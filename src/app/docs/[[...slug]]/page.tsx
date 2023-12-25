@@ -8,6 +8,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 // import dynamic from "next/dynamic";
 import "highlight.js/styles/github-dark-dimmed.css";
+import linkMap from "@/nav/link.map.json";
 
 type Props = {
   params: { slug: [] };
@@ -15,11 +16,13 @@ type Props = {
 };
 async function getMdx(params: any) {
   // return dynamic(() => import(`@/content/docs/${path}.mdx`));
-  let path = (params.slug && params.slug.length && params.slug.join("/")) || "index";
+  const path = (params.slug && params.slug.length && params.slug.join("/")) || "index";
   // let file = `@/content/docs/${path}.mdx`;
   // if (!existsSync(file)) file = `@/content/docs/${path}/index.mdx`;
   // if (!existsSync(file)) return undefined;
-  const Mdx: any = await import(`@/content/docs/${path}.mdx`);
+  const file = linkMap[path];
+  console.log(path, file);
+  const Mdx: any = await import(`@/content/docs/${file}`);
   return Mdx;
 }
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {

@@ -17,28 +17,22 @@ Create error UI by adding an `error.js` file inside a route segment and exportin
 
 <Image
   alt="error.js special file"
-  srcLight="/docs/light/error-special-file.png"
-  srcDark="/docs/dark/error-special-file.png"
+  srclight="/docs/light/error-special-file.png"
+  srcdark="/docs/dark/error-special-file.png"
   width="1600"
   height="606"
 />
 
 ```tsx filename="app/dashboard/error.tsx" switcher
-'use client' // Error components must be Client Components
+"use client"; // Error components must be Client Components
 
-import { useEffect } from 'react'
+import { useEffect } from "react";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string }
-  reset: () => void
-}) {
+export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    console.error(error)
-  }, [error])
+    console.error(error);
+  }, [error]);
 
   return (
     <div>
@@ -52,20 +46,20 @@ export default function Error({
         Try again
       </button>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/dashboard/error.js" switcher
-'use client' // Error components must be Client Components
+"use client"; // Error components must be Client Components
 
-import { useEffect } from 'react'
+import { useEffect } from "react";
 
 export default function Error({ error, reset }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    console.error(error)
-  }, [error])
+    console.error(error);
+  }, [error]);
 
   return (
     <div>
@@ -79,7 +73,7 @@ export default function Error({ error, reset }) {
         Try again
       </button>
     </div>
-  )
+  );
 }
 ```
 
@@ -87,8 +81,8 @@ export default function Error({ error, reset }) {
 
 <Image
   alt="How error.js works"
-  srcLight="/docs/light/error-overview.png"
-  srcDark="/docs/dark/error-overview.png"
+  srclight="/docs/light/error-overview.png"
+  srcdark="/docs/dark/error-overview.png"
   width="1600"
   height="903"
 />
@@ -105,26 +99,20 @@ The cause of an error can sometimes be temporary. In these cases, simply trying 
 An error component can use the `reset()` function to prompt the user to attempt to recover from the error. When executed, the function will try to re-render the Error boundary's contents. If successful, the fallback error component is replaced with the result of the re-render.
 
 ```tsx filename="app/dashboard/error.tsx" switcher
-'use client'
+"use client";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string }
-  reset: () => void
-}) {
+export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
     <div>
       <h2>Something went wrong!</h2>
       <button onClick={() => reset()}>Try again</button>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/dashboard/error.js" switcher
-'use client'
+"use client";
 
 export default function Error({ error, reset }) {
   return (
@@ -132,7 +120,7 @@ export default function Error({ error, reset }) {
       <h2>Something went wrong!</h2>
       <button onClick={() => reset()}>Try again</button>
     </div>
-  )
+  );
 }
 ```
 
@@ -144,8 +132,8 @@ For example, a nested route with two segments that both include `layout.js` and 
 
 <Image
   alt="Nested Error Component Hierarchy"
-  srcLight="/docs/light/nested-error-component-hierarchy.png"
-  srcDark="/docs/dark/nested-error-component-hierarchy.png"
+  srclight="/docs/light/nested-error-component-hierarchy.png"
+  srcdark="/docs/dark/nested-error-component-hierarchy.png"
   width="1600"
   height="687"
 />
@@ -176,15 +164,9 @@ Unlike the root `error.js`, the `global-error.js` error boundary wraps the **ent
 Even if a `global-error.js` is defined, it is still recommended to define a root `error.js` whose fallback component will be rendered **within** the root layout, which includes globally shared UI and branding.
 
 ```tsx filename="app/global-error.tsx" switcher
-'use client'
+"use client";
 
-export default function GlobalError({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string }
-  reset: () => void
-}) {
+export default function GlobalError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
     <html>
       <body>
@@ -192,12 +174,12 @@ export default function GlobalError({
         <button onClick={() => reset()}>Try again</button>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/global-error.js" switcher
-'use client'
+"use client";
 
 export default function GlobalError({ error, reset }) {
   return (
@@ -207,7 +189,7 @@ export default function GlobalError({ error, reset }) {
         <button onClick={() => reset()}>Try again</button>
       </body>
     </html>
-  )
+  );
 }
 ```
 

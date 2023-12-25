@@ -2,14 +2,20 @@
 
 import menus from "@/nav/menus";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
-function SubMenu({ menu, ...props }: any) {
+function SubMenu({ menu }: any) {
   return (
     <li key={menu.label}>
       {menu.subMenus && menu.subMenus.length ? (
         <details>
-          <summary>{menu.label}</summary>
+          <summary>
+            {!menu.href ? (
+              menu.label
+            ) : (
+              <Link href={menu.href || "#"} dangerouslySetInnerHTML={{ __html: menu.label }}></Link>
+            )}
+          </summary>
           <ul>
             {menu.subMenus.map((subMenu: any) => (
               <SubMenu key={subMenu.label} menu={subMenu} />
@@ -17,7 +23,7 @@ function SubMenu({ menu, ...props }: any) {
           </ul>
         </details>
       ) : (
-        <Link href={menu.href || "#"}>{menu.label}</Link>
+        <Link href={menu.href || "#"} dangerouslySetInnerHTML={{ __html: menu.label }}></Link>
       )}
     </li>
   );

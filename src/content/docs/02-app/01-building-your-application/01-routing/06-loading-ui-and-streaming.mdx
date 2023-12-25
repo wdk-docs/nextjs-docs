@@ -7,8 +7,8 @@ The special file `loading.js` helps you create meaningful Loading UI with [React
 
 <Image
   alt="Loading UI"
-  srcLight="/docs/light/loading-ui.png"
-  srcDark="/docs/dark/loading-ui.png"
+  srclight="/docs/light/loading-ui.png"
+  srcdark="/docs/dark/loading-ui.png"
   width="1600"
   height="691"
 />
@@ -21,8 +21,8 @@ Create a loading state by adding a `loading.js` file inside a folder.
 
 <Image
   alt="loading.js special file"
-  srcLight="/docs/light/loading-special-file.png"
-  srcDark="/docs/dark/loading-special-file.png"
+  srclight="/docs/light/loading-special-file.png"
+  srcdark="/docs/dark/loading-special-file.png"
   width="1600"
   height="606"
 />
@@ -30,14 +30,14 @@ Create a loading state by adding a `loading.js` file inside a folder.
 ```tsx filename="app/dashboard/loading.tsx" switcher
 export default function Loading() {
   // You can add any UI inside Loading, including a Skeleton.
-  return <LoadingSkeleton />
+  return <LoadingSkeleton />;
 }
 ```
 
 ```jsx filename="app/dashboard/loading.js" switcher
 export default function Loading() {
   // You can add any UI inside Loading, including a Skeleton.
-  return <LoadingSkeleton />
+  return <LoadingSkeleton />;
 }
 ```
 
@@ -45,8 +45,8 @@ In the same folder, `loading.js` will be nested inside `layout.js`. It will auto
 
 <Image
   alt="loading.js overview"
-  srcLight="/docs/light/loading-overview.png"
-  srcDark="/docs/dark/loading-overview.png"
+  srclight="/docs/light/loading-overview.png"
+  srcdark="/docs/dark/loading-overview.png"
   width="1600"
   height="768"
 />
@@ -77,8 +77,8 @@ With SSR, there's a series of steps that need to be completed before a user can 
 
 <Image
   alt="Chart showing Server Rendering without Streaming"
-  srcLight="/docs/light/server-rendering-without-streaming-chart.png"
-  srcDark="/docs/dark/server-rendering-without-streaming-chart.png"
+  srclight="/docs/light/server-rendering-without-streaming-chart.png"
+  srcdark="/docs/dark/server-rendering-without-streaming-chart.png"
   width="1600"
   height="612"
 />
@@ -89,8 +89,8 @@ SSR with React and Next.js helps improve the perceived loading performance by sh
 
 <Image
   alt="Server Rendering without Streaming"
-  srcLight="/docs/light/server-rendering-without-streaming.png"
-  srcDark="/docs/dark/server-rendering-without-streaming.png"
+  srclight="/docs/light/server-rendering-without-streaming.png"
+  srcdark="/docs/dark/server-rendering-without-streaming.png"
   width="1600"
   height="748"
 />
@@ -101,8 +101,8 @@ However, it can still be slow as all data fetching on server needs to be complet
 
 <Image
   alt="How Server Rendering with Streaming Works"
-  srcLight="/docs/light/server-rendering-with-streaming.png"
-  srcDark="/docs/dark/server-rendering-with-streaming.png"
+  srclight="/docs/light/server-rendering-with-streaming.png"
+  srcdark="/docs/dark/server-rendering-with-streaming.png"
   width="1600"
   height="785"
 />
@@ -113,8 +113,8 @@ Streaming works well with React's component model because each component can be 
 
 <Image
   alt="Chart showing Server Rendering with Streaming"
-  srcLight="/docs/light/server-rendering-with-streaming-chart.png"
-  srcDark="/docs/dark/server-rendering-with-streaming-chart.png"
+  srclight="/docs/light/server-rendering-with-streaming-chart.png"
+  srcdark="/docs/dark/server-rendering-with-streaming-chart.png"
   width="1600"
   height="730"
 />
@@ -126,8 +126,8 @@ Streaming is particularly beneficial when you want to prevent long data requests
 `<Suspense>` works by wrapping a component that performs an asynchronous action (e.g. fetch data), showing fallback UI (e.g. skeleton, spinner) while it's happening, and then swapping in your component once the action completes.
 
 ```tsx filename="app/dashboard/page.tsx" switcher
-import { Suspense } from 'react'
-import { PostFeed, Weather } from './Components'
+import { Suspense } from "react";
+import { PostFeed, Weather } from "./Components";
 
 export default function Posts() {
   return (
@@ -139,13 +139,13 @@ export default function Posts() {
         <Weather />
       </Suspense>
     </section>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/dashboard/page.js" switcher
-import { Suspense } from 'react'
-import { PostFeed, Weather } from './Components'
+import { Suspense } from "react";
+import { PostFeed, Weather } from "./Components";
 
 export default function Posts() {
   return (
@@ -157,7 +157,7 @@ export default function Posts() {
         <Weather />
       </Suspense>
     </section>
-  )
+  );
 }
 ```
 

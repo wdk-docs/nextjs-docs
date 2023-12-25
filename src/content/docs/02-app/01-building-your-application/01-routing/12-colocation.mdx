@@ -28,8 +28,8 @@ However, even though route structure is defined through folders, a route is **no
 
 <Image
   alt="A diagram showing how a route is not publicly accessible until a page.js or route.js file is added to a route segment."
-  srcLight="/docs/light/project-organization-not-routable.png"
-  srcDark="/docs/dark/project-organization-not-routable.png"
+  srclight="/docs/light/project-organization-not-routable.png"
+  srcdark="/docs/dark/project-organization-not-routable.png"
   width="1600"
   height="444"
 />
@@ -38,8 +38,8 @@ And, even when a route is made publicly accessible, only the **content returned*
 
 <Image
   alt="A diagram showing how page.js and route.js files make routes publicly accessible."
-  srcLight="/docs/light/project-organization-routable.png"
-  srcDark="/docs/dark/project-organization-routable.png"
+  srclight="/docs/light/project-organization-routable.png"
+  srcdark="/docs/dark/project-organization-routable.png"
   width="1600"
   height="687"
 />
@@ -48,8 +48,8 @@ This means that **project files** can be **safely colocated** inside route segme
 
 <Image
   alt="A diagram showing colocated project files are not routable even when a segment contains a page.js or route.js file."
-  srcLight="/docs/light/project-organization-colocation.png"
-  srcDark="/docs/dark/project-organization-colocation.png"
+  srclight="/docs/light/project-organization-colocation.png"
+  srcdark="/docs/dark/project-organization-colocation.png"
   width="1600"
   height="1011"
 />
@@ -71,8 +71,8 @@ This indicates the folder is a private implementation detail and should not be c
 
 <Image
   alt="An example folder structure using private folders"
-  srcLight="/docs/light/project-organization-private-folders.png"
-  srcDark="/docs/dark/project-organization-private-folders.png"
+  srclight="/docs/light/project-organization-private-folders.png"
+  srcdark="/docs/dark/project-organization-private-folders.png"
   width="1600"
   height="849"
 />
@@ -98,8 +98,8 @@ This indicates the folder is for organizational purposes and should **not be inc
 
 <Image
   alt="An example folder structure using route groups"
-  srcLight="/docs/light/project-organization-route-groups.png"
-  srcDark="/docs/dark/project-organization-route-groups.png"
+  srclight="/docs/light/project-organization-route-groups.png"
+  srcdark="/docs/dark/project-organization-route-groups.png"
   width="1600"
   height="849"
 />
@@ -117,8 +117,8 @@ Next.js supports storing application code (including `app`) inside an optional [
 
 <Image
   alt="An example folder structure with the `src` directory"
-  srcLight="/docs/light/project-organization-src-directory.png"
-  srcDark="/docs/dark/project-organization-src-directory.png"
+  srclight="/docs/light/project-organization-src-directory.png"
+  srcdark="/docs/dark/project-organization-src-directory.png"
   width="1600"
   height="687"
 />
@@ -129,10 +129,10 @@ Next.js supports [Module Path Aliases](/docs/app/building-your-application/confi
 
 ```jsx filename="app/dashboard/settings/analytics/page.js"
 // before
-import { Button } from '../../../components/button'
+import { Button } from "../../../components/button";
 
 // after
-import { Button } from '@/components/button'
+import { Button } from "@/components/button";
 ```
 
 ## Project organization strategies
@@ -149,8 +149,8 @@ This strategy stores all application code in shared folders in the **root of you
 
 <Image
   alt="An example folder structure with project files outside of app"
-  srcLight="/docs/light/project-organization-project-root.png"
-  srcDark="/docs/dark/project-organization-project-root.png"
+  srclight="/docs/light/project-organization-project-root.png"
+  srcdark="/docs/dark/project-organization-project-root.png"
   width="1600"
   height="849"
 />
@@ -161,8 +161,8 @@ This strategy stores all application code in shared folders in the **root of the
 
 <Image
   alt="An example folder structure with project files inside app"
-  srcLight="/docs/light/project-organization-app-root.png"
-  srcDark="/docs/dark/project-organization-app-root.png"
+  srclight="/docs/light/project-organization-app-root.png"
+  srcdark="/docs/dark/project-organization-app-root.png"
   width="1600"
   height="849"
 />
@@ -173,8 +173,8 @@ This strategy stores globally shared application code in the root `app` director
 
 <Image
   alt="An example folder structure with project files split by feature or route"
-  srcLight="/docs/light/project-organization-app-root-split.png"
-  srcDark="/docs/dark/project-organization-app-root-split.png"
+  srclight="/docs/light/project-organization-app-root-split.png"
+  srcdark="/docs/dark/project-organization-app-root-split.png"
   width="1600"
   height="1011"
 />

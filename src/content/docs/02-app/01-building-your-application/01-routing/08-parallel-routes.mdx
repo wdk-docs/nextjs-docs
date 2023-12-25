@@ -9,8 +9,8 @@ For example, you can simultaneously render the team and analytics pages.
 
 <Image
   alt="Parallel Routes Diagram"
-  srcLight="/docs/light/parallel-routes.png"
-  srcDark="/docs/dark/parallel-routes.png"
+  srclight="/docs/light/parallel-routes.png"
+  srcdark="/docs/dark/parallel-routes.png"
   width="1600"
   height="952"
 />
@@ -19,8 +19,8 @@ Parallel Routing allows you to define independent error and loading states for e
 
 <Image
   alt="Parallel routes enable custom error and loading states"
-  srcLight="/docs/light/parallel-routes-cinematic-universe.png"
-  srcDark="/docs/dark/parallel-routes-cinematic-universe.png"
+  srclight="/docs/light/parallel-routes-cinematic-universe.png"
+  srcdark="/docs/dark/parallel-routes-cinematic-universe.png"
   width="1600"
   height="1218"
 />
@@ -29,8 +29,8 @@ Parallel Routing also allows you to conditionally render a slot based on certain
 
 <Image
   alt="Conditional routes diagram"
-  srcLight="/docs/light/conditional-routes-ui.png"
-  srcDark="/docs/dark/conditional-routes-ui.png"
+  srclight="/docs/light/conditional-routes-ui.png"
+  srcdark="/docs/dark/conditional-routes-ui.png"
   width="1600"
   height="898"
 />
@@ -45,8 +45,8 @@ For example, the following file structure defines two explicit slots: `@analytic
 
 <Image
   alt="Parallel Routes File-system Structure"
-  srcLight="/docs/light/parallel-routes-file-system.png"
-  srcDark="/docs/dark/parallel-routes-file-system.png"
+  srclight="/docs/light/parallel-routes-file-system.png"
+  srcdark="/docs/dark/parallel-routes-file-system.png"
   width="1600"
   height="687"
 />
@@ -55,9 +55,9 @@ The folder structure above means that the component in `app/layout.js` now accep
 
 ```tsx filename="app/layout.tsx" switcher
 export default function Layout(props: {
-  children: React.ReactNode
-  analytics: React.ReactNode
-  team: React.ReactNode
+  children: React.ReactNode;
+  analytics: React.ReactNode;
+  team: React.ReactNode;
 }) {
   return (
     <>
@@ -65,7 +65,7 @@ export default function Layout(props: {
       {props.team}
       {props.analytics}
     </>
-  )
+  );
 }
 ```
 
@@ -77,7 +77,7 @@ export default function Layout(props) {
       {props.team}
       {props.analytics}
     </>
-  )
+  );
 }
 ```
 
@@ -97,8 +97,8 @@ Consider the following folder structure. The `@team` slot has a `settings` direc
 
 <Image
   alt="Parallel Routes unmatched routes"
-  srcLight="/docs/light/parallel-routes-unmatched-routes.png"
-  srcDark="/docs/dark/parallel-routes-unmatched-routes.png"
+  srclight="/docs/light/parallel-routes-unmatched-routes.png"
+  srcdark="/docs/dark/parallel-routes-unmatched-routes.png"
   width="1600"
   height="930"
 />
@@ -118,26 +118,26 @@ On reload, Next.js will first try to render the unmatched slot's `default.js` fi
 Both [`useSelectedLayoutSegment`](/docs/app/api-reference/functions/use-selected-layout-segment) and [`useSelectedLayoutSegments`](/docs/app/api-reference/functions/use-selected-layout-segments) accept a `parallelRoutesKey`, which allows you to read the active route segment within that slot.
 
 ```tsx filename="app/layout.tsx" switcher
-'use client'
+"use client";
 
-import { useSelectedLayoutSegment } from 'next/navigation'
+import { useSelectedLayoutSegment } from "next/navigation";
 
 export default async function Layout(props: {
   //...
-  auth: React.ReactNode
+  auth: React.ReactNode;
 }) {
-  const loginSegments = useSelectedLayoutSegment('auth')
+  const loginSegments = useSelectedLayoutSegment("auth");
   // ...
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-'use client'
+"use client";
 
-import { useSelectedLayoutSegment } from 'next/navigation'
+import { useSelectedLayoutSegment } from "next/navigation";
 
 export default async function Layout(props) {
-  const loginSegments = useSelectedLayoutSegment('auth')
+  const loginSegments = useSelectedLayoutSegment("auth");
   // ...
 }
 ```
@@ -152,8 +152,8 @@ Parallel Routing can be used to render modals.
 
 <Image
   alt="Parallel Routes Diagram"
-  srcLight="/docs/light/parallel-routes-auth-modal.png"
-  srcDark="/docs/dark/parallel-routes-auth-modal.png"
+  srclight="/docs/light/parallel-routes-auth-modal.png"
+  srcdark="/docs/dark/parallel-routes-auth-modal.png"
   width="1600"
   height="687"
 />
@@ -163,14 +163,14 @@ The `@auth` slot renders a `<Modal>` component that can be shown by navigating t
 ```tsx filename="app/layout.tsx" switcher
 export default async function Layout(props: {
   // ...
-  auth: React.ReactNode
+  auth: React.ReactNode;
 }) {
   return (
     <>
       {/* ... */}
       {props.auth}
     </>
-  )
+  );
 }
 ```
 
@@ -181,12 +181,12 @@ export default async function Layout(props) {
       {/* ... */}
       {props.auth}
     </>
-  )
+  );
 }
 ```
 
 ```tsx filename="app/@auth/login/page.tsx" switcher
-import { Modal } from 'components/modal'
+import { Modal } from "components/modal";
 
 export default function Login() {
   return (
@@ -194,12 +194,12 @@ export default function Login() {
       <h1>Login</h1>
       {/* ... */}
     </Modal>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/@auth/login/page.js" switcher
-import { Modal } from 'components/modal'
+import { Modal } from "components/modal";
 
 export default function Login() {
   return (
@@ -207,7 +207,7 @@ export default function Login() {
       <h1>Login</h1>
       {/* ... */}
     </Modal>
-  )
+  );
 }
 ```
 
@@ -215,13 +215,13 @@ To ensure that the contents of the modal don't get rendered when it's not active
 
 ```tsx filename="app/@auth/default.tsx" switcher
 export default function Default() {
-  return null
+  return null;
 }
 ```
 
 ```jsx filename="app/@auth/default.js" switcher
 export default function Default() {
-  return null
+  return null;
 }
 ```
 
@@ -230,36 +230,36 @@ export default function Default() {
 If a modal was initiated through client navigation, e.g. by using `<Link href="/login">`, you can dismiss the modal by calling `router.back()` or by using a `Link` component.
 
 ```tsx filename="app/@auth/login/page.tsx" highlight="5" switcher
-'use client'
-import { useRouter } from 'next/navigation'
-import { Modal } from 'components/modal'
+"use client";
+import { useRouter } from "next/navigation";
+import { Modal } from "components/modal";
 
 export default async function Login() {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <Modal>
       <span onClick={() => router.back()}>Close modal</span>
       <h1>Login</h1>
       ...
     </Modal>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/@auth/login/page.js" highlight="5" switcher
-'use client'
-import { useRouter } from 'next/navigation'
-import { Modal } from 'components/modal'
+"use client";
+import { useRouter } from "next/navigation";
+import { Modal } from "components/modal";
 
 export default async function Login() {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <Modal>
       <span onClick={() => router.back()}>Close modal</span>
       <h1>Login</h1>
       ...
     </Modal>
-  )
+  );
 }
 ```
 
@@ -269,21 +269,21 @@ If you want to navigate elsewhere and dismiss a modal, you can also use a catch-
 
 <Image
   alt="Parallel Routes Diagram"
-  srcLight="/docs/light/parallel-routes-catchall.png"
-  srcDark="/docs/dark/parallel-routes-catchall.png"
+  srclight="/docs/light/parallel-routes-catchall.png"
+  srcdark="/docs/dark/parallel-routes-catchall.png"
   width="1600"
   height="768"
 />
 
 ```tsx filename="app/@auth/[...catchAll]/page.tsx" switcher
 export default function CatchAll() {
-  return null
+  return null;
 }
 ```
 
 ```jsx filename="app/@auth/[...catchAll]/page.js" switcher
 export default function CatchAll() {
-  return null
+  return null;
 }
 ```
 
@@ -294,33 +294,27 @@ export default function CatchAll() {
 Parallel Routes can be used to implement conditional routing. For example, you can render a `@dashboard` or `@login` route depending on the authentication state.
 
 ```tsx filename="app/layout.tsx" switcher
-import { getUser } from '@/lib/auth'
+import { getUser } from "@/lib/auth";
 
-export default function Layout({
-  dashboard,
-  login,
-}: {
-  dashboard: React.ReactNode
-  login: React.ReactNode
-}) {
-  const isLoggedIn = getUser()
-  return isLoggedIn ? dashboard : login
+export default function Layout({ dashboard, login }: { dashboard: React.ReactNode; login: React.ReactNode }) {
+  const isLoggedIn = getUser();
+  return isLoggedIn ? dashboard : login;
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import { getUser } from '@/lib/auth'
+import { getUser } from "@/lib/auth";
 
 export default function Layout({ dashboard, login }) {
-  const isLoggedIn = getUser()
-  return isLoggedIn ? dashboard : login
+  const isLoggedIn = getUser();
+  return isLoggedIn ? dashboard : login;
 }
 ```
 
 <Image
   alt="Parallel routes authentication example"
-  srcLight="/docs/light/conditional-routes-ui.png"
-  srcDark="/docs/dark/conditional-routes-ui.png"
+  srclight="/docs/light/conditional-routes-ui.png"
+  srcdark="/docs/dark/conditional-routes-ui.png"
   width="1600"
   height="898"
 />

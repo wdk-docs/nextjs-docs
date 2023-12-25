@@ -6,12 +6,13 @@ import { Footer } from "@/components/Footer";
 import { Sidebar } from "@/components/Sidebar";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
+import { Logo } from "@/components/Logo";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "深度学习",
-  description: "人工智能学习站",
+  title: "Next.js文档",
+  description: "学习next.js",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -37,14 +38,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   className="flex-0 btn btn-ghost px-2"
                   data-svelte-h="svelte-pw6yxt"
                 >
-                  <svg width="32" height="32" viewBox="0 0 415 415" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="82.5" y="290" width="250" height="125" rx="62.5" fill="#1AD1A5"></rect>
-                    <circle cx="207.5" cy="135" r="130" fill="black" fillOpacity=".3"></circle>
-                    <circle cx="207.5" cy="135" r="125" fill="white"></circle>
-                    <circle cx="207.5" cy="135" r="56" fill="#FF9903"></circle>
-                  </svg>{" "}
+                  <Logo />
                   <div className="font-title inline-flex text-lg md:text-2xl">
-                    <span className="lowercase">深度学习</span> <span className="uppercase text-[#1AD1A5]">AI</span>
+                    <span className="">
+                      Next<sub>js</sub>
+                    </span>{" "}
+                    <span className="uppercase text-[#1AD1A5]">文档</span>
                   </div>
                 </Link>{" "}
                 <div className="dropdown">
