@@ -1,15 +1,15 @@
 ---
-title: App Router
-description: Use the new App Router with Next.js' and React's latest features, including Layouts, Server Components, Suspense, and more.
+title: 应用程序路由器
+description: 使用带有Next.js和React最新功能的新应用路由器，包括布局、服务器组件、暂停等。
 ---
 
 The Next.js App Router is a new paradigm for building applications using React's latest features. If you're already familiar with Next.js, you'll find that the App Router is a natural evolution of the existing file-system based router in the [Pages Router](/docs/pages).
 
 For new applications, **we recommend using the App Router**. For existing applications, you can [incrementally adopt the App Router](/docs/app/building-your-application/upgrading/app-router-migration). It's also possible to use both routers in the same application.
 
-## Frequently Asked Questions
+## 常见问题
 
-### How can I access the request object in a layout?
+### 如何访问布局中的请求对象？
 
 You intentionally cannot access the raw request object. However, you can access [`headers`](/docs/app/api-reference/functions/headers) and [`cookies`](/docs/app/api-reference/functions/cookies) through server-only functions. You can also [set cookies](#how-can-i-set-cookies).
 
@@ -19,7 +19,7 @@ This design also enforces consistent and predictable behavior for layouts across
 
 Depending on the UI pattern you're building, [Parallel Routes](/docs/app/building-your-application/routing/parallel-routes) allow you to render multiple pages in the same layout, and pages have access to the route segments as well as the URL search params.
 
-### How can I access the URL on a page?
+### 如何访问页面上的 URL？
 
 By default, pages are Server Components. You can access the route segments through the [`params`](/docs/app/api-reference/file-conventions/page#params-optional) prop and the URL search params through the [`searchParams`](/docs/app/api-reference/file-conventions/page#searchparams-optional) prop for a given page.
 
@@ -27,11 +27,11 @@ If you are using Client Components, you can use [`usePathname`](/docs/app/api-re
 
 Further, depending on the UI pattern you're building, [Parallel Routes](/docs/app/building-your-application/routing/parallel-routes) allow you to render multiple pages in the same layout, and pages have access to the route segments as well as the URL search params.
 
-### How can I redirect from a Server Component?
+### 如何从服务器组件重定向？
 
 You can use [`redirect`](/docs/app/api-reference/functions/redirect) to redirect from a page to a relative or absolute URL. [`redirect`](/docs/app/api-reference/functions/redirect) is a temporary (307) redirect, while [`permanentRedirect`](/docs/app/api-reference/functions/permanentRedirect) is a permanent (308) redirect. When these functions are used while streaming UI, they will insert a meta tag to emit the redirect on the client side.
 
-### How can I handle authentication with the App Router?
+### 如何使用应用程序路由器进行身份验证？
 
 Here are some common authentication solutions that support the App Router:
 
@@ -42,30 +42,30 @@ Here are some common authentication solutions that support the App Router:
 - [Kinde](https://kinde.com/docs/developer-tools/nextjs-sdk/)
 - Or manually handling sessions or JWTs
 
-### How can I set cookies?
+### 如何设置 cookie？
 
 You can set cookies in [Server Actions](/docs/app/building-your-application/data-fetching/server-actions-and-mutations#cookies) or [Route Handlers](/docs/app/building-your-application/routing/route-handlers) using the [`cookies`](/docs/app/api-reference/functions/cookies) function.
 
 Since HTTP does not allow setting cookies after streaming starts, you cannot set cookies from a page or layout directly. You can also set cookies from [Middleware](/docs/app/building-your-application/routing/middleware#using-cookies).
 
-### How can I build multi-tenant apps?
+### 如何构建多租户应用程序？
 
 If you are looking to build a single Next.js application that serves multiple tenants, we have [built an example](https://vercel.com/templates/next.js/platforms-starter-kit) showing our recommended architecture.
 
-### How can I invalidate the App Router cache?
+### 如何使应用程序路由器缓存无效？
 
 There are multiple layers of caching in Next.js, and thus, multiple ways to invalidate different parts of the cache. [Learn more about caching](/docs/app/building-your-application/caching).
 
-### Are there any comprehensive, open-source applications built on the App Router?
+### App 路由器上是否有任何全面的开源应用程序？
 
-Yes. You can view [Next.js Commerce](https://vercel.com/templates/next.js/nextjs-commerce) or the [Platforms Starter Kit](https://vercel.com/templates/next.js/platforms-starter-kit) for two larger examples of using the App Router that are open-source.
+对您可以查看[Next.js 商业](https://vercel.com/templates/next.js/nextjs-commerce)或[平台入门套件](https://vercel.com/templates/next.js/platforms-starter-kit)关于使用开源应用程序路由器的两个更大的例子。
 
-## Learn More
+## 了解更多信息
 
-- [Routing Fundamentals](/docs/app/building-your-application/routing)
-- [Data Fetching, Caching, and Revalidating](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating)
-- [Forms and Mutations](/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
-- [Caching](/docs/app/building-your-application/caching)
-- [Rendering Fundamentals](/docs/app/building-your-application/rendering)
-- [Server Components](/docs/app/building-your-application/rendering/server-components)
-- [Client Components](/docs/app/building-your-application/rendering/client-components)
+- [布线基础知识](/docs/app/building-your-application/routing)
+- [数据获取、缓存和重新验证](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating)
+- [表单和突变](/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
+- [缓存](/docs/app/building-your-application/caching)
+- [渲染基础知识](/docs/app/building-your-application/rendering)
+- [服务器组件](/docs/app/building-your-application/rendering/server-components)
+- [客户端组件](/docs/app/building-your-application/rendering/client-components)

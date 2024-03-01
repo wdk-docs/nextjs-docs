@@ -1,6 +1,6 @@
 ---
-title: Error Handling
-description: Handle runtime errors by automatically wrapping route segments and their nested children in a React Error Boundary.
+title: 错误处理
+description: 通过在React Error Boundary中自动包装管段及其嵌套子级来处理运行时错误。
 related:
   links:
     - app/api-reference/file-conventions/error
@@ -92,7 +92,7 @@ export default function Error({ error, reset }) {
 - If an error is thrown within the error boundary, the error is **contained**, and the fallback component is **rendered**.
 - When the fallback error component is active, layouts **above** the error boundary **maintain** their state and **remain** interactive, and the error component can display functionality to recover from the error.
 
-### Recovering From Errors
+### 从错误中恢复
 
 The cause of an error can sometimes be temporary. In these cases, simply trying again might resolve the issue.
 
@@ -124,7 +124,7 @@ export default function Error({ error, reset }) {
 }
 ```
 
-### Nested Routes
+### 嵌套路由
 
 React components created through [special files](/docs/app/building-your-application/routing#file-conventions) are rendered in a [specific nested hierarchy](/docs/app/building-your-application/routing#component-hierarchy).
 
@@ -143,7 +143,7 @@ The nested component hierarchy has implications for the behavior of `error.js` f
 - Errors bubble up to the nearest parent error boundary. This means an `error.js` file will handle errors for all its nested child segments. More or less granular error UI can be achieved by placing `error.js` files at different levels in the nested folders of a route.
 - An `error.js` boundary will **not** handle errors thrown in a `layout.js` component in the **same** segment because the error boundary is nested **inside** that layout's component.
 
-### Handling Errors in Layouts
+### 处理布局中的错误
 
 `error.js` boundaries do **not** catch errors thrown in `layout.js` or `template.js` components of the **same segment**. This [intentional hierarchy](#nested-routes) keeps important UI that is shared between sibling routes (such as navigation) visible and functional when an error occurs.
 
@@ -151,7 +151,7 @@ To handle errors within a specific layout or template, place an `error.js` file 
 
 To handle errors within the root layout or template, use a variation of `error.js` called `global-error.js`.
 
-### Handling Errors in Root Layouts
+### 处理根布局中的错误
 
 The root `app/error.js` boundary does **not** catch errors thrown in the root `app/layout.js` or `app/template.js` component.
 
@@ -193,11 +193,11 @@ export default function GlobalError({ error, reset }) {
 }
 ```
 
-### Handling Server Errors
+### 处理服务器错误
 
 If an error is thrown inside a Server Component, Next.js will forward an `Error` object (stripped of sensitive error information in production) to the nearest `error.js` file as the `error` prop.
 
-#### Securing Sensitive Error Information
+#### 保护敏感错误信息
 
 During production, the `Error` object forwarded to the client only includes a generic `message` and `digest` property.
 

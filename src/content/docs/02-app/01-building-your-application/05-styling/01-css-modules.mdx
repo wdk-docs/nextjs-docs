@@ -10,38 +10,34 @@ description: Style your Next.js Application with CSS Modules.
 <details open>
   <summary>Examples</summary>
 
-- [Basic CSS Example](https://github.com/vercel/next.js/tree/canary/examples/basic-css)
+- [CSS 基本示例](https://github.com/vercel/next.js/tree/canary/examples/basic-css)
 
 </details>
 
 </PagesOnly>
 
-Next.js has built-in support for CSS Modules using the `.module.css` extension.
+Next.js 内置支持使用`.module.CSS`扩展名的 CSS 模块。
 
-CSS Modules locally scope CSS by automatically creating a unique class name. This allows you to use the same class name in different files without worrying about collisions. This behavior makes CSS Modules the ideal way to include component-level CSS.
+CSS 模块通过自动创建一个唯一的类名来对 CSS 进行本地作用域。这允许您在不同的文件中使用相同的类名，而不用担心冲突。这种行为使 CSS 模块成为包含组件级 CSS 的理想方式。
 
-## Example
+## 实例
 
 <AppOnly>
-CSS Modules can be imported into any file inside the `app` directory:
+CSS模块可以导入到`app`目录中的任何文件中：
 
 ```tsx filename="app/dashboard/layout.tsx" switcher
-import styles from './styles.module.css'
+import styles from "./styles.module.css";
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return <section className={styles.dashboard}>{children}</section>
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  return <section className={styles.dashboard}>{children}</section>;
 }
 ```
 
 ```jsx filename="app/dashboard/layout.js" switcher
-import styles from './styles.module.css'
+import styles from "./styles.module.css";
 
 export default function DashboardLayout({ children }) {
-  return <section className={styles.dashboard}>{children}</section>
+  return <section className={styles.dashboard}>{children}</section>;
 }
 ```
 
@@ -55,9 +51,9 @@ export default function DashboardLayout({ children }) {
 
 <PagesOnly>
 
-For example, consider a reusable `Button` component in the `components/` folder:
+例如，考虑`components/`文件夹中的可重复使用的`Button`组件：
 
-First, create `components/Button.module.css` with the following content:
+首先，创建具有以下内容的`components/Button.module.css`：
 
 ```css filename="Button.module.css"
 /*
@@ -70,10 +66,10 @@ You do not need to worry about .error {} colliding with any other `.css` or
 }
 ```
 
-Then, create `components/Button.js`, importing and using the above CSS file:
+然后，创建`components/Button.js`，导入并使用上面的 CSS 文件：
 
 ```jsx filename="components/Button.js"
-import styles from './Button.module.css'
+import styles from "./Button.module.css";
 
 export function Button() {
   return (
@@ -85,7 +81,7 @@ export function Button() {
     >
       Destroy
     </button>
-  )
+  );
 }
 ```
 
@@ -97,7 +93,7 @@ Regular `<link>` stylesheets and global CSS files are still supported.
 In production, all CSS Module files will be automatically concatenated into **many minified and code-split** `.css` files.
 These `.css` files represent hot execution paths in your application, ensuring the minimal amount of CSS is loaded for your application to paint.
 
-## Global Styles
+## 全局样式
 
 <AppOnly>
 Global styles can be imported into any layout, page, or component inside the `app` directory.
@@ -118,31 +114,27 @@ Inside the root layout (`app/layout.js`), import the `global.css` stylesheet to 
 
 ```tsx filename="app/layout.tsx" switcher
 // These styles apply to every route in the application
-import './global.css'
+import "./global.css";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
 // These styles apply to every route in the application
-import './global.css'
+import "./global.css";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -156,8 +148,7 @@ For example, consider the following stylesheet named `styles.css`:
 
 ```css filename="styles.css"
 body {
-  font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
-    'Arial', sans-serif;
+  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   padding: 20px 20px 60px;
   max-width: 680px;
   margin: 0 auto;
@@ -168,11 +159,11 @@ Create a [`pages/_app.js` file](/docs/pages/building-your-application/routing/cu
 Then, [`import`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import) the `styles.css` file.
 
 ```jsx filename="pages/_app.js"
-import '../styles.css'
+import "../styles.css";
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 ```
 
@@ -184,53 +175,49 @@ In development, expressing stylesheets this way allows your styles to be hot rel
 In production, all CSS files will be automatically concatenated into a single minified `.css` file. The order that the CSS is concatenated will match the order the CSS is imported into the `_app.js` file. Pay special attention to imported JS modules that include their own CSS; the JS module's CSS will be concatenated following the same ordering rules as imported CSS files. For example:
 
 ```jsx
-import '../styles.css'
+import "../styles.css";
 // The CSS in ErrorBoundary depends on the global CSS in styles.css,
 // so we import it after styles.css.
-import ErrorBoundary from '../components/ErrorBoundary'
+import ErrorBoundary from "../components/ErrorBoundary";
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <ErrorBoundary>
       <Component {...pageProps} />
     </ErrorBoundary>
-  )
+  );
 }
 ```
 
 </PagesOnly>
 
-## External Stylesheets
+## 外部样式表
 
 <AppOnly>
 
 Stylesheets published by external packages can be imported anywhere in the `app` directory, including colocated components:
 
 ```tsx filename="app/layout.tsx" switcher
-import 'bootstrap/dist/css/bootstrap.css'
+import "bootstrap/dist/css/bootstrap.css";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className="container">{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import 'bootstrap/dist/css/bootstrap.css'
+import "bootstrap/dist/css/bootstrap.css";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="container">{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -243,7 +230,7 @@ export default function RootLayout({ children }) {
 Next.js allows you to import CSS files from a JavaScript file.
 This is possible because Next.js extends the concept of [`import`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import) beyond JavaScript.
 
-### Import styles from `node_modules`
+### 从`node_modules`导入样式
 
 Since Next.js **9.5.4**, importing a CSS file from `node_modules` is permitted anywhere in your application.
 
@@ -251,25 +238,25 @@ For global stylesheets, like `bootstrap` or `nprogress`, you should import the f
 For example:
 
 ```jsx filename="pages/_app.js"
-import 'bootstrap/dist/css/bootstrap.css'
+import "bootstrap/dist/css/bootstrap.css";
 
 export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 ```
 
 For importing CSS required by a third-party component, you can do so in your component. For example:
 
 ```jsx filename="components/example-dialog.js"
-import { useState } from 'react'
-import { Dialog } from '@reach/dialog'
-import VisuallyHidden from '@reach/visually-hidden'
-import '@reach/dialog/styles.css'
+import { useState } from "react";
+import { Dialog } from "@reach/dialog";
+import VisuallyHidden from "@reach/visually-hidden";
+import "@reach/dialog/styles.css";
 
 function ExampleDialog(props) {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   return (
     <div>
@@ -282,16 +269,17 @@ function ExampleDialog(props) {
         <p>Hello there. I am a dialog</p>
       </Dialog>
     </div>
-  )
+  );
 }
 ```
 
 </PagesOnly>
 
-## Additional Features
+## 其他功能
 
-Next.js includes additional features to improve the authoring experience of adding styles:
+Next.js 包含了一些额外的功能，可以改善添加样式的创作体验：
 
-- When running locally with `next dev`, local stylesheets (either global or CSS modules) will take advantage of [Fast Refresh](/docs/architecture/fast-refresh) to instantly reflect changes as edits are saved.
-- When building for production with `next build`, CSS files will be bundled into fewer minified `.css` files to reduce the number of network requests needed to retrieve styles.
-- If you disable JavaScript, styles will still be loaded in the production build (`next start`). However, JavaScript is still required for `next dev` to enable [Fast Refresh](/docs/architecture/fast-refresh).
+- 使用`next dev`在本地运行时, 本地样式表（全局或 CSS 模块）将利用[快速刷新](/docs/architecture/fast-refresh)在保存编辑时立即反映更改。
+- 当使用`next build`进行生产构建时，CSS 文件将被捆绑到更少的缩小的`.css`文件中，以减少检索样式所需的网络请求数量。
+- 如果禁用 JavaScript，样式仍将加载到生产版本中(`next start`).
+  但是，`next dev`仍然需要 JavaScript 才能启用[快速刷新](/docs/architecture/fast-refresh).

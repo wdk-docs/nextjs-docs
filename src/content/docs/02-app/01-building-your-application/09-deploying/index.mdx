@@ -9,13 +9,13 @@ Congratulations, it's time to ship to production.
 
 You can deploy [managed Next.js with Vercel](#managed-nextjs-with-vercel), or self-host on a Node.js server, Docker image, or even static HTML files. When deploying using `next start`, all Next.js features are supported.
 
-## Production Builds
+## 生产建筑
 
 Running `next build` generates an optimized version of your application for production. HTML, CSS, and JavaScript files are created based on your pages. JavaScript is **compiled** and browser bundles are **minified** using the [Next.js Compiler](/docs/architecture/nextjs-compiler) to help achieve the best performance and support [all modern browsers](/docs/architecture/supported-browsers).
 
 Next.js produces a standard deployment output used by managed and self-hosted Next.js. This ensures all features are supported across both methods of deployment. In the next major version, we will be transforming this output into our [Build Output API specification](https://vercel.com/docs/build-output-api/v3?utm_source=next-site&utm_medium=docs&utm_campaign=next-website).
 
-## Managed Next.js with Vercel
+## 使用 Vercel 管理 Next.js
 
 [Vercel](https://vercel.com/docs/frameworks/nextjs?utm_source=next-site&utm_medium=docs&utm_campaign=next-website), the creators and maintainers of Next.js, provide managed infrastructure and a developer experience platform for your Next.js applications.
 
@@ -23,9 +23,9 @@ Deploying to Vercel is zero-configuration and provides additional enhancements f
 
 Learn more about [Next.js on Vercel](https://vercel.com/docs/frameworks/nextjs?utm_source=next-site&utm_medium=docs&utm_campaign=next-website) or [deploy a template for free](https://vercel.com/templates/next.js?utm_source=next-site&utm_medium=docs&utm_campaign=next-website) to try it out.
 
-## Self-Hosting
+## 自我寄宿
 
-You can self-host Next.js in three different ways:
+您可以通过三种不同的方式自托管 Next.js：
 
 - [A Node.js server](#nodejs-server)
 - [A Docker container](#docker-image)
@@ -147,25 +147,25 @@ To configure the ISR/Data Cache location when self-hosting, you can configure a 
 ```jsx filename="next.config.js"
 module.exports = {
   experimental: {
-    incrementalCacheHandlerPath: require.resolve('./cache-handler.js'),
+    incrementalCacheHandlerPath: require.resolve("./cache-handler.js"),
     isrMemoryCacheSize: 0, // disable default in-memory caching
   },
-}
+};
 ```
 
 Then, create `cache-handler.js` in the root of your project, for example:
 
 ```jsx filename="cache-handler.js"
-const cache = new Map()
+const cache = new Map();
 
 module.exports = class CacheHandler {
   constructor(options) {
-    this.options = options
+    this.options = options;
   }
 
   async get(key) {
     // This could be stored anywhere, like durable storage
-    return cache.get(key)
+    return cache.get(key);
   }
 
   async set(key, data, ctx) {
@@ -174,7 +174,7 @@ module.exports = class CacheHandler {
       value: data,
       lastModified: Date.now(),
       tags: ctx.tags,
-    })
+    });
   }
 
   async revalidateTag(tag) {
@@ -182,11 +182,11 @@ module.exports = class CacheHandler {
     for (let [key, value] of cache) {
       // If the value's tags include the specified tag, delete this entry
       if (value.tags.includes(tag)) {
-        cache.delete(key)
+        cache.delete(key);
       }
     }
   }
-}
+};
 ```
 
 Using a custom cache handler will allow you to ensure consistency across all pods hosting your Next.js application. For instance, you can save the cached values anywhere, like [Redis](https://github.com/vercel/next.js/tree/canary/examples/cache-handler-redis) or AWS S3.
@@ -205,9 +205,9 @@ If you are rebuilding for each stage of your environment, you will need to gener
 module.exports = {
   generateBuildId: async () => {
     // This could be anything, using the latest git hash
-    return process.env.GIT_HASH
+    return process.env.GIT_HASH;
   },
-}
+};
 ```
 
 ### Version Skew
@@ -240,14 +240,14 @@ You can set the env variable `NEXT_MANUAL_SIG_HANDLE` to `true` and then registe
 
 ```js filename="pages/_document.js"
 if (process.env.NEXT_MANUAL_SIG_HANDLE) {
-  process.on('SIGTERM', () => {
-    console.log('Received SIGTERM: cleaning up')
-    process.exit(0)
-  })
-  process.on('SIGINT', () => {
-    console.log('Received SIGINT: cleaning up')
-    process.exit(0)
-  })
+  process.on("SIGTERM", () => {
+    console.log("Received SIGTERM: cleaning up");
+    process.exit(0);
+  });
+  process.on("SIGINT", () => {
+    console.log("Received SIGINT: cleaning up");
+    process.exit(0);
+  });
 }
 ```
 

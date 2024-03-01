@@ -32,13 +32,22 @@ const menus: any = {
               label: "链接和导航",
               href: "/docs/app/building-your-application/routing/linking-and-navigating",
             },
-            { label: "路由组", href: "/docs/app/building-your-application/routing/route-groups" },
-            { label: "动态路由", href: "/docs/app/building-your-application/routing/dynamic-routes" },
+            {
+              label: "路由组",
+              href: "/docs/app/building-your-application/routing/route-groups",
+            },
+            {
+              label: "动态路由",
+              href: "/docs/app/building-your-application/routing/dynamic-routes",
+            },
             {
               label: "加载UI和流式处理",
               href: "/docs/app/building-your-application/routing/loading-ui-and-streaming",
             },
-            { label: "错误处理", href: "/docs/app/building-your-application/routing/error-handling" },
+            {
+              label: "错误处理",
+              href: "/docs/app/building-your-application/routing/error-handling",
+            },
             {
               label: "平行路由",
               href: "/docs/app/building-your-application/routing/parallel-routes",
@@ -47,8 +56,14 @@ const menus: any = {
               label: "拦截路由",
               href: "/docs/app/building-your-application/routing/intercepting-routes",
             },
-            { label: "路由处理程序", href: "/docs/app/building-your-application/routing/route-handlers" },
-            { label: "中间件", href: "/docs/app/building-your-application/routing/middleware" },
+            {
+              label: "路由处理程序",
+              href: "/docs/app/building-your-application/routing/route-handlers",
+            },
+            {
+              label: "中间件",
+              href: "/docs/app/building-your-application/routing/middleware",
+            },
             {
               label: "项目组织机构",
               href: "/docs/app/building-your-application/routing/colocation",
@@ -78,11 +93,17 @@ const menus: any = {
           ],
         },
         {
-          label: "Rendering",
+          label: "渲染",
           href: "/docs/app/building-your-application/rendering",
           subMenus: [
-            { label: "服务器组件", href: "/docs/app/building-your-application/rendering/server-components" },
-            { label: "客户端组件", href: "/docs/app/building-your-application/rendering/client-components" },
+            {
+              label: "服务器组件",
+              href: "/docs/app/building-your-application/rendering/server-components",
+            },
+            {
+              label: "客户端组件",
+              href: "/docs/app/building-your-application/rendering/client-components",
+            },
             {
               label: "构图模式",
               href: "/docs/app/building-your-application/rendering/composition-patterns",
@@ -101,25 +122,64 @@ const menus: any = {
           label: "样式",
           href: "/docs/app/building-your-application/styling",
           subMenus: [
-            { label: "CSS Modules", href: "/docs/app/building-your-application/styling/css-modules" },
-            { label: "Tailwind CSS", href: "/docs/app/building-your-application/styling/tailwind-css" },
-            { label: "CSS-in-JS", href: "/docs/app/building-your-application/styling/css-in-js" },
-            { label: "Sass", href: "/docs/app/building-your-application/styling/sass" },
+            {
+              label: "CSS Modules",
+              href: "/docs/app/building-your-application/styling/css-modules",
+            },
+            {
+              label: "Tailwind CSS",
+              href: "/docs/app/building-your-application/styling/tailwind-css",
+            },
+            {
+              label: "CSS-in-JS",
+              href: "/docs/app/building-your-application/styling/css-in-js",
+            },
+            {
+              label: "Sass",
+              href: "/docs/app/building-your-application/styling/sass",
+            },
           ],
         },
         {
           label: "优化",
           href: "/docs/app/building-your-application/optimizing",
           subMenus: [
-            { label: "Images", href: "/docs/app/building-your-application/optimizing/images" },
-            { label: "Fonts", href: "/docs/app/building-your-application/optimizing/fonts" },
-            { label: "Scripts", href: "/docs/app/building-your-application/optimizing/scripts" },
-            { label: "Metadata", href: "/docs/app/building-your-application/optimizing/metadata" },
-            { label: "静态资产", href: "/docs/app/building-your-application/optimizing/static-assets" },
-            { label: "懒惰加载", href: "/docs/app/building-your-application/optimizing/lazy-loading" },
-            { label: "分析", href: "/docs/app/building-your-application/optimizing/analytics" },
-            { label: "OpenTelemetry", href: "/docs/app/building-your-application/optimizing/open-telemetry" },
-            { label: "仪表", href: "/docs/app/building-your-application/optimizing/instrumentation" },
+            {
+              label: "Images",
+              href: "/docs/app/building-your-application/optimizing/images",
+            },
+            {
+              label: "Fonts",
+              href: "/docs/app/building-your-application/optimizing/fonts",
+            },
+            {
+              label: "Scripts",
+              href: "/docs/app/building-your-application/optimizing/scripts",
+            },
+            {
+              label: "Metadata",
+              href: "/docs/app/building-your-application/optimizing/metadata",
+            },
+            {
+              label: "静态资产",
+              href: "/docs/app/building-your-application/optimizing/static-assets",
+            },
+            {
+              label: "懒惰加载",
+              href: "/docs/app/building-your-application/optimizing/lazy-loading",
+            },
+            {
+              label: "分析",
+              href: "/docs/app/building-your-application/optimizing/analytics",
+            },
+            {
+              label: "OpenTelemetry",
+              href: "/docs/app/building-your-application/optimizing/open-telemetry",
+            },
+            {
+              label: "仪表",
+              href: "/docs/app/building-your-application/optimizing/instrumentation",
+            },
             {
               label: "第三方库",
               href: "/docs/app/building-your-application/optimizing/third-party-libraries",
@@ -130,8 +190,14 @@ const menus: any = {
           label: "配置",
           href: "/docs/app/building-your-application/configuring",
           subMenus: [
-            { label: "TypeScript", href: "/docs/app/building-your-application/configuring/typescript" },
-            { label: "ESLint", href: "/docs/app/building-your-application/configuring/eslint" },
+            {
+              label: "TypeScript",
+              href: "/docs/app/building-your-application/configuring/typescript",
+            },
+            {
+              label: "ESLint",
+              href: "/docs/app/building-your-application/configuring/eslint",
+            },
             {
               label: "环境变量",
               href: "/docs/app/building-your-application/configuring/environment-variables",
@@ -140,9 +206,18 @@ const menus: any = {
               label: "绝对导入和模块路径别名",
               href: "/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases",
             },
-            { label: "MDX", href: "/docs/app/building-your-application/configuring/mdx" },
-            { label: "src 目录", href: "/docs/app/building-your-application/configuring/src-directory" },
-            { label: "草稿模式", href: "/docs/app/building-your-application/configuring/draft-mode" },
+            {
+              label: "MDX",
+              href: "/docs/app/building-your-application/configuring/mdx",
+            },
+            {
+              label: "src 目录",
+              href: "/docs/app/building-your-application/configuring/src-directory",
+            },
+            {
+              label: "草稿模式",
+              href: "/docs/app/building-your-application/configuring/draft-mode",
+            },
             {
               label: "内容安全策略",
               href: "/docs/app/building-your-application/configuring/content-security-policy",
@@ -231,64 +306,172 @@ const menus: any = {
           ],
         },
         {
-          label: "File Conventions",
+          label: "文件约定",
           href: "/docs/chatgpt/guidelines",
           subMenus: [
-            { label: "default.js", href: "/docs/app/api-reference/file-conventions/default" },
-            { label: "error.js", href: "/docs/app/api-reference/file-conventions/error" },
-            { label: "layout.js", href: "/docs/app/api-reference/file-conventions/layout" },
-            { label: "loading.js", href: "/docs/app/api-reference/file-conventions/loading" },
-            { label: "not-found.js", href: "/docs/app/api-reference/file-conventions/not-found" },
-            { label: "page.js", href: "/docs/app/api-reference/file-conventions/page" },
-            { label: "route.js", href: "/docs/app/api-reference/file-conventions/route" },
-            { label: "Route Segment Config", href: "/docs/app/api-reference/file-conventions/route-segment-config" },
-            { label: "template.js", href: "/docs/app/api-reference/file-conventions/template" },
             {
-              label: "Metadata Files",
+              label: "default.js",
+              href: "/docs/app/api-reference/file-conventions/default",
+            },
+            {
+              label: "error.js",
+              href: "/docs/app/api-reference/file-conventions/error",
+            },
+            {
+              label: "layout.js",
+              href: "/docs/app/api-reference/file-conventions/layout",
+            },
+            {
+              label: "loading.js",
+              href: "/docs/app/api-reference/file-conventions/loading",
+            },
+            {
+              label: "not-found.js",
+              href: "/docs/app/api-reference/file-conventions/not-found",
+            },
+            {
+              label: "page.js",
+              href: "/docs/app/api-reference/file-conventions/page",
+            },
+            {
+              label: "route.js",
+              href: "/docs/app/api-reference/file-conventions/route",
+            },
+            {
+              label: "Route Segment Config",
+              href: "/docs/app/api-reference/file-conventions/route-segment-config",
+            },
+            {
+              label: "template.js",
+              href: "/docs/app/api-reference/file-conventions/template",
+            },
+            {
+              label: "元数据文件",
               subMenus: [
                 {
-                  label: "favicon, icon, and apple-icon",
+                  label: "favicon, icon, 和 apple-icon",
                   href: "/docs/app/api-reference/file-conventions/metadata/app-icons",
                 },
-                { label: "manifest.json", href: "/docs/app/api-reference/file-conventions/metadata/manifest" },
                 {
-                  label: "opengraph-image and twitter-image",
+                  label: "manifest.json",
+                  href: "/docs/app/api-reference/file-conventions/metadata/manifest",
+                },
+                {
+                  label: "opengraph-image 和 twitter-image",
                   href: "/docs/app/api-reference/file-conventions/metadata/opengraph-image",
                 },
-                { label: "robots.txt", href: "/docs/app/api-reference/file-conventions/metadata/robots" },
-                { label: "sitemap.xml", href: "/docs/app/api-reference/file-conventions/metadata/sitemap" },
+                {
+                  label: "robots.txt",
+                  href: "/docs/app/api-reference/file-conventions/metadata/robots",
+                },
+                {
+                  label: "sitemap.xml",
+                  href: "/docs/app/api-reference/file-conventions/metadata/sitemap",
+                },
               ],
             },
           ],
         },
         {
-          label: "Functions",
+          label: "函数",
           href: "",
           subMenus: [
-            { label: "cookies", href: "/docs/app/api-reference/functions/cookies" },
-            { label: "draftMode", href: "/docs/app/api-reference/functions/draft-mode" },
-            { label: "fetch", href: "/docs/app/api-reference/functions/fetch" },
-            { label: "generateImageMetadata", href: "/docs/app/api-reference/functions/generate-image-metadata" },
-            { label: "generateMetadata", href: "/docs/app/api-reference/functions/generate-metadata" },
-            { label: "generateSitemaps", href: "/docs/app/api-reference/functions/generate-sitemaps" },
-            { label: "generateStaticParams", href: "/docs/app/api-reference/functions/generate-static-params" },
-            { label: "generateViewport", href: "/docs/app/api-reference/functions/generate-viewport" },
-            { label: "headers", href: "/docs/app/api-reference/functions/headers" },
-            { label: "ImageResponse", href: "/docs/app/api-reference/functions/image-response" },
-            { label: "NextRequest", href: "/docs/app/api-reference/functions/next-request" },
-            { label: "NextResponse", href: "/docs/app/api-reference/functions/next-response" },
-            { label: "notFound", href: "/docs/app/api-reference/functions/not-found" },
-            { label: "permanentRedirect", href: "/docs/app/api-reference/functions/permanentRedirect" },
-            { label: "redirect", href: "/docs/app/api-reference/functions/redirect" },
-            { label: "revalidatePath", href: "/docs/app/api-reference/functions/revalidatePath" },
-            { label: "revalidateTag", href: "/docs/app/api-reference/functions/revalidateTag" },
-            { label: "unstable_cache", href: "/docs/app/api-reference/functions/unstable_cache" },
-            { label: "unstable_noStore", href: "/docs/app/api-reference/functions/unstable_noStore" },
-            { label: "useParams", href: "/docs/app/api-reference/functions/use-params" },
-            { label: "usePathname", href: "/docs/app/api-reference/functions/use-pathname" },
-            { label: "useReportWebVitals", href: "/docs/app/api-reference/functions/use-report-web-vitals" },
-            { label: "useRouter", href: "/docs/app/api-reference/functions/use-router" },
-            { label: "useSearchParams", href: "/docs/app/api-reference/functions/use-search-params" },
+            {
+              label: "cookies",
+              href: "/docs/app/api-reference/functions/cookies",
+            },
+            {
+              label: "draftMode",
+              href: "/docs/app/api-reference/functions/draft-mode",
+            },
+            {
+              label: "fetch",
+              href: "/docs/app/api-reference/functions/fetch",
+            },
+            {
+              label: "generateImageMetadata",
+              href: "/docs/app/api-reference/functions/generate-image-metadata",
+            },
+            {
+              label: "generateMetadata",
+              href: "/docs/app/api-reference/functions/generate-metadata",
+            },
+            {
+              label: "generateSitemaps",
+              href: "/docs/app/api-reference/functions/generate-sitemaps",
+            },
+            {
+              label: "generateStaticParams",
+              href: "/docs/app/api-reference/functions/generate-static-params",
+            },
+            {
+              label: "generateViewport",
+              href: "/docs/app/api-reference/functions/generate-viewport",
+            },
+            {
+              label: "headers",
+              href: "/docs/app/api-reference/functions/headers",
+            },
+            {
+              label: "ImageResponse",
+              href: "/docs/app/api-reference/functions/image-response",
+            },
+            {
+              label: "NextRequest",
+              href: "/docs/app/api-reference/functions/next-request",
+            },
+            {
+              label: "NextResponse",
+              href: "/docs/app/api-reference/functions/next-response",
+            },
+            {
+              label: "notFound",
+              href: "/docs/app/api-reference/functions/not-found",
+            },
+            {
+              label: "permanentRedirect",
+              href: "/docs/app/api-reference/functions/permanentRedirect",
+            },
+            {
+              label: "redirect",
+              href: "/docs/app/api-reference/functions/redirect",
+            },
+            {
+              label: "revalidatePath",
+              href: "/docs/app/api-reference/functions/revalidatePath",
+            },
+            {
+              label: "revalidateTag",
+              href: "/docs/app/api-reference/functions/revalidateTag",
+            },
+            {
+              label: "unstable_cache",
+              href: "/docs/app/api-reference/functions/unstable_cache",
+            },
+            {
+              label: "unstable_noStore",
+              href: "/docs/app/api-reference/functions/unstable_noStore",
+            },
+            {
+              label: "useParams",
+              href: "/docs/app/api-reference/functions/use-params",
+            },
+            {
+              label: "usePathname",
+              href: "/docs/app/api-reference/functions/use-pathname",
+            },
+            {
+              label: "useReportWebVitals",
+              href: "/docs/app/api-reference/functions/use-report-web-vitals",
+            },
+            {
+              label: "useRouter",
+              href: "/docs/app/api-reference/functions/use-router",
+            },
+            {
+              label: "useSearchParams",
+              href: "/docs/app/api-reference/functions/use-search-params",
+            },
             {
               label: "useSelectedLayoutSegment",
               href: "/docs/app/api-reference/functions/use-selected-layout-segment",
@@ -297,82 +480,214 @@ const menus: any = {
               label: "useSelectedLayoutSegments",
               href: "/docs/app/api-reference/functions/use-selected-layout-segments",
             },
-            { label: "userAgent", href: "/docs/app/api-reference/functions/userAgent" },
+            {
+              label: "userAgent",
+              href: "/docs/app/api-reference/functions/userAgent",
+            },
           ],
         },
         {
-          label: "next.config.js Options",
-          href: "",
+          label: "next.config.js 选项",
+          href: "/docs/app/api-reference/next-config-js",
           subMenus: [
-            { label: "appDir", href: "/docs/app/api-reference/next-config-js/appDir" },
-            { label: "assetPrefix", href: "/docs/app/api-reference/next-config-js/assetPrefix" },
-            { label: "basePath", href: "/docs/app/api-reference/next-config-js/basePath" },
-            { label: "compress", href: "/docs/app/api-reference/next-config-js/compress" },
-            { label: "devIndicators", href: "/docs/app/api-reference/next-config-js/devIndicators" },
-            { label: "distDir", href: "/docs/app/api-reference/next-config-js/distDir" },
-            { label: "env", href: "/docs/app/api-reference/next-config-js/env" },
-            { label: "eslint", href: "/docs/app/api-reference/next-config-js/eslint" },
-            { label: "exportPathMap", href: "/docs/app/api-reference/next-config-js/exportPathMap" },
-            { label: "generateBuildId", href: "/docs/app/api-reference/next-config-js/generateBuildId" },
-            { label: "generateEtags", href: "/docs/app/api-reference/next-config-js/generateEtags" },
-            { label: "headers", href: "/docs/app/api-reference/next-config-js/headers" },
-            { label: "httpAgentOptions", href: "/docs/app/api-reference/next-config-js/httpAgentOptions" },
-            { label: "images", href: "/docs/app/api-reference/next-config-js/images" },
+            {
+              label: "appDir",
+              href: "/docs/app/api-reference/next-config-js/appDir",
+            },
+            {
+              label: "assetPrefix",
+              href: "/docs/app/api-reference/next-config-js/assetPrefix",
+            },
+            {
+              label: "basePath",
+              href: "/docs/app/api-reference/next-config-js/basePath",
+            },
+            {
+              label: "compress",
+              href: "/docs/app/api-reference/next-config-js/compress",
+            },
+            {
+              label: "devIndicators",
+              href: "/docs/app/api-reference/next-config-js/devIndicators",
+            },
+            {
+              label: "distDir",
+              href: "/docs/app/api-reference/next-config-js/distDir",
+            },
+            {
+              label: "env",
+              href: "/docs/app/api-reference/next-config-js/env",
+            },
+            {
+              label: "eslint",
+              href: "/docs/app/api-reference/next-config-js/eslint",
+            },
+            {
+              label: "exportPathMap",
+              href: "/docs/app/api-reference/next-config-js/exportPathMap",
+            },
+            {
+              label: "generateBuildId",
+              href: "/docs/app/api-reference/next-config-js/generateBuildId",
+            },
+            {
+              label: "generateEtags",
+              href: "/docs/app/api-reference/next-config-js/generateEtags",
+            },
+            {
+              label: "headers",
+              href: "/docs/app/api-reference/next-config-js/headers",
+            },
+            {
+              label: "httpAgentOptions",
+              href: "/docs/app/api-reference/next-config-js/httpAgentOptions",
+            },
+            {
+              label: "images",
+              href: "/docs/app/api-reference/next-config-js/images",
+            },
             {
               label: "incrementalCacheHandlerPath",
               href: "/docs/app/api-reference/next-config-js/incrementalCacheHandlerPath",
             },
-            { label: "logging", href: "/docs/app/api-reference/next-config-js/logging" },
-            { label: "mdxRs", href: "/docs/app/api-reference/next-config-js/mdxRs" },
-            { label: "onDemandEntries", href: "/docs/app/api-reference/next-config-js/onDemandEntries" },
-            { label: "optimizePackageImports", href: "/docs/app/api-reference/next-config-js/optimizePackageImports" },
-            { label: "output", href: "/docs/app/api-reference/next-config-js/output" },
-            { label: "pageExtensions", href: "/docs/app/api-reference/next-config-js/pageExtensions" },
+            {
+              label: "logging",
+              href: "/docs/app/api-reference/next-config-js/logging",
+            },
+            {
+              label: "mdxRs",
+              href: "/docs/app/api-reference/next-config-js/mdxRs",
+            },
+            {
+              label: "onDemandEntries",
+              href: "/docs/app/api-reference/next-config-js/onDemandEntries",
+            },
+            {
+              label: "optimizePackageImports",
+              href: "/docs/app/api-reference/next-config-js/optimizePackageImports",
+            },
+            {
+              label: "output",
+              href: "/docs/app/api-reference/next-config-js/output",
+            },
+            {
+              label: "pageExtensions",
+              href: "/docs/app/api-reference/next-config-js/pageExtensions",
+            },
             {
               label: "Partial Prerendering (experimental)",
               href: "/docs/app/api-reference/next-config-js/partial-prerendering",
             },
-            { label: "poweredByHeader", href: "/docs/app/api-reference/next-config-js/poweredByHeader" },
+            {
+              label: "poweredByHeader",
+              href: "/docs/app/api-reference/next-config-js/poweredByHeader",
+            },
             {
               label: "productionBrowserSourceMaps",
               href: "/docs/app/api-reference/next-config-js/productionBrowserSourceMaps",
             },
-            { label: "reactStrictMode", href: "/docs/app/api-reference/next-config-js/reactStrictMode" },
-            { label: "redirects", href: "/docs/app/api-reference/next-config-js/redirects" },
-            { label: "rewrites", href: "/docs/app/api-reference/next-config-js/rewrites" },
-            { label: "serverActions", href: "/docs/app/api-reference/next-config-js/serverActions" },
+            {
+              label: "reactStrictMode",
+              href: "/docs/app/api-reference/next-config-js/reactStrictMode",
+            },
+            {
+              label: "redirects",
+              href: "/docs/app/api-reference/next-config-js/redirects",
+            },
+            {
+              label: "rewrites",
+              href: "/docs/app/api-reference/next-config-js/rewrites",
+            },
+            {
+              label: "serverActions",
+              href: "/docs/app/api-reference/next-config-js/serverActions",
+            },
             {
               label: "serverComponentsExternalPackages",
               href: "/docs/app/api-reference/next-config-js/serverComponentsExternalPackages",
             },
-            { label: "trailingSlash", href: "/docs/app/api-reference/next-config-js/trailingSlash" },
-            { label: "transpilePackages", href: "/docs/app/api-reference/next-config-js/transpilePackages" },
-            { label: "turbo", href: "/docs/app/api-reference/next-config-js/turbo" },
-            { label: "typedRoutes", href: "/docs/app/api-reference/next-config-js/typedRoutes" },
-            { label: "typescript", href: "/docs/app/api-reference/next-config-js/typescript" },
-            { label: "urlImports", href: "/docs/app/api-reference/next-config-js/urlImports" },
-            { label: "webpack", href: "/docs/app/api-reference/next-config-js/webpack" },
-            { label: "webVitalsAttribution", href: "/docs/app/api-reference/next-config-js/webVitalsAttribution" },
+            {
+              label: "trailingSlash",
+              href: "/docs/app/api-reference/next-config-js/trailingSlash",
+            },
+            {
+              label: "transpilePackages",
+              href: "/docs/app/api-reference/next-config-js/transpilePackages",
+            },
+            {
+              label: "turbo",
+              href: "/docs/app/api-reference/next-config-js/turbo",
+            },
+            {
+              label: "typedRoutes",
+              href: "/docs/app/api-reference/next-config-js/typedRoutes",
+            },
+            {
+              label: "typescript",
+              href: "/docs/app/api-reference/next-config-js/typescript",
+            },
+            {
+              label: "urlImports",
+              href: "/docs/app/api-reference/next-config-js/urlImports",
+            },
+            {
+              label: "webpack",
+              href: "/docs/app/api-reference/next-config-js/webpack",
+            },
+            {
+              label: "webVitalsAttribution",
+              href: "/docs/app/api-reference/next-config-js/webVitalsAttribution",
+            },
           ],
         },
-        { label: "create-next-app", href: "/docs/pages/api-reference/create-next-app" },
-        { label: "Next.js CLI", href: "/docs/pages/api-reference/next-cli" },
-        { label: "Edge Runtime", href: "/docs/pages/api-reference/edge" },
+        {
+          label: "create-next-app",
+          href: "/docs/pages/api-reference/create-next-app",
+        },
+        {
+          label: "Next.js CLI",
+          href: "/docs/pages/api-reference/next-cli",
+        },
+        {
+          label: "Edge Runtime",
+          href: "/docs/pages/api-reference/edge",
+        },
       ],
     },
     {
-      label: "Architecture",
+      label: "体系结构",
+      href: "/docs/architecture",
       subMenus: [
-        { label: "Accessibility", href: "/docs/architecture/accessibility" },
-        { label: "Fast Refresh", href: "/docs/architecture/fast-refresh" },
-        { label: "Next.js Compiler", href: "/docs/architecture/nextjs-compiler" },
-        { label: "Supported Browsers", href: "/docs/architecture/supported-browsers" },
-        { label: "Turbopack", href: "/docs/architecture/turbopack" },
+        {
+          label: "可访问性",
+          href: "/docs/architecture/accessibility",
+        },
+        {
+          label: "快速刷新",
+          href: "/docs/architecture/fast-refresh",
+        },
+        {
+          label: "Next.js 编译器",
+          href: "/docs/architecture/nextjs-compiler",
+        },
+        {
+          label: "支持的浏览器",
+          href: "/docs/architecture/supported-browsers",
+        },
+        {
+          label: "Turbopack",
+          href: "/docs/architecture/turbopack",
+        },
       ],
     },
     {
-      label: "Community",
-      subMenus: [{ label: "Contribution Guide", href: "/docs/community/contribution-guide" }],
+      label: "社区",
+      subMenus: [
+        {
+          label: "贡献指南",
+          href: "/docs/community/contribution-guide",
+        },
+      ],
     },
   ],
   blog: [

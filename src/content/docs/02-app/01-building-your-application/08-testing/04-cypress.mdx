@@ -13,7 +13,7 @@ description: Learn how to set up Cypress with Next.js for End-to-End (E2E) and C
 
 <AppOnly>
 
-## Quickstart
+## 快速启动
 
 You can use `create-next-app` with the [with-cypress example](https://github.com/vercel/next.js/tree/canary/examples/with-cypress) to quickly get started.
 
@@ -23,7 +23,7 @@ npx create-next-app@latest --example with-cypress with-cypress-app
 
 </AppOnly>
 
-## Manual setup
+## 手动设置
 
 To manually set up Cypress, install `cypress` as a dev dependency:
 
@@ -57,28 +57,28 @@ npm run cypress:open
 
 You can choose to configure **E2E Testing** and/or **Component Testing**. Selecting any of these options will automatically create a `cypress.config.js` file and a `cypress` folder in your project.
 
-## Creating your first Cypress E2E test
+## 创建您的第一个 Cypress E2E 测试
 
 Ensure your `cypress.config.js` file has the following configuration:
 
 ```ts filename="cypress.config.ts"
-import { defineConfig } from 'cypress'
+import { defineConfig } from "cypress";
 
 export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {},
   },
-})
+});
 ```
 
 ```js filename="cypress.config.js"
-const { defineConfig } = require('cypress')
+const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {},
   },
-})
+});
 ```
 
 Then, create two new Next.js files:
@@ -86,7 +86,7 @@ Then, create two new Next.js files:
 <AppOnly>
 
 ```jsx filename="app/page.js"
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -94,12 +94,12 @@ export default function Page() {
       <h1>Home</h1>
       <Link href="/about">About</Link>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/about/page.js"
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -107,7 +107,7 @@ export default function Page() {
       <h1>About</h1>
       <Link href="/">Home</Link>
     </div>
-  )
+  );
 }
 ```
 
@@ -116,7 +116,7 @@ export default function Page() {
 <PagesOnly>
 
 ```jsx filename="pages/index.js"
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -124,12 +124,12 @@ export default function Home() {
       <h1>Home</h1>
       <Link href="/about">About</Link>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/about.js"
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function About() {
   return (
@@ -137,7 +137,7 @@ export default function About() {
       <h1>About</h1>
       <Link href="/">Home</Link>
     </div>
-  )
+  );
 }
 ```
 
@@ -146,24 +146,24 @@ export default function About() {
 Add a test to check your navigation is working correctly:
 
 ```js filename="cypress/e2e/app.cy.js"
-describe('Navigation', () => {
-  it('should navigate to the about page', () => {
+describe("Navigation", () => {
+  it("should navigate to the about page", () => {
     // Start from the index page
-    cy.visit('http://localhost:3000/')
+    cy.visit("http://localhost:3000/");
 
     // Find a link with an href attribute containing "about" and click it
-    cy.get('a[href*="about"]').click()
+    cy.get('a[href*="about"]').click();
 
     // The new url should include "/about"
-    cy.url().should('include', '/about')
+    cy.url().should("include", "/about");
 
     // The new page should contain an h1 with "About"
-    cy.get('h1').contains('About')
-  })
-})
+    cy.get("h1").contains("About");
+  });
+});
 ```
 
-### Running E2E Tests
+### 运行 E2E 测试
 
 Cypress will simulate a user navigating your application, this requires your Next.js server to be running. We recommend running your tests against your production code to more closely resemble how your application will behave.
 
@@ -174,7 +174,7 @@ Run `npm run build && npm run start` to build your Next.js application, then run
 > - You can use `cy.visit("/")` instead of `cy.visit("http://localhost:3000/")` by adding `baseUrl: 'http://localhost:3000'` to the `cypress.config.js` configuration file.
 > - Alternatively, you can install the `start-server-and-test` package to run the Next.js production server in conjuction with Cypress. After installation, add `"test": "start-server-and-test start http://localhost:3000 cypress"` to your `package.json` scripts field. Remember to rebuild your application after new changes.
 
-## Creating your first Cypress component test
+## 创建您的第一个 Cypress 组件测试
 
 Component tests build and mount a specific component without having to bundle your whole application or start a server.
 
@@ -183,29 +183,29 @@ Select **Component Testing** in the Cypress app, then select **Next.js** as your
 Ensure your `cypress.config.js` file has the following configuration:
 
 ```ts filename="cypress.config.ts"
-import { defineConfig } from 'cypress'
+import { defineConfig } from "cypress";
 
 export default defineConfig({
   component: {
     devServer: {
-      framework: 'next',
-      bundler: 'webpack',
+      framework: "next",
+      bundler: "webpack",
     },
   },
-})
+});
 ```
 
 ```js filename="cypress.config.js"
-const { defineConfig } = require('cypress')
+const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   component: {
     devServer: {
-      framework: 'next',
-      bundler: 'webpack',
+      framework: "next",
+      bundler: "webpack",
     },
   },
-})
+});
 ```
 
 Assuming the same components from the previous section, add a test to validate a component is rendering the expected output:
@@ -213,21 +213,21 @@ Assuming the same components from the previous section, add a test to validate a
 <AppOnly>
 
 ```tsx filename="cypress/component/about.cy.tsx"
-import Page from '../../app/page'
+import Page from "../../app/page";
 
-describe('<Page />', () => {
-  it('should render and display expected content', () => {
+describe("<Page />", () => {
+  it("should render and display expected content", () => {
     // Mount the React component for the Home page
-    cy.mount(<Page />)
+    cy.mount(<Page />);
 
     // The new page should contain an h1 with "Home"
-    cy.get('h1').contains('Home')
+    cy.get("h1").contains("Home");
 
     // Validate that a link with the expected URL is present
     // Following the link is better suited to an E2E test
-    cy.get('a[href="/about"]').should('be.visible')
-  })
-})
+    cy.get('a[href="/about"]').should("be.visible");
+  });
+});
 ```
 
 </AppOnly>
@@ -235,21 +235,21 @@ describe('<Page />', () => {
 <PagesOnly>
 
 ```jsx filename="cypress/component/about.cy.js"
-import AboutPage from '../../pages/about'
+import AboutPage from "../../pages/about";
 
-describe('<AboutPage />', () => {
-  it('should render and display expected content', () => {
+describe("<AboutPage />", () => {
+  it("should render and display expected content", () => {
     // Mount the React component for the About page
-    cy.mount(<AboutPage />)
+    cy.mount(<AboutPage />);
 
     // The new page should contain an h1 with "About page"
-    cy.get('h1').contains('About')
+    cy.get("h1").contains("About");
 
     // Validate that a link with the expected URL is present
     // *Following* the link is better suited to an E2E test
-    cy.get('a[href="/"]').should('be.visible')
-  })
-})
+    cy.get('a[href="/"]').should("be.visible");
+  });
+});
 ```
 
 </PagesOnly>
@@ -259,11 +259,11 @@ describe('<AboutPage />', () => {
 > - Cypress currently doesn't support component testing for `async` Server Components. We recommend using E2E testing.
 > - Since component tests do not require a Next.js server, features like `<Image />` that rely on a server being available may not function out-of-the-box.
 
-### Running Component Tests
+### 运行组件测试
 
 Run `npm run cypress:open` in your terminal to start Cypress and run your component testing suite.
 
-## Continuous Integration (CI)
+## 持续集成 (CI)
 
 In addition to interactive testing, you can also run Cypress headlessly using the `cypress run` command, which is better suited for CI environments:
 
@@ -279,7 +279,7 @@ In addition to interactive testing, you can also run Cypress headlessly using th
 }
 ```
 
-You can learn more about Cypress and Continuous Integration from these resources:
+您可以从这些资源中了解有关 Cypress 和 Continuous Integration 的更多信息：
 
 - [Next.js with Cypress example](https://github.com/vercel/next.js/tree/canary/examples/with-cypress)
 - [Cypress Continuous Integration Docs](https://docs.cypress.io/guides/continuous-integration/introduction)

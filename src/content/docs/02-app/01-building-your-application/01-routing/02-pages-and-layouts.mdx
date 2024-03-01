@@ -1,13 +1,13 @@
 ---
-title: Pages and Layouts
-description: Create your first page and shared layout with the App Router.
+title: 页面和布局
+description: 使用App Router创建您的第一个页面和共享布局。
 ---
 
 > We recommend reading the [Routing Fundamentals](/docs/app/building-your-application/routing) and [Defining Routes](/docs/app/building-your-application/routing/defining-routes) pages before continuing.
 
 The App Router inside Next.js 13 introduced new file conventions to easily create [pages](#pages), [shared layouts](#layouts), and [templates](#templates). This page will guide you through how to use these special files in your Next.js application.
 
-## Pages
+## 页
 
 A page is UI that is **unique** to a route. You can define pages by exporting a component from a `page.js` file. Use nested folders to [define a route](/docs/app/building-your-application/routing/defining-routes) and a `page.js` file to make the route publicly accessible.
 
@@ -49,7 +49,7 @@ export default function Page() {
 }
 ```
 
-> **Good to know**:
+> **很高兴知道**:
 >
 > - A page is always the [leaf](/docs/app/building-your-application/routing#terminology) of the [route subtree](/docs/app/building-your-application/routing#terminology).
 > - `.js`, `.jsx`, or `.tsx` file extensions can be used for Pages.
@@ -57,7 +57,7 @@ export default function Page() {
 > - Pages are [Server Components](/docs/app/building-your-application/rendering/server-components) by default but can be set to a [Client Component](/docs/app/building-your-application/rendering/client-components).
 > - Pages can fetch data. View the [Data Fetching](/docs/app/building-your-application/data-fetching) section for more information.
 
-## Layouts
+## 布局
 
 A layout is UI that is **shared** between multiple pages. On navigation, layouts preserve state, remain interactive, and do not re-render. Layouts can also be [nested](#nesting-layouts).
 
@@ -116,7 +116,7 @@ export default function DashboardLayout({
 > - `.js`, `.jsx`, or `.tsx` file extensions can be used for Layouts.
 > - A `layout.js` and `page.js` file can be defined in the same folder. The layout will wrap the page.
 
-### Root Layout (Required)
+### 根布局 (必须地)
 
 The root layout is defined at the top level of the `app` directory and applies to all routes. This layout enables you to modify the initial HTML returned from the server.
 
@@ -150,7 +150,7 @@ export default function RootLayout({ children }) {
 
 > **Migrating from the `pages` directory:** The root layout replaces the [`_app.js`](/docs/pages/building-your-application/routing/custom-app) and [`_document.js`](/docs/pages/building-your-application/routing/custom-document) files. [View the migration guide](/docs/app/building-your-application/upgrading/app-router-migration#migrating-_documentjs-and-_appjs).
 
-### Nesting Layouts
+### 嵌套布局
 
 Layouts defined inside a folder (e.g. `app/dashboard/layout.js`) apply to specific route segments (e.g. `acme.com/dashboard`) and render when those segments are active. By default, layouts in the file hierarchy are **nested**, which means they wrap child layouts via their `children` prop.
 
@@ -192,7 +192,7 @@ The two layouts would be nested as such:
 
 You can use [Route Groups](/docs/app/building-your-application/routing/route-groups) to opt specific route segments in and out of shared layouts.
 
-## Templates
+## 模板
 
 Templates are similar to layouts in that they wrap each child layout or page. Unlike layouts that persist across routes and maintain state, templates create a new instance for each of their children on navigation. This means that when a user navigates between routes that share a template, a new instance of the component is mounted, DOM elements are recreated, state is **not** preserved, and effects are re-synchronized.
 
@@ -232,7 +232,7 @@ In terms of nesting, `template.js` is rendered between a layout and its children
 </Layout>
 ```
 
-## Modifying `<head>`
+## 正在修改 `<head>`
 
 In the `app` directory, you can modify the `<head>` HTML elements such as `title` and `meta` using the [built-in SEO support](/docs/app/building-your-application/optimizing/metadata).
 

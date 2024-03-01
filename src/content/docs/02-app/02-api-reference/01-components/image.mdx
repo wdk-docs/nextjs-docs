@@ -1,24 +1,25 @@
 ---
 title: <Image>
-description: Optimize Images in your Next.js Application using the built-in `next/image` Component.
+description: 使用内置的`Next/image`组件优化Next.js应用程序中的图像。
 ---
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
 <details>
-  <summary>Examples</summary>
+  <summary>示例</summary>
 
-- [Image Component](https://github.com/vercel/next.js/tree/canary/examples/image-component)
+- [图像组件](https://github.com/vercel/next.js/tree/canary/examples/image-component)
 
 </details>
 
 <PagesOnly>
 
-> **Good to know**: If you are using a version of Next.js prior to 13, you'll want to use the [next/legacy/image](/docs/pages/api-reference/components/image-legacy) documentation since the component was renamed.
+> **Good to know**: 如果您使用的是 13 之前的 Next.js 版本, 您将希望使用[next/legate/image](/docs/pages/api-reference/components/image-legacy)文档，因为组件已重命名。
 
 </PagesOnly>
 
-This API reference will help you understand how to use [props](#props) and [configuration options](#configuration-options) available for the Image Component. For features and usage, please see the [Image Component](/docs/app/building-your-application/optimizing/images) page.
+此 API 参考资料将帮助您了解如何使用图像组件可用的[props](#props) 和 [配置选项](#configuration-options)。
+有关功能和用法，请参阅[图像组件](/docs/app/building-your-application/optimizing/images)页面。
 
 ```jsx filename="app/page.js"
 import Image from "next/image";
@@ -30,7 +31,7 @@ export default function Page() {
 
 ## Props
 
-Here's a summary of the props available for the Image Component:
+以下是图像组件可用属性的摘要：
 
 <div style={{ overflowX: 'auto', width: '100%' }}>
 | Prop                                      | Example                                  | Type            | Status     |
@@ -53,9 +54,9 @@ Here's a summary of the props available for the Image Component:
 | [`blurDataURL`](#blurdataurl)             | `blurDataURL="data:image/jpeg..."`       | String          | -          |
 </div>
 
-## Required Props
+## 必须属性
 
-The Image Component requires the following properties: `src`, `width`, `height`, and `alt`.
+图像组件需要以下属性: `src`, `width`, `height`, and `alt`.
 
 ```jsx filename="app/page.js"
 import Image from "next/image";
@@ -71,50 +72,50 @@ export default function Page() {
 
 ### `src`
 
-Must be one of the following:
+必须是以下其中之一：
 
-- A [statically imported](/docs/app/building-your-application/optimizing/images#local-images) image file
-- A path string. This can be either an absolute external URL, or an internal path depending on the [loader](#loader) prop.
+- [静态导入](/docs/app/building-your-application/optimizing/images#local-images)的图像文件
+- 路径字符串。这可以是绝对的外部 URL，也可以是内部路径，具体取决于[loader](#loader)属性。
 
-When using an external URL, you must add it to [remotePatterns](#remotepatterns) in `next.config.js`.
+使用外部 URL 时，必须将其添加到`next.config.js`中的[remotePatterns](#remotePatterns)中。
 
 ### `width`
 
-The `width` property represents the _rendered_ width in pixels, so it will affect how large the image appears.
+`width`属性表示以像素为单位的*渲染*宽度，因此它将影响图像的显示大小。
 
-Required, except for [statically imported images](/docs/app/building-your-application/optimizing/images#local-images) or images with the [`fill` property](#fill).
+必需，[静态导入的图像](/docs/app/building-your-application/optimizing/images#local-images)或具有[`fill`属性](#fill)的图像除外.
 
 ### `height`
 
-The `height` property represents the _rendered_ height in pixels, so it will affect how large the image appears.
+`height`属性以像素为单位表示\_rendered_height，因此它将影响图像的显示大小。
 
-Required, except for [statically imported images](/docs/app/building-your-application/optimizing/images#local-images) or images with the [`fill` property](#fill).
+必需，[静态导入的图像](/docs/app/building-your-application/optimizing/images#local-images)或具有[`fill`属性](#fill)的图像除外.
 
 ### `alt`
 
-The `alt` property is used to describe the image for screen readers and search engines. It is also the fallback text if images have been disabled or an error occurs while loading the image.
+`alt`属性用于描述屏幕阅读器和搜索引擎的图像。如果图像已被禁用或加载图像时发生错误，它也是回退文本。
 
-It should contain text that could replace the image [without changing the meaning of the page](https://html.spec.whatwg.org/multipage/images.html#general-guidelines). It is not meant to supplement the image and should not repeat information that is already provided in the captions above or below the image.
+它应该包含可以替换图像的文本[而不改变页面的含义](https://html.spec.whatwg.org/multipage/images.html#general-guidelines). 这并不意味着补充图像，也不应重复在图像上方或下方的字幕中已经提供的信息。
 
-If the image is [purely decorative](https://html.spec.whatwg.org/multipage/images.html#a-purely-decorative-image-that-doesn't-add-any-information) or [not intended for the user](https://html.spec.whatwg.org/multipage/images.html#an-image-not-intended-for-the-user), the `alt` property should be an empty string (`alt=""`).
+如果图像[纯粹是装饰性的](https://html.spec.whatwg.org/multipage/images.html#a-purely-decorative-image-that-doesn't-add-any-information)或[不是为用户设计的](https://html.spec.whatwg.org/multipage/images.html#an-image-not-intended-for-the-user), `alt`属性应为空字符串 (`alt=""`).
 
-[Learn more](https://html.spec.whatwg.org/multipage/images.html#alt)
+[了解更多信息](https://html.spec.whatwg.org/multipage/images.html#alt)
 
-## Optional Props
+## 可选属性
 
-The `<Image />` component accepts a number of additional properties beyond those which are required. This section describes the most commonly-used properties of the Image component. Find details about more rarely-used properties in the [Advanced Props](#advanced-props) section.
+`<Image/>`组件接受所需属性之外的许多其他属性。本节介绍图像组件最常用的特性。在[高级道具]（#Advanced Props）部分中查找更多很少使用的属性的详细信息。
 
 ### `loader`
 
-A custom function used to resolve image URLs.
+用于解析图像 URL 的自定义函数。
 
-A `loader` is a function returning a URL string for the image, given the following parameters:
+`loader`是一个返回图像 URL 字符串的函数，给定以下参数：
 
 - [`src`](#src)
 - [`width`](#width)
 - [`quality`](#quality)
 
-Here is an example of using a custom loader:
+以下是使用自定义加载程序的示例：
 
 ```js
 "use client";
@@ -132,11 +133,11 @@ export default function Page() {
 
 <AppOnly>
 
-> **Good to know**: Using props like `loader`, which accept a function, require using [Client Components](/docs/app/building-your-application/rendering/client-components) to serialize the provided function.
+> **Good to know**: 使用像`loader`这样接受函数的道具，需要使用[Client Components](/docs/app/building-your-application/rendering/client-components)来序列化所提供的函数。
 
 </AppOnly>
 
-Alternatively, you can use the [loaderFile](#loaderfile) configuration in `next.config.js` to configure every instance of `next/image` in your application, without passing a prop.
+或者，您可以使用`next.config.js`中的[loaderFile]（#loaderFile）配置来配置应用程序中`next/image`的每个实例，而无需传递道具。
 
 ### `fill`
 
@@ -144,17 +145,19 @@ Alternatively, you can use the [loaderFile](#loaderfile) configuration in `next.
 fill={true} // {true} | {false}
 ```
 
-A boolean that causes the image to fill the parent element, which is useful when the [`width`](#width) and [`height`](#height) are unknown.
+导致图像填充父元素的布尔值，当[`width`]（#width）和[`height`]（#height）未知时，此值非常有用。
 
-The parent element _must_ assign `position: "relative"`, `position: "fixed"`, or `position: "absolute"` style.
+父元素必须赋值 `position: "relative"`, `position: "fixed"`, 或 `position: "absolute"` 样式.
 
-By default, the img element will automatically be assigned the `position: "absolute"` style.
+默认情况下, img 元素将自动分配给 `position: "absolute"` 样式.
 
-If no styles are applied to the image, the image will stretch to fit the container. You may prefer to set `object-fit: "contain"` for an image which is letterboxed to fit the container and preserve aspect ratio.
+如果没有样式应用于图像，则图像将拉伸以适合容器。
+您可能更喜欢将`object-fit: "contain"`设置为带信箱的图像，以适应容器并保持纵横比。
 
-Alternatively, `object-fit: "cover"` will cause the image to fill the entire container and be cropped to preserve aspect ratio. For this to look correct, the `overflow: "hidden"` style should be assigned to the parent element.
+或者, `object-fit: "cover"`将导致图像填充整个容器并进行裁剪以保持纵横比。
+为了使其看起来正确, `overflow: "hidden"`样式应指定给父元素。
 
-For more information, see also:
+有关更多信息，另请参阅:
 
 - [`position`](https://developer.mozilla.org/docs/Web/CSS/position)
 - [`object-fit`](https://developer.mozilla.org/docs/Web/CSS/object-fit)
@@ -162,14 +165,21 @@ For more information, see also:
 
 ### `sizes`
 
-A string, similar to a media query, that provides information about how wide the image will be at different breakpoints. The value of `sizes` will greatly affect performance for images using [`fill`](#fill) or which are [styled to have a responsive size](#responsive-images).
+一个类似于媒体查询的字符串，它提供有关图像在不同断点处的宽度的信息。
+`sizes`的值将极大地影响使用[`fill`](#fill)或[样式设置为具有响应大小](#responsive-images)的图像的性能。
 
-The `sizes` property serves two important purposes related to image performance:
+`sizes`属性有两个与图像性能相关的重要用途：
 
-- First, the value of `sizes` is used by the browser to determine which size of the image to download, from `next/image`'s automatically generated `srcset`. When the browser chooses, it does not yet know the size of the image on the page, so it selects an image that is the same size or larger than the viewport. The `sizes` property allows you to tell the browser that the image will actually be smaller than full screen. If you don't specify a `sizes` value in an image with the `fill` property, a default value of `100vw` (full screen width) is used.
-- Second, the `sizes` property changes the behavior of the automatically generated `srcset` value. If no `sizes` value is present, a small `srcset` is generated, suitable for a fixed-size image (1x/2x/etc). If `sizes` is defined, a large `srcset` is generated, suitable for a responsive image (640w/750w/etc). If the `sizes` property includes sizes such as `50vw`, which represent a percentage of the viewport width, then the `srcset` is trimmed to not include any values which are too small to ever be necessary.
+- 首先，浏览器使用`sizes`的值来从`next/image`的自动生成的`srcset`中确定要下载的图像的大小。
+  当浏览器选择时，它还不知道页面上图像的大小，因此它会选择与视口大小相同或大于视口的图像。
+  `sizes`属性允许您告诉浏览器图像实际上会小于全屏。
+  如果没有在具有`fill`属性的图像中指定`sizes`值，则使用默认值`100vw`（全屏宽度）。
+- 其次，`sizes`属性更改自动生成的`srcset`值的行为。
+  如果不存在`sizes`值，则生成适用于固定大小图像（1x/2x/etc）的小`srcset`。
+  如果定义了`sizes`，则生成适用于响应图像的大`srcset` (640w/750w/etc).
+  如果`sizes`属性包括表示视口宽度百分比的`50vw`等大小，则`srcset`将被修剪为不包括任何太小而不必要的值。
 
-For example, if you know your styling will cause an image to be full-width on mobile devices, in a 2-column layout on tablets, and a 3-column layout on desktop displays, you should include a sizes property such as the following:
+例如，如果您知道您的样式会导致图像在移动设备上为全宽，在平板电脑上为 2 列布局，在桌面显示器上为 3 列布局，则应包括以下尺寸属性：
 
 ```jsx
 import Image from "next/image";
@@ -183,9 +193,10 @@ export default function Page() {
 }
 ```
 
-This example `sizes` could have a dramatic effect on performance metrics. Without the `33vw` sizes, the image selected from the server would be 3 times as wide as it needs to be. Because file size is proportional to the square of the width, without `sizes` the user would download an image that's 9 times larger than necessary.
+此示例`sizes`可能会对性能指标产生显著影响。
+如果没有`33vw`大小，从服务器上选择的图像将是所需宽度的 3 倍。因为文件大小与宽度的平方成正比，如果没有`sizes`，用户将下载比所需宽度大 9 倍的图像。
 
-Learn more about `srcset` and `sizes`:
+了解更多信息 `srcset` 和 `sizes`:
 
 - [web.dev](https://web.dev/learn/design/responsive-images/#sizes)
 - [mdn](https://developer.mozilla.org/docs/Web/HTML/Element/img#attr-sizes)
@@ -196,7 +207,7 @@ Learn more about `srcset` and `sizes`:
 quality={75} // {number 1-100}
 ```
 
-The quality of the optimized image, an integer between `1` and `100`, where `100` is the best quality and therefore largest file size. Defaults to `75`.
+优化图像的质量，在`1`和`100`之间的整数，其中`100`是最好的质量，因此是最大的文件大小。默认为`75`。
 
 ### `priority`
 
@@ -204,12 +215,12 @@ The quality of the optimized image, an integer between `1` and `100`, where `100
 priority={false} // {false} | {true}
 ```
 
-When true, the image will be considered high priority and
-[preload](https://web.dev/preload-responsive-images/). Lazy loading is automatically disabled for images using `priority`.
+如果为 true，则图像将被视为高优先级，并且[预加载](https://web.dev/preload-responsive-images/).
+对于使用`priority`的图像，将自动禁用延迟加载。
 
-You should use the `priority` property on any image detected as the [Largest Contentful Paint (LCP)](https://nextjs.org/learn/seo/web-performance/lcp) element. It may be appropriate to have multiple priority images, as different images may be the LCP element for different viewport sizes.
+您应该在检测到的任何图像上使用`priority`属性作为[Largets Contentful Paint（LCP）](https://nextjs.org/learn/seo/web-performance/lcp)元素。具有多个优先级图像可能是合适的，因为不同的图像可能是用于不同视口大小的 LCP 元素。
 
-Should only be used when the image is visible above the fold. Defaults to `false`.
+仅当图像在折叠上方可见时才应使用。默认为`false`。
 
 ### `placeholder`
 
@@ -217,7 +228,7 @@ Should only be used when the image is visible above the fold. Defaults to `false
 placeholder = "empty"; // "empty" | "blur" | "data:image/..."
 ```
 
-A placeholder to use while the image is loading. Possible values are `blur`, `empty`, or `data:image/...`. Defaults to `empty`.
+加载图像时要使用的占位符。可能的值为`blur`、`empty`或`data:image/...`。默认为`empty`。
 
 When `blur`, the [`blurDataURL`](#blurdataurl) property will be used as the placeholder. If `src` is an object from a [static import](/docs/app/building-your-application/optimizing/images#local-images) and the imported image is `.jpg`, `.png`, `.webp`, or `.avif`, then `blurDataURL` will be automatically populated, except when the image is detected to be animated.
 
@@ -233,13 +244,13 @@ Try it out:
 - [Demo the shimmer effect with data URL `placeholder` prop](https://image-component.nextjs.gallery/shimmer)
 - [Demo the color effect with `blurDataURL` prop](https://image-component.nextjs.gallery/color)
 
-## Advanced Props
+## 高级属性
 
-In some cases, you may need more advanced usage. The `<Image />` component optionally accepts the following advanced properties.
+在某些情况下，您可能需要更高级的用法。`<Image/>`组件可选地接受以下高级属性。
 
 ### `style`
 
-Allows passing CSS styles to the underlying image element.
+允许将 CSS 样式传递到基础图像元素。
 
 ```jsx filename="components/ProfileImage.js"
 const imageStyle = {
@@ -252,7 +263,7 @@ export default function ProfileImage() {
 }
 ```
 
-Remember that the required width and height props can interact with your styling. If you use styling to modify an image's width, you should also style its height to `auto` to preserve its intrinsic aspect ratio, or your image will be distorted.
+请记住，所需的宽度和高度道具可以与您的造型相互作用。如果使用样式设置来修改图像的宽度，还应将其高度设置为`auto`以保持其固有的纵横比，否则图像将失真。
 
 ### `onLoadingComplete`
 
@@ -364,7 +375,7 @@ module.exports = {
 };
 ```
 
-### Other Props
+### 其他属性
 
 Other properties on the `<Image />` component will be passed to the underlying
 `img` element with the exception of the following:
@@ -372,9 +383,9 @@ Other properties on the `<Image />` component will be passed to the underlying
 - `srcSet`. Use [Device Sizes](#devicesizes) instead.
 - `decoding`. It is always `"async"`.
 
-## Configuration Options
+## 配置选项
 
-In addition to props, you can configure the Image Component in `next.config.js`. The following options are available:
+除了属性，您还可以在`next.config.js`中配置图像组件。以下选项可用：
 
 ### `remotePatterns`
 
@@ -441,7 +452,7 @@ module.exports = {
 
 ### `loaderFile`
 
-If you want to use a cloud provider to optimize images instead of using the Next.js built-in Image Optimization API, you can configure the `loaderFile` in your `next.config.js` like the following:
+如果您想使用云提供商来优化图像，而不是使用 Next.js 内置的图像优化 API，您可以在`next.config.js`中配置`loaderFile`，如下所示：
 
 ```js filename="next.config.js"
 module.exports = {
@@ -452,7 +463,7 @@ module.exports = {
 };
 ```
 
-This must point to a file relative to the root of your Next.js application. The file must export a default function that returns a string, for example:
+这必须指向一个相对于 Next.js 应用程序根的文件。文件必须导出一个返回字符串的默认函数，例如：
 
 ```js
 "use client";
@@ -462,21 +473,21 @@ export default function myImageLoader({ src, width, quality }) {
 }
 ```
 
-Alternatively, you can use the [`loader` prop](#loader) to configure each instance of `next/image`.
+或者，您可以使用[`loader` prop](#loader)来配置`next/image`的每个实例。
 
-Examples:
+示例:
 
-- [Custom Image Loader Configuration](/docs/app/api-reference/next-config-js/images#example-loader-configuration)
+- [自定义映像加载器配置](/docs/app/api-reference/next-config-js/images#example-loader-configuration)
 
 <AppOnly>
 
-> **Good to know**: Customizing the image loader file, which accepts a function, require using [Client Components](/docs/app/building-your-application/rendering/client-components) to serialize the provided function.
+> **很高兴知道**: 自定义接受函数的图像加载程序文件需要使用[客户端组件](/docs/app/building-your-application/rendering/client-components)来序列化所提供的函数。
 
 </AppOnly>
 
-## Advanced
+## 高级的
 
-The following configuration is for advanced use cases and is usually not necessary. If you choose to configure the properties below, you will override any changes to the Next.js defaults in future updates.
+以下配置适用于高级用例，通常不需要。如果您选择配置下面的属性，您将在未来的更新中覆盖对 Next.js 默认值的任何更改。
 
 ### `deviceSizes`
 
@@ -539,7 +550,7 @@ module.exports = {
 > - AVIF generally takes 20% longer to encode but it compresses 20% smaller compared to WebP. This means that the first time an image is requested, it will typically be slower and then subsequent requests that are cached will be faster.
 > - If you self-host with a Proxy/CDN in front of Next.js, you must configure the Proxy to forward the `Accept` header.
 
-## Caching Behavior
+## 缓存行为
 
 The following describes the caching algorithm for the default [loader](#loader). For all other loaders, please refer to your cloud provider's documentation.
 
@@ -609,19 +620,19 @@ module.exports = {
 
 In addition, it is strongly recommended to also set `contentDispositionType` to force the browser to download the image, as well as `contentSecurityPolicy` to prevent scripts embedded in the image from executing.
 
-## Animated Images
+## 动画图像
 
 The default [loader](#loader) will automatically bypass Image Optimization for animated images and serve the image as-is.
 
 Auto-detection for animated files is best-effort and supports GIF, APNG, and WebP. If you want to explicitly bypass Image Optimization for a given animated image, use the [unoptimized](#unoptimized) prop.
 
-## Responsive Images
+## 响应图片
 
 The default generated `srcset` contains `1x` and `2x` images in order to support different device pixel ratios. However, you may wish to render a responsive image that stretches with the viewport. In that case, you'll need to set [`sizes`](#sizes) as well as `style` (or `className`).
 
 You can render a responsive image using one of the following methods below.
 
-### Responsive image using a static import
+### 使用静态导入的响应图像
 
 If the source image is not dynamic, you can statically import to create a responsive image:
 
@@ -648,7 +659,7 @@ Try it out:
 
 - [Demo the image responsive to viewport](https://image-component.nextjs.gallery/responsive)
 
-### Responsive image with aspect ratio
+### 具有纵横比的响应图像
 
 If the source image is a dynamic or a remote url, you will also need to provide `width` and `height` to set the correct aspect ratio of the responsive image:
 
@@ -676,7 +687,7 @@ Try it out:
 
 - [Demo the image responsive to viewport](https://image-component.nextjs.gallery/responsive)
 
-### Responsive image with `fill`
+### 带有`fill`的响应图像
 
 If you don't know the aspect ratio, you will need to set the [`fill`](#fill) prop and set `position: relative` on the parent. Optionally, you can set `object-fit` style depending on the desired stretch vs crop behavior:
 
@@ -704,7 +715,7 @@ Try it out:
 
 - [Demo the `fill` prop](https://image-component.nextjs.gallery/fill)
 
-## Theme Detection
+## 主题检测
 
 If you want to display a different image for light and dark mode, you can create a new component that wraps two `<Image>` components and reveals the correct one based on a CSS media query.
 
@@ -766,7 +777,7 @@ Try it out:
 
 - [Demo light/dark mode theme detection](https://image-component.nextjs.gallery/theme)
 
-## Known Browser Bugs
+## 已知浏览器错误
 
 This `next/image` component uses browser native [lazy loading](https://caniuse.com/loading-lazy-attr), which may fallback to eager loading for older browsers before Safari 15.4. When using the blur-up placeholder, older browsers before Safari 12 will fallback to empty placeholder. When using styles with `width`/`height` of `auto`, it is possible to cause [Layout Shift](https://web.dev/cls/) on older browsers before Safari 15 that don't [preserve the aspect ratio](https://caniuse.com/mdn-html_elements_img_aspect_ratio_computed_from_attributes). For more details, see [this MDN video](https://www.youtube.com/watch?v=4-d_SoCHeWE).
 
@@ -777,7 +788,7 @@ This `next/image` component uses browser native [lazy loading](https://caniuse.c
   - Enable [AVIF `formats`](#formats)
   - Use [`placeholder`](#placeholder)
 
-## Version History
+## 版本历史记录
 
 | Version    | Changes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

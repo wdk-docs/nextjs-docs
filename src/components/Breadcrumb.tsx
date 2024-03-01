@@ -24,7 +24,7 @@ export default function Breadcrumb() {
   }
 
   return (
-    <div className="text-sm breadcrumbs">
+    <div className="text-sm breadcrumbs px-6 xl:pr-2">
       <ul>
         {breadcrumbs.map((breadcrumb, index) => {
           // console.log({ breadcrumb });

@@ -1,6 +1,6 @@
 ---
-title: Dynamic Routes
-description: Dynamic Routes can be used to programmatically generate route segments from dynamic data.
+title: 动态路线
+description: 动态路线可用于通过编程方式从动态数据生成管线段。
 related:
   title: Next Steps
   description: For more information on what to do next, we recommend the following sections
@@ -11,25 +11,25 @@ related:
 
 When you don't know the exact segment names ahead of time and want to create routes from dynamic data, you can use Dynamic Segments that are filled in at request time or [prerendered](#generating-static-params) at build time.
 
-## Convention
+## 习俗
 
 A Dynamic Segment can be created by wrapping a folder's name in square brackets: `[folderName]`. For example, `[id]` or `[slug]`.
 
 Dynamic Segments are passed as the `params` prop to [`layout`](/docs/app/api-reference/file-conventions/layout), [`page`](/docs/app/api-reference/file-conventions/page), [`route`](/docs/app/building-your-application/routing/route-handlers), and [`generateMetadata`](/docs/app/api-reference/functions/generate-metadata#generatemetadata-function) functions.
 
-## Example
+## 实例
 
 For example, a blog could include the following route `app/blog/[slug]/page.js` where `[slug]` is the Dynamic Segment for blog posts.
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
 export default function Page({ params }: { params: { slug: string } }) {
-  return <div>My Post: {params.slug}</div>
+  return <div>My Post: {params.slug}</div>;
 }
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
 export default function Page({ params }) {
-  return <div>My Post: {params.slug}</div>
+  return <div>My Post: {params.slug}</div>;
 }
 ```
 
@@ -43,27 +43,27 @@ See the [generateStaticParams()](#generating-static-params) page to learn how to
 
 > **Good to know**: Dynamic Segments are equivalent to [Dynamic Routes](/docs/app/building-your-application/routing/dynamic-routes) in the `pages` directory.
 
-## Generating Static Params
+## 生成静态参数
 
 The `generateStaticParams` function can be used in combination with [dynamic route segments](/docs/app/building-your-application/routing/dynamic-routes) to [**statically generate**](/docs/app/building-your-application/rendering/server-components#static-rendering-default) routes at build time instead of on-demand at request time.
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
 export async function generateStaticParams() {
-  const posts = await fetch('https://.../posts').then((res) => res.json())
+  const posts = await fetch("https://.../posts").then((res) => res.json());
 
   return posts.map((post) => ({
     slug: post.slug,
-  }))
+  }));
 }
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
 export async function generateStaticParams() {
-  const posts = await fetch('https://.../posts').then((res) => res.json())
+  const posts = await fetch("https://.../posts").then((res) => res.json());
 
   return posts.map((post) => ({
     slug: post.slug,
-  }))
+  }));
 }
 ```
 
@@ -73,7 +73,7 @@ Use the [migration guide](/docs/app/building-your-application/upgrading/app-rout
 
 See [`generateStaticParams` server function documentation](/docs/app/api-reference/functions/generate-static-params) for more information and advanced use cases.
 
-## Catch-all Segments
+## 捕获所有分段
 
 Dynamic Segments can be extended to **catch-all** subsequent segments by adding an ellipsis inside the brackets `[...folderName]`.
 
@@ -85,7 +85,7 @@ For example, `app/shop/[...slug]/page.js` will match `/shop/clothes`, but also `
 | `app/shop/[...slug]/page.js` | `/shop/a/b`   | `{ slug: ['a', 'b'] }`      |
 | `app/shop/[...slug]/page.js` | `/shop/a/b/c` | `{ slug: ['a', 'b', 'c'] }` |
 
-## Optional Catch-all Segments
+## 可选捕获所有分段
 
 Catch-all Segments can be made **optional** by including the parameter in double square brackets: `[[...folderName]]`.
 
@@ -106,13 +106,13 @@ When using TypeScript, you can add types for `params` depending on your configur
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
 export default function Page({ params }: { params: { slug: string } }) {
-  return <h1>My Page</h1>
+  return <h1>My Page</h1>;
 }
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
 export default function Page({ params }) {
-  return <h1>My Page</h1>
+  return <h1>My Page</h1>;
 }
 ```
 

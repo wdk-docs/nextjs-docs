@@ -5,7 +5,7 @@ description: API Reference for robots.txt file.
 
 Add or generate a `robots.txt` file that matches the [Robots Exclusion Standard](https://en.wikipedia.org/wiki/Robots.txt#Standard) in the **root** of `app` directory to tell search engine crawlers which URLs they can access on your site.
 
-## Static `robots.txt`
+## 静止的 `robots.txt`
 
 ```txt filename="app/robots.txt"
 User-Agent: *
@@ -15,22 +15,22 @@ Disallow: /private/
 Sitemap: https://acme.com/sitemap.xml
 ```
 
-## Generate a Robots file
+## 生成 Robots 文件
 
 Add a `robots.js` or `robots.ts` file that returns a [`Robots` object](#robots-object).
 
 ```ts filename="app/robots.ts" switcher
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: '/private/',
+      userAgent: "*",
+      allow: "/",
+      disallow: "/private/",
     },
-    sitemap: 'https://acme.com/sitemap.xml',
-  }
+    sitemap: "https://acme.com/sitemap.xml",
+  };
 }
 ```
 
@@ -38,12 +38,12 @@ export default function robots(): MetadataRoute.Robots {
 export default function robots() {
   return {
     rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: '/private/',
+      userAgent: "*",
+      allow: "/",
+      disallow: "/private/",
     },
-    sitemap: 'https://acme.com/sitemap.xml',
-  }
+    sitemap: "https://acme.com/sitemap.xml",
+  };
 }
 ```
 
@@ -57,26 +57,26 @@ Disallow: /private/
 Sitemap: https://acme.com/sitemap.xml
 ```
 
-### Robots object
+### Robots 对象
 
 ```tsx
 type Robots = {
   rules:
     | {
-        userAgent?: string | string[]
-        allow?: string | string[]
-        disallow?: string | string[]
-        crawlDelay?: number
+        userAgent?: string | string[];
+        allow?: string | string[];
+        disallow?: string | string[];
+        crawlDelay?: number;
       }
     | Array<{
-        userAgent: string | string[]
-        allow?: string | string[]
-        disallow?: string | string[]
-        crawlDelay?: number
-      }>
-  sitemap?: string | string[]
-  host?: string
-}
+        userAgent: string | string[];
+        allow?: string | string[];
+        disallow?: string | string[];
+        crawlDelay?: number;
+      }>;
+  sitemap?: string | string[];
+  host?: string;
+};
 ```
 
 ## Version History

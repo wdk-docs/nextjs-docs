@@ -3,11 +3,12 @@ title: Turbopack
 description: Turbopack is an incremental bundler optimized for JavaScript and TypeScript, written in Rust, and built into Next.js.
 ---
 
-[Turbopack](https://turbo.build/pack) (beta) is an incremental bundler optimized for JavaScript and TypeScript, written in Rust, and built into Next.js.
+[Turbopack](https://turbo.build/pack) (beta) 是一个针对 JavaScript 和 TypeScript 优化的增量 bundler，用 Rust 编写，并内置到 Next.js 中。
 
-## Usage
+## 用法
 
-Turbopack can be used in Next.js in both the `pages` and `app` directories for faster local development. To enable Turbopack, use the `--turbo` flag when running the Next.js development server.
+Turbopack 可以在 Next.js 的`pages`和`app`目录中使用，以加快本地开发。
+要启用 Turbopack，请在运行 Next.js 开发服务器时使用`--turbo`标志。
 
 ```json filename="package.json" highlight={3}
 {
@@ -20,10 +21,10 @@ Turbopack can be used in Next.js in both the `pages` and `app` directories for f
 }
 ```
 
-## Supported Features
+## 支持的功能
 
-To learn more about the currently supported features for Turbopack, view the [documentation](https://turbo.build/pack/docs/features).
+要了解更多关于 Turbopack 当前支持的功能，请查看[文档](https://turbo.build/pack/docs/features).
 
-## Unsupported Features
+## 不支持的功能
 
-Turbopack currently only supports `next dev` and does not support `next build`. We are currently working on support for builds as we move closer towards stability.
+Turbopack 目前只支持`next-dev`，不支持`next-build`。随着我们向稳定迈进，我们目前正在努力为建筑提供支持。

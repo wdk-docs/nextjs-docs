@@ -1,6 +1,6 @@
 ---
 title: route.js
-description: API reference for the route.js special file.
+description: route.js特殊文件的API引用。
 ---
 
 Route Handlers allow you to create custom request handlers for a given route using the Web [Request](https://developer.mozilla.org/docs/Web/API/Request) and [Response](https://developer.mozilla.org/docs/Web/API/Response) APIs.
@@ -55,7 +55,7 @@ The `request` object is a [NextRequest](/docs/app/api-reference/functions/next-r
 
 ```ts filename="app/dashboard/[team]/route.js"
 export async function GET(request, context: { params }) {
-  const team = params.team // '1'
+  const team = params.team; // '1'
 }
 ```
 

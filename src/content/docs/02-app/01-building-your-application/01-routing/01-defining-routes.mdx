@@ -7,15 +7,15 @@ related:
     - app/building-your-application/routing/pages-and-layouts
 ---
 
-> We recommend reading the [Routing Fundamentals](/docs/app/building-your-application/routing) page before continuing.
+> 我们建议在继续之前阅读[路由基础知识](/docs/app/building-your-application/routing)页面。
 
-This page will guide you through how to define and organize routes in your Next.js application.
+本页将指导您如何在 Next.js 应用程序中定义和组织路线。
 
-## Creating Routes
+## 创建路由
 
-Next.js uses a file-system based router where **folders** are used to define routes.
+Next.js 使用基于文件系统的路由器，其中**folders**用于定义路由。
 
-Each folder represents a [**route** segment](/docs/app/building-your-application/routing#route-segments) that maps to a **URL** segment. To create a [nested route](/docs/app/building-your-application/routing#nested-routes), you can nest folders inside each other.
+每个文件夹代表一个[**route** 段](/docs/app/building-your-application/routing#route-segments)，映射到**URL**段。要创建[嵌套路由](/docs/app/building-your-application/routing#nested-routes)，可以将文件夹嵌套在彼此内部。
 
 <Image
   alt="Route segments to path segments"
@@ -39,11 +39,11 @@ In this example, the `/dashboard/analytics` URL path is _not_ publicly accessibl
 
 > **Good to know**: `.js`, `.jsx`, or `.tsx` file extensions can be used for special files.
 
-## Creating UI
+## 正在创建 UI
 
-[Special file conventions](/docs/app/building-your-application/routing#file-conventions) are used to create UI for each route segment. The most common are [pages](/docs/app/building-your-application/routing/pages-and-layouts#pages) to show UI unique to a route, and [layouts](/docs/app/building-your-application/routing/pages-and-layouts#layouts) to show UI that is shared across multiple routes.
+[特殊文件约定](/docs/app/building-your-application/routing#file-conventions)用于为每个管段创建 UI。 The most common are [pages](/docs/app/building-your-application/routing/pages-and-layouts#pages) to show UI unique to a route, and [layouts](/docs/app/building-your-application/routing/pages-and-layouts#layouts) to show UI that is shared across multiple routes.
 
-For example, to create your first page, add a `page.js` file inside the `app` directory and export a React component:
+例如，要创建第一个页面，请在`app`目录中添加一个`page.js`文件，然后导出一个 React 组件：
 
 ```tsx filename="app/page.tsx" switcher
 export default function Page() {

@@ -1,23 +1,23 @@
 ---
-title: Server Components
-description: Learn how you can use React Server Components to render parts of your application on the server.
+title: 服务器组件
+description: 了解如何使用React服务器组件在服务器上呈现应用程序的各个部分。
 related:
-  description: Learn how Next.js caches data and the result of static rendering.
+  description: 了解Next.js如何缓存数据和静态渲染的结果。
   links:
     - app/building-your-application/caching
 ---
 
-React Server Components allow you to write UI that can be rendered and optionally cached on the server. In Next.js, the rendering work is further split by route segments to enable streaming and partial rendering, and there are three different server rendering strategies:
+React 服务器组件允许您编写 UI，这些 UI 可以在服务器上进行渲染和缓存。在 Next.js 中，渲染工作被路由段进一步分割，以实现流式和部分渲染，并且有三种不同的服务器渲染策略：
 
 - [Static Rendering](#static-rendering-default)
 - [Dynamic Rendering](#dynamic-rendering)
 - [Streaming](#streaming)
 
-This page will go through how Server Components work, when you might use them, and the different server rendering strategies.
+本页将介绍服务器组件的工作方式、可能使用它们的时间以及不同的服务器呈现策略。
 
-## Benefits of Server Rendering
+## 服务器呈现的好处
 
-There are a couple of benefits to doing the rendering work on the server, including:
+在服务器上进行渲染工作有几个好处，包括：
 
 - **Data Fetching**: Server Components allow you to move data fetching to the server, closer to your data source. This can improve performance by reducing time it takes to fetch data needed for rendering, and the amount of requests the client needs to make.
 - **Security**: Server Components allow you to keep sensitive data and logic on the server, such as tokens and API keys, without the risk of exposing them to the client.
@@ -27,11 +27,11 @@ There are a couple of benefits to doing the rendering work on the server, includ
 - **Search Engine Optimization and Social Network Shareability**: The rendered HTML can be used by search engine bots to index your pages and social network bots to generate social card previews for your pages.
 - **Streaming**: Server Components allow you to split the rendering work into chunks and stream them to the client as they become ready. This allows the user to see parts of the page earlier without having to wait for the entire page to be rendered on the server.
 
-## Using Server Components in Next.js
+## 在 Next.js 中使用服务器组件
 
 By default, Next.js uses Server Components. This allows you to automatically implement server rendering with no additional configuration, and you can opt into using Client Components when needed, see [Client Components](/docs/app/building-your-application/rendering/client-components).
 
-## How are Server Components rendered?
+## 服务器组件是如何呈现的？
 
 On the server, Next.js uses React's APIs to orchestrate rendering. The rendering work is split into chunks: by individual route segments and [Suspense Boundaries](https://react.dev/reference/react/Suspense).
 
@@ -56,11 +56,11 @@ Then, on the client:
 > - Placeholders for where Client Components should be rendered and references to their JavaScript files
 > - Any props passed from a Server Component to a Client Component
 
-## Server Rendering Strategies
+## 服务器呈现策略
 
 There are three subsets of server rendering: Static, Dynamic, and Streaming.
 
-### Static Rendering (Default)
+### 静态渲染（默认）
 
 {/* Static Rendering Diagram */}
 
@@ -68,7 +68,7 @@ With Static Rendering, routes are rendered at **build time**, or in the backgrou
 
 Static rendering is useful when a route has data that is not personalized to the user and can be known at build time, such as a static blog post or a product page.
 
-### Dynamic Rendering
+### 动态渲染
 
 {/* Dynamic Rendering Diagram */}
 
@@ -76,7 +76,7 @@ With Dynamic Rendering, routes are rendered for each user at **request time**.
 
 Dynamic rendering is useful when a route has data that is personalized to the user or has information that can only be known at request time, such as cookies or the URL's search params.
 
-> **Dynamic Routes with Cached Data**
+> **具有缓存数据的动态路由**
 >
 > In most websites, routes are not fully static or fully dynamic - it's a spectrum. For example, you can have an e-commerce page that uses cached product data that's revalidated at an interval, but also has uncached, personalized customer data.
 >
@@ -84,7 +84,7 @@ Dynamic rendering is useful when a route has data that is personalized to the us
 >
 > Learn more about the [full-route cache](/docs/app/building-your-application/caching#full-route-cache) and [Data Cache](/docs/app/building-your-application/caching#data-cache).
 
-#### Switching to Dynamic Rendering
+#### 切换到动态渲染
 
 During rendering, if a [dynamic function](#dynamic-functions) or [uncached data request](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#opting-out-of-data-caching) is discovered, Next.js will switch to dynamically rendering the whole route. This table summarizes how dynamic functions and data caching affect whether a route is statically or dynamically rendered:
 
@@ -99,7 +99,7 @@ In the table above, for a route to be fully static, all data must be cached. How
 
 As a developer, you do not need to choose between static and dynamic rendering as Next.js will automatically choose the best rendering strategy for each route based on the features and APIs used. Instead, you choose when to [cache or revalidate specific data](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating), and you may choose to [stream](#streaming) parts of your UI.
 
-#### Dynamic Functions
+#### 动态函数
 
 Dynamic functions rely on information that can only be known at request time such as a user's cookies, current requests headers, or the URL's search params. In Next.js, these dynamic functions are:
 
@@ -111,7 +111,7 @@ Dynamic functions rely on information that can only be known at request time suc
 
 Using any of these functions will opt the whole route into dynamic rendering at request time.
 
-### Streaming
+### 流动
 
 <Image
   alt="Diagram showing parallelization of route segments during streaming, showing data fetching, rendering, and hydration of invidiual chunks."

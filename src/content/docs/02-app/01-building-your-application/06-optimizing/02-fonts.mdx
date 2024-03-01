@@ -1,111 +1,105 @@
 ---
-title: Font Optimization
+title: 字体优化
 nav_title: Fonts
-description: Optimize your application's web fonts with the built-in `next/font` loaders.
+description: 使用内置的`next/font`加载程序优化应用程序的web字体。
 related:
-  title: API Reference
-  description: Learn more about the next/font API.
+  title: API 参考
+  description: 了解有关 next/font API的更多信息。
   links:
     - app/api-reference/components/font
 ---
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-[**`next/font`**](/docs/app/api-reference/components/font) will automatically optimize your fonts (including custom fonts) and remove external network requests for improved privacy and performance.
+[**`next/font`**](/docs/app/api-reference/components/font) 将自动优化您的字体（包括自定义字体），并删除外部网络请求，以提高隐私和性能。
 
-> **🎥 Watch:** Learn more about how to use `next/font` → [YouTube (6 minutes)](https://www.youtube.com/watch?v=L8_98i_bMMA).
+> **🎥 看:** 了解有关如何使用`next/font`的详细信息 → [YouTube (6 分钟)](https://www.youtube.com/watch?v=L8_98i_bMMA).
 
-`next/font` includes **built-in automatic self-hosting** for _any_ font file. This means you can optimally load web fonts with zero layout shift, thanks to the underlying CSS `size-adjust` property used.
+`next/font`包括**内置的自动自托管**，用于任何字体文件。
+这意味着，由于使用了底层的 CSS `size-adjust`属性，您可以在零布局偏移的情况下优化加载 web 字体。
 
-This new font system also allows you to conveniently use all Google Fonts with performance and privacy in mind. CSS and font files are downloaded at build time and self-hosted with the rest of your static assets. **No requests are sent to Google by the browser.**
+这个新的字体系统还允许您方便地使用所有谷歌字体，同时考虑到性能和隐私。CSS 和字体文件在构建时下载，并与其他静态资产一起自托管**浏览器不会向谷歌发送任何请求**
 
-## Google Fonts
+## 谷歌字体
 
-Automatically self-host any Google Font. Fonts are included in the deployment and served from the same domain as your deployment. **No requests are sent to Google by the browser.**
+自动自托管任何谷歌字体。字体包含在部署中，并与您的部署来自同一域。 **浏览器不会向谷歌发送任何请求。**
 
-Get started by importing the font you would like to use from `next/font/google` as a function. We recommend using [variable fonts](https://fonts.google.com/variablefonts) for the best performance and flexibility.
+首先从`next/font/google`导入要使用的字体作为函数。
+我们建议使用[可变字体](https://fonts.google.com/variablefonts)以获得最佳性能和灵活性。
 
 <AppOnly>
 
 ```tsx filename="app/layout.tsx" switcher
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 
 // If loading a variable font, you don't need to specify the font weight
 const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-})
+  subsets: ["latin"],
+  display: "swap",
+});
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={inter.className}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 
 // If loading a variable font, you don't need to specify the font weight
 const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-})
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.className}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
-If you can't use a variable font, you will **need to specify a weight**:
+如果不能使用可变字体，则**需要指定权重**：
 
 ```tsx filename="app/layout.tsx" switcher
-import { Roboto } from 'next/font/google'
+import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-})
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={roboto.className}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import { Roboto } from 'next/font/google'
+import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-})
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={roboto.className}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -113,67 +107,67 @@ export default function RootLayout({ children }) {
 
 <PagesOnly>
 
-To use the font in all your pages, add it to [`_app.js` file](/docs/pages/building-your-application/routing/custom-app) under `/pages` as shown below:
+要在所有页面中使用该字体，请将其添加到`/pages`下的[`_app.js` 文件](/docs/pages/building-your-application/routing/custom-app)中，如下所示：
 
 ```jsx filename="pages/_app.js"
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 
 // If loading a variable font, you don't need to specify the font weight
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <main className={inter.className}>
       <Component {...pageProps} />
     </main>
-  )
+  );
 }
 ```
 
-If you can't use a variable font, you will **need to specify a weight**:
+如果不能使用可变字体，则**需要指定权重**：
 
 ```jsx filename="pages/_app.js"
-import { Roboto } from 'next/font/google'
+import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-})
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <main className={roboto.className}>
       <Component {...pageProps} />
     </main>
-  )
+  );
 }
 ```
 
 </PagesOnly>
 
-You can specify multiple weights and/or styles by using an array:
+可以使用阵列指定多个权重和/或样式：
 
 ```jsx filename="app/layout.js"
 const roboto = Roboto({
-  weight: ['400', '700'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  display: 'swap',
-})
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
 ```
 
-> **Good to know**: Use an underscore (\_) for font names with multiple words. E.g. `Roboto Mono` should be imported as `Roboto_Mono`.
+> **很高兴知道**: 对包含多个单词的字体名称使用下划线(\_)。 例如。 `Roboto Mono` 应导入为 `Roboto_Mono`.
 
 <PagesOnly>
 
-### Apply the font in `<head>`
+### 在`<head>`中应用字体
 
-You can also use the font without a wrapper and `className` by injecting it inside the `<head>` as follows:
+您也可以使用不带包装的字体和`className`，方法是将其注入`<head>`中，如下所示：
 
 ```jsx filename="pages/_app.js"
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function MyApp({ Component, pageProps }) {
   return (
@@ -185,44 +179,44 @@ export default function MyApp({ Component, pageProps }) {
       `}</style>
       <Component {...pageProps} />
     </>
-  )
+  );
 }
 ```
 
-### Single page usage
+### 单页使用
 
-To use the font on a single page, add it to the specific page as shown below:
+要在单个页面上使用字体，请将其添加到特定页面，如下所示：
 
 ```jsx filename="pages/index.js"
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
     <div className={inter.className}>
       <p>Hello World</p>
     </div>
-  )
+  );
 }
 ```
 
 </PagesOnly>
 
-### Specifying a subset
+### 指定子集
 
-Google Fonts are automatically [subset](https://fonts.google.com/knowledge/glossary/subsetting). This reduces the size of the font file and improves performance. You'll need to define which of these subsets you want to preload. Failing to specify any subsets while [`preload`](/docs/app/api-reference/components/font#preload) is `true` will result in a warning.
+谷歌字体是自动[子集](https://fonts.google.com/knowledge/glossary/subsetting). 这减少了字体文件的大小并提高了性能。您需要定义要预加载的子集。 当[`preload`](/docs/app/api-reference/components/font#preload)为`true`时，未能指定任何子集将导致警告。
 
-This can be done by adding it to the function call:
+这可以通过将其添加到函数调用中来完成：
 
 <AppOnly>
 
 ```tsx filename="app/layout.tsx" switcher
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 ```
 
 ```jsx filename="app/layout.js" switcher
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 ```
 
 </AppOnly>
@@ -230,51 +224,51 @@ const inter = Inter({ subsets: ['latin'] })
 <PagesOnly>
 
 ```jsx filename="pages/_app.js"
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 ```
 
 </PagesOnly>
 
-View the [Font API Reference](/docs/app/api-reference/components/font) for more information.
+查看[Font API 参考](/docs/app/api-reference/components/font)了解更多信息。
 
-### Using Multiple Fonts
+### 使用多种字体
 
-You can import and use multiple fonts in your application. There are two approaches you can take.
+您可以在应用程序中导入和使用多种字体。你可以采取两种方法。
 
-The first approach is to create a utility function that exports a font, imports it, and applies its `className` where needed. This ensures the font is preloaded only when it's rendered:
+第一种方法是创建一个实用程序函数，用于导出字体、导入字体，并在需要时应用其`className`。这样可以确保字体仅在渲染时预加载：
 
 ```ts filename="app/fonts.ts" switcher
-import { Inter, Roboto_Mono } from 'next/font/google'
+import { Inter, Roboto_Mono } from "next/font/google";
 
 export const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-})
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const roboto_mono = Roboto_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-})
+  subsets: ["latin"],
+  display: "swap",
+});
 ```
 
 ```js filename="app/fonts.js" switcher
-import { Inter, Roboto_Mono } from 'next/font/google'
+import { Inter, Roboto_Mono } from "next/font/google";
 
 export const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-})
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const roboto_mono = Roboto_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-})
+  subsets: ["latin"],
+  display: "swap",
+});
 ```
 
 <AppOnly>
 
 ```tsx filename="app/layout.tsx" switcher
-import { inter } from './fonts'
+import { inter } from "./fonts";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -283,12 +277,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div>{children}</div>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import { inter } from './fonts'
+import { inter } from "./fonts";
 
 export default function Layout({ children }) {
   return (
@@ -297,63 +291,59 @@ export default function Layout({ children }) {
         <div>{children}</div>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```tsx filename="app/page.tsx" switcher
-import { roboto_mono } from './fonts'
+import { roboto_mono } from "./fonts";
 
 export default function Page() {
   return (
     <>
       <h1 className={roboto_mono.className}>My page</h1>
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import { roboto_mono } from './fonts'
+import { roboto_mono } from "./fonts";
 
 export default function Page() {
   return (
     <>
       <h1 className={roboto_mono.className}>My page</h1>
     </>
-  )
+  );
 }
 ```
 
 </AppOnly>
 
-In the example above, `Inter` will be applied globally, and `Roboto Mono` can be imported and applied as needed.
+在上面的例子中，`Inter`将被全局应用，`Roboto Mono`可以根据需要导入和应用。
 
-Alternatively, you can create a [CSS variable](/docs/app/api-reference/components/font#variable) and use it with your preferred CSS solution:
+或者，您可以创建一个[CSS 变量](/docs/app/api-reference/components/font#variable)，并将其与您首选的 CSS 解决方案一起使用：
 
 <AppOnly>
 
 ```tsx filename="app/layout.tsx" switcher
-import { Inter, Roboto_Mono } from 'next/font/google'
-import styles from './global.css'
+import { Inter, Roboto_Mono } from "next/font/google";
+import styles from "./global.css";
 
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 const roboto_mono = Roboto_Mono({
-  subsets: ['latin'],
-  variable: '--font-roboto-mono',
-  display: 'swap',
-})
+  subsets: ["latin"],
+  variable: "--font-roboto-mono",
+  display: "swap",
+});
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${roboto_mono.variable}`}>
       <body>
@@ -361,24 +351,24 @@ export default function RootLayout({
         <div>{children}</div>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import { Inter, Roboto_Mono } from 'next/font/google'
+import { Inter, Roboto_Mono } from "next/font/google";
 
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 const roboto_mono = Roboto_Mono({
-  subsets: ['latin'],
-  variable: '--font-roboto-mono',
-  display: 'swap',
-})
+  subsets: ["latin"],
+  variable: "--font-roboto-mono",
+  display: "swap",
+});
 
 export default function RootLayout({ children }) {
   return (
@@ -388,7 +378,7 @@ export default function RootLayout({ children }) {
         <div>{children}</div>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -404,53 +394,50 @@ h1 {
 }
 ```
 
-In the example above, `Inter` will be applied globally, and any `<h1>` tags will be styled with `Roboto Mono`.
+在上面的例子中, `Inter` 将在全局范围内应用, 以及任何 `<h1>` 标签将使用`Roboto Mono`进行样式设置。
 
-> **Recommendation**: Use multiple fonts conservatively since each new font is an additional resource the client has to download.
+> **正式建议**: 保守地使用多种字体，因为每个新字体都是客户端必须下载的额外资源。
 
-## Local Fonts
+## 本地字体
 
-Import `next/font/local` and specify the `src` of your local font file. We recommend using [variable fonts](https://fonts.google.com/variablefonts) for the best performance and flexibility.
+导入`next/font/local`并指定本地字体文件的`src`。
+我们建议使用[可变字体](https://fonts.google.com/variablefonts)以获得最佳性能和灵活性。
 
 <AppOnly>
 
 ```tsx filename="app/layout.tsx" switcher
-import localFont from 'next/font/local'
+import localFont from "next/font/local";
 
 // Font files can be colocated inside of `app`
 const myFont = localFont({
-  src: './my-font.woff2',
-  display: 'swap',
-})
+  src: "./my-font.woff2",
+  display: "swap",
+});
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={myFont.className}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import localFont from 'next/font/local'
+import localFont from "next/font/local";
 
 // Font files can be colocated inside of `app`
 const myFont = localFont({
-  src: './my-font.woff2',
-  display: 'swap',
-})
+  src: "./my-font.woff2",
+  display: "swap",
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={myFont.className}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -459,110 +446,108 @@ export default function RootLayout({ children }) {
 <PagesOnly>
 
 ```jsx filename="pages/_app.js"
-import localFont from 'next/font/local'
+import localFont from "next/font/local";
 
 // Font files can be colocated inside of `pages`
-const myFont = localFont({ src: './my-font.woff2' })
+const myFont = localFont({ src: "./my-font.woff2" });
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <main className={myFont.className}>
       <Component {...pageProps} />
     </main>
-  )
+  );
 }
 ```
 
 </PagesOnly>
 
-If you want to use multiple files for a single font family, `src` can be an array:
+如果要将多个文件用于单个字体系列，`src`可以是一个数组：
 
 ```js
 const roboto = localFont({
   src: [
     {
-      path: './Roboto-Regular.woff2',
-      weight: '400',
-      style: 'normal',
+      path: "./Roboto-Regular.woff2",
+      weight: "400",
+      style: "normal",
     },
     {
-      path: './Roboto-Italic.woff2',
-      weight: '400',
-      style: 'italic',
+      path: "./Roboto-Italic.woff2",
+      weight: "400",
+      style: "italic",
     },
     {
-      path: './Roboto-Bold.woff2',
-      weight: '700',
-      style: 'normal',
+      path: "./Roboto-Bold.woff2",
+      weight: "700",
+      style: "normal",
     },
     {
-      path: './Roboto-BoldItalic.woff2',
-      weight: '700',
-      style: 'italic',
+      path: "./Roboto-BoldItalic.woff2",
+      weight: "700",
+      style: "italic",
     },
   ],
-})
+});
 ```
 
-View the [Font API Reference](/docs/app/api-reference/components/font) for more information.
+查看[Font API 参考](/docs/app/api-reference/components/font)了解更多信息。
 
-## With Tailwind CSS
+## 和 Tailwind CSS
 
-`next/font` can be used with [Tailwind CSS](https://tailwindcss.com/) through a [CSS variable](/docs/app/api-reference/components/font#css-variables).
+`next/font`可以通过[CSS 变量](/docs/app/api-reference/components/font#css-variables)与[Tailwind CSS](https://tailwindcss.com/)一起使用.
 
-In the example below, we use the font `Inter` from `next/font/google` (you can use any font from Google or Local Fonts). Load your font with the `variable` option to define your CSS variable name and assign it to `inter`. Then, use `inter.variable` to add the CSS variable to your HTML document.
+在下面的例子中，我们使用`next/font/google`中的`Inter`字体（您可以使用谷歌或本地字体中的任何字体）。
+使用`variable`选项加载字体以定义 CSS 变量名并将其分配给`inter`。
+然后，使用`inter.variable`将 CSS 变量添加到 HTML 文档中。
 
 <AppOnly>
 
 ```tsx filename="app/layout.tsx" switcher
-import { Inter, Roboto_Mono } from 'next/font/google'
+import { Inter, Roboto_Mono } from "next/font/google";
 
 const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-})
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 const roboto_mono = Roboto_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-roboto-mono',
-})
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-mono",
+});
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${roboto_mono.variable}`}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import { Inter, Roboto_Mono } from 'next/font/google'
+import { Inter, Roboto_Mono } from "next/font/google";
 
 const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-})
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 const roboto_mono = Roboto_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-roboto-mono',
-})
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-mono",
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${roboto_mono.variable}`}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -571,72 +556,68 @@ export default function RootLayout({ children }) {
 <PagesOnly>
 
 ```jsx filename="pages/_app.js"
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-})
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <main className={`${inter.variable} font-sans`}>
       <Component {...pageProps} />
     </main>
-  )
+  );
 }
 ```
 
 </PagesOnly>
 
-Finally, add the CSS variable to your [Tailwind CSS config](/docs/app/building-your-application/styling/tailwind-css#configuring-tailwind):
+最后，将 CSS 变量添加到[Tailwind CSS config](/docs/app/building-your-application/styling/tailwind-css#configuring-tailwind):
 
 ```js filename="tailwind.config.js"
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-    './app/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}", "./app/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)'],
-        mono: ['var(--font-roboto-mono)'],
+        sans: ["var(--font-inter)"],
+        mono: ["var(--font-roboto-mono)"],
       },
     },
   },
   plugins: [],
-}
+};
 ```
 
-You can now use the `font-sans` and `font-mono` utility classes to apply the font to your elements.
+现在，您可以使用`font-sans` 和 `font-mono`实用程序类将字体应用于元素。
 
-## Preloading
+## 预加载
 
 <AppOnly>
-When a font function is called on a page of your site, it is not globally available and preloaded on all routes. Rather, the font is only preloaded on the related routes based on the type of file where it is used:
+当在网站的某个页面上调用字体函数时，它不是全局可用的，也不是在所有路由上都预装的。相反，字体仅根据使用的文件类型预加载在相关路径上：
 
-- If it's a [unique page](/docs/app/building-your-application/routing/pages-and-layouts#pages), it is preloaded on the unique route for that page.
-- If it's a [layout](/docs/app/building-your-application/routing/pages-and-layouts#layouts), it is preloaded on all the routes wrapped by the layout.
-- If it's the [root layout](/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required), it is preloaded on all routes.
+- 如果是[唯一页面](/docs/app/building-your-application/routing/pages-and-layouts#pages), 它被预加载在该页面的唯一路由上。
+- 如果是[布局](/docs/app/building-your-application/routing/pages-and-layouts#layouts), 它被预加载在布局所包裹的所有路由上。
+- 如果是[根布局](/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required), 它预装在所有路由上。
 
 </AppOnly>
 
 <PagesOnly>
 
-When a font function is called on a page of your site, it is not globally available and preloaded on all routes. Rather, the font is only preloaded on the related route/s based on the type of file where it is used:
+当在网站的某个页面上调用字体函数时，它不是全局可用的，也不是在所有路由上都预装的。相反，字体仅根据使用的文件类型预加载在相关的路由上：
 
-- if it's a [unique page](/docs/pages/building-your-application/routing/pages-and-layouts), it is preloaded on the unique route for that page
-- if it's in the [custom App](/docs/pages/building-your-application/routing/custom-app), it is preloaded on all the routes of the site under `/pages`
+- 如果它是一个[唯一的页面](/docs/pages/building-your-application/routing/pages-and-layouts)，它会被预加载到该页面的唯一路由上
+- 如果在[自定义应用程序](/docs/pages/building-your-application/routing/custom-app)中, 它预装在网站的所有路线上`/pages`下
 
 </PagesOnly>
 
-## Reusing fonts
+## 重用字体
 
-Every time you call the `localFont` or Google font function, that font is hosted as one instance in your application. Therefore, if you load the same font function in multiple files, multiple instances of the same font are hosted. In this situation, it is recommended to do the following:
+每次调用`localFont`或 Google 字体函数时，该字体都作为应用程序中的一个实例托管。因此，如果在多个文件中加载相同的字体函数，则会承载相同字体的多个实例。在这种情况下，建议执行以下操作：
 
-- Call the font loader function in one shared file
-- Export it as a constant
-- Import the constant in each file where you would like to use this font
+- 在一个共享文件中调用字体加载器函数
+- 将其导出为常量
+- 在要使用此字体的每个文件中导入常量

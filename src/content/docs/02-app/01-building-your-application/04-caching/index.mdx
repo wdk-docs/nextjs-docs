@@ -1,14 +1,14 @@
 ---
-title: Caching in Next.js
+title: 在Next.js中缓存
 nav_title: Caching
-description: An overview of caching mechanisms in Next.js.
+description: Next.js中的缓存机制概述。
 ---
 
 Next.js improves your application's performance and reduces costs by caching rendering work and data requests. This page provides an in-depth look at Next.js caching mechanisms, the APIs you can use to configure them, and how they interact with each other.
 
 > **Good to know**: This page helps you understand how Next.js works under the hood but is **not** essential knowledge to be productive with Next.js. Most of Next.js' caching heuristics are determined by your API usage and have defaults for the best performance with zero or minimal configuration.
 
-## Overview
+## 概述
 
 Here's a high-level overview of the different caching mechanisms and their purpose:
 
@@ -31,7 +31,7 @@ By default, Next.js will cache as much as possible to improve performance and re
 
 Caching behavior changes depending on whether the route is statically or dynamically rendered, data is cached or uncached, and whether a request is part of an initial visit or a subsequent navigation. Depending on your use case, you can configure the caching behavior for individual routes and data requests.
 
-## Request Memoization
+## 请求备忘录化
 
 React extends the [`fetch` API](#fetch) to automatically **memoize** requests that have the same URL and options. This means you can call a fetch function for the same data in multiple places in a React component tree while only executing it once.
 
@@ -99,15 +99,15 @@ const item = await getItem(); // cache HIT
 >   - It doesn't apply to `fetch` requests in Route Handlers as they are not a part of the React component tree.
 > - For cases where `fetch` is not suitable (e.g. some database clients, CMS clients, or GraphQL clients), you can use the [React `cache` function](#react-cache-function) to memoize functions.
 
-### Duration
+### 期间
 
 The cache lasts the lifetime of a server request until the React component tree has finished rendering.
 
-### Revalidating
+### 重新验证
 
 Since the memoization is not shared across server requests and only applies during rendering, there is no need to revalidate it.
 
-### Opting out
+### 选择退出
 
 To opt out of memoization in `fetch` requests, you can pass an `AbortController` `signal` to the request.
 
@@ -116,7 +116,7 @@ const { signal } = new AbortController();
 fetch(url, { signal });
 ```
 
-## Data Cache
+## 数据缓存
 
 Next.js has a built-in Data Cache that **persists** the result of data fetches across incoming **server requests** and **deployments**. This is possible because Next.js extends the native `fetch` API to allow each request on the server to set its own persistent caching semantics.
 
@@ -146,18 +146,18 @@ By default, data requests that use `fetch` are **cached**. You can use the [`cac
 >
 > With memoization, we reduce the number of **duplicate** requests in the same render pass that have to cross the network boundary from the rendering server to the Data Cache server (e.g. a CDN or Edge Network) or data source (e.g. a database or CMS). With the Data Cache, we reduce the number of requests made to our origin data source.
 
-### Duration
+### 期间
 
 The Data Cache is persistent across incoming requests and deployments unless you revalidate or opt-out.
 
-### Revalidating
+### 重新验证
 
 Cached data can be revalidated in two ways, with:
 
 - **Time-based Revalidation**: Revalidate data after a certain amount of time has passed and a new request is made. This is useful for data that changes infrequently and freshness is not as critical.
 - **On-demand Revalidation:** Revalidate data based on an event (e.g. form submission). On-demand revalidation can use a tag-based or path-based approach to revalidate groups of data at once. This is useful when you want to ensure the latest data is shown as soon as possible (e.g. when content from your headless CMS is updated).
 
-#### Time-based Revalidation
+#### 基于时间的重新验证
 
 To revalidate data at a timed interval, you can use the `next.revalidate` option of `fetch` to set the cache lifetime of a resource (in seconds).
 
@@ -187,7 +187,7 @@ Alternatively, you can use [Route Segment Config options](#segment-config-option
 
 This is similar to [**stale-while-revalidate**](https://web.dev/stale-while-revalidate/) behavior.
 
-#### On-demand Revalidation
+#### 按需重新验证
 
 Data can be revalidated on-demand by path ([`revalidatePath`](#revalidatepath)) or by cache tag ([`revalidateTag`](#fetch-optionsnexttags-and-revalidatetag)).
 
@@ -206,7 +206,7 @@ Data can be revalidated on-demand by path ([`revalidatePath`](#revalidatepath)) 
   - This is different from time-based revalidation, which keeps the stale data in the cache until the fresh data is fetched.
 - The next time a request is made, it will be a cache `MISS` again, and the data will be fetched from the external data source and stored in the Data Cache.
 
-### Opting out
+### 选择退出
 
 For individual data fetches, you can opt out of caching by setting the [`cache`](#fetch-optionscache) option to `no-store`. This means data will be fetched whenever `fetch` is called.
 
@@ -226,7 +226,7 @@ export const dynamic = "force-dynamic";
 >
 > If your Next.js application is deployed to Vercel, we recommend reading the [Vercel Data Cache](https://vercel.com/docs/infrastructure/data-cache) documentation for a better understanding of Vercel specific features.
 
-## Full Route Cache
+## 完整路由缓存
 
 > **Related terms**:
 >
@@ -236,7 +236,7 @@ Next.js automatically renders and caches routes at build time. This is an optimi
 
 To understand how the Full Route Cache works, it's helpful to look at how React handles rendering, and how Next.js caches the result:
 
-### 1. React Rendering on the Server
+### 1. 服务器上的 React 渲染
 
 On the server, Next.js uses React's APIs to orchestrate rendering. The rendering work is split into chunks: by individual routes segments and Suspense boundaries.
 
@@ -287,7 +287,7 @@ On subsequent navigations or during prefetching, Next.js will check if the React
 
 If the route segments are not in the cache, Next.js will fetch the React Server Components Payload from the server, and populate the Router Cache on the client.
 
-### Static and Dynamic Rendering
+### 静态和动态渲染
 
 Whether a route is cached or not at build time depends on whether it's statically or dynamically rendered. Static routes are cached by default, whereas dynamic routes are rendered at request time, and not cached.
 
@@ -303,18 +303,18 @@ This diagram shows the difference between statically and dynamically rendered ro
 
 Learn more about [static and dynamic rendering](/docs/app/building-your-application/rendering/server-components#server-rendering-strategies).
 
-### Duration
+### 期间
 
 By default, the Full Route Cache is persistent. This means that the render output is cached across user requests.
 
-### Invalidation
+### 无效
 
 There are two ways you can invalidate the Full Route Cache:
 
 - **[Revalidating Data](/docs/app/building-your-application/caching#revalidating)**: Revalidating the [Data Cache](#data-cache), will in turn invalidate the Router Cache by re-rendering components on the server and caching the new render output.
 - **Redeploying**: Unlike the Data Cache, which persists across deployments, the Full Route Cache is cleared on new deployments.
 
-### Opting out
+### 选择退出
 
 You can opt out of the Full Route Cache, or in other words, dynamically render components for every incoming request, by:
 
@@ -322,7 +322,7 @@ You can opt out of the Full Route Cache, or in other words, dynamically render c
 - **Using the `dynamic = 'force-dynamic'` or `revalidate = 0` route segment config options**: This will skip the Full Route Cache and the Data Cache. Meaning components will be rendered and data fetched on every incoming request to the server. The Router Cache will still apply as it's a client-side cache.
 - **Opting out of the [Data Cache](#data-cache)**: If a route has a `fetch` request that is not cached, this will opt the route out of the Full Route Cache. The data for the specific `fetch` request will be fetched for every incoming request. Other `fetch` requests that do not opt out of caching will still be cached in the Data Cache. This allows for a hybrid of cached and uncached data.
 
-## Router Cache
+## 路由器缓存
 
 > **Related Terms:**
 >

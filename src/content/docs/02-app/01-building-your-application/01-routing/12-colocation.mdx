@@ -1,7 +1,7 @@
 ---
-title: Project Organization and File Colocation
-nav_title: Project Organization
-description: Learn how to organize your Next.js project and colocate files.
+title: 项目组织与文件编目
+nav_title: 项目组织机构
+description: 了解如何组织您的Next.js项目并将文件并置。
 related:
   links:
     - app/building-your-application/routing/defining-routes
@@ -10,31 +10,31 @@ related:
     - app/building-your-application/configuring/absolute-imports-and-module-aliases
 ---
 
-Apart from [routing folder and file conventions](/docs/getting-started/project-structure#app-routing-conventions), Next.js is **unopinionated** about how you organize and colocate your project files.
+除了[路由文件夹和文件约定](/docs/getting-started/project-structure#app-routing-conventions), Next.js 是关于如何组织和并置项目文件的。
 
-This page shares default behavior and features you can use to organize your project.
+此页面共享可用于组织项目的默认行为和功能。
 
-- [Safe colocation by default](#safe-colocation-by-default)
-- [Project organization features](#project-organization-features)
-- [Project organization strategies](#project-organization-strategies)
+- [默认情况下安全主机代管](#safe-colocation-by-default)
+- [项目组织特点](#project-organization-features)
+- [项目组织策略](#project-organization-strategies)
 
-## Safe colocation by default
+## 默认情况下安全主机代管
 
-In the `app` directory, [nested folder hierarchy](/docs/app/building-your-application/routing#route-segments) defines route structure.
+在`app`目录中, [嵌套文件夹层次结构](/docs/app/building-your-application/routing#route-segments)定义路由结构。
 
-Each folder represents a route segment that is mapped to a corresponding segment in a URL path.
+每个文件夹表示映射到 URL 路径中相应段的路由段。
 
-However, even though route structure is defined through folders, a route is **not publicly accessible** until a `page.js` or `route.js` file is added to a route segment.
+然而，即使路由结构是通过文件夹定义的，在将`page.js`或`route.js`文件添加到路由段之前，路由是**不可公开访问的**。
 
 <Image
-  alt="A diagram showing how a route is not publicly accessible until a page.js or route.js file is added to a route segment."
+  alt="一个图表，显示在将page.js或route.js文件添加到路由段之前，路由是如何不可公开访问的。"
   srclight="/docs/light/project-organization-not-routable.png"
   srcdark="/docs/dark/project-organization-not-routable.png"
   width="1600"
   height="444"
 />
 
-And, even when a route is made publicly accessible, only the **content returned** by `page.js` or `route.js` is sent to the client.
+而且，即使路由被公开访问，也只有`page.js`或`route.js`返回**的**内容被发送到客户端。
 
 <Image
   alt="A diagram showing how page.js and route.js files make routes publicly accessible."
@@ -44,10 +44,10 @@ And, even when a route is made publicly accessible, only the **content returned*
   height="687"
 />
 
-This means that **project files** can be **safely colocated** inside route segments in the `app` directory without accidentally being routable.
+这意味着**项目文件**可以在`app`目录中的路由段内**安全地并置**，而不会意外地被路由。
 
 <Image
-  alt="A diagram showing colocated project files are not routable even when a segment contains a page.js or route.js file."
+  alt="即使段包含page.js或route.js文件，显示共有项目文件的图表也不可路由。"
   srclight="/docs/light/project-organization-colocation.png"
   srcdark="/docs/dark/project-organization-colocation.png"
   width="1600"
@@ -59,11 +59,11 @@ This means that **project files** can be **safely colocated** inside route segme
 > - This is different from the `pages` directory, where any file in `pages` is considered a route.
 > - While you **can** colocate your project files in `app` you don't **have** to. If you prefer, you can [keep them outside the `app` directory](#store-project-files-outside-of-app).
 
-## Project organization features
+## 项目组织特点
 
 Next.js provides several features to help you organize your project.
 
-### Private Folders
+### 专用文件夹
 
 Private folders can be created by prefixing a folder with an underscore: `_folderName`
 
@@ -90,7 +90,7 @@ Since files in the `app` directory can be [safely colocated by default](#safe-co
 > - You can create URL segments that start with an underscore by prefixing the folder name with `%5F` (the URL-encoded form of an underscore): `%5FfolderName`.
 > - If you don't use private folders, it would be helpful to know Next.js [special file conventions](/docs/getting-started/project-structure#routing-files) to prevent unexpected naming conflicts.
 
-### Route Groups
+### 路由组
 
 Route groups can be created by wrapping a folder in parenthesis: `(folderName)`
 
@@ -111,7 +111,7 @@ Route groups are useful for:
   - [Creating multiple nested layouts in the same segment, including multiple root layouts](/docs/app/building-your-application/routing/route-groups#creating-multiple-root-layouts)
   - [Adding a layout to a subset of routes in a common segment](/docs/app/building-your-application/routing/route-groups#opting-specific-segments-into-a-layout)
 
-### `src` Directory
+### `src` 目录
 
 Next.js supports storing application code (including `app`) inside an optional [`src` directory](/docs/app/building-your-application/configuring/src-directory). This separates application code from project configuration files which mostly live in the root of a project.
 
@@ -123,7 +123,7 @@ Next.js supports storing application code (including `app`) inside an optional [
   height="687"
 />
 
-### Module Path Aliases
+### 模块路径别名
 
 Next.js supports [Module Path Aliases](/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases) which make it easier to read and maintain imports across deeply nested project files.
 
@@ -135,7 +135,7 @@ import { Button } from "../../../components/button";
 import { Button } from "@/components/button";
 ```
 
-## Project organization strategies
+## 项目组织策略
 
 There is no "right" or "wrong" way when it comes to organizing your own files and folders in a Next.js project.
 
@@ -155,7 +155,7 @@ This strategy stores all application code in shared folders in the **root of you
   height="849"
 />
 
-### Store project files in top-level folders inside of `app`
+### 将项目文件存储在`app`内的顶级文件夹中
 
 This strategy stores all application code in shared folders in the **root of the `app` directory**.
 
@@ -167,7 +167,7 @@ This strategy stores all application code in shared folders in the **root of the
   height="849"
 />
 
-### Split project files by feature or route
+### 按要素或管线拆分项目文件
 
 This strategy stores globally shared application code in the root `app` directory and **splits** more specific application code into the route segments that use them.
 

@@ -1,6 +1,6 @@
 ---
-title: Loading UI and Streaming
-description: Built on top of Suspense, Loading UI allows you to create a fallback for specific route segments, and automatically stream content as it becomes ready.
+title: 加载UI和流式处理
+description: Loading UI建立在Suspense之上，允许您为特定的路由段创建回退，并在内容准备就绪时自动流式传输内容。
 ---
 
 The special file `loading.js` helps you create meaningful Loading UI with [React Suspense](https://react.dev/reference/react/Suspense). With this convention, you can show an [instant loading state](#instant-loading-states) from the server while the content of a route segment loads. The new content is automatically swapped in once rendering is complete.
@@ -13,7 +13,7 @@ The special file `loading.js` helps you create meaningful Loading UI with [React
   height="691"
 />
 
-## Instant Loading States
+## 即时加载状态
 
 An instant loading state is fallback UI that is shown immediately upon navigation. You can pre-render loading indicators such as skeletons and spinners, or a small but meaningful part of future screens such as a cover photo, title, etc. This helps users understand the app is responding and provides a better user experience.
 
@@ -59,11 +59,11 @@ In the same folder, `loading.js` will be nested inside `layout.js`. It will auto
 
 > **Recommendation:** Use the `loading.js` convention for route segments (layouts and pages) as Next.js optimizes this functionality.
 
-## Streaming with Suspense
+## 带暂停的流式处理
 
 In addition to `loading.js`, you can also manually create Suspense Boundaries for your own UI components. The App Router supports streaming with [Suspense](https://react.dev/reference/react/Suspense) for both [Node.js and Edge runtimes](/docs/app/building-your-application/rendering/edge-and-nodejs-runtimes).
 
-### What is Streaming?
+### 什么是流媒体？
 
 To learn how Streaming works in React and Next.js, it's helpful to understand **Server-Side Rendering (SSR)** and its limitations.
 
@@ -121,7 +121,7 @@ Streaming works well with React's component model because each component can be 
 
 Streaming is particularly beneficial when you want to prevent long data requests from blocking the page from rendering as it can reduce the [Time To First Byte (TTFB)](https://web.dev/ttfb/) and [First Contentful Paint (FCP)](https://web.dev/first-contentful-paint/). It also helps improve [Time to Interactive (TTI)](https://developer.chrome.com/en/docs/lighthouse/performance/interactive/), especially on slower devices.
 
-### Example
+### 实例
 
 `<Suspense>` works by wrapping a component that performs an asynchronous action (e.g. fetch data), showing fallback UI (e.g. skeleton, spinner) while it's happening, and then swapping in your component once the action completes.
 
@@ -173,7 +173,7 @@ For more Suspense examples and use cases, please see the [React Documentation](h
 - Next.js will wait for data fetching inside [`generateMetadata`](/docs/app/api-reference/functions/generate-metadata) to complete before streaming UI to the client. This guarantees the first part of a streamed response includes `<head>` tags.
 - Since streaming is server-rendered, it does not impact SEO. You can use the [Mobile Friendly Test](https://search.google.com/test/mobile-friendly) tool from Google to see how your page appears to Google's web crawlers and view the serialized HTML ([source](https://web.dev/rendering-on-the-web/#seo-considerations)).
 
-### Status Codes
+### 状态代码
 
 When streaming, a `200` status code will be returned to signal that the request was successful.
 

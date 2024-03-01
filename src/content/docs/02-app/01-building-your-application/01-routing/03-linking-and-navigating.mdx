@@ -1,20 +1,20 @@
 ---
-title: Linking and Navigating
-description: Learn how navigation works in Next.js, and how to use the Link Component and `useRouter` hook.
+title: 链接和导航
+description: 了解导航在Next.js中的工作原理，以及如何使用链接组件和`useRouter`挂钩。
 related:
   links:
     - app/building-your-application/caching
     - app/building-your-application/configuring/typescript
 ---
 
-There are two ways to navigate between routes in Next.js:
+在 Next.js 中，有两种方法可以在路线之间导航：
 
 - Using the [`<Link>` Component](#link-component)
 - Using the [`useRouter` Hook](#userouter-hook)
 
 This page will go through how to use `<Link>`, `useRouter()`, and dive deeper into how navigation works.
 
-## `<Link>` Component
+## `<Link>` 组件
 
 `<Link>` is a built-in component that extends the HTML `<a>` tag to provide [prefetching](#1-prefetching) and client-side navigation between routes. It is the primary way to navigate between routes in Next.js.
 
@@ -38,9 +38,9 @@ export default function Page() {
 
 There are other optional props you can pass to `<Link>`. See the [API reference](/docs/app/api-reference/components/link) for more.
 
-### Examples
+### 示例
 
-#### Linking to Dynamic Segments
+#### 链接到动态分段
 
 When linking to [dynamic segments](/docs/app/building-your-application/routing/dynamic-routes), you can use [template literals and interpolation](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals) to generate a list of links. For example, to generate a list of blog posts:
 
@@ -60,7 +60,7 @@ export default function PostList({ posts }) {
 }
 ```
 
-#### Checking Active Links
+#### 检查活动链接
 
 You can use [`usePathname()`](/docs/app/api-reference/functions/use-pathname) to determine if a link is active. For example, to add a class to the active link, you can check if the current `pathname` matches the `href` of the link:
 
@@ -120,7 +120,7 @@ export function Links() {
 }
 ```
 
-#### Scrolling to an `id`
+#### 滚动到 `id`
 
 The default behavior of the Next.js App Router is to scroll to the top of a new route or to maintain the scroll position for backwards and forwards navigation.
 
@@ -133,7 +133,7 @@ If you'd like to scroll to a specific `id` on navigation, you can append your UR
 <a href="/dashboard#settings">Settings</a>
 ```
 
-#### Disabling scroll restoration
+#### 禁用滚动恢复
 
 The default behavior of the Next.js App Router is to scroll to the top of a new route or to maintain the scroll position for backwards and forwards navigation. If you'd like to disable this behavior, you can pass `scroll={false}` to the `<Link>` component, or `scroll: false` to `router.push()` or `router.replace()`.
 
@@ -153,11 +153,11 @@ const router = useRouter();
 router.push("/dashboard", { scroll: false });
 ```
 
-## `useRouter()` Hook
+## `useRouter()` 钩子
 
-The `useRouter` hook allows you to programmatically change routes.
+`useRouter`挂钩允许您以编程方式更改路由。
 
-This hook can only be used inside Client Components and is imported from `next/navigation`.
+此挂钩只能在客户端组件内部使用，并从`next/navigation`导入。
 
 ```jsx filename="app/page.js"
 "use client";
@@ -175,27 +175,27 @@ export default function Page() {
 }
 ```
 
-For a full list of `useRouter` methods, see the [API reference](/docs/app/api-reference/functions/use-router).
+有关`useRouter`方法的完整列表，请参阅[API 参考](/docs/app/api-reference/functions/use-router).
 
-> **Recommendation:** Use the `<Link>` component to navigate between routes unless you have a specific requirement for using `useRouter`.
+> **正式建议:** 使用`<Link>`组件在路线之间导航，除非您有使用`useRouter`的特定要求。
 
-## How Routing and Navigation Works
+## 路由和导航的工作原理
 
 The App Router uses a hybrid approach for routing and navigation. On the server, your application code is automatically code-split by route segments. And on the client, Next.js [prefetches](#1-prefetching) and [caches](#2-caching) the route segments. This means, when a user navigates to a new route, the browser doesn't reload the page, and only the route segments that change re-render - improving the navigation experience and performance.
 
-### 1. Prefetching
+### 1. 预取
 
-Prefetching is a way to preload a route in the background before the user visits it.
+预取是在用户访问路由之前在后台预加载路由的一种方式。
 
-There are two ways routes are prefetched in Next.js:
+Next.js 中有两种预取路由的方式：
 
-- **`<Link>` component**: Routes are automatically prefetched as they become visible in the user's viewport. Prefetching happens when the page first loads or when it comes into view through scrolling.
-- **`router.prefetch()`**: The `useRouter` hook can be used to prefetch routes programmatically.
+- **`<Link>` component**: 当路由在用户的视口中可见时，会自动预取这些路由。当页面首次加载或通过滚动进入视图时，会发生预取。
+- **`router.prefetch()`**: `useRouter`挂钩可用于以编程方式预取路由。
 
-The`<Link>`'s prefetching behavior is different for static and dynamic routes:
+静态路由和动态路由的`<Link>`预取行为不同：
 
-- [**Static Routes**](/docs/app/building-your-application/rendering/server-components#static-rendering-default): `prefetch` defaults to `true`. The entire route is prefetched and cached.
-- [**Dynamic Routes**](/docs/app/building-your-application/rendering/server-components#dynamic-rendering): `prefetch` default to automatic. Only the shared layout down until the first `loading.js` file is prefetched and cached for `30s`. This reduces the cost of fetching an entire dynamic route, and it means you can show an [instant loading state](/docs/app/building-your-application/routing/loading-ui-and-streaming#instant-loading-states) for better visual feedback to users.
+- [**静态路由**](/docs/app/building-your-application/rendering/server-components#static-rendering-default): `prefetch` defaults to `true`. The entire route is prefetched and cached.
+- [**动态路线**](/docs/app/building-your-application/rendering/server-components#dynamic-rendering): `prefetch` default to automatic. Only the shared layout down until the first `loading.js` file is prefetched and cached for `30s`. This reduces the cost of fetching an entire dynamic route, and it means you can show an [instant loading state](/docs/app/building-your-application/routing/loading-ui-and-streaming#instant-loading-states) for better visual feedback to users.
 
 You can disable prefetching by setting the `prefetch` prop to `false`.
 
@@ -205,7 +205,7 @@ See the [`<Link>` API reference](/docs/app/api-reference/components/link) for mo
 >
 > - Prefetching is not enabled in development, only in production.
 
-### 2. Caching
+### 2. 缓存
 
 Next.js has an **in-memory client-side cache** called the [Router Cache](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#caching-data#router-cache). As users navigate around the app, the React Server Component Payload of [prefetched](#1-prefetching) route segments and visited routes are stored in the cache.
 
@@ -213,9 +213,9 @@ This means on navigation, the cache is reused as much as possible, instead of ma
 
 Learn more about how the [Router Cache](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#caching-data) works and how to configure it.
 
-### 3. Partial Rendering
+### 3. 局部渲染
 
-Partial rendering means only the route segments that change on navigation re-render on the client, and any shared segments are preserved.
+部分渲染意味着只有在导航时发生更改的路由段才会在客户端上重新渲染，并且任何共享管段都会保留。
 
 For example, when navigating between two sibling routes, `/dashboard/settings` and `/dashboard/analytics`, the `settings` and `analytics` pages will be rendered, and the shared `dashboard` layout will be preserved.
 
@@ -227,12 +227,12 @@ For example, when navigating between two sibling routes, `/dashboard/settings` a
   height="945"
 />
 
-Without partial rendering, each navigation would cause the full page to re-render on the server. Rendering only the segment that changes reduces the amount of data transferred and execution time, leading to improved performance.
+如果没有部分渲染，每个导航都会导致整个页面在服务器上重新渲染。仅渲染发生更改的段可以减少传输的数据量和执行时间，从而提高性能。
 
-### 4. Soft Navigation
+### 4. 软导航
 
-By default, the browser performs a hard navigation between pages. This means the browser reloads the page and resets React state such as `useState` hooks in your app and browser state such as the user's scroll position or focused element. However, in Next.js, the App Router uses soft navigation. This means React only renders the segments that have changed while preserving React and browser state, and there is no full page reload.
+默认情况下，浏览器在页面之间执行硬导航。这意味着浏览器会重新加载页面并重置 React 状态，如应用程序中的`useState`挂钩，以及浏览器状态，如用户的滚动位置或聚焦元素。然而，在 Next.js 中，应用程序路由器使用软导航。这意味着 React 只渲染已更改的片段，同时保留 React 和浏览器状态，并且不重新加载整个页面。
 
-### 5. Back and Forward Navigation
+### 5. 前后导航
 
-By default, Next.js will maintain the scroll position for backwards and forwards navigation, and re-use route segments in the [Router Cache](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#caching-data).
+默认情况下，Next.js 将保持向后和向前导航的滚动位置，并重复使用[路由器缓存](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#caching-data)中的路由段.

@@ -1,11 +1,12 @@
 ---
 title: ImageResponse
-description: API Reference for the ImageResponse constructor.
+description: ImageResponse构造函数的API引用。
 ---
 
-The `ImageResponse` constructor allows you to generate dynamic images using JSX and CSS. This is useful for generating social media images such as Open Graph images, Twitter cards, and more.
+`ImageResponse`构造函数允许您使用 JSX 和 CSS 生成动态图像。
+这对于生成社交媒体图像非常有用，例如 Open Graph 图像、Twitter 卡等。
 
-The following options are available for `ImageResponse`:
+以下选项可用于`ImageResponse`：
 
 ```jsx
 import { ImageResponse } from 'next/og'
@@ -32,13 +33,13 @@ new ImageResponse(
 )
 ```
 
-## Supported CSS Properties
+## 支持的 CSS 属性
 
 Please refer to [Satori’s documentation](https://github.com/vercel/satori#css) for a list of supported HTML and CSS features.
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes                                               |
+| 版本      | 变化                                                  |
 | --------- | ----------------------------------------------------- |
 | `v14.0.0` | `ImageResponse` moved from `next/server` to `next/og` |
 | `v13.3.0` | `ImageResponse` can be imported from `next/server`.   |

@@ -1,6 +1,6 @@
 ---
-title: Content Security Policy
-description: Learn how to set a Content Security Policy (CSP) for your Next.js application.
+title: 内容安全策略
+description: 了解如何为Next.js应用程序设置内容安全策略（CSP）。
 related:
   links:
     - app/building-your-application/routing/middleware
@@ -24,11 +24,11 @@ By using CSP, developers can specify which origins are permissible for content s
 
 A [nonce](https://developer.mozilla.org/docs/Web/HTML/Global_attributes/nonce) is a unique, random string of characters created for a one-time use. It is used in conjunction with CSP to selectively allow certain inline scripts or styles to execute, bypassing strict CSP directives.
 
-### Why use a nonce?
+### 为什么要使用 nonce？
 
 Even though CSPs are designed to block malicious scripts, there are legitimate scenarios where inline scripts are necessary. In such cases, nonces offer a way to allow these scripts to execute if they have the correct nonce.
 
-### Adding a nonce with Middleware
+### 使用中间件添加 nonce
 
 [Middleware](/docs/app/building-your-application/routing/middleware) enables you to add headers and generate nonces before the page renders.
 
@@ -37,10 +37,10 @@ Every time a page is viewed, a fresh nonce should be generated. This means that 
 For example:
 
 ```ts filename="middleware.ts" switcher
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
+  const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const cspHeader = `
     default-src 'self';
     script-src 'self' 'nonce-${nonce}' 'strict-dynamic';
@@ -53,39 +53,31 @@ export function middleware(request: NextRequest) {
     frame-ancestors 'none';
     block-all-mixed-content;
     upgrade-insecure-requests;
-`
+`;
   // Replace newline characters and spaces
-  const contentSecurityPolicyHeaderValue = cspHeader
-    .replace(/\s{2,}/g, ' ')
-    .trim()
+  const contentSecurityPolicyHeaderValue = cspHeader.replace(/\s{2,}/g, " ").trim();
 
-  const requestHeaders = new Headers(request.headers)
-  requestHeaders.set('x-nonce', nonce)
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-nonce", nonce);
 
-  requestHeaders.set(
-    'Content-Security-Policy',
-    contentSecurityPolicyHeaderValue
-  )
+  requestHeaders.set("Content-Security-Policy", contentSecurityPolicyHeaderValue);
 
   const response = NextResponse.next({
     request: {
       headers: requestHeaders,
     },
-  })
-  response.headers.set(
-    'Content-Security-Policy',
-    contentSecurityPolicyHeaderValue
-  )
+  });
+  response.headers.set("Content-Security-Policy", contentSecurityPolicyHeaderValue);
 
-  return response
+  return response;
 }
 ```
 
 ```js filename="middleware.js" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export function middleware(request) {
-  const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
+  const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const cspHeader = `
     default-src 'self';
     script-src 'self' 'nonce-${nonce}' 'strict-dynamic';
@@ -98,30 +90,22 @@ export function middleware(request) {
     frame-ancestors 'none';
     block-all-mixed-content;
     upgrade-insecure-requests;
-`
+`;
   // Replace newline characters and spaces
-  const contentSecurityPolicyHeaderValue = cspHeader
-    .replace(/\s{2,}/g, ' ')
-    .trim()
+  const contentSecurityPolicyHeaderValue = cspHeader.replace(/\s{2,}/g, " ").trim();
 
-  const requestHeaders = new Headers(request.headers)
-  requestHeaders.set('x-nonce', nonce)
-  requestHeaders.set(
-    'Content-Security-Policy',
-    contentSecurityPolicyHeaderValue
-  )
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-nonce", nonce);
+  requestHeaders.set("Content-Security-Policy", contentSecurityPolicyHeaderValue);
 
   const response = NextResponse.next({
     request: {
       headers: requestHeaders,
     },
-  })
-  response.headers.set(
-    'Content-Security-Policy',
-    contentSecurityPolicyHeaderValue
-  )
+  });
+  response.headers.set("Content-Security-Policy", contentSecurityPolicyHeaderValue);
 
-  return response
+  return response;
 }
 ```
 
@@ -140,14 +124,14 @@ export const config = {
      * - favicon.ico (favicon file)
      */
     {
-      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+      source: "/((?!api|_next/static|_next/image|favicon.ico).*)",
       missing: [
-        { type: 'header', key: 'next-router-prefetch' },
-        { type: 'header', key: 'purpose', value: 'prefetch' },
+        { type: "header", key: "next-router-prefetch" },
+        { type: "header", key: "purpose", value: "prefetch" },
       ],
     },
   ],
-}
+};
 ```
 
 ```js filename="middleware.js" switcher
@@ -161,54 +145,42 @@ export const config = {
      * - favicon.ico (favicon file)
      */
     {
-      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+      source: "/((?!api|_next/static|_next/image|favicon.ico).*)",
       missing: [
-        { type: 'header', key: 'next-router-prefetch' },
-        { type: 'header', key: 'purpose', value: 'prefetch' },
+        { type: "header", key: "next-router-prefetch" },
+        { type: "header", key: "purpose", value: "prefetch" },
       ],
     },
   ],
-}
+};
 ```
 
-### Reading the nonce
+### 读取 nonce
 
 You can now read the nonce from a [Server Component](/docs/app/building-your-application/rendering/server-components) using [`headers`](/docs/app/api-reference/functions/headers):
 
 ```tsx filename="app/page.tsx" switcher
-import { headers } from 'next/headers'
-import Script from 'next/script'
+import { headers } from "next/headers";
+import Script from "next/script";
 
 export default function Page() {
-  const nonce = headers().get('x-nonce')
+  const nonce = headers().get("x-nonce");
 
-  return (
-    <Script
-      src="https://www.googletagmanager.com/gtag/js"
-      strategy="afterInteractive"
-      nonce={nonce}
-    />
-  )
+  return <Script src="https://www.googletagmanager.com/gtag/js" strategy="afterInteractive" nonce={nonce} />;
 }
 ```
 
 ```jsx filename="app/page.jsx" switcher
-import { headers } from 'next/headers'
-import Script from 'next/script'
+import { headers } from "next/headers";
+import Script from "next/script";
 
 export default function Page() {
-  const nonce = headers().get('x-nonce')
+  const nonce = headers().get("x-nonce");
 
-  return (
-    <Script
-      src="https://www.googletagmanager.com/gtag/js"
-      strategy="afterInteractive"
-      nonce={nonce}
-    />
-  )
+  return <Script src="https://www.googletagmanager.com/gtag/js" strategy="afterInteractive" nonce={nonce} />;
 }
 ```
 
-## Version History
+## 版本历史记录
 
 We recommend using `v13.4.20+` of Next.js to properly handle and apply nonces.

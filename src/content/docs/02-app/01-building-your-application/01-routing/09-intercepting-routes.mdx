@@ -1,16 +1,17 @@
 ---
-title: Intercepting Routes
-description: Use intercepting routes to load a new route within the current layout while masking the browser URL, useful for advanced routing patterns such as modals.
+title: 拦截路线
+description: 使用截取路由在当前布局中加载新路由，同时屏蔽浏览器URL，这对于高级路由模式（如模式）非常有用。
 related:
   title: Next Steps
-  description: Learn how to use modals with Intercepted and Parallel Routes.
+  description: 了解如何将模态与拦截和并行路由一起使用。
   links:
     - app/building-your-application/routing/parallel-routes
 ---
 
-Intercepting routes allows you to load a route from another part of your application within the current layout. This routing paradigm can be useful when you want to display the content of a route without the user switching to a different context.
+截取路由允许您在当前布局中从应用程序的另一部分加载路由。当您希望在不让用户切换到不同上下文的情况下显示路线的内容时，这种路由范例可能很有用。
 
-For example, when clicking on a photo in a feed, you can display the photo in a modal, overlaying the feed. In this case, Next.js intercepts the `/photo/123` route, masks the URL, and overlays it over `/feed`.
+例如，当点击提要中的照片时，可以以模式显示照片，覆盖提要。
+在这种情况下，Next.js 截取`/photo/123`路由，屏蔽 URL，并将其覆盖在`/feed`上。
 
 <Image
   alt="Intercepting routes soft navigation"
@@ -20,7 +21,7 @@ For example, when clicking on a photo in a feed, you can display the photo in a 
   height="617"
 />
 
-However, when navigating to the photo by clicking a shareable URL or by refreshing the page, the entire photo page should render instead of the modal. No route interception should occur.
+但是，当通过单击可共享的 URL 或刷新页面导航到照片时，应该呈现整个照片页面，而不是模态页面。不应发生路由拦截。
 
 <Image
   alt="Intercepting routes hard navigation"
@@ -30,11 +31,11 @@ However, when navigating to the photo by clicking a shareable URL or by refreshi
   height="604"
 />
 
-## Convention
+## 习俗
 
-Intercepting routes can be defined with the `(..)` convention, which is similar to relative path convention `../` but for segments.
+拦截路由可以用`(..)`约定来定义，这类似于相对路径约定`../`但是对于分段。
 
-You can use:
+您可以使用：
 
 - `(.)` to match segments on the **same level**
 - `(..)` to match segments **one level above**
@@ -53,9 +54,9 @@ For example, you can intercept the `photo` segment from within the `feed` segmen
 
 > Note that the `(..)` convention is based on _route segments_, not the file-system.
 
-## Examples
+## 示例
 
-### Modals
+### 模式
 
 Intercepting Routes can be used together with [Parallel Routes](/docs/app/building-your-application/routing/parallel-routes) to create modals.
 

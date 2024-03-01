@@ -1,19 +1,19 @@
 ---
 title: Installation
-description: Create a new Next.js application with `create-next-app`. Set up TypeScript, styles, and configure your `next.config.js` file.
+description: 使用`create-next-app`创建新的Next.js应用程序。设置TypeScript、样式并配置`next.config.js`文件。
 related:
   title: Next Steps
-  description: Learn about the files and folders in your Next.js project.
+  description: 了解Next.js项目中的文件和文件夹。
   links:
     - getting-started/project-structure
 ---
 
-System Requirements:
+系统要求:
 
-- [Node.js 18.17](https://nodejs.org/) or later.
-- macOS, Windows (including WSL), and Linux are supported.
+- [Node.js 18.17](https://nodejs.org/) 或更晚.
+- 支持 macOS、Windows（包括 WSL）和 Linux。
 
-## Automatic Installation
+## 自动安装
 
 We recommend starting a new Next.js app using [`create-next-app`](/docs/app/api-reference/create-next-app), which sets up everything automatically for you. To create a project, run:
 
@@ -41,9 +41,9 @@ After the prompts, `create-next-app` will create a folder with your project name
 > - Next.js now ships with [TypeScript](/docs/app/building-your-application/configuring/typescript), [ESLint](/docs/app/building-your-application/configuring/eslint), and [Tailwind CSS](/docs/app/building-your-application/styling/tailwind-css) configuration by default.
 > - You can optionally use a [`src` directory](/docs/app/building-your-application/configuring/src-directory) in the root of your project to separate your application's code from configuration files.
 
-## Manual Installation
+## 手动安装
 
-To manually create a new Next.js app, install the required packages:
+要手动创建新的 Next.js 应用程序，请安装所需的软件包：
 
 ```bash filename="Terminal"
 npm install next@latest react@latest react-dom@latest
@@ -62,18 +62,18 @@ Open your `package.json` file and add the following `scripts`:
 }
 ```
 
-These scripts refer to the different stages of developing an application:
+这些脚本指的是开发应用程序的不同阶段：
 
 - `dev`: runs [`next dev`](/docs/app/api-reference/next-cli#development) to start Next.js in development mode.
 - `build`: runs [`next build`](/docs/app/api-reference/next-cli#build) to build the application for production usage.
 - `start`: runs [`next start`](/docs/app/api-reference/next-cli#production) to start a Next.js production server.
 - `lint`: runs [`next lint`](/docs/app/api-reference/next-cli#lint) to set up Next.js' built-in ESLint configuration.
 
-### Creating directories
+### 正在创建目录
 
 Next.js uses file-system routing, which means the routes in your application are determined by how you structure your files.
 
-#### The `app` directory
+#### `app`目录
 
 For new applications, we recommend using the [App Router](/docs/app). This router allows you to use React's latest features and is an evolution of the [Pages Router](/docs/pages) based on community feedback.
 
@@ -127,7 +127,7 @@ export default function Page() {
 
 Learn more about [using the App Router](/docs/app/building-your-application/routing/defining-routes).
 
-#### The `pages` directory (optional)
+#### `pages`目录（可选）
 
 If you prefer to use the Pages Router instead of the App Router, you can create a `pages/` directory at the root of your project.
 
@@ -177,11 +177,11 @@ Learn more about [using the Pages Router](/docs/pages/building-your-application/
 
 > **Good to know**: Although you can use both routers in the same project, routes in `app` will be prioritized over `pages`. We recommend using only one router in your new project to avoid confusion.
 
-#### The `public` folder (optional)
+#### `public`文件夹（可选）
 
 Create a `public` folder to store static assets such as images, fonts, etc. Files inside `public` directory can then be referenced by your code starting from the base URL (`/`).
 
-## Run the Development Server
+## 运行开发服务器
 
 1. Run `npm run dev` to start the development server.
 2. Visit `http://localhost:3000` to view your application.
