@@ -1,11 +1,11 @@
 ---
-title: Analytics
-description: Measure and track page performance using Next.js Speed Insights
+title: 分析
+description: 使用Next.js Speed Insights测量和跟踪页面性能
 ---
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-Next.js has built-in support for measuring and reporting performance metrics. You can either use the `useReportWebVitals` hook to manage reporting yourself, or alternatively, Vercel provides a [managed service](https://vercel.com/analytics?utm_source=next-site&utm_medium=docs&utm_campaign=next-website) to automatically collect and visualize metrics for you.
+Next.js 内置了对测量和报告性能指标的支持。 您可以使用`useReportWebVitals`挂钩自行管理报告，也可以使用 Vercel 提供[托管服务](https://vercel.com/analytics?utm_source=next-site&utm_medium=docs&utm_campaign=next-website)自动为您收集和可视化指标。
 
 ## 建立自己的
 
@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
 }
 ```
 
-View the [API Reference](/docs/pages/api-reference/functions/use-report-web-vitals) for more information.
+查看[API 参考](/docs/pages/api-reference/functions/use-report-web-vitals)了解更多信息。
 
 </PagesOnly>
 
@@ -56,25 +56,24 @@ export default function Layout({ children }) {
 }
 ```
 
-> Since the `useReportWebVitals` hook requires the `"use client"` directive, the most performant approach is to create a separate component that the root layout imports. This confines the client boundary exclusively to the `WebVitals` component.
+> 由于`useReportWebVitals`钩子需要`"use client"`指令，因此最高效的方法是创建一个单独的组件，由根布局导入。这将客户端边界仅限于`WebVitals`组件。
 
-View the [API Reference](/docs/app/api-reference/functions/use-report-web-vitals) for more information.
+查看[API 参考](/docs/app/api-reference/functions/use-report-web-vitals)了解更多信息。
 
 </AppOnly>
 
 ## 网络简历
 
-[Web Vitals](https://web.dev/vitals/) are a set of useful metrics that aim to capture the user
-experience of a web page. The following web vitals are all included:
+[Web Vitals](https://web.dev/vitals/) 是一组有用的指标，旨在捕捉网页的用户体验。以下网络生命体征均包含在内：
 
-- [Time to First Byte](https://developer.mozilla.org/docs/Glossary/Time_to_first_byte) (TTFB)
-- [First Contentful Paint](https://developer.mozilla.org/docs/Glossary/First_contentful_paint) (FCP)
-- [Largest Contentful Paint](https://web.dev/lcp/) (LCP)
-- [First Input Delay](https://web.dev/fid/) (FID)
-- [Cumulative Layout Shift](https://web.dev/cls/) (CLS)
-- [Interaction to Next Paint](https://web.dev/inp/) (INP)
+- [到第一个字节的时间](https://developer.mozilla.org/docs/Glossary/Time_to_first_byte) (TTFB)
+- [第一幅画](https://developer.mozilla.org/docs/Glossary/First_contentful_paint) (FCP)
+- [最大的满足感涂料](https://web.dev/lcp/) (LCP)
+- [首次输入延迟](https://web.dev/fid/) (FID)
+- [累计布局偏移](https://web.dev/cls/) (CLS)
+- [与下一幅画的交互](https://web.dev/inp/) (INP)
 
-You can handle all the results of these metrics using the `name` property.
+您可以使用`name`属性处理这些度量的所有结果。
 
 <PagesOnly>
 
@@ -148,15 +147,13 @@ export function WebVitals() {
 
 ## 自定义度量
 
-In addition to the core metrics listed above, there are some additional custom metrics that
-measure the time it takes for the page to hydrate and render:
+除了上面列出的核心指标外，还有一些额外的自定义指标可以衡量页面水合和渲染所需的时间：
 
-- `Next.js-hydration`: Length of time it takes for the page to start and finish hydrating (in ms)
-- `Next.js-route-change-to-render`: Length of time it takes for a page to start rendering after a
-  route change (in ms)
-- `Next.js-render`: Length of time it takes for a page to finish render after a route change (in ms)
+- `Next.js-hydration`: 页面开始和完成补水所需的时间长度（毫秒）
+- `Next.js-route-change-to-render`: 路由更改后页面开始渲染所需的时间长度（以毫秒为单位）
+- `Next.js-render`: 路由更改后页面完成渲染所需的时间长度（以毫秒为单位）
 
-You can handle all the results of these metrics separately:
+您可以单独处理这些指标的所有结果：
 
 ```js
 export function reportWebVitals(metric) {
@@ -176,14 +173,13 @@ export function reportWebVitals(metric) {
 }
 ```
 
-These metrics work in all browsers that support the [User Timing API](https://caniuse.com/#feat=user-timing).
+这些指标适用于所有支持[用户计时 API](https://caniuse.com/#feat=user-timing)的浏览器.
 
 </PagesOnly>
 
 ## 将结果发送到外部系统
 
-You can send results to any endpoint to measure and track
-real user performance on your site. For example:
+您可以将结果发送到任何端点，以测量和跟踪网站上的真实用户性能。例如
 
 ```js
 useReportWebVitals((metric) => {
@@ -199,9 +195,7 @@ useReportWebVitals((metric) => {
 });
 ```
 
-> **Good to know**: If you use [Google Analytics](https://analytics.google.com/analytics/web/), using the
-> `id` value can allow you to construct metric distributions manually (to calculate percentiles,
-> etc.)
+> **很高兴知道**: 如果您使用[谷歌分析](https://analytics.google.com/analytics/web/)，使用`id`值可以手动构建度量分布（计算百分位数等）
 
 > ```js
 > useReportWebVitals(metric => {
@@ -215,4 +209,4 @@ useReportWebVitals((metric) => {
 > }
 > ```
 >
-> Read more about [sending results to Google Analytics](https://github.com/GoogleChrome/web-vitals#send-the-results-to-google-analytics).
+> 阅读更多关于[将结果发送到谷歌分析](https://github.com/GoogleChrome/web-vitals#send-the-results-to-google-analytics).

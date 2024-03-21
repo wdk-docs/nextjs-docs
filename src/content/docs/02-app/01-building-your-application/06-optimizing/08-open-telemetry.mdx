@@ -5,31 +5,31 @@ description: 了解如何使用OpenTelemetry对Next.js应用程序进行检测�
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-> **Good to know**: This feature is **experimental**, you need to explicitly opt-in by providing `experimental.instrumentationHook = true;` in your `next.config.js`.
+> **很高兴知道**: 此功能是**实验性的**, 您需要通过在`next.config.js`中提供`experimental.instrumentationHook = true;`来明确选择加入。
 
-Observability is crucial for understanding and optimizing the behavior and performance of your Next.js app.
+可观察性对于理解和优化 Next.js 应用程序的行为和性能至关重要。
 
-As applications become more complex, it becomes increasingly difficult to identify and diagnose issues that may arise. By leveraging observability tools, such as logging and metrics, developers can gain insights into their application's behavior and identify areas for optimization. With observability, developers can proactively address issues before they become major problems and provide a better user experience. Therefore, it is highly recommended to use observability in your Next.js applications to improve performance, optimize resources, and enhance user experience.
+随着应用程序变得越来越复杂，识别和诊断可能出现的问题变得越来越困难。通过利用可观察性工具，如日志记录和度量，开发人员可以深入了解应用程序的行为，并确定需要优化的领域。有了可观察性，开发人员可以在问题成为主要问题之前主动解决问题，并提供更好的用户体验。因此，强烈建议在 Next.js 应用程序中使用可观察性来提高性能、优化资源和增强用户体验。
 
-We recommend using OpenTelemetry for instrumenting your apps.
-It's a platform-agnostic way to instrument apps that allows you to change your observability provider without changing your code.
-Read [Official OpenTelemetry docs](https://opentelemetry.io/docs/) for more information about OpenTelemetry and how it works.
+我们建议使用 OpenTelemetry 来检测您的应用程序。
+这是一种与平台无关的工具应用程序方式，允许您在不更改代码的情况下更改可观测性提供者。
+有关 OpenTelemetry 及其工作方式的更多信息，请阅读[官方 OpenTelemetry docs](https://opentelemetry.io/docs/)。
 
-This documentation uses terms like _Span_, _Trace_ or _Exporter_ throughout this doc, all of which can be found in [the OpenTelemetry Observability Primer](https://opentelemetry.io/docs/concepts/observability-primer/).
+本文档在整个文档中使用了*Span*、*Trace*或*Exporter*等术语，所有这些术语都可以在[OpenTelemetry 可观测性入门](https://opentelemetry.io/docs/concepts/observability-primer/)中找到.
 
-Next.js supports OpenTelemetry instrumentation out of the box, which means that we already instrumented Next.js itself.
-When you enable OpenTelemetry we will automatically wrap all your code like `getStaticProps` in _spans_ with helpful attributes.
+Next.js 支持开箱即用的 OpenTelemetry 检测，这意味着我们已经对 Next.js 本身进行了检测。
+当您启用 OpenTelemetry 时，我们将自动使用有用的属性将您的所有代码（如*spans*中的`getStaticProps`）包装起来。
 
-> **Good to know**: We currently support OpenTelemetry bindings only in serverless functions.
-> We don't provide any for `edge` or client side code.
+> **很高兴知道**: 我们目前仅在无服务器功能中支持 OpenTelemetry 绑定。
+> 我们不提供任何`edge`或客户端代码。
 
-## Getting Started
+## 入门
 
 OpenTelemetry is extensible but setting it up properly can be quite verbose.
 That's why we prepared a package `@vercel/otel` that helps you get started quickly.
 It's not extensible and you should configure OpenTelemetry manually if you need to customize your setup.
 
-### Using `@vercel/otel`
+### 使用 `@vercel/otel`
 
 To get started, you must install `@vercel/otel`:
 
@@ -85,7 +85,7 @@ export function register() {
 
 </PagesOnly>
 
-### Manual OpenTelemetry configuration
+### 手动 OpenTelemetry 配置
 
 If our wrapper `@vercel/otel` doesn't suit your needs, you can configure OpenTelemetry manually.
 
@@ -149,7 +149,7 @@ sdk.start();
 Doing this is equivalent to using `@vercel/otel`, but it's possible to modify and extend.
 For example, you could use `@opentelemetry/exporter-trace-otlp-grpc` instead of `@opentelemetry/exporter-trace-otlp-http` or you can specify more resource attributes.
 
-## Testing your instrumentation
+## 测试仪器
 
 You need an OpenTelemetry collector with a compatible backend to test OpenTelemetry traces locally.
 We recommend using our [OpenTelemetry dev environment](https://github.com/vercel/opentelemetry-collector-dev-setup).
@@ -160,20 +160,20 @@ All other spans from that particular trace will be nested under it.
 Next.js traces more spans than are emitted by default.
 To see more spans, you must set `NEXT_OTEL_VERBOSE=1`.
 
-## Deployment
+## 部署
 
-### Using OpenTelemetry Collector
+### 使用 OpenTelemetry 收集器
 
 When you are deploying with OpenTelemetry Collector, you can use `@vercel/otel`.
 It will work both on Vercel and when self-hosted.
 
-#### Deploying on Vercel
+#### 在 Vercel 上部署
 
 We made sure that OpenTelemetry works out of the box on Vercel.
 
 Follow [Vercel documentation](https://vercel.com/docs/concepts/observability/otel-overview/quickstart) to connect your project to an observability provider.
 
-#### Self-hosting
+#### 自托管
 
 Deploying to other platforms is also straightforward. You will need to spin up your own OpenTelemetry Collector to receive and process the telemetry data from your Next.js app.
 
@@ -181,12 +181,12 @@ To do this, follow the [OpenTelemetry Collector Getting Started guide](https://o
 
 Once you have your collector up and running, you can deploy your Next.js app to your chosen platform following their respective deployment guides.
 
-### Custom Exporters
+### 自定义导出器
 
 We recommend using OpenTelemetry Collector.
 If that is not possible on your platform, you can use a custom OpenTelemetry exporter with [manual OpenTelemetry configuration](/docs/pages/building-your-application/optimizing/open-telemetry#manual-opentelemetry-configuration)
 
-## Custom Spans
+## 自定义跨度
 
 You can add a custom span with [OpenTelemetry APIs](https://opentelemetry.io/docs/instrumentation/js/instrumentation).
 
@@ -213,7 +213,7 @@ export async function fetchGithubStars() {
 The `register` function will execute before your code runs in a new environment.
 You can start creating new spans, and they should be correctly added to the exported trace.
 
-## Default Spans in Next.js
+## Next.js 中的默认跨度
 
 Next.js automatically instruments several spans for you to provide useful insights into your application's performance.
 

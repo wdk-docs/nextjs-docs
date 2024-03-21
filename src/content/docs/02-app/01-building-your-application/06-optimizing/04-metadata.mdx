@@ -9,18 +9,18 @@ related:
     - app/api-reference/functions/generate-viewport
 ---
 
-Next.js has a Metadata API that can be used to define your application metadata (e.g. `meta` and `link` tags inside your HTML `head` element) for improved SEO and web shareability.
+Next.js 有一个元数据 API，可用于定义应用程序元数据(例如 在 HTML`head`元素中`meta` 和 `link` 标签)，以提高搜索引擎优化和网络共享性。
 
-There are two ways you can add metadata to your application:
+有两种方法可以将元数据添加到应用程序中：
 
-- **Config-based Metadata**: Export a [static `metadata` object](/docs/app/api-reference/functions/generate-metadata#metadata-object) or a dynamic [`generateMetadata` function](/docs/app/api-reference/functions/generate-metadata#generatemetadata-function) in a `layout.js` or `page.js` file.
-- **File-based Metadata**: Add static or dynamically generated special files to route segments.
+- **基于配置的元数据**: 在`layout.js`或`page.js`文件中导出[静态 `metadata` 对象](/docs/app/api-reference/functions/generate-metadata#metadata-object) 或动态 [`generateMetadata` 函数](/docs/app/api-reference/functions/generate-metadata#generatemetadata-function) 。
+- **基于文件的元数据**: 将静态或动态生成的特殊文件添加到管段中。
 
-With both these options, Next.js will automatically generate the relevant `<head>` elements for your pages. You can also create dynamic OG images using the [`ImageResponse`](/docs/app/api-reference/functions/image-response) constructor.
+有了这两个选项，Next.js 将自动为您的页面生成相关的`<head>`元素。您也可以使用[`ImageResponse`](/docs/app/api-reference/functions/image-response) 构造函数创建动态 OG 图像。
 
 ## 静态元数据
 
-To define static metadata, export a [`Metadata` object](/docs/app/api-reference/functions/generate-metadata#metadata-object) from a `layout.js` or static `page.js` file.
+定义静态元数据, 从`layout.js`或静态`page.js`文件导出[`Metadata` 对象](/docs/app/api-reference/functions/generate-metadata#metadata-object)。
 
 ```tsx filename="layout.tsx | page.tsx" switcher
 import type { Metadata } from "next";
@@ -42,11 +42,11 @@ export const metadata = {
 export default function Page() {}
 ```
 
-For all the available options, see the [API Reference](/docs/app/api-reference/functions/generate-metadata).
+有关所有可用选项，请参阅[API 参考](/docs/app/api-reference/functions/generate-metadata).
 
 ## 动态元数据
 
-You can use `generateMetadata` function to `fetch` metadata that requires dynamic values.
+您可以使用`generateMetadata`函数来`fetch`需要动态值的元数据。
 
 ```tsx filename="app/products/[id]/page.tsx" switcher
 import type { Metadata, ResolvingMetadata } from "next";
@@ -99,57 +99,57 @@ export async function generateMetadata({ params, searchParams }, parent) {
 export default function Page({ params, searchParams }) {}
 ```
 
-For all the available params, see the [API Reference](/docs/app/api-reference/functions/generate-metadata).
+有关所有可用的参数，请参阅[API 参考](/docs/app/api-reference/functions/generate-metadata).
 
-> **Good to know**:
+> **很高兴知道**:
 >
-> - Both static and dynamic metadata through `generateMetadata` are **only supported in Server Components**.
-> - `fetch` requests are automatically [memoized](/docs/app/building-your-application/caching#request-memoization) for the same data across `generateMetadata`, `generateStaticParams`, Layouts, Pages, and Server Components. React [`cache` can be used](/docs/app/building-your-application/caching#request-memoization) if `fetch` is unavailable.
-> - Next.js will wait for data fetching inside `generateMetadata` to complete before streaming UI to the client. This guarantees the first part of a [streamed response](/docs/app/building-your-application/routing/loading-ui-and-streaming) includes `<head>` tags.
+> - **只有服务器组件**支持通过`generateMetadata`的静态和动态元数据。
+> - 在`generateMetadata`、`generateStaticParams`、Layouts、Pages 和服务器组件中，对相同数据的`fetch`请求会自动[存储](/docs/app/building-your-application/caching#request-memoization)。 如果`fetch`不可用，则 React[可以使用`cache`](/docs/app/building-your-application/caching#request-memoization)。
+> - Next.js 将等待`generateMetadata`内部的数据提取完成，然后再将 UI 流式传输到客户端。这保证了[流式响应](/docs/app/building-your-application/routing/loading-ui-and-streaming)的第一部分包括`<head>`标记。
 
 ## 基于文件的元数据
 
-These special files are available for metadata:
+这些特殊文件可用于元数据:
 
-- [favicon.ico, apple-icon.jpg, and icon.jpg](/docs/app/api-reference/file-conventions/metadata/app-icons)
-- [opengraph-image.jpg and twitter-image.jpg](/docs/app/api-reference/file-conventions/metadata/opengraph-image)
+- [favicon.ico, apple-icon.jpg, 和 icon.jpg](/docs/app/api-reference/file-conventions/metadata/app-icons)
+- [opengraph-image.jpg 和 twitter-image.jpg](/docs/app/api-reference/file-conventions/metadata/opengraph-image)
 - [robots.txt](/docs/app/api-reference/file-conventions/metadata/robots)
 - [sitemap.xml](/docs/app/api-reference/file-conventions/metadata/sitemap)
 
-You can use these for static metadata, or you can programmatically generate these files with code.
+您可以将这些用于静态元数据，也可以使用代码以编程方式生成这些文件。
 
-For implementation and examples, see the [Metadata Files](/docs/app/api-reference/file-conventions/metadata) API Reference and [Dynamic Image Generation](#dynamic-image-generation).
+有关实现和示例，请参阅[元数据文件](/docs/app/api-reference/file-conventions/metadata)API 参考和[动态图像生成](#dynamic-image-generation).
 
 ## 行为
 
-File-based metadata has the higher priority and will override any config-based metadata.
+基于文件的元数据具有更高的优先级，并将覆盖任何基于配置的元数据。
 
 ### 默认字段
 
-There are two default `meta` tags that are always added even if a route doesn't define metadata:
+即使路由没有定义元数据，也会始终添加两个默认的`meta`标记：
 
-- The [meta charset tag](https://developer.mozilla.org/docs/Web/HTML/Element/meta#attr-charset) sets the character encoding for the website.
-- The [meta viewport tag](https://developer.mozilla.org/docs/Web/HTML/Viewport_meta_tag) sets the viewport width and scale for the website to adjust for different devices.
+- [meta charset 标记](https://developer.mozilla.org/docs/Web/HTML/Element/meta#attr-charset)设置网站的字符编码。
+- [meta viewport 标记](https://developer.mozilla.org/docs/Web/HTML/Viewport_meta_tag)设置网站的视口宽度和比例，以针对不同的设备进行调整。
 
 ```html
 <meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1" />
 ```
 
-> **Good to know**: You can overwrite the default [`viewport`](/docs/app/api-reference/functions/generate-metadata#viewport) meta tag.
+> **很高兴知道**: 您可以覆盖默认的[`viewport`](/docs/app/api-reference/functions/generate-metadata#viewport)元标记。
 
-### 订购
+### 排序
 
-Metadata is evaluated in order, starting from the root segment down to the segment closest to the final `page.js` segment. For example:
+元数据是按顺序计算的，从根段开始，一直到最靠近最后一个`page.js`段的段。例如
 
-1. `app/layout.tsx` (Root Layout)
-2. `app/blog/layout.tsx` (Nested Blog Layout)
-3. `app/blog/[slug]/page.tsx` (Blog Page)
+1. `app/layout.tsx` (根布局)
+2. `app/blog/layout.tsx` (嵌套博客布局)
+3. `app/blog/[slug]/page.tsx` (博客页面)
 
 ### 合并
 
-Following the [evaluation order](#ordering), Metadata objects exported from multiple segments in the same route are **shallowly** merged together to form the final metadata output of a route. Duplicate keys are **replaced** based on their ordering.
+按照[评估顺序](#ordering)，从同一路由中的多个分段导出的元数据对象**浅**合并在一起，形成路由的最终元数据输出。重复的钥匙将根据其顺序进行**替换**。
 
-This means metadata with nested fields such as [`openGraph`](/docs/app/api-reference/functions/generate-metadata#opengraph) and [`robots`](/docs/app/api-reference/functions/generate-metadata#robots) that are defined in an earlier segment are **overwritten** by the last segment to define them.
+这意味着在前一个段中定义的带有嵌套字段（如[`openGraph`](/docs/app/api-reference/functions/generate-metadata#opengraph)和[`robots`](/docs/app/api-reference/functions/generate-metadata#robots)）的元数据会被最后一个段**覆盖**以定义它们。
 
 #### 覆盖字段
 
@@ -176,12 +176,12 @@ export const metadata = {
 // <meta property="og:title" content="Blog" />
 ```
 
-In the example above:
+在上面的例子中:
 
-- `title` from `app/layout.js` is **replaced** by `title` in `app/blog/page.js`.
-- All `openGraph` fields from `app/layout.js` are **replaced** in `app/blog/page.js` because `app/blog/page.js` sets `openGraph` metadata. Note the absence of `openGraph.description`.
+- `app/layout.js`中`title`**被**`app/blog/page.js`中`title`替换.
+- `app/layout.js`中的所有`openGraph`字段在`app/blog/page.js`中将被**替换**，因为`app/blog/page.js`设置了`openGraph`元数据。请注意缺少`openGraph.description`。
 
-If you'd like to share some nested fields between segments while overwriting others, you can pull them out into a separate variable:
+如果您想在段之间共享一些嵌套字段，同时覆盖其他字段，可以将它们拉到一个单独的变量中:
 
 ```jsx filename="app/shared-metadata.js"
 export const openGraphImage = { images: ["http://..."] };
@@ -209,7 +209,7 @@ export const metadata = {
 };
 ```
 
-In the example above, the OG image is shared between `app/layout.js` and `app/about/page.js` while the titles are different.
+在上面的例子中，OG 图像在`app/layout.js`和`app/about/page.js`之间共享，而标题不同。
 
 #### 继承字段
 
@@ -234,18 +234,18 @@ export const metadata = {
 // <meta property="og:description" content="Acme is a..." />
 ```
 
-**Notes**
+**笔记**
 
-- `title` from `app/layout.js` is **replaced** by `title` in `app/about/page.js`.
-- All `openGraph` fields from `app/layout.js` are **inherited** in `app/about/page.js` because `app/about/page.js` doesn't set `openGraph` metadata.
+- 来自`app/layout.js`里`title`被`app/about/page.js`中`title`**替换** .
+- `app/layout.js`中的所有`openGraph`字段都是在`app/about/page.js`内**继承的**，因为`app/about/page.js`未设置`openGraph`元数据。
 
 ## 动态图像生成
 
-The `ImageResponse` constructor allows you to generate dynamic images using JSX and CSS. This is useful for creating social media images such as Open Graph images, Twitter cards, and more.
+`ImageResponse`构造函数允许您使用 JSX 和 CSS 生成动态图像。这对于创建社交媒体图像非常有用，例如 Open Graph 图像、Twitter 卡等。
 
-`ImageResponse` uses the [Edge Runtime](/docs/app/building-your-application/rendering/edge-and-nodejs-runtimes#edge-runtime), and Next.js automatically adds the correct headers to cached images at the edge, helping improve performance and reducing recomputation.
+`ImageResponse`使用[Edge 运行时](/docs/app/building-your-application/rendering/edge-and-nodejs-runtimes#edge-runtime)，Next.js 会自动将正确的标头添加到边缘缓存的图像中，有助于提高性能并减少重新计算。
 
-To use it, you can import `ImageResponse` from `next/og`:
+要使用它，您可以从`next/og`导入`ImageResponse`：
 
 ```jsx filename="app/about/route.js"
 import { ImageResponse } from "next/og";
@@ -278,24 +278,24 @@ export async function GET() {
 }
 ```
 
-`ImageResponse` integrates well with other Next.js APIs, including [Route Handlers](/docs/app/building-your-application/routing/route-handlers) and file-based Metadata. For example, you can use `ImageResponse` in a `opengraph-image.tsx` file to generate Open Graph images at build time or dynamically at request time.
+`ImageResponse`与其他 Next.js API 集成良好，包括[路由处理程序](/docs/app/building-your-application/routing/route-handlers)和基于文件的元数据。 例如，您可以在`opengraph-image.tsx`文件中使用`ImageResponse`在构建时或在请求时动态生成 Open Graph 图像。
 
-`ImageResponse` supports common CSS properties including flexbox and absolute positioning, custom fonts, text wrapping, centering, and nested images. [See the full list of supported CSS properties](/docs/app/api-reference/functions/image-response).
+`ImageResponse`支持常见的 CSS 属性，包括 flexbox 和绝对定位、自定义字体、文本换行、居中和嵌套图像。 [查看支持的 CSS 属性的完整列表](/docs/app/api-reference/functions/image-response).
 
-> **Good to know**:
+> **很高兴知道**:
 >
-> - Examples are available in the [Vercel OG Playground](https://og-playground.vercel.app/).
-> - `ImageResponse` uses [@vercel/og](https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation), [Satori](https://github.com/vercel/satori), and Resvg to convert HTML and CSS into PNG.
-> - Only the Edge Runtime is supported. The default Node.js runtime will not work.
-> - Only flexbox and a subset of CSS properties are supported. Advanced layouts (e.g. `display: grid`) will not work.
-> - Maximum bundle size of `500KB`. The bundle size includes your JSX, CSS, fonts, images, and any other assets. If you exceed the limit, consider reducing the size of any assets or fetching at runtime.
-> - Only `ttf`, `otf`, and `woff` font formats are supported. To maximize the font parsing speed, `ttf` or `otf` are preferred over `woff`.
+> - 示例可在[Vercel OG 游乐场](https://og-playground.vercel.app/)中找到.
+> - `ImageResponse` 使用 [@vercel/og](https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation), [Satori](https://github.com/vercel/satori), 以及 Resvg ，用于将 HTML 和 CSS 转换为 PNG。
+> - 仅支持 Edge Runtime。默认的 Node.js 运行时将不起作用。
+> - 仅支持 flexbox 和 CSS 属性的子集。高级布局（例如`display: grid`）将不起作用。
+> - 最大捆绑包大小为`500KB`。捆绑包大小包括您的 JSX、CSS、字体、图像和任何其他资产。如果超出限制，请考虑减少任何资产的大小或在运行时提取。
+> - 仅支持`ttf`、`otf`和`woff`字体格式。为了最大限度地提高字体解析速度，`ttf`或`otf`优先于`woff`。
 
 ## JSON-LD
 
-[JSON-LD](https://json-ld.org/) is a format for structured data that can be used by search engines to understand your content. For example, you can use it to describe a person, an event, an organization, a movie, a book, a recipe, and many other types of entities.
+[JSON-LD](https://json-ld.org/)是一种结构化数据格式，搜索引擎可以使用它来理解您的内容。例如，您可以使用它来描述一个人、一个事件、一个组织、一部电影、一本书、一个食谱和许多其他类型的实体。
 
-Our current recommendation for JSON-LD is to render structured data as a `<script>` tag in your `layout.js` or `page.js` components. For example:
+我们目前对 JSON-LD 的建议是在`layout.js`或`page.js`组件中将结构化数据呈现为`<script>`标记。例如
 
 ```tsx filename="app/products/[id]/page.tsx" switcher
 export default async function Page({ params }) {
@@ -341,9 +341,9 @@ export default async function Page({ params }) {
 }
 ```
 
-You can validate and test your structured data with the [Rich Results Test](https://search.google.com/test/rich-results) for Google or the generic [Schema Markup Validator](https://validator.schema.org/).
+您可以使用 Google 的[丰富结果测试](https://search.google.com/test/rich-results)或通用[架构标记验证器](https://validator.schema.org/)验证和测试结构化数据.
 
-You can type your JSON-LD with TypeScript using community packages like [`schema-dts`](https://www.npmjs.com/package/schema-dts):
+您可以使用社区包（如[`schema-dts`](https://www.npmjs.com/package/schema-dts)）使用 TypeScript 键入 JSON-LD:
 
 ```tsx
 import { Product, WithContext } from "schema-dts";

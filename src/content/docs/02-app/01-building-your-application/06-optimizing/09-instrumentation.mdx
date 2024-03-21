@@ -5,22 +5,22 @@ description: 了解如何在Next.js应用程序中使用插入在服务器启动
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-If you export a function named `register` from a `instrumentation.ts` (or `.js`) file in the **root directory** of your project (or inside the `src` folder if using one), we will call that function whenever a new Next.js server instance is bootstrapped.
+如果您从项目**根目录**中的`instrumentation.ts`（或`.js`）文件导出名为`register`的函数（如果使用的话，则在`src`文件夹中），则每当启动新的 Next.js 服务器实例时，我们都会调用该函数。
 
 <AppOnly>
 
-> **Good to know**
+> **很高兴知道**
 >
-> - This feature is **experimental**. To use it, you must explicitly opt in by defining `experimental.instrumentationHook = true;` in your `next.config.js`.
-> - The `instrumentation` file should be in the root of your project and not inside the `app` or `pages` directory. If you're using the `src` folder, then place the file inside `src` alongside `pages` and `app`.
-> - If you use the [`pageExtensions` config option](/docs/app/api-reference/next-config-js/pageExtensions) to add a suffix, you will also need to update the `instrumentation` filename to match.
-> - We have created a basic [with-opentelemetry](https://github.com/vercel/next.js/tree/canary/examples/with-opentelemetry) example that you can use.
+> - 此功能是**实验性的**。要使用它，您必须通过定义`next.config.js`中`experimental.instrumentationHook = true;` .
+> - `instrumentation`文件应该在项目的根目录中，而不是在`app`或`pages`目录中。如果您使用的是`src`文件夹，请将文件放在`src`中，与`pages`和`app`并列。
+> - 如果使用[`pageExtensions`配置选项](/docs/app/api-reference/next-config-js/pageExtensions)添加后缀，还需要更新`instrumentation`文件名以匹配。
+> - 我们已经创建了一个您可以使用的基本[with-opentelemetry](https://github.com/vercel/next.js/tree/canary/examples/with-opentelemetry)示例。
 
 </AppOnly>
 
 <PagesOnly>
 
-> **Good to know**
+> **很高兴知道**
 >
 > - This feature is **experimental**. To use it, you must explicitly opt in by defining `experimental.instrumentationHook = true;` in your `next.config.js`.
 > - The `instrumentation` file should be in the root of your project and not inside the `app` or `pages` directory. If you're using the `src` folder, then place the file inside `src` alongside `pages` and `app`.
@@ -29,11 +29,11 @@ If you export a function named `register` from a `instrumentation.ts` (or `.js`)
 
 </PagesOnly>
 
-When your `register` function is deployed, it will be called on each cold boot (but exactly once in each environment).
+当部署`register`函数时，它将在每次冷启动时被调用（但在每个环境中只调用一次）。
 
-Sometimes, it may be useful to import a file in your code because of the side effects it will cause. For example, you might import a file that defines a set of global variables, but never explicitly use the imported file in your code. You would still have access to the global variables the package has declared.
+有时，在代码中导入文件可能会很有用，因为它会产生副作用。例如，您可以导入定义一组全局变量的文件，但永远不要在代码中显式使用导入的文件。您仍然可以访问包声明的全局变量。
 
-You can import files with side effects in `instrumentation.ts`, which you might want to use in your `register` function as demonstrated in the following example:
+您可以在`instrumentation.ts`中导入具有副作用的文件，您可能希望在`register`函数中使用该文件，如以下示例所示：
 
 ```ts filename="your-project/instrumentation.ts" switcher
 import { init } from "package-init";
@@ -51,7 +51,7 @@ export function register() {
 }
 ```
 
-However, we recommend importing files with side effects using `import` from within your `register` function instead. The following example demonstrates a basic usage of `import` in a `register` function:
+但是，我们建议从`register`函数中使用`import`导入有副作用的文件。以下示例演示了`register`函数中`import`的基本用法：
 
 ```ts filename="your-project/instrumentation.ts" switcher
 export async function register() {
@@ -65,9 +65,9 @@ export async function register() {
 }
 ```
 
-By doing this, you can colocate all of your side effects in one place in your code, and avoid any unintended consequences from importing files.
+通过这样做，您可以将所有副作用集中在代码中的一个位置，并避免导入文件带来的任何意外后果。
 
-We call `register` in all environments, so it's necessary to conditionally import any code that doesn't support both `edge` and `nodejs`. You can use the environment variable `NEXT_RUNTIME` to get the current environment. Importing an environment-specific code would look like this:
+我们在所有环境中都调用`register`，因此有必要有条件地导入任何不同时支持`edge`和`nodejs`的代码。您可以使用环境变量`NEXT_RUNTIME`来获取当前环境。导入特定于环境的代码如下所示：
 
 ```ts filename="your-project/instrumentation.ts" switcher
 export async function register() {

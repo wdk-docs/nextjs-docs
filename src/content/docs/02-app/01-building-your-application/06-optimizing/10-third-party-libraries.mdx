@@ -5,29 +5,25 @@ description: 使用`@next/sthird-partyers`包优化应用程序中第三方库�
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-**`@next/third-parties`** is a library that provides a collection of components and utilities that
-improve the performance and developer experience of loading popular third-party libraries in your
-Next.js application.
+**`@next/third-parties`**是一个库，它提供了一组组件和实用程序，可以提高在 Next.js 应用程序中加载流行的第三方库的性能和开发人员体验。
 
-> **Good to know**: `@next/third-parties` is a new **experimental** library that is still under
-> active development. We're currently working on adding more third-party integrations.
+> **很高兴知道**: `@next/third-parties`是一个新的**实验性**库，仍在积极开发中。我们目前正在添加更多的第三方集成。
 
-All third-party integrations provided by `@next/third-parties` have been optimized for performance
-and ease of use.
+`@next/third-parties`提供的所有第三方集成都经过了性能和易用性优化。
 
-## Getting Started
+## 入门
 
-To get started, you must install the `@next/third-parties` library:
+若要开始，您必须安装`@next/third-parties`库：
 
 ```bash filename="Terminal"
 npm install @next/third-parties
 ```
 
-## Google Third-Parties
+## 谷歌第三方
 
 All supported third-party libraries from Google can be imported from `@next/third-parties/google`.
 
-### Google Tag Manager
+### 谷歌标签管理器
 
 The `GoogleTagManager` component can be used to instantiate a [Google Tag
 Manager](https://developers.google.com/tag-platform/tag-manager) container to your
@@ -110,7 +106,7 @@ export default function Page() {
 
 </PagesOnly>
 
-#### Sending Events
+#### 发送事件
 
 The `sendGTMEvent` function can be used to track user interactions on your page by sending events
 using the `dataLayer` object. For this function to work, the `<GoogleTagManager />` component must be
@@ -154,7 +150,7 @@ Refer to the Tag Manager [developer
 documentation](https://developers.google.com/tag-platform/tag-manager/datalayer) to learn about the
 different variables and events that can be passed into the function.
 
-#### Options
+#### 选项
 
 Options to pass to the Google Tag Manager. For a full list of options, read the [Google Tag Manager
 docs](https://developers.google.com/tag-platform/tag-manager/datalayer).
@@ -167,7 +163,7 @@ docs](https://developers.google.com/tag-platform/tag-manager/datalayer).
 | `auth`          | Optional | Value of authentication parameter (`gtm_auth`) for environment snippets.        |
 | `preview`       | Optional | Value of preview parameter (`gtm_preview`) for environment snippets.            |
 
-### Google Analytics
+### 谷歌分析
 
 The `GoogleAnalytics` component can be used to include [Google Analytics
 4](https://developers.google.com/analytics/devguides/collection/ga4) to your page via the Google tag
@@ -256,7 +252,7 @@ export default function Page() {
 
 </PagesOnly>
 
-#### Sending Events
+#### 发送事件
 
 The `sendGAEvent` function can be used to measure user interactions on your page by sending events
 using the `dataLayer` object. For this function to work, the `<GoogleAnalytics />` component must be
@@ -300,7 +296,7 @@ Refer to the Google Analytics [developer
 documentation](https://developers.google.com/analytics/devguides/collection/ga4/event-parameters) to learn
 more about event parameters.
 
-#### Options
+#### 选项
 
 Options to pass to the `<GoogleAnalytics>` component.
 
@@ -309,7 +305,7 @@ Options to pass to the `<GoogleAnalytics>` component.
 | `gaId`          | Required | Your Google tag id.                              |
 | `dataLayerName` | Optional | Name of the data layer. Defaults to `dataLayer`. |
 
-### Google Maps Embed
+### 谷歌地图嵌入
 
 The `GoogleMapsEmbed` component can be used to add a [Google Maps
 Embed](https://developers.google.com/maps/documentation/embed/embedding-map) to your page. By
@@ -339,7 +335,7 @@ export default function Page() {
 
 </PagesOnly>
 
-#### Options
+#### 选项
 
 Options to pass to the Google Maps Embed. For a full list of options, read the [Google Map Embed
 docs](https://developers.google.com/maps/documentation/embed/embedding-map).
@@ -360,7 +356,7 @@ docs](https://developers.google.com/maps/documentation/embed/embedding-map).
 | `language`        | Optional | Defines the language to use for UI elements and for the display of labels on map tiles.             |
 | `region`          | Optional | Defines the appropriate borders and labels to display, based on geo-political sensitivities.        |
 
-### YouTube Embed
+### YouTube 嵌入
 
 The `YouTubeEmbed` component can be used to load and display a YouTube embed. This component loads
 faster by using [`lite-youtube-embed`](https://github.com/paulirish/lite-youtube-embed) under the
@@ -390,7 +386,7 @@ export default function Page() {
 
 </PagesOnly>
 
-#### Options
+#### 选项
 
 | Name        | Type     | Description                                                                                                                                                                                                  |
 | ----------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
