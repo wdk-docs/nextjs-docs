@@ -177,7 +177,7 @@ const menus: any = {
               href: "/docs/app/building-your-application/optimizing/open-telemetry",
             },
             {
-              label: "仪表",
+              label: "Instrumentation",
               href: "/docs/app/building-your-application/optimizing/instrumentation",
             },
             {
@@ -699,24 +699,7 @@ const menus: any = {
       ],
     },
   ],
-  blog: [
-    {
-      label: "DevDay 上发布的新模型和开发人员产品",
-      href: "/blog/new-models-and-developer-products-announced-at-devday",
-    },
-    {
-      label: "国内各大模型盘点汇总",
-      href: "/blog/domestic-major-models-inventory-summary",
-    },
-    {
-      label: "和AI聊天",
-      href: "/blog/chat-with-ai",
-    },
-    {
-      label: "和llama2聊天",
-      href: "/blog/llama2-so-bad",
-    },
-  ],
+  blog: [],
   term: [
     {
       label: "llama",
