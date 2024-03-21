@@ -292,5 +292,7 @@
   "architecture/turbopack": "04-architecture/turbopack.mdx",
   "community/contribution-guide": "05-community/01-contribution-guide.mdx",
   "community": "05-community/index.mdx",
+  "errors": "06-errors/index.mdx",
+  "errors/missing-suspense-with-csr-bailout": "06-errors/missing-suspense-with-csr-bailout.mdx",
   "index": "index.mdx"
 }

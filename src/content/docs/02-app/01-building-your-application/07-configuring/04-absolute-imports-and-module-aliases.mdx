@@ -6,9 +6,9 @@ description: 配置允许您重新映射某些导入路径的模块路径别名�
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
 <details>
-  <summary>Examples</summary>
+  <summary>示例</summary>
 
-- [Absolute Imports and Aliases](https://github.com/vercel/next.js/tree/canary/examples/with-absolute-imports)
+- [绝对导入和别名](https://github.com/vercel/next.js/tree/canary/examples/with-absolute-imports)
 
 </details>
 
@@ -24,13 +24,13 @@ import { Button } from "../../../components/button";
 import { Button } from "@/components/button";
 ```
 
-> **Good to know**: `create-next-app` will prompt to configure these options for you.
+> **很高兴知道**: `create-next-app` 将提示为您配置这些选项。
 
 ## 绝对进口
 
-The `baseUrl` configuration option allows you to import directly from the root of the project.
+`baseUrl`配置选项允许您直接从项目的根目录导入。
 
-An example of this configuration:
+此配置的示例：
 
 ```json filename="tsconfig.json or jsconfig.json"
 {
@@ -80,9 +80,9 @@ export default function HomePage() {
 
 ## 模块别名
 
-In addition to configuring the `baseUrl` path, you can use the `"paths"` option to "alias" module paths.
+除了配置`baseUrl`路径外，还可以使用`"paths"`选项来"alias"模块路径。
 
-For example, the following configuration maps `@/components/*` to `components/*`:
+例如，以下配置将`@/components/*`映射到`components/*`：
 
 ```json filename="tsconfig.json or jsconfig.json"
 {
@@ -133,7 +133,7 @@ export default function HomePage() {
 }
 ```
 
-Each of the `"paths"` are relative to the `baseUrl` location. For example:
+每个`"paths"`都相对于`baseUrl`位置。例如
 
 ```json
 // tsconfig.json or jsconfig.json

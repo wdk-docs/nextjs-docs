@@ -103,7 +103,7 @@ export default function Page() {
 
 ## 可选属性
 
-`<Image/>`组件接受所需属性之外的许多其他属性。本节介绍图像组件最常用的特性。在[高级道具]（#Advanced Props）部分中查找更多很少使用的属性的详细信息。
+`<Image/>`组件接受所需属性之外的许多其他属性。本节介绍图像组件最常用的特性。在[高级道具](#Advanced Props)部分中查找更多很少使用的属性的详细信息。
 
 ### `loader`
 
@@ -137,7 +137,7 @@ export default function Page() {
 
 </AppOnly>
 
-或者，您可以使用`next.config.js`中的[loaderFile]（#loaderFile）配置来配置应用程序中`next/image`的每个实例，而无需传递道具。
+或者，您可以使用`next.config.js`中的[loaderFile](#loaderFile)配置来配置应用程序中`next/image`的每个实例，而无需传递道具。
 
 ### `fill`
 
@@ -145,7 +145,7 @@ export default function Page() {
 fill={true} // {true} | {false}
 ```
 
-导致图像填充父元素的布尔值，当[`width`]（#width）和[`height`]（#height）未知时，此值非常有用。
+导致图像填充父元素的布尔值，当[`width`](#width)和[`height`](#height)未知时，此值非常有用。
 
 父元素必须赋值 `position: "relative"`, `position: "fixed"`, 或 `position: "absolute"` 样式.
 
@@ -173,9 +173,9 @@ fill={true} // {true} | {false}
 - 首先，浏览器使用`sizes`的值来从`next/image`的自动生成的`srcset`中确定要下载的图像的大小。
   当浏览器选择时，它还不知道页面上图像的大小，因此它会选择与视口大小相同或大于视口的图像。
   `sizes`属性允许您告诉浏览器图像实际上会小于全屏。
-  如果没有在具有`fill`属性的图像中指定`sizes`值，则使用默认值`100vw`（全屏宽度）。
+  如果没有在具有`fill`属性的图像中指定`sizes`值，则使用默认值`100vw`(全屏宽度)。
 - 其次，`sizes`属性更改自动生成的`srcset`值的行为。
-  如果不存在`sizes`值，则生成适用于固定大小图像（1x/2x/etc）的小`srcset`。
+  如果不存在`sizes`值，则生成适用于固定大小图像(1x/2x/etc)的小`srcset`。
   如果定义了`sizes`，则生成适用于响应图像的大`srcset` (640w/750w/etc).
   如果`sizes`属性包括表示视口宽度百分比的`50vw`等大小，则`srcset`将被修剪为不包括任何太小而不必要的值。
 
@@ -218,7 +218,7 @@ priority={false} // {false} | {true}
 如果为 true，则图像将被视为高优先级，并且[预加载](https://web.dev/preload-responsive-images/).
 对于使用`priority`的图像，将自动禁用延迟加载。
 
-您应该在检测到的任何图像上使用`priority`属性作为[Largets Contentful Paint（LCP）](https://nextjs.org/learn/seo/web-performance/lcp)元素。具有多个优先级图像可能是合适的，因为不同的图像可能是用于不同视口大小的 LCP 元素。
+您应该在检测到的任何图像上使用`priority`属性作为[Largets Contentful Paint(LCP)](https://nextjs.org/learn/seo/web-performance/lcp)元素。具有多个优先级图像可能是合适的，因为不同的图像可能是用于不同视口大小的 LCP 元素。
 
 仅当图像在折叠上方可见时才应使用。默认为`false`。
 

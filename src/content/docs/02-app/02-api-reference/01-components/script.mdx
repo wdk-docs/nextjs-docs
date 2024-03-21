@@ -71,7 +71,7 @@ export default function Dashboard() {
 
 用该策略表示的脚本在任何第一方代码之前都会被预加载和提取，但它们的执行不会阻止页面水合的发生。
 
-`beforeInteractive`脚本必须放置在根布局(`app/layout.tsx`)中，并且设计用于加载整个网站所需的脚本（即，当应用程序中的任何页面都已在服务器端加载时，脚本将加载）。
+`beforeInteractive`脚本必须放置在根布局(`app/layout.tsx`)中，并且设计用于加载整个网站所需的脚本(即，当应用程序中的任何页面都已在服务器端加载时，脚本将加载)。
 
 **此策略应仅用于在页面的任何部分变为交互式之前需要提取的关键脚本。**
 
@@ -136,7 +136,7 @@ export default function Document() {
 
 ### `afterInteractive`
 
-使用`afterInteractive`策略的脚本被注入 HTML 客户端，并将在页面上发生部分（或全部）水合作用后加载。
+使用`afterInteractive`策略的脚本被注入 HTML 客户端，并将在页面上发生部分(或全部)水合作用后加载。
 **这是 Script 组件的默认策略**，应该用于任何需要尽快加载的脚本，但不能在任何第一方 Next.js 代码之前加载。
 
 `afterInteractive` scripts can be placed inside of any page or layout and will only load and execute when that page (or group of pages) is opened in the browser.

@@ -247,7 +247,7 @@ const menus: any = {
           ],
         },
         {
-          label: "正在部署",
+          label: "部署",
           href: "/docs/app/building-your-application/deploying",
           subMenus: [
             {
@@ -257,7 +257,7 @@ const menus: any = {
           ],
         },
         {
-          label: "正在升级",
+          label: "升级",
           href: "/docs/app/building-your-application/upgrading",
           subMenus: [
             {
@@ -686,6 +686,15 @@ const menus: any = {
         {
           label: "贡献指南",
           href: "/docs/community/contribution-guide",
+        },
+      ],
+    },
+    {
+      label: "常见错误",
+      subMenus: [
+        {
+          label: "缺少useSearchParams的挂起边界",
+          href: "/docs/errors/missing-suspense-with-csr-bailout",
         },
       ],
     },

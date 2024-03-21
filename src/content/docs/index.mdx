@@ -1,57 +1,57 @@
 ---
-title: Introduction
-description: Welcome to the Next.js Documentation.
+title: 介绍
+description: 欢迎使用Next.js文档。
 ---
 
-Welcome to the Next.js documentation!
+欢迎使用 Next.js 文档！
 
-## What is Next.js?
+## 什么是 Next.js？
 
-Next.js is a React framework for building full-stack web applications. You use React Components to build user interfaces, and Next.js for additional features and optimizations.
+Next.js 是一个 React 框架，用于构建全栈 web 应用程序。您使用 React Components 来构建用户界面，使用 Next.js 来实现其他功能和优化。
 
-Under the hood, Next.js also abstracts and automatically configures tooling needed for React, like bundling, compiling, and more. This allows you to focus on building your application instead of spending time with configuration.
+在后台，Next.js 还抽象并自动配置 React 所需的工具，如绑定、编译等。这使您能够专注于构建应用程序，而不是花时间进行配置。
 
-Whether you're an individual developer or part of a larger team, Next.js can help you build interactive, dynamic, and fast React applications.
+无论您是个人开发人员还是更大团队的一员，Next.js 都可以帮助您构建交互式、动态和快速的 React 应用程序。
 
-## Main Features
+## 主要特点
 
-Some of the main Next.js features include:
+Next.js 的一些主要功能包括：
 
-| Feature                                                                  | Description                                                                                                                                                                                      |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Routing](/docs/app/building-your-application/routing)                   | A file-system based router built on top of Server Components that supports layouts, nested routing, loading states, error handling, and more.                                                    |
-| [Rendering](/docs/app/building-your-application/rendering)               | Client-side and Server-side Rendering with Client and Server Components. Further optimized with Static and Dynamic Rendering on the server with Next.js. Streaming on Edge and Node.js runtimes. |
-| [Data Fetching](/docs/app/building-your-application/data-fetching)       | Simplified data fetching with async/await in Server Components, and an extended `fetch` API for request memoization, data caching and revalidation.                                              |
-| [Styling](/docs/app/building-your-application/styling)                   | Support for your preferred styling methods, including CSS Modules, Tailwind CSS, and CSS-in-JS                                                                                                   |
-| [Optimizations](/docs/app/building-your-application/optimizing)          | Image, Fonts, and Script Optimizations to improve your application's Core Web Vitals and User Experience.                                                                                        |
-| [TypeScript](/docs/app/building-your-application/configuring/typescript) | Improved support for TypeScript, with better type checking and more efficient compilation, as well as custom TypeScript Plugin and type checker.                                                 |
+| 特色                                                                     | 描述                                                                                                                                        |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| [路由](/docs/app/building-your-application/routing)                      | 基于文件系统的路由器构建在服务器组件之上，支持布局、嵌套路由、加载状态、错误处理等。                                                        |
+| [渲染](/docs/app/building-your-application/rendering)                    | 使用客户端和服务器组件进行客户端和服务器端渲染。使用 Next.js 在服务器上使用静态和动态渲染进行进一步优化。Edge 和 Node.js 运行时上的流媒体。 |
+| [数据获取](/docs/app/building-your-application/data-fetching)            | 简化了服务器组件中的异步/等待数据获取，以及用于请求存储、数据缓存和重新验证的扩展`fetch`API。                                               |
+| [造型](/docs/app/building-your-application/styling)                      | 支持您喜欢的样式方法，包括 CSS 模块、Tailwind CSS 和 JS 中的 CSS                                                                            |
+| [优化](/docs/app/building-your-application/optimizing)                   | 图像、字体和脚本优化，以提高应用程序的核心 Web 活力和用户体验。                                                                             |
+| [TypeScript](/docs/app/building-your-application/configuring/typescript) | 改进了对 TypeScript 的支持，提供了更好的类型检查和更高效的编译，以及自定义 TypeScript 插件和类型检查器。                                    |
 
-## How to Use These Docs
+## 如何使用这些文档
 
-On the left side of the screen, you'll find the docs navbar. The pages of the docs are organized sequentially, from basic to advanced, so you can follow them step-by-step when building your application. However, you can read them in any order or skip to the pages that apply to your use case.
+在屏幕的左侧，你会发现文档导航栏。文档的页面是按顺序组织的，从基本页面到高级页面，因此在构建应用程序时可以逐步遵循这些页面。但是，您可以按任何顺序阅读它们，也可以跳到适用于您的用例的页面。
 
-On the right side of the screen, you'll see a table of contents that makes it easier to navigate between sections of a page. If you need to quickly find a page, you can use the search bar at the top, or the search shortcut (`Ctrl+K` or `Cmd+K`).
+在屏幕的右侧，您将看到一个目录，它使您更容易在页面的各个部分之间导航。如果需要快速查找页面，可以使用顶部的搜索栏或搜索快捷方式 (`Ctrl+K` or `Cmd+K`).
 
-To get started, checkout the [Installation](/docs/getting-started/installation) guide.
+要开始，请查看[安装](/docs/getting-started/installation)指南。
 
-## App Router vs Pages Router
+## 应用程序路由器与页面路由器
 
-Next.js has two different routers: the App Router and the Pages Router. The App Router is a newer router that allows you to use React's latest features, such as Server Components and Streaming. The Pages Router is the original Next.js router, which allowed you to build server-rendered React applications and continues to be supported for older Next.js applications.
+Next.js 有两个不同的路由器：应用程序路由器和页面路由器。App Router 是一款更新的路由器，允许您使用 React 的最新功能，如服务器组件和流媒体。Pages 路由器是最初的 Next.js 路由器，它允许您构建服务器渲染的 React 应用程序，并继续支持旧的 Next.jsp 应用程序。
 
-At the top of the sidebar, you'll notice a dropdown menu that allows you to switch between the **App Router** and the **Pages Router** features. Since there are features that are unique to each directory, it's important to keep track of which tab is selected.
+在侧边栏的顶部，您会注意到一个下拉菜单，允许您在**应用程序路由器**和**页面路由器**功能之间切换。由于每个目录都有独特的功能，因此跟踪所选选项卡非常重要。
 
-The breadcrumbs at the top of the page will also indicate whether you're viewing App Router docs or Pages Router docs.
+页面顶部的面包屑还将指示您是在查看 App Router 文档还是 Pages Router 文档。
 
-## Pre-Requisite Knowledge
+## 必备知识
 
-Although our docs are designed to be beginner-friendly, we need to establish a baseline so that the docs can stay focused on Next.js functionality. We'll make sure to provide links to relevant documentation whenever we introduce a new concept.
+尽管我们的文档是为初学者设计的，但我们需要建立一个基线，以便文档能够专注于 Next.js 的功能。每当我们引入一个新概念时，我们都会确保提供相关文档的链接。
 
-To get the most out of our docs, it's recommended that you have a basic understanding of HTML, CSS, and React. If you need to brush up on your React skills, check out our [React Foundations Course](/learn/react-foundations), which will introduce you to the fundamentals. Then, learn more about Next.js by [building a dashboard application](/learn/dashboard-app).
+为了充分利用我们的文档，建议您对 HTML、CSS 和 React 有基本的了解。如果你需要复习你的反应技能，请查看我们的[反应基础课程](/learn/react-foundations)，它将向你介绍基本知识。然后，通过[构建仪表板应用程序](/learn/dashboard-app)了解更多关于 Next.js 的信息.
 
-## Accessibility
+## 可访问性
 
-For optimal accessibility when using a screen reader while reading the docs, we recommend using Firefox and NVDA, or Safari and VoiceOver.
+为了在阅读文档时使用屏幕阅读器实现最佳访问性，我们建议使用 Firefox 和 NVDA，或 Safari 和 VoiceOver。
 
-## Join our Community
+## 加入我们的社区
 
-If you have questions about anything related to Next.js, you're always welcome to ask our community on [GitHub Discussions](https://github.com/vercel/next.js/discussions), [Discord](https://discord.com/invite/bUG2bvbtHy), [Twitter](https://twitter.com/nextjs), and [Reddit](https://www.reddit.com/r/nextjs).
+如果您对 Next.js 有任何问题，欢迎您在[GitHub 讨论](https://github.com/vercel/next.js/discussions), [Discord](https://discord.com/invite/bUG2bvbtHy), [Twitter](https://twitter.com/nextjs), 和 [Reddit](https://www.reddit.com/r/nextjs)上向我们的社区提问.

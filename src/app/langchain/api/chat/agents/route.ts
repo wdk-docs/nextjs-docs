@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
       );
     } else {
       /**
-       * 代理执行器不支持流式响应（现在！），所以每次流式返回完整的响应一个字符，并延迟以模拟它。
+       * 代理执行器不支持流式响应(现在！)，所以每次流式返回完整的响应一个字符，并延迟以模拟它。
        */
       const textEncoder = new TextEncoder();
       const fakeStream = new ReadableStream({

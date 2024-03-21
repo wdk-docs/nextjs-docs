@@ -24,10 +24,10 @@ Next.js 图像组件扩展了 HTML`<img>`元素，并提供了自动图像优化
 
 - **尺寸优化:** 使用 WebP 和 AVIF 等现代图像格式，自动为每个设备提供正确大小的图像。
 - **视觉稳定性:** 加载图像时自动阻止[布局偏移](/learn/seo/web-performance/cls)。
-- **更快的页面加载:** 只有当图像使用本地浏览器延迟加载（带有可选的模糊占位符）进入视口时，才会加载图像。
+- **更快的页面加载:** 只有当图像使用本地浏览器延迟加载(带有可选的模糊占位符)进入视口时，才会加载图像。
 - **资产灵活性:** 按需调整图像大小，即使是存储在远程服务器上的图像
 
-> **🎥 看:** 了解有关如何使用`next/image`的详细信息 →[YouTube（9 分钟）](https://youtu.be/iu_qq_c_lka).
+> **🎥 看:** 了解有关如何使用`next/image`的详细信息 →[YouTube(9 分钟)](https://youtu.be/iu_qq_c_lka).
 
 ## 用法
 
@@ -35,7 +35,7 @@ Next.js 图像组件扩展了 HTML`<img>`元素，并提供了自动图像优化
 import Image from "next/image";
 ```
 
-然后，您可以为图像定义`src`（本地或远程）。
+然后，您可以为图像定义`src`(本地或远程)。
 
 ### 本地图像
 
@@ -146,7 +146,7 @@ Next.js 应用程序的默认加载程序使用内置的 Image Optimization API�
 
 ## 优先事项
 
-您应该将`priority`属性添加到将成为[最大内容绘制（LCP）元素](https://web.dev/lcp/#what-elements-are-considered)的图像中。这样做可以让 Next.js 专门为加载的图像设置优先级（例如，通过预加载标签或优先级提示），从而显著提高 LCP。
+您应该将`priority`属性添加到将成为[最大内容绘制(LCP)元素](https://web.dev/lcp/#what-elements-are-considered)的图像中。这样做可以让 Next.js 专门为加载的图像设置优先级(例如，通过预加载标签或优先级提示)，从而显著提高 LCP。
 
 LCP 元素通常是页面视口中可见的最大图像或文本块。当您运行`next-dev`时，如果 LCP 元素是不带`priority`属性的`<Image>`，您将看到控制台警告。
 
@@ -214,7 +214,7 @@ export default function Page() {
 >
 > **修改 API 调用**
 >
-> 如果您的应用程序使用 API 调用（例如 CMS）检索图像 URL，则您可以修改 API 调用以返回图像维度和 URL。
+> 如果您的应用程序使用 API 调用(例如 CMS)检索图像 URL，则您可以修改 API 调用以返回图像维度和 URL。
 
 如果建议的方法都不适用于调整图像大小, `next/image`组件被设计为与标准的`<img>`元素一起在页面上工作良好。
 

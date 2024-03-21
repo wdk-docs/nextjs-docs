@@ -2,19 +2,19 @@
 title: cookies
 description: Cookie函数的API参考。
 related:
-  title: Next Steps
-  description: For more information on what to do next, we recommend the following sections
+  title: 接下来的步骤
+  description: 有关下一步操作的更多信息，我们建议使用以下部分
   links:
     - app/building-your-application/data-fetching/server-actions-and-mutations
 ---
 
-The `cookies` function allows you to read the HTTP incoming request cookies from a [Server Component](/docs/app/building-your-application/rendering/server-components) or write outgoing request cookies in a [Server Action](/docs/app/building-your-application/data-fetching/server-actions-and-mutations) or [Route Handler](/docs/app/building-your-application/routing/route-handlers).
+`cookie`功能允许您从[服务器组件](/docs/app/building-your-application/rendering/server-components)读取 HTTP 传入请求 cookie，或在[服务器操作](/docs/app/building-your-application/data-fetching/server-actions-and-mutations)或[路由处理程序](/docs/app/building-your-application/routing/route-handlers)中写入传出请求 cookie。
 
-> **Good to know**: `cookies()` is a **[Dynamic Function](/docs/app/building-your-application/rendering/server-components#server-rendering-strategies#dynamic-functions)** whose returned values cannot be known ahead of time. Using it in a layout or page will opt a route into **[dynamic rendering](/docs/app/building-your-application/rendering/server-components#dynamic-rendering)** at request time.
+> **很高兴知道**: `cookies()` 是 **[动态函数](/docs/app/building-your-application/rendering/server-components#server-rendering-strategies#dynamic-functions)** 其返回值无法提前获知. 在布局或页面中使用它将在请求时选择进入 **[动态渲染](/docs/app/building-your-application/rendering/server-components#dynamic-rendering)** 的路径。
 
 ## `cookies().get(name)`
 
-A method that takes a cookie name and returns an object with name and value. If a cookie with `name` isn't found, it returns `undefined`. If multiple cookies match, it will only return the first match.
+一个方法，它采用 cookie 名称并返回一个具有名称和值的对象。如果找不到带有`name`的 cookie，则返回`undefined`。如果多个 cookie 匹配，则只返回第一个匹配。
 
 ```jsx filename="app/page.js"
 import { cookies } from "next/headers";
@@ -28,7 +28,7 @@ export default function Page() {
 
 ## `cookies().getAll()`
 
-A method that is similar to `get`, but returns a list of all the cookies with a matching `name`. If `name` is unspecified, it returns all the available cookies.
+一种类似于`get`的方法，但返回具有匹配`name`的所有 cookie 的列表。如果未指定`name`，则返回所有可用的 cookie。
 
 ```jsx filename="app/page.js"
 import { cookies } from "next/headers";
@@ -46,7 +46,7 @@ export default function Page() {
 
 ## `cookies().has(name)`
 
-A method that takes a cookie name and returns a `boolean` based on if the cookie exists (`true`) or not (`false`).
+一种方法，它取一个 cookie 名称，并根据 cookie 是否存在(`true`)(`false`)返回一个`boolean`。
 
 ```jsx filename="app/page.js"
 import { cookies } from "next/headers";
@@ -60,9 +60,9 @@ export default function Page() {
 
 ## `cookies().set(name, value, options)`
 
-A method that takes a cookie name, value, and options and sets the outgoing request cookie.
+一种方法，它采用 cookie 名称、值和选项，并设置传出请求 cookie。
 
-> **Good to know**: HTTP does not allow setting cookies after streaming starts, so you must use `.set()` in a [Server Action](/docs/app/building-your-application/data-fetching/server-actions-and-mutations) or [Route Handler](/docs/app/building-your-application/routing/route-handlers).
+> **很高兴知道**: HTTP 不允许在流式传输开始后设置 cookie, 因此您必须在[服务器操作](/docs/app/building-your-application/data-fetching/server-actions-and-mutations)或[路由处理程序](/docs/app/building-your-application/routing/route-handlers)中使用`.set()`
 
 ```js filename="app/actions.js"
 "use server";
@@ -83,15 +83,15 @@ async function create(data) {
 }
 ```
 
-## Deleting cookies
+## 删除 cookie
 
-> **Good to know**: You can only delete cookies in a [Server Action](/docs/app/building-your-application/data-fetching/server-actions-and-mutations) or [Route Handler](/docs/app/building-your-application/routing/route-handlers).
+> **很高兴知道**: 您只能在[服务器操作](/docs/app/building-your-application/data-fetching/server-actions-and-mutations)或[路由处理程序](/docs/app/building-your-application/routing/route-handlers)中删除 cookie.
 
-There are several options for deleting a cookie:
+有几个选项可用于删除 cookie:
 
 ### `cookies().delete(name)`
 
-You can explicitly delete a cookie with a given name.
+您可以显式删除具有给定名称的 cookie。
 
 ```js filename="app/actions.js"
 "use server";
@@ -105,7 +105,7 @@ async function create(data) {
 
 ### `cookies().set(name, '')`
 
-Alternatively, you can set a new cookie with the same name and an empty value.
+或者，您可以设置一个具有相同名称和空值的新 cookie。
 
 ```js filename="app/actions.js"
 "use server";
@@ -117,11 +117,11 @@ async function create(data) {
 }
 ```
 
-> **Good to know**: `.set()` is only available in a [Server Action](/docs/app/building-your-application/data-fetching/server-actions-and-mutations) or [Route Handler](/docs/app/building-your-application/routing/route-handlers).
+> **Good to know**: `.set()`仅在[服务器操作](/docs/app/building-your-application/data-fetching/server-actions-and-mutations)或[路由处理程序](/docs/app/building-your-application/routing/route-handlers)中可用.
 
 ### `cookies().set(name, value, { maxAge: 0 })`
 
-Setting `maxAge` to 0 will immediately expire a cookie.
+将`maxAge`设置为 0 将使 cookie 立即过期。
 
 ```js filename="app/actions.js"
 "use server";
@@ -135,7 +135,7 @@ async function create(data) {
 
 ### `cookies().set(name, value, { expires: timestamp })`
 
-Setting `expires` to any value in the past will immediately expire a cookie.
+将`expires`设置为过去的任何值都会使 cookie 立即过期。
 
 ```js filename="app/actions.js"
 "use server";
@@ -148,10 +148,10 @@ async function create(data) {
 }
 ```
 
-> **Good to know**: You can only delete cookies that belong to the same domain from which `.set()` is called. Additionally, the code must be executed on the same protocol (HTTP or HTTPS) as the cookie you want to delete.
+> **很高兴知道**: 您只能删除属于调用`.set()`的同一域的 cookie。此外，代码必须在与要删除的 cookie 相同的协议(HTTP 或 HTTPS)上执行。
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes               |
-| --------- | --------------------- |
-| `v13.0.0` | `cookies` introduced. |
+| 版本      | 变化            |
+| --------- | --------------- |
+| `v13.0.0` | `cookies` 介绍. |

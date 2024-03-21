@@ -1,6 +1,6 @@
 ---
 title: Edge和Node.js运行时
-description: 了解Next.js中的可切换运行时（Edge和Node.js）。
+description: 了解Next.js中的可切换运行时(Edge和Node.js)。
 ---
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
@@ -9,45 +9,45 @@ description: 了解Next.js中的可切换运行时（Edge和Node.js）。
 
 在服务器上，有两个运行时可以呈现部分应用程序代码：
 
-- The **Node.js Runtime** (default) has access to all Node.js APIs and compatible packages from the ecosystem.
-- The **Edge Runtime** is based on [Web APIs](/docs/app/api-reference/edge).
+- **Node.js Runtime**(默认)可以访问生态系统中的所有 Node.js API 和兼容包。
+- **Edge Runtime**基于[Web APIs](/docs/app/api-reference/edge).
 
 ## 运行时差异
 
-There are many considerations to make when choosing a runtime. This table shows the major differences at a glance. If you want a more in-depth analysis of the differences, check out the sections below.
+在选择运行时时需要考虑许多因素。此表显示了主要差异。如果您想对差异进行更深入的分析，请查看下面的部分。
 
-|                                                                                                                                       | Node   | Serverless | Edge             |
-| ------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---------- | ---------------- |
-| Cold Boot                                                                                                                             | /      | Normal     | Low              |
-| [HTTP Streaming](/docs/app/building-your-application/routing/loading-ui-and-streaming)                                                | Yes    | Yes        | Yes              |
-| IO                                                                                                                                    | All    | All        | `fetch`          |
-| Scalability                                                                                                                           | /      | High       | Highest          |
-| Security                                                                                                                              | Normal | High       | High             |
-| Latency                                                                                                                               | Normal | Low        | Lowest           |
-| npm Packages                                                                                                                          | All    | All        | A smaller subset |
-| [Static Rendering](/docs/app/building-your-application/rendering/server-components#static-rendering-default)                          | Yes    | Yes        | No               |
-| [Dynamic Rendering](/docs/app/building-your-application/rendering/server-components#dynamic-rendering)                                | Yes    | Yes        | Yes              |
-| [Data Revalidation w/ `fetch`](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#revalidating-data) | Yes    | Yes        | Yes              |
+|                                                                                                                                  | Node   | Serverless | Edge             |
+| -------------------------------------------------------------------------------------------------------------------------------- | ------ | ---------- | ---------------- |
+| 冷启动                                                                                                                           | /      | Normal     | Low              |
+| [HTTP Streaming](/docs/app/building-your-application/routing/loading-ui-and-streaming)                                           | Yes    | Yes        | Yes              |
+| IO                                                                                                                               | All    | All        | `fetch`          |
+| 可扩展性                                                                                                                         | /      | High       | Highest          |
+| 安全                                                                                                                             | Normal | High       | High             |
+| 延迟                                                                                                                             | Normal | Low        | Lowest           |
+| npm 包装                                                                                                                         | All    | All        | A smaller subset |
+| [静态渲染](/docs/app/building-your-application/rendering/server-components#static-rendering-default)                             | Yes    | Yes        | No               |
+| [动态渲染](/docs/app/building-your-application/rendering/server-components#dynamic-rendering)                                    | Yes    | Yes        | Yes              |
+| [数据重新验证 w/ `fetch`](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#revalidating-data) | Yes    | Yes        | Yes              |
 
 ### Edge 运行时
 
-In Next.js, the lightweight Edge Runtime is a subset of available Node.js APIs.
+在 Next.js 中，轻量级 Edge Runtime 是可用 Node.js API 的子集。
 
-The Edge Runtime is ideal if you need to deliver dynamic, personalized content at low latency with small, simple functions. The Edge Runtime's speed comes from its minimal use of resources, but that can be limiting in many scenarios.
+如果您需要以小而简单的功能以低延迟提供动态、个性化的内容，Edge Runtime 是理想的选择。Edge Runtime 的速度来自于它对资源的最小使用，但在许多情况下这可能会受到限制。
 
-For example, code executed in the Edge Runtime [on Vercel cannot exceed between 1 MB and 4 MB](https://vercel.com/docs/concepts/limits/overview#edge-middleware-and-edge-functions-size), this limit includes imported packages, fonts and files, and will vary depending on your deployment infrastructure.
+例如，在 Edge Runtime 中执行的代码[在 Vercel 上不能超过 1 MB 到 4 MB](https://vercel.com/docs/concepts/limits/overview#edge-middleware-and-edge-functions-size), 此限制包括导入的包、字体和文件，并且会根据您的部署基础结构而有所不同。
 
 ### Node.js 运行时
 
-Using the Node.js runtime gives you access to all Node.js APIs, and all npm packages that rely on them. However, it's not as fast to start up as routes using the Edge runtime.
+使用 Node.js 运行时可以访问所有 Node.js API 以及所有依赖它们的 npm 包。但是，它的启动速度不如使用 Edge 运行时的路由快。
 
-Deploying your Next.js application to a Node.js server will require managing, scaling, and configuring your infrastructure. Alternatively, you can consider deploying your Next.js application to a serverless platform like Vercel, which will handle this for you.
+将 Next.js 应用程序部署到 Node.js 服务器将需要管理、扩展和配置基础设施。或者，您可以考虑将 Next.js 应用程序部署到像 Vercel 这样的无服务器平台，它将为您处理此问题。
 
 ### 无服务器 Node.js
 
-Serverless is ideal if you need a scalable solution that can handle more complex computational loads than the Edge Runtime. With Serverless Functions on Vercel, for example, your overall code size is [50MB](https://vercel.com/docs/concepts/limits/overview#serverless-function-size) including imported packages, fonts, and files.
+如果您需要一个可扩展的解决方案来处理比 Edge Runtime 更复杂的计算负载，那么无服务器是理想的选择。例如，使用 Vercel 上的无服务器函数，您的总体代码大小为[50MB](https://vercel.com/docs/concepts/limits/overview#serverless-function-size)，包括导入的包、字体和文件。
 
-The downside compared to routes using the [Edge](https://vercel.com/docs/concepts/functions/edge-functions) is that it can take hundreds of milliseconds for Serverless Functions to boot up before they begin processing requests. Depending on the amount of traffic your site receives, this could be a frequent occurrence as the functions are not frequently "warm".
+与使用[Edge](https://vercel.com/docs/concepts/functions/edge-functions)的路由相比，缺点是无服务器函数在开始处理请求之前可能需要数百毫秒才能启动。根据您的网站接收的流量，这种情况可能会频繁发生，因为这些功能并不经常"warm"。
 
 <AppOnly>
 
@@ -55,9 +55,11 @@ The downside compared to routes using the [Edge](https://vercel.com/docs/concept
 
 ### 分段运行时选项
 
-You can specify a runtime for individual route segments in your Next.js application. To do so, [declare a variable called `runtime` and export it](/docs/app/api-reference/file-conventions/route-segment-config). The variable must be a string, and must have a value of either `'nodejs'` or `'edge'` runtime.
+您可以在 Next.js 应用程序中为各个管段指定运行时。
+为此，[声明一个名为`runtime`的变量并导出它](/docs/app/api-reference/file-conventions/route-segment-config)。
+变量必须是字符串，并且必须在运行时具有`nodejs`或`edge`值。
 
-The following example demonstrates a page route segment that exports a `runtime` with a value of `'edge'`:
+以下示例演示了导出值为`edge`的`runtime`的页面路由段：
 
 ```tsx filename="app/page.tsx" switcher
 export const runtime = "edge"; // 'nodejs' (default) | 'edge'
@@ -67,7 +69,7 @@ export const runtime = "edge"; // 'nodejs' (default) | 'edge'
 export const runtime = "edge"; // 'nodejs' (default) | 'edge'
 ```
 
-You can also define `runtime` on a layout level, which will make all routes under the layout run on the edge runtime:
+您还可以在布局级别上定义`runtime`，这将使布局下的所有路由在边缘运行时上运行：
 
 ```tsx filename="app/layout.tsx" switcher
 export const runtime = "edge"; // 'nodejs' (default) | 'edge'
@@ -77,8 +79,8 @@ export const runtime = "edge"; // 'nodejs' (default) | 'edge'
 export const runtime = "edge"; // 'nodejs' (default) | 'edge'
 ```
 
-If the segment runtime is _not_ set, the default `nodejs` runtime will be used. You do not need to use the `runtime` option if you do not plan to change from the Node.js runtime.
+如果段运行时为\_not_set，则将使用默认的`nodejs`运行时。如果您不打算从 Node.js 运行时进行更改，则不需要使用`runtime`选项。
 
 </AppOnly>
 
-> Please refer to the [Node.js Docs](https://nodejs.org/docs/latest/api/) and [Edge Docs](/docs/app/api-reference/edge) for the full list of available APIs. Both runtimes can also support [streaming](/docs/app/building-your-application/routing/loading-ui-and-streaming) depending on your deployment infrastructure.
+> 请参考[Node.js 文档](https://nodejs.org/docs/latest/api/)和[Edge Docs](/docs/app/api-reference/edge)获取可用 API 的完整列表。根据您的部署基础架构，这两个运行时还可以支持[流式传输](/docs/app/building-your-application/routing/loading-ui-and-streaming)。

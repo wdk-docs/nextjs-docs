@@ -58,7 +58,7 @@ export default function AgentsPage() {
         <li className="hidden text-l md:block">
           🔱
           <span className="ml-2">
-            在运行此示例之前，您首先需要设置一个Supadase（或其他）矢量存储。 有关更多详细信息，请参阅自述文件。
+            在运行此示例之前，您首先需要设置一个Supadase(或其他)矢量存储。 有关更多详细信息，请参阅自述文件。
           </span>
         </li>
         <li className="text-l">

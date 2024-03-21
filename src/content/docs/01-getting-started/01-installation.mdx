@@ -11,17 +11,17 @@ related:
 系统要求:
 
 - [Node.js 18.17](https://nodejs.org/) 或更晚.
-- 支持 macOS、Windows（包括 WSL）和 Linux。
+- 支持 macOS、Windows(包括 WSL)和 Linux。
 
 ## 自动安装
 
-We recommend starting a new Next.js app using [`create-next-app`](/docs/app/api-reference/create-next-app), which sets up everything automatically for you. To create a project, run:
+我们建议使用[`create Next app`](/docs/app/api-reference/create-next-app)启动一个新的 Next.js 应用程序，它会自动为您设置所有内容。要创建项目，请运行：
 
 ```bash filename="Terminal"
 npx create-next-app@latest
 ```
 
-On installation, you'll see the following prompts:
+安装时，您将看到以下提示：
 
 ```txt filename="Terminal"
 What is your project named? my-app
@@ -34,12 +34,12 @@ Would you like to customize the default import alias (@/*)? No / Yes
 What import alias would you like configured? @/*
 ```
 
-After the prompts, `create-next-app` will create a folder with your project name and install the required dependencies.
+提示后，`create-next-app`将使用您的项目名称创建一个文件夹，并安装所需的依赖项。
 
 > **Good to know**:
 >
-> - Next.js now ships with [TypeScript](/docs/app/building-your-application/configuring/typescript), [ESLint](/docs/app/building-your-application/configuring/eslint), and [Tailwind CSS](/docs/app/building-your-application/styling/tailwind-css) configuration by default.
-> - You can optionally use a [`src` directory](/docs/app/building-your-application/configuring/src-directory) in the root of your project to separate your application's code from configuration files.
+> - Next.js 现在默认情况下附带[TypeScript](/docs/app/building-your-application/configuring/typescript), [ESLint](/docs/app/building-your-application/configuring/eslint), 和 [Tailwind CSS](/docs/app/building-your-application/styling/tailwind-css) 配置.
+> - 您可以选择使用项目根目录中的[`src` 目录](/docs/app/building-your-application/configuring/src-directory)将应用程序的代码与配置文件分离。
 
 ## 手动安装
 
@@ -49,7 +49,7 @@ After the prompts, `create-next-app` will create a folder with your project name
 npm install next@latest react@latest react-dom@latest
 ```
 
-Open your `package.json` file and add the following `scripts`:
+打开`package.json`文件并添加以下`脚本`：
 
 ```json filename="package.json"
 {
@@ -64,14 +64,14 @@ Open your `package.json` file and add the following `scripts`:
 
 这些脚本指的是开发应用程序的不同阶段：
 
-- `dev`: runs [`next dev`](/docs/app/api-reference/next-cli#development) to start Next.js in development mode.
-- `build`: runs [`next build`](/docs/app/api-reference/next-cli#build) to build the application for production usage.
-- `start`: runs [`next start`](/docs/app/api-reference/next-cli#production) to start a Next.js production server.
-- `lint`: runs [`next lint`](/docs/app/api-reference/next-cli#lint) to set up Next.js' built-in ESLint configuration.
+- `dev`: runs [`next dev`](/docs/app/api-reference/next-cli#development) 以开发模式启动 Next.js。
+- `build`: runs [`next build`](/docs/app/api-reference/next-cli#build) 以构建用于生产用途的应用程序。
+- `start`: runs [`next start`](/docs/app/api-reference/next-cli#production) 以启动 Next.js 生产服务器。
+- `lint`: runs [`next lint`](/docs/app/api-reference/next-cli#lint) 以设置 Next.js 的内置 ESLint 配置。
 
 ### 正在创建目录
 
-Next.js uses file-system routing, which means the routes in your application are determined by how you structure your files.
+Next.js 使用文件系统路由，这意味着应用程序中的路由由文件的结构决定。
 
 #### `app`目录
 
@@ -127,7 +127,7 @@ export default function Page() {
 
 Learn more about [using the App Router](/docs/app/building-your-application/routing/defining-routes).
 
-#### `pages`目录（可选）
+#### `pages`目录(可选)
 
 If you prefer to use the Pages Router instead of the App Router, you can create a `pages/` directory at the root of your project.
 
@@ -155,7 +155,7 @@ export default function App({ Component, pageProps }) {
 }
 ```
 
-Finally, add a `_document.tsx` file inside `pages/` to control the initial response from the server. Learn more about the [custom Document file](/docs/pages/building-your-application/routing/custom-document).
+最后, 在`pages/`内添加一个 `_document.tsx` 文件以控制来自服务器的初始响应. 了解有关[自定义文档文件](/docs/pages/building-your-application/routing/custom-document)的详细信息.
 
 ```tsx filename="pages/_document.tsx" switcher
 import { Html, Head, Main, NextScript } from "next/document";
@@ -177,7 +177,7 @@ Learn more about [using the Pages Router](/docs/pages/building-your-application/
 
 > **Good to know**: Although you can use both routers in the same project, routes in `app` will be prioritized over `pages`. We recommend using only one router in your new project to avoid confusion.
 
-#### `public`文件夹（可选）
+#### `public`文件夹(可选)
 
 Create a `public` folder to store static assets such as images, fonts, etc. Files inside `public` directory can then be referenced by your code starting from the base URL (`/`).
 

@@ -1,0 +1,51 @@
+# Missing Suspense boundary with useSearchParams
+
+## 为什么发生此错误
+
+在没有 Suspense 边界的情况下通过 useSearchParams()读取搜索参数会将整个页面选择为客户端呈现。这可能会导致页面在加载客户端 JavaScript 之前一直为空。
+
+## 可能的解决方法
+
+请确保对 useSearchParams()的调用被包装在 Suspense 边界中。
+
+```tsx filename="app/search.tsx"
+"use client";
+
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+
+function Search() {
+  const searchParams = useSearchParams();
+
+  return <input placeholder="Search..." />;
+}
+
+export function Searchbar() {
+  return (
+    // You could have a loading skeleton as the `fallback` too
+    <Suspense>
+      <Search />
+    </Suspense>
+  );
+}
+```
+
+这将确保页面不会放弃客户端呈现。
+
+## 禁用
+
+我们不建议禁用此规则。但是，如果需要，可以通过在 next.config.js 中将 missingSuspenseWithCSRBailout 选项设置为 false 来禁用它：
+
+```js filename="next.config.js"
+module.exports = {
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
+};
+```
+
+此配置选项将在未来的主要版本中删除。
+
+## 有用的链接
+
+- useSearchParams

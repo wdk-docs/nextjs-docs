@@ -165,7 +165,7 @@ export async function POST() {
 
 您可以将`route`视为最低级别的路由原语。
 
-- 它们**不**参与布局或客户端导航（如`page`）。
+- 它们**不**参与布局或客户端导航(如`page`)。
 - **不能**在与`page.js`相同的路径上有`route.js`文件。
 
 | Page                 | Route              | Result                       |
@@ -392,7 +392,7 @@ export function GET(request) {
 
 ### 流
 
-流媒体通常与大型语言模型（LLM）（如 OpenAI）结合使用，用于人工智能生成的内容。了解更多有关[AI SDK](https://sdk.vercel.ai/docs)的信息.
+流媒体通常与大型语言模型(LLM)(如 OpenAI)结合使用，用于人工智能生成的内容。了解更多有关[AI SDK](https://sdk.vercel.ai/docs)的信息.
 
 ```ts filename="app/api/chat/route.ts" switcher
 import OpenAI from "openai";
@@ -564,7 +564,7 @@ export async function POST(request) {
 }
 ```
 
-由于`formData`数据都是字符串，您可能需要使用[`zod-form-data`](https://www.npmjs.com/zod-form-data)验证请求并以您喜欢的格式（例如`number`）检索数据。
+由于`formData`数据都是字符串，您可能需要使用[`zod-form-data`](https://www.npmjs.com/zod-form-data)验证请求并以您喜欢的格式(例如`number`)检索数据。
 
 ### CORS
 
