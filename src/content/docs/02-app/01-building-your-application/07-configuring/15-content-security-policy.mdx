@@ -9,32 +9,32 @@ related:
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-[Content Security Policy (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP) is important to guard your Next.js application against various security threats such as cross-site scripting (XSS), clickjacking, and other code injection attacks.
+[内容安全策略(CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP)重要的是保护您的 Next.js 应用程序免受各种安全威胁，如跨站点脚本(XSS)、点击劫持和其他代码注入攻击。
 
-By using CSP, developers can specify which origins are permissible for content sources, scripts, stylesheets, images, fonts, objects, media (audio, video), iframes, and more.
+通过使用 CSP，开发人员可以指定允许内容源、脚本、样式表、图像、字体、对象、媒体(音频、视频)、iframe 等使用哪些来源。
 
 <details>
-  <summary>Examples</summary>
+  <summary>示例</summary>
 
-- [Strict CSP](https://github.com/vercel/next.js/tree/canary/examples/with-strict-csp)
+- [严格的 CSP](https://github.com/vercel/next.js/tree/canary/examples/with-strict-csp)
 
 </details>
 
 ## Nonces
 
-A [nonce](https://developer.mozilla.org/docs/Web/HTML/Global_attributes/nonce) is a unique, random string of characters created for a one-time use. It is used in conjunction with CSP to selectively allow certain inline scripts or styles to execute, bypassing strict CSP directives.
+一个[随机数](https://developer.mozilla.org/docs/Web/HTML/Global_attributes/nonce)是为一次性使用而创建的唯一随机字符串。它与 CSP 一起使用，以选择性地允许某些内联脚本或样式执行，从而绕过严格的 CSP 指令。
 
 ### 为什么要使用 nonce？
 
-Even though CSPs are designed to block malicious scripts, there are legitimate scenarios where inline scripts are necessary. In such cases, nonces offer a way to allow these scripts to execute if they have the correct nonce.
+尽管 CSP 被设计为阻止恶意脚本，但在一些合法的情况下，内联脚本是必要的。在这种情况下，nonce 提供了一种方法，允许这些脚本在具有正确的 nonce 的情况下执行。
 
 ### 使用中间件添加 nonce
 
-[Middleware](/docs/app/building-your-application/routing/middleware) enables you to add headers and generate nonces before the page renders.
+[中间件](/docs/app/building-your-application/routing/middleware)使您能够在页面呈现之前添加标题并生成随机数。
 
-Every time a page is viewed, a fresh nonce should be generated. This means that you **must use dynamic rendering to add nonces**.
+每次查看页面时，都应该生成一个新的 nonce。这意味着**您必须使用动态渲染来添加随机数**.
 
-For example:
+例如:
 
 ```ts filename="middleware.ts" switcher
 import { NextRequest, NextResponse } from "next/server";
@@ -109,9 +109,9 @@ export function middleware(request) {
 }
 ```
 
-By default, Middleware runs on all requests. You can filter Middleware to run on specific paths using a [`matcher`](/docs/app/building-your-application/routing/middleware#matcher).
+默认情况下，中间件在所有请求上运行。您可以使用[`matcher`](/docs/app/building-your-application/routing/middleware#matcher)筛选中间件以在特定路径上运行.
 
-We recommend ignoring matching prefetches (from `next/link`) and static assets that don't need the CSP header.
+我们建议忽略匹配的预取(来自`next/link`)和不需要 CSP 头的静态资产。
 
 ```ts filename="middleware.ts" switcher
 export const config = {
@@ -157,7 +157,7 @@ export const config = {
 
 ### 读取 nonce
 
-You can now read the nonce from a [Server Component](/docs/app/building-your-application/rendering/server-components) using [`headers`](/docs/app/api-reference/functions/headers):
+现在，您可以使用[`headers`](/docs/app/building-your-application/rendering/server-components)从[服务器组件]读取 nonce(/docs/app/api-reference/functions/headers):
 
 ```tsx filename="app/page.tsx" switcher
 import { headers } from "next/headers";
@@ -183,4 +183,4 @@ export default function Page() {
 
 ## 版本历史记录
 
-We recommend using `v13.4.20+` of Next.js to properly handle and apply nonces.
+我们建议使用 Next.js 的`v13.4.20+`来正确处理和应用 nonce。

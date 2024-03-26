@@ -5,15 +5,15 @@ description: NextRequest的API参考。
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-NextRequest extends the [Web Request API](https://developer.mozilla.org/docs/Web/API/Request) with additional convenience methods.
+NextRequest 扩展了[Web 请求 API](https://developer.mozilla.org/docs/Web/API/Request)具有额外的便利方法。
 
 ## `cookies`
 
-Read or mutate the [`Set-Cookie`](https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie) header of the request.
+读取或更改请求的[`Set-Cookie`](https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie)标头。
 
 ### `set(name, value)`
 
-Given a name, set a cookie with the given value on the request.
+给定一个名称，在请求中设置一个具有给定值的 cookie。
 
 ```ts
 // Given incoming request /home
@@ -24,7 +24,7 @@ request.cookies.set("show-banner", "false");
 
 ### `get(name)`
 
-Given a cookie name, return the value of the cookie. If the cookie is not found, `undefined` is returned. If multiple cookies are found, the first one is returned.
+给定一个 cookie 名称，返回 cookie 的值。如果找不到 cookie，则返回`undefined`。如果找到多个 cookie，则返回第一个 cookie。
 
 ```ts
 // Given incoming request /home
@@ -34,7 +34,7 @@ request.cookies.get("show-banner");
 
 ### `getAll()`
 
-Given a cookie name, return the values of the cookie. If no name is given, return all cookies on the request.
+给定一个 cookie 名称，返回 cookie 的值。如果没有提供名称，请根据请求返回所有 cookie。
 
 ```ts
 // Given incoming request /home
@@ -49,7 +49,7 @@ request.cookies.getAll();
 
 ### `delete(name)`
 
-Given a cookie name, delete the cookie from the request.
+给定一个 cookie 名称，从请求中删除该 cookie。
 
 ```ts
 // Returns true for deleted, false is nothing is deleted
@@ -58,7 +58,7 @@ request.cookies.delete("experiments");
 
 ### `has(name)`
 
-Given a cookie name, return `true` if the cookie exists on the request.
+给定一个 cookie 名称，如果请求中存在 cookie，则返回`true`。
 
 ```ts
 // Returns true if cookie exists, false if it does not
@@ -67,7 +67,7 @@ request.cookies.has("experiments");
 
 ### `clear()`
 
-Remove the `Set-Cookie` header from the request.
+从请求中删除`Set-Cookie`标头。
 
 ```ts
 request.cookies.clear();
@@ -75,7 +75,7 @@ request.cookies.clear();
 
 ## `nextUrl`
 
-Extends the native [`URL`](https://developer.mozilla.org/docs/Web/API/URL) API with additional convenience methods, including Next.js specific properties.
+扩展本机[`URL`](https://developer.mozilla.org/docs/Web/API/URL)API 提供了额外的便利方法，包括特定于 Next.js 的属性。
 
 ```ts
 // Given a request to /home, pathname is /home
@@ -84,11 +84,11 @@ request.nextUrl.pathname;
 request.nextUrl.searchParams;
 ```
 
-The following options are available:
+以下选项可用:
 
 <PagesOnly>
 
-| Property          | Type                      | Description                                                                                                                     |
+| 属性              | 类型                      | 描述                                                                                                                            |
 | ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `basePath`        | `string`                  | The [base path](/docs/pages/api-reference/next-config-js/basePath) of the URL.                                                  |
 | `buildId`         | `string` \| `undefined`   | The build identifier of the Next.js application. Can be [customized](/docs/pages/api-reference/next-config-js/generateBuildId). |
@@ -105,23 +105,23 @@ The following options are available:
 
 <AppOnly>
 
-| Property       | Type                    | Description                                                                                                                   |
-| -------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `basePath`     | `string`                | The [base path](/docs/app/api-reference/next-config-js/basePath) of the URL.                                                  |
-| `buildId`      | `string` \| `undefined` | The build identifier of the Next.js application. Can be [customized](/docs/app/api-reference/next-config-js/generateBuildId). |
-| `url`          | `URL`                   | The URL object.                                                                                                               |
-| `pathname`     | `string`                | The pathname of the URL.                                                                                                      |
-| `searchParams` | `Object`                | The search parameters of the URL.                                                                                             |
+| 属性           | 类型                    | 描述                                                                                                    |
+| -------------- | ----------------------- | ------------------------------------------------------------------------------------------------------- |
+| `basePath`     | `string`                | URL 的[基本路径](/docs/app/api-reference/next-config-js/basePath)。                                     |
+| `buildId`      | `string` \| `undefined` | Next.js 应用程序的内部版本标识符。可以[自定义](/docs/app/api-reference/next-config-js/generateBuildId). |
+| `url`          | `URL`                   | URL 对象。                                                                                              |
+| `pathname`     | `string`                | URL 的路径名。                                                                                          |
+| `searchParams` | `Object`                | URL 的搜索参数。                                                                                        |
 
-> **Note:** The internationalization properties from the Pages Router are not available for usage in the App Router. Learn more about [internationalization with the App Router](/docs/app/building-your-application/routing/internationalization).
+> **笔记:** 页面路由器的国际化属性不可在应用程序路由器中使用。了解更多关于[使用应用路由器实现国际化](/docs/app/building-your-application/routing/internationalization)的信息.
 
 </AppOnly>
 
 ## `ip`
 
-The `ip` property is a string that contains the IP address of the request. This value can optionally be provided by your hosting platform.
+`ip`属性是一个字符串，其中包含请求的 ip 地址。此值可以由您的托管平台提供。
 
-> **Good to know:** On [Vercel](https://vercel.com/docs/frameworks/nextjs?utm_source=next-site&utm_medium=docs&utm_campaign=next-website), this value is provided by default. On other platforms, you can use the [`X-Forwarded-For`](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Forwarded-For) header to provide the IP address.
+> **很高兴知道:** 在[Vercel](https://vercel.com/docs/frameworks/nextjs?utm_source=next-site&utm_medium=docs&utm_campaign=next-website)上, 默认情况下提供该值.在其他平台上，您可以使用 [`X-Forwarded-For`](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Forwarded-For) 标头以提供 IP 地址。
 
 ```ts
 // Provided by Vercel
@@ -132,9 +132,9 @@ request.headers.get("X-Forwarded-For");
 
 ## `geo`
 
-The `geo` property is an object that contains the geographic information of the request. This value can optionally be provided by your hosting platform.
+`geo`属性是一个包含请求的地理信息的对象。此值可以由您的托管平台提供。
 
-> **Good to know:** On [Vercel](https://vercel.com/docs/frameworks/nextjs?utm_source=next-site&utm_medium=docs&utm_campaign=next-website), this value is provided by default. On other platforms, you can use the [`X-Forwarded-For`](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Forwarded-For) header to provide the IP address, then use a [third-party service](https://ip-api.com/) to lookup the geographic information.
+> **很高兴知道:** 在[Vercel](https://vercel.com/docs/frameworks/nextjs?utm_source=next-site&utm_medium=docs&utm_campaign=next-website)上,默认情况下提供该值. 在其他平台上，您可以使用 [`X-Forwarded-For`](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Forwarded-For) 提供 IP 地址的标头, 然后使用[第三方服务](https://ip-api.com/)以查找地理信息。
 
 ```ts
 // Provided by Vercel
@@ -151,8 +151,8 @@ function getGeo(request) {
 }
 ```
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes                       |
-| --------- | ----------------------------- |
-| `v13.0.0` | `useSearchParams` introduced. |
+| 版本      | 变化                    |
+| --------- | ----------------------- |
+| `v13.0.0` | `useSearchParams` 介绍. |

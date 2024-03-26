@@ -46,6 +46,8 @@ export default async function MDXPage({ params }: any) {
     <div className="max-w-3xl mx-auto pt-3 xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-1">
       <article className="relative z-20 prose prose-slate mt-3 mb-3 dark:prose-dark">
         <div className="prose prose-stone">
+          <h1>{Mdx.frontmatter.title}</h1>
+          <div className="border-2 p-2 text-xs">{Mdx.frontmatter.description}</div>
           <Mdx.default />
         </div>
       </article>

@@ -149,9 +149,9 @@ export function WebVitals() {
 
 除了上面列出的核心指标外，还有一些额外的自定义指标可以衡量页面水合和渲染所需的时间：
 
-- `Next.js-hydration`: 页面开始和完成补水所需的时间长度（毫秒）
-- `Next.js-route-change-to-render`: 路由更改后页面开始渲染所需的时间长度（以毫秒为单位）
-- `Next.js-render`: 路由更改后页面完成渲染所需的时间长度（以毫秒为单位）
+- `Next.js-hydration`: 页面开始和完成补水所需的时间长度(毫秒)
+- `Next.js-route-change-to-render`: 路由更改后页面开始渲染所需的时间长度(以毫秒为单位)
+- `Next.js-render`: 路由更改后页面完成渲染所需的时间长度(以毫秒为单位)
 
 您可以单独处理这些指标的所有结果：
 
@@ -195,7 +195,7 @@ useReportWebVitals((metric) => {
 });
 ```
 
-> **很高兴知道**: 如果您使用[谷歌分析](https://analytics.google.com/analytics/web/)，使用`id`值可以手动构建度量分布（计算百分位数等）
+> **很高兴知道**: 如果您使用[谷歌分析](https://analytics.google.com/analytics/web/)，使用`id`值可以手动构建度量分布(计算百分位数等)
 
 > ```js
 > useReportWebVitals(metric => {

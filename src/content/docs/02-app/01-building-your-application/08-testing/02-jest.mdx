@@ -6,7 +6,7 @@ description: Learn how to set up Jest with Next.js for Unit Testing and Snapshot
 
 Jest and React Testing Library are frequently used together for **Unit Testing** and **Snapshot Testing**. This guide will show you how to set up Jest with Next.js and write your first tests.
 
-> **Good to know:** Since `async` Server Components are new to the React ecosystem, Jest currently does not support them. While you can still run **unit tests** for synchronous Server and Client Components, we recommend using an **E2E tests** for `async` components.
+> **很高兴知道:** Since `async` Server Components are new to the React ecosystem, Jest currently does not support them. While you can still run **unit tests** for synchronous Server and Client Components, we recommend using an **E2E tests** for `async` components.
 
 ## 快速启动
 
@@ -95,7 +95,7 @@ Under the hood, `next/jest` is automatically configuring Jest for you, including
 - Ignoring `.next` from test resolving
 - Loading `next.config.js` for flags that enable SWC transforms
 
-> **Good to know**: To test environment variables directly, load them manually in a separate setup script or in your `jest.config.ts` file. For more information, please see [Test Environment Variables](/docs/pages/building-your-application/configuring/environment-variables#test-environment-variables).
+> **很高兴知道**: To test environment variables directly, load them manually in a separate setup script or in your `jest.config.ts` file. For more information, please see [Test Environment Variables](/docs/pages/building-your-application/configuring/environment-variables#test-environment-variables).
 
 <PagesOnly>
 
@@ -239,7 +239,7 @@ import "@testing-library/jest-dom";
 import "@testing-library/jest-dom";
 ```
 
-> **Good to know:**[`extend-expect` was removed in `v6.0`](https://github.com/testing-library/jest-dom/releases/tag/v6.0.0), so if you are using `@testing-library/jest-dom` before version 6, you will need to import `@testing-library/jest-dom/extend-expect` instead.
+> **很高兴知道:**[`extend-expect` was removed in `v6.0`](https://github.com/testing-library/jest-dom/releases/tag/v6.0.0), so if you are using `@testing-library/jest-dom` before version 6, you will need to import `@testing-library/jest-dom/extend-expect` instead.
 
 If you need to add more setup options before each test, you can add them to the `jest.setup.js` file above.
 
@@ -342,7 +342,7 @@ it("renders homepage unchanged", () => {
 });
 ```
 
-> **Good to know**: Test files should not be included inside the Pages Router because any files inside the Pages Router are considered routes.
+> **很高兴知道**: Test files should not be included inside the Pages Router because any files inside the Pages Router are considered routes.
 
 </PagesOnly>
 

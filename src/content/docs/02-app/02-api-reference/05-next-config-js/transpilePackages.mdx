@@ -1,23 +1,23 @@
 ---
 title: transpilePackages
-description: Automatically transpile and bundle dependencies from local packages (like monorepos) or from external dependencies (`node_modules`).
+description: 自动从本地包（如monorepos）或外部依赖项（`node_modules`）转换和绑定依赖项。
 ---
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-Next.js can automatically transpile and bundle dependencies from local packages (like monorepos) or from external dependencies (`node_modules`). This replaces the `next-transpile-modules` package.
+Next.js 可以自动从本地包（如 monorepos）或外部依赖项（`node_modules`）中转换和绑定依赖项。这将替换`next-transpile-modules`包。
 
 ```js filename="next.config.js"
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@acme/ui', 'lodash-es'],
-}
+  transpilePackages: ["@acme/ui", "lodash-es"],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes                    |
-| --------- | -------------------------- |
-| `v13.0.0` | `transpilePackages` added. |
+| 版本      | 变化                      |
+| --------- | ------------------------- |
+| `v13.0.0` | `transpilePackages` 补充. |

@@ -5,7 +5,7 @@ description: Next.js允许您在公共目录中提供静态文件，如图像。
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-Next.js 可以在根目录中名为`public`的文件夹下提供静态文件，如图像。然后，代码可以从基本 URL（`/`）开始引用`public`中的文件。
+Next.js 可以在根目录中名为`public`的文件夹下提供静态文件，如图像。然后，代码可以从基本 URL(`/`)开始引用`public`中的文件。
 
 例如，如果在`public`中添加`me.png`，则以下代码将访问图像：
 
@@ -19,7 +19,7 @@ export function Avatar() {
 
 <PagesOnly>
 
-此文件夹对`robots.txt`、`favicon.ico`、谷歌网站验证和任何其他静态文件（包括`.html`）也很有用。但是，请确保不要有与`pages/`目录中的文件同名的静态文件，因为这会导致错误。[阅读更多](/docs/messages/conflicting-public-file-page).
+此文件夹对`robots.txt`、`favicon.ico`、谷歌网站验证和任何其他静态文件(包括`.html`)也很有用。但是，请确保不要有与`pages/`目录中的文件同名的静态文件，因为这会导致错误。[阅读更多](/docs/messages/conflicting-public-file-page).
 
 </PagesOnly>
 

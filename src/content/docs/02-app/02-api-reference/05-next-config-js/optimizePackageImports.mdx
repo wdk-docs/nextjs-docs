@@ -1,20 +1,20 @@
 ---
 title: optimizePackageImports
-description: API Reference for optmizedPackageImports Next.js Config Option
+description: optimizePackageImports Next.js配置选项的API参考
 ---
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-Some packages can export hundreds or thousands of modules, which can cause performance issues in development and production.
+有些软件包可以导出数百或数千个模块，这可能会导致开发和生产中的性能问题。
 
-Adding a package to `experimental.optimizePackageImports` will only load the modules you are actually using, while still giving you the convenience of writing import statements with many named exports.
+将包添加到`experimental.optimizePackageImports`中只会加载您实际使用的模块，同时仍然可以方便地编写带有许多命名导出的导入语句。
 
 ```js filename="next.config.js"
 module.exports = {
   experimental: {
-    optimizePackageImports: ['package-name'],
+    optimizePackageImports: ["package-name"],
   },
-}
+};
 ```
 
-Libraries like `@mui/icons-material`, `@mui/material`, `date-fns`, `lodash`, `lodash-es`, `react-bootstrap`, `@headlessui/react`, `@heroicons/react`, and `lucide-react` are already optimized by default.
+像这样的库 `@mui/icons-material`, `@mui/material`, `date-fns`, `lodash`, `lodash-es`, `react-bootstrap`, `@headlessui/react`, `@heroicons/react`, 和 `lucide-react`默认情况下已经优化。

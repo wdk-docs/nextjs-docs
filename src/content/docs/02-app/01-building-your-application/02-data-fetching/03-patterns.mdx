@@ -25,7 +25,7 @@ If you need to use the same data (e.g. current user) in multiple components in a
 
 This is possible because `fetch` requests are automatically memoized. Learn more about [request memoization](/docs/app/building-your-application/caching#request-memoization)
 
-> **Good to know**: This also applies to layouts, since it's not possible to pass data between a parent layout and its children.
+> **很高兴知道**: This also applies to layouts, since it's not possible to pass data between a parent layout and its children.
 
 ## 流动
 
@@ -296,7 +296,7 @@ With this approach, you can eagerly fetch data, cache responses, and guarantee t
 
 The `utils/get-item` exports can be used by Layouts, Pages, or other components to give them control over when an item's data is fetched.
 
-> **Good to know:**
+> **很高兴知道:**
 >
 > - We recommend using the [`server-only` package](/docs/app/building-your-application/rendering/composition-patterns#keeping-server-only-code-out-of-the-client-environment) to make sure server data fetching functions are never used on the client.
 

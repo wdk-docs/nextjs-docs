@@ -84,7 +84,7 @@ Here's a summary of the props available for the Link Component:
 | [`scroll`](#scroll)      | `scroll={false}`    | Boolean          | -        |
 | [`prefetch`](#prefetch)  | `prefetch={false}`  | Boolean          | -        |
 
-> **Good to know**: `<a>` tag attributes such as `className` or `target="_blank"` can be added to `<Link>` as props and will be passed to the underlying `<a>` element.
+> **很高兴知道**: `<a>` tag attributes such as `className` or `target="_blank"` can be added to `<Link>` as props and will be passed to the underlying `<a>` element.
 
 ### `href` (required)
 
@@ -202,7 +202,7 @@ export default function Page() {
 
 An `<a>` element is no longer required as a child of `<Link>`. Add the `legacyBehavior` prop to use the legacy behavior or remove the `<a>` to upgrade. A [codemod is available](/docs/app/building-your-application/upgrading/codemods#new-link) to automatically upgrade your code.
 
-> **Good to know**: when `legacyBehavior` is not set to `true`, all [`anchor`](https://developer.mozilla.org/docs/Web/HTML/Element/a) tag properties can be passed to `next/link` as well such as, `className`, `onClick`, etc.
+> **很高兴知道**: when `legacyBehavior` is not set to `true`, all [`anchor`](https://developer.mozilla.org/docs/Web/HTML/Element/a) tag properties can be passed to `next/link` as well such as, `className`, `onClick`, etc.
 
 ### `passHref`
 
@@ -222,7 +222,7 @@ The active locale is automatically prepended. `locale` allows for providing a di
 
 </PagesOnly>
 
-## Examples
+## 举例
 
 ### Linking to Dynamic Routes
 
@@ -445,13 +445,13 @@ export default function Page() {
 
 <PagesOnly>
 
-> **Good to know**: If you're using [Dynamic Routes](/docs/app/building-your-application/routing/dynamic-routes), you'll need to adapt your `as` and `href` props. For example, if you have a Dynamic Route like `/dashboard/[user]` that you want to present differently via middleware, you would write: `<Link href={{ pathname: '/dashboard/authed/[user]', query: { user: username } }} as="/dashboard/[user]">Profile</Link>`.
+> **很高兴知道**: If you're using [Dynamic Routes](/docs/app/building-your-application/routing/dynamic-routes), you'll need to adapt your `as` and `href` props. For example, if you have a Dynamic Route like `/dashboard/[user]` that you want to present differently via middleware, you would write: `<Link href={{ pathname: '/dashboard/authed/[user]', query: { user: username } }} as="/dashboard/[user]">Profile</Link>`.
 
 </PagesOnly>
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes                                                                                                                                                                                         |
+| 版本      | 变化                                                                                                                                                                                            |
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `v13.0.0` | No longer requires a child `<a>` tag. A [codemod](/docs/app/building-your-application/upgrading/codemods#remove-a-tags-from-link-components) is provided to automatically update your codebase. |
 | `v10.0.0` | `href` props pointing to a dynamic route are automatically resolved and no longer require an `as` prop.                                                                                         |

@@ -1,11 +1,11 @@
 ---
 title: Edge Runtime
-description: API Reference for the Edge Runtime.
+description: 边缘运行时的API参考。
 ---
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-The Next.js Edge Runtime is based on standard Web APIs, it supports the following APIs:
+Next.js Edge Runtime 基于标准 Web API，支持以下 API:
 
 ## Network APIs
 
@@ -150,14 +150,14 @@ You can relax the check to allow specific files with your Middleware or Edge API
 
 ```javascript
 export const config = {
-  runtime: 'edge', // for Edge API Routes only
+  runtime: "edge", // for Edge API Routes only
   unstable_allowDynamic: [
     // allows a single file
-    '/lib/utilities.js',
+    "/lib/utilities.js",
     // use a glob to allow anything in the function-bind 3rd party module
-    '/node_modules/function-bind/**',
+    "/node_modules/function-bind/**",
   ],
-}
+};
 ```
 
 `unstable_allowDynamic` is a [glob](https://github.com/micromatch/micromatch#matching-features), or an array of globs, ignoring dynamic code evaluation for specific files. The globs are relative to your application root folder.

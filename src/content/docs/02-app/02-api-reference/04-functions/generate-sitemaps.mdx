@@ -1,29 +1,29 @@
 ---
 title: generateSitemaps
 nav_title: generateSitemaps
-description: Learn how to use the generateSiteMaps function to create multiple sitemaps for your application.
+description: 了解如何使用generateSiteMaps功能为应用程序创建多个站点地图。
 related:
-  title: Next Steps
-  description: Learn how to create sitemaps for your Next.js application.
+  title: 接下来的步骤
+  description: 了解如何为Next.js应用程序创建网站地图。
   links:
     - app/api-reference/file-conventions/metadata/sitemap
 ---
 
-You can use the `generateSiteMaps` function to generate multiple sitemaps for your application.
+您可以使用`generateSiteMaps`功能为应用程序生成多个站点地图。
 
-## Returns
+## 返回
 
-The `generateSitemaps` returns an array of objects with an `id` property.
+`generateSitemaps`返回一个具有`id`属性的对象数组。
 
 ## URLs
 
-In production, your generated sitemaps will be available at `/.../sitemap/[id].xml`. For example, `/product/sitemap/1.xml`.
+在制作过程中，您生成的网站地图将在`/.../sitemap/[id].xml`。 例如, `/product/sitemap/1.xml`.
 
-In development, you can view the generated sitemap on `/.../sitemap.xml/[id]`. For example, `/product/sitemap.xml/1`. This difference is temporary and will follow the production format.
+在开发过程中，您可以在`/.../sitemap.xml/[id]`上面查看生成的网站地图. 例如, `/product/sitemap.xml/1`. 这种差异是暂时的，将遵循生产格式。
 
-## Example
+## 实例
 
-For example, to split a sitemap using `generateSitemaps`, return an array of objects with the sitemap `id`. Then, use the `id` to generate the unique sitemaps.
+例如，要使用`generateSitemaps`拆分网站地图，请返回一个带有网站地图`id`的对象数组。然后，使用`id`生成唯一的网站地图。
 
 ```ts filename="app/product/sitemap.ts" switcher
 import { BASE_URL } from '@/app/lib/constants'

@@ -13,7 +13,7 @@ const menus: any = {
       href: "/docs/getting-started/project-structure",
     },
     {
-      label: "构建您的应用程序",
+      label: "构建应用",
       href: "/docs/app/building-your-application",
       subMenus: [
         {
@@ -642,15 +642,15 @@ const menus: any = {
         },
         {
           label: "create-next-app",
-          href: "/docs/pages/api-reference/create-next-app",
+          href: "/docs/app/api-reference/create-next-app",
         },
         {
           label: "Next.js CLI",
-          href: "/docs/pages/api-reference/next-cli",
+          href: "/docs/app/api-reference/next-cli",
         },
         {
           label: "Edge Runtime",
-          href: "/docs/pages/api-reference/edge",
+          href: "/docs/app/api-reference/edge",
         },
       ],
     },

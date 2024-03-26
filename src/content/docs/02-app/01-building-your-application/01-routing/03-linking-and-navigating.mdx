@@ -7,18 +7,18 @@ related:
     - app/building-your-application/configuring/typescript
 ---
 
-在 Next.js 中，有两种方法可以在路线之间导航：
+在 Next.js 中，有两种方法可以在路由之间导航：
 
-- Using the [`<Link>` Component](#link-component)
-- Using the [`useRouter` Hook](#userouter-hook)
+- 使用 [`<Link>` 组件](#link-component)
+- 使用 [`useRouter` 钩子](#userouter-hook)
 
-This page will go through how to use `<Link>`, `useRouter()`, and dive deeper into how navigation works.
+本页将介绍如何使用 `<Link>`, `useRouter()`, 并深入了解导航的工作原理。
 
 ## `<Link>` 组件
 
-`<Link>` is a built-in component that extends the HTML `<a>` tag to provide [prefetching](#1-prefetching) and client-side navigation between routes. It is the primary way to navigate between routes in Next.js.
+`<Link>`是一个内置组件，它扩展了 HTML`<a>`标记，以提供[预取](#1-prefetching)和路由之间的客户端导航。这是 Next.js 中在路由之间导航的主要方式。
 
-You can use it by importing it from `next/link`, and passing a `href` prop to the component:
+您可以通过从`next/link`导入它，并将`href`道具传递给组件来使用它：
 
 ```tsx filename="app/page.tsx" switcher
 import Link from "next/link";
@@ -36,13 +36,13 @@ export default function Page() {
 }
 ```
 
-There are other optional props you can pass to `<Link>`. See the [API reference](/docs/app/api-reference/components/link) for more.
+您还可以将其他可选道具传递给`<链接>`。有关更多信息，请参阅[API 参考资料](/docs/app/api-reference/components/link)。
 
 ### 示例
 
 #### 链接到动态分段
 
-When linking to [dynamic segments](/docs/app/building-your-application/routing/dynamic-routes), you can use [template literals and interpolation](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals) to generate a list of links. For example, to generate a list of blog posts:
+链接到[动态分段](/docs/app/building-your-application/routing/dynamic-routes)时, 可以使用[模板文字和插值](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals)生成链接列表。例如，生成博客文章列表:
 
 ```jsx filename="app/blog/PostList.js"
 import Link from "next/link";
@@ -62,7 +62,7 @@ export default function PostList({ posts }) {
 
 #### 检查活动链接
 
-You can use [`usePathname()`](/docs/app/api-reference/functions/use-pathname) to determine if a link is active. For example, to add a class to the active link, you can check if the current `pathname` matches the `href` of the link:
+您可以使用 [`usePathname()`](/docs/app/api-reference/functions/use-pathname)以确定链接是否处于活动状态. 例如，要将类添加到活动链接，可以检查当前的`pathname`是否与链接的`href`匹配：
 
 ```tsx filename="app/components/links.tsx" switcher
 "use client";
@@ -122,9 +122,9 @@ export function Links() {
 
 #### 滚动到 `id`
 
-The default behavior of the Next.js App Router is to scroll to the top of a new route or to maintain the scroll position for backwards and forwards navigation.
+Next.js 应用程序路由器的默认行为是滚动到新路由的顶部，或者保持滚动位置以进行前后导航。
 
-If you'd like to scroll to a specific `id` on navigation, you can append your URL with a `#` hash link or just pass a hash link to the `href` prop. This is possible since `<Link>` renders to an `<a>` element.
+如果您想在导航中滚动到特定的`id`，您可以在 URL 中附加一个`#`哈希链接，或者只将一个哈希链接传递给`href`道具。这是可能的，因为`<Link>`渲染到`<a>`元素。
 
 ```jsx
 <Link href="/dashboard#settings">Settings</Link>
@@ -135,7 +135,7 @@ If you'd like to scroll to a specific `id` on navigation, you can append your UR
 
 #### 禁用滚动恢复
 
-The default behavior of the Next.js App Router is to scroll to the top of a new route or to maintain the scroll position for backwards and forwards navigation. If you'd like to disable this behavior, you can pass `scroll={false}` to the `<Link>` component, or `scroll: false` to `router.push()` or `router.replace()`.
+Next.js 应用程序路由器的默认行为是滚动到新路由的顶部，或者保持滚动位置以进行前后导航。如果要禁用此行为, 你可以传输 `scroll={false}` 到 `<Link>` 组件, 或 `scroll: false`到`router.push()`或`router.replace()`.
 
 ```jsx
 // next/link
@@ -177,11 +177,11 @@ export default function Page() {
 
 有关`useRouter`方法的完整列表，请参阅[API 参考](/docs/app/api-reference/functions/use-router).
 
-> **正式建议:** 使用`<Link>`组件在路线之间导航，除非您有使用`useRouter`的特定要求。
+> **正式建议:** 使用`<Link>`组件在路由之间导航，除非您有使用`useRouter`的特定要求。
 
 ## 路由和导航的工作原理
 
-The App Router uses a hybrid approach for routing and navigation. On the server, your application code is automatically code-split by route segments. And on the client, Next.js [prefetches](#1-prefetching) and [caches](#2-caching) the route segments. This means, when a user navigates to a new route, the browser doesn't reload the page, and only the route segments that change re-render - improving the navigation experience and performance.
+应用程序路由器使用混合方法进行路由和导航。在服务器上，您的应用程序代码会自动按路由段进行代码分割。在客户端上，Next.js[预取](#1-prefetching)和[缓存](#2-caching)路由段。这意味着，当用户导航到新路由时，浏览器不会重新加载页面，只会重新渲染更改的路由段，从而提高导航体验和性能。
 
 ### 1. 预取
 
@@ -194,30 +194,30 @@ Next.js 中有两种预取路由的方式：
 
 静态路由和动态路由的`<Link>`预取行为不同：
 
-- [**静态路由**](/docs/app/building-your-application/rendering/server-components#static-rendering-default): `prefetch` defaults to `true`. The entire route is prefetched and cached.
-- [**动态路线**](/docs/app/building-your-application/rendering/server-components#dynamic-rendering): `prefetch` default to automatic. Only the shared layout down until the first `loading.js` file is prefetched and cached for `30s`. This reduces the cost of fetching an entire dynamic route, and it means you can show an [instant loading state](/docs/app/building-your-application/routing/loading-ui-and-streaming#instant-loading-states) for better visual feedback to users.
+- [**静态路由**](/docs/app/building-your-application/rendering/server-components#static-rendering-default): `prefetch`默认为`true`。整个路由被预取和缓存。
+- [**动态路由**](/docs/app/building-your-application/rendering/server-components#dynamic-rendering): `prefetch` 默认为自动. 只有共享布局向下，直到第一个`loading.js`文件被预取并缓存`30s`。这降低了获取整个动态路由的成本，也意味着您可以显示[即时加载状态](/docs/app/building-your-application/routing/loading-ui-and-streaming#instant-loading-states)，以便向用户提供更好的视觉反馈。
 
-You can disable prefetching by setting the `prefetch` prop to `false`.
+您可以通过将`prefetch`属性设置为`false`来禁用预取。
 
-See the [`<Link>` API reference](/docs/app/api-reference/components/link) for more information.
+有关更多信息，请参阅[`<Link>` API 参考](/docs/app/api-reference/components/link)。
 
-> **Good to know**:
+> **很高兴知道**:
 >
-> - Prefetching is not enabled in development, only in production.
+> - 预取在开发中不启用，只在生产中启用。
 
 ### 2. 缓存
 
-Next.js has an **in-memory client-side cache** called the [Router Cache](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#caching-data#router-cache). As users navigate around the app, the React Server Component Payload of [prefetched](#1-prefetching) route segments and visited routes are stored in the cache.
+Next.js 有一个**内存中的客户端缓存**，称为[路由器缓存](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#caching-data#router-cache). 当用户在应用程序中导航时，[预取](#1-prefetching)路由段和访问路由的 React Server 组件有效载荷存储在缓存中。
 
-This means on navigation, the cache is reused as much as possible, instead of making a new request to the server - improving performance by reducing the number of requests and data transferred.
+这意味着在导航时，将尽可能多地重用缓存，而不是向服务器发出新的请求——通过减少请求和传输的数据数量来提高性能。
 
-Learn more about how the [Router Cache](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#caching-data) works and how to configure it.
+了解有关[路由器缓存](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#caching-data)如何工作以及如何配置它的更多信息。
 
 ### 3. 局部渲染
 
 部分渲染意味着只有在导航时发生更改的路由段才会在客户端上重新渲染，并且任何共享管段都会保留。
 
-For example, when navigating between two sibling routes, `/dashboard/settings` and `/dashboard/analytics`, the `settings` and `analytics` pages will be rendered, and the shared `dashboard` layout will be preserved.
+例如当在两条同级路由之间导航时， `/dashboard/settings`和`/dashboard/analytics`, 这个`settings`和`analytics`将呈现页面, 并且共享的`dashboard`布局将被保留。
 
 <Image
   alt="How partial rendering works"

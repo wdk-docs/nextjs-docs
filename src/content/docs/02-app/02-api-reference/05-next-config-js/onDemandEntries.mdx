@@ -1,13 +1,13 @@
 ---
 title: onDemandEntries
-description: Configure how Next.js will dispose and keep in memory pages created in development.
+description: 配置Next.js将如何处理和保留在开发过程中创建的内存页面。
 ---
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-Next.js exposes some options that give you some control over how the server will dispose or keep in memory built pages in development.
+Next.js 公开了一些选项，让您可以控制服务器在开发过程中如何处理或保留内存中构建的页面。
 
-To change the defaults, open `next.config.js` and add the `onDemandEntries` config:
+要更改默认值，请打开`next.config.js`并添加`onDemandEntries`配置:
 
 ```js filename="next.config.js"
 module.exports = {
@@ -17,5 +17,5 @@ module.exports = {
     // number of pages that should be kept simultaneously without being disposed
     pagesBufferLength: 2,
   },
-}
+};
 ```

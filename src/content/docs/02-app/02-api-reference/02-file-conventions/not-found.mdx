@@ -33,7 +33,7 @@ export default function NotFound() {
 }
 ```
 
-> **Good to know**: In addition to catching expected `notFound()` errors, the root `app/not-found.js` file also handles any unmatched URLs for your whole application. This means users that visit a URL that is not handled by your app will be shown the UI exported by the `app/not-found.js` file.
+> **很高兴知道**: In addition to catching expected `notFound()` errors, the root `app/not-found.js` file also handles any unmatched URLs for your whole application. This means users that visit a URL that is not handled by your app will be shown the UI exported by the `app/not-found.js` file.
 
 ## Props
 
@@ -85,9 +85,9 @@ export default async function NotFound() {
 
 If you need to use Client Component hooks like `usePathname` to display content based on the path, you must fetch data on the client-side instead.
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes                                             |
+| 版本      | 变化                                                |
 | --------- | --------------------------------------------------- |
 | `v13.3.0` | Root `app/not-found` handles global unmatched URLs. |
 | `v13.0.0` | `not-found` introduced.                             |

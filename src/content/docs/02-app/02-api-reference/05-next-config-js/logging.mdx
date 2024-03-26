@@ -1,13 +1,13 @@
 ---
-title: logging
-description: Configure how data fetches are logged to the console when running Next.js in development mode.
+title: 记录日志
+description: 配置在开发模式下运行Next.js时如何将数据获取记录到控制台。
 ---
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-You can configure the logging level and whether the full URL is logged to the console when running Next.js in development mode.
+在开发模式下运行 Next.js 时，您可以配置日志记录级别以及是否将完整 URL 记录到控制台。
 
-Currently, `logging` only applies to data fetching using the `fetch` API. It does not yet apply to other logs inside of Next.js.
+目前，`logging`仅适用于使用`fetch`API 获取数据。它还不适用于 Next.js 中的其他日志。
 
 ```js filename="next.config.js"
 module.exports = {
@@ -16,5 +16,5 @@ module.exports = {
       fullUrl: true,
     },
   },
-}
+};
 ```

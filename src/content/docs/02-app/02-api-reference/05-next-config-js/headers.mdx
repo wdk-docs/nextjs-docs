@@ -1,153 +1,153 @@
 ---
 title: headers
-description: Add custom HTTP headers to your Next.js app.
+description: 将自定义HTTP头添加到Next.js应用程序中。
 ---
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-Headers allow you to set custom HTTP headers on the response to an incoming request on a given path.
+标头允许您在给定路径上对传入请求的响应上设置自定义 HTTP 标头。
 
-To set custom HTTP headers you can use the `headers` key in `next.config.js`:
-
-```js filename="next.config.js"
-module.exports = {
-  async headers() {
-    return [
-      {
-        source: '/about',
-        headers: [
-          {
-            key: 'x-custom-header',
-            value: 'my custom header value',
-          },
-          {
-            key: 'x-another-custom-header',
-            value: 'my other custom header value',
-          },
-        ],
-      },
-    ]
-  },
-}
-```
-
-`headers` is an async function that expects an array to be returned holding objects with `source` and `headers` properties:
-
-- `source` is the incoming request path pattern.
-- `headers` is an array of response header objects, with `key` and `value` properties.
-- `basePath`: `false` or `undefined` - if false the basePath won't be included when matching, can be used for external rewrites only.
-- `locale`: `false` or `undefined` - whether the locale should not be included when matching.
-- `has` is an array of [has objects](#header-cookie-and-query-matching) with the `type`, `key` and `value` properties.
-- `missing` is an array of [missing objects](#header-cookie-and-query-matching) with the `type`, `key` and `value` properties.
-
-Headers are checked before the filesystem which includes pages and `/public` files.
-
-## Header Overriding Behavior
-
-If two headers match the same path and set the same header key, the last header key will override the first. Using the below headers, the path `/hello` will result in the header `x-hello` being `world` due to the last header value set being `world`.
+要设置自定义 HTTP 标头，可以使用`next.config.js`中的`headers`键：
 
 ```js filename="next.config.js"
 module.exports = {
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: "/about",
         headers: [
           {
-            key: 'x-hello',
-            value: 'there',
+            key: "x-custom-header",
+            value: "my custom header value",
+          },
+          {
+            key: "x-another-custom-header",
+            value: "my other custom header value",
           },
         ],
       },
-      {
-        source: '/hello',
-        headers: [
-          {
-            key: 'x-hello',
-            value: 'world',
-          },
-        ],
-      },
-    ]
+    ];
   },
-}
+};
 ```
 
-## Path Matching
+`headers`是一个异步函数，它期望返回一个数组，其中包含具有`source`和`headers`属性的对象：
 
-Path matches are allowed, for example `/blog/:slug` will match `/blog/hello-world` (no nested paths):
+- `source`是传入请求路径模式。
+- `headers`是一个响应头对象数组，具有`key`和`value`属性。
+- `basePath`: `false` 或 `undefined` - 如果为 false，匹配时将不包括 basePath，只能用于外部重写。
+- `locale`: `false` 或 `undefined` - 匹配时是否不应包括区域设置。
+- `has`是具有`type`、`key`和`value`属性的[has-objects](#header-cookie-and-query-matching)数组。
+- `missing`是一个具有`type`、`key`和`value`属性的[missing 对象](#header-cookie-and-query-matching)数组。
+
+在包括页面和`/public`文件的文件系统之前检查头。
+
+## 标头覆盖行为
+
+如果两个标头匹配相同的路径并设置相同的标头键，则最后一个标头键将覆盖第一个标头键。使用以下标头，路径`/hello`将导致标头`x-hello`为`world`，因为最后一个标头值集为`world`。
 
 ```js filename="next.config.js"
 module.exports = {
   async headers() {
     return [
       {
-        source: '/blog/:slug',
+        source: "/:path*",
         headers: [
           {
-            key: 'x-slug',
-            value: ':slug', // Matched parameters can be used in the value
-          },
-          {
-            key: 'x-slug-:slug', // Matched parameters can be used in the key
-            value: 'my other custom header value',
+            key: "x-hello",
+            value: "there",
           },
         ],
       },
-    ]
+      {
+        source: "/hello",
+        headers: [
+          {
+            key: "x-hello",
+            value: "world",
+          },
+        ],
+      },
+    ];
   },
-}
+};
 ```
 
-### Wildcard Path Matching
+## 路径匹配
 
-To match a wildcard path you can use `*` after a parameter, for example `/blog/:slug*` will match `/blog/a/b/c/d/hello-world`:
+允许路径匹配，例如`/blog/:slug`将匹配`/blog/hello-world`（无嵌套路径）:
 
 ```js filename="next.config.js"
 module.exports = {
   async headers() {
     return [
       {
-        source: '/blog/:slug*',
+        source: "/blog/:slug",
         headers: [
           {
-            key: 'x-slug',
-            value: ':slug*', // Matched parameters can be used in the value
+            key: "x-slug",
+            value: ":slug", // Matched parameters can be used in the value
           },
           {
-            key: 'x-slug-:slug*', // Matched parameters can be used in the key
-            value: 'my other custom header value',
+            key: "x-slug-:slug", // Matched parameters can be used in the key
+            value: "my other custom header value",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-### Regex Path Matching
+### 通配符路径匹配
 
-To match a regex path you can wrap the regex in parenthesis after a parameter, for example `/blog/:slug(\\d{1,})` will match `/blog/123` but not `/blog/abc`:
+要匹配通配符路径，可以在参数后使用`*`，例如`/blog/:slug*`将匹配 `/blog/a/b/c/d/hello-world`:
 
 ```js filename="next.config.js"
 module.exports = {
   async headers() {
     return [
       {
-        source: '/blog/:post(\\d{1,})',
+        source: "/blog/:slug*",
         headers: [
           {
-            key: 'x-post',
-            value: ':post',
+            key: "x-slug",
+            value: ":slug*", // Matched parameters can be used in the value
+          },
+          {
+            key: "x-slug-:slug*", // Matched parameters can be used in the key
+            value: "my other custom header value",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-The following characters `(`, `)`, `{`, `}`, `:`, `*`, `+`, `?` are used for regex path matching, so when used in the `source` as non-special values they must be escaped by adding `\\` before them:
+### Regex 路径匹配
+
+要匹配正则表达式路径，可以将正则表达式包装在参数后面的括号中，例如 `/blog/:slug(\\d{1,})` 将匹配 `/blog/123` 但不是 `/blog/abc`:
+
+```js filename="next.config.js"
+module.exports = {
+  async headers() {
+    return [
+      {
+        source: "/blog/:post(\\d{1,})",
+        headers: [
+          {
+            key: "x-post",
+            value: ":post",
+          },
+        ],
+      },
+    ];
+  },
+};
+```
+
+以下字符 `(`, `)`, `{`, `}`, `:`, `*`, `+`, `?` 用于正则表达式路径匹配, 因此，当在`source`中用作非特殊值时，必须通过在它们之前添加`\\`来转义它们：
 
 ```js filename="next.config.js"
 module.exports = {
@@ -155,28 +155,28 @@ module.exports = {
     return [
       {
         // this will match `/english(default)/something` being requested
-        source: '/english\\(default\\)/:slug',
+        source: "/english\\(default\\)/:slug",
         headers: [
           {
-            key: 'x-header',
-            value: 'value',
+            key: "x-header",
+            value: "value",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-## Header, Cookie, and Query Matching
+## 标头、Cookie 和查询匹配
 
-To only apply a header when header, cookie, or query values also match the `has` field or don't match the `missing` field can be used. Both the `source` and all `has` items must match and all `missing` items must not match for the header to be applied.
+仅当标头、cookie 或查询值与`has`字段匹配或与`missing`字段不匹配时才应用标头。对于要应用的标头，`source`和所有`has`项都必须匹配，而所有`missing`项必须不匹配。
 
-`has` and `missing` items can have the following fields:
+`has`和`missing`项可以具有以下字段：
 
-- `type`: `String` - must be either `header`, `cookie`, `host`, or `query`.
-- `key`: `String` - the key from the selected type to match against.
-- `value`: `String` or `undefined` - the value to check for, if undefined any value will match. A regex like string can be used to capture a specific part of the value, e.g. if the value `first-(?<paramName>.*)` is used for `first-second` then `second` will be usable in the destination with `:paramName`.
+- `type`: `String` - 必须是`header`、`cookie`、`host`或`query`。
+- `key`: `String` - 所选类型中要匹配的键。
+- `value`: `String` 或 `undefined` - 要检查的值，如果未定义，则任何值都将匹配。类似 regex 的字符串可用于捕获值的特定部分, 例如，如果值 `first-(?<paramName>.*)` 用于 `first-second` 然后 `second` 将在目标中与`:paramName`一起使用。
 
 ```js filename="next.config.js"
 module.exports = {
@@ -185,142 +185,142 @@ module.exports = {
       // if the header `x-add-header` is present,
       // the `x-another-header` header will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'header',
-            key: 'x-add-header',
+            type: "header",
+            key: "x-add-header",
           },
         ],
         headers: [
           {
-            key: 'x-another-header',
-            value: 'hello',
+            key: "x-another-header",
+            value: "hello",
           },
         ],
       },
       // if the header `x-no-header` is not present,
       // the `x-another-header` header will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         missing: [
           {
-            type: 'header',
-            key: 'x-no-header',
+            type: "header",
+            key: "x-no-header",
           },
         ],
         headers: [
           {
-            key: 'x-another-header',
-            value: 'hello',
+            key: "x-another-header",
+            value: "hello",
           },
         ],
       },
       // if the source, query, and cookie are matched,
       // the `x-authorized` header will be applied
       {
-        source: '/specific/:path*',
+        source: "/specific/:path*",
         has: [
           {
-            type: 'query',
-            key: 'page',
+            type: "query",
+            key: "page",
             // the page value will not be available in the
             // header key/values since value is provided and
             // doesn't use a named capture group e.g. (?<page>home)
-            value: 'home',
+            value: "home",
           },
           {
-            type: 'cookie',
-            key: 'authorized',
-            value: 'true',
+            type: "cookie",
+            key: "authorized",
+            value: "true",
           },
         ],
         headers: [
           {
-            key: 'x-authorized',
-            value: ':authorized',
+            key: "x-authorized",
+            value: ":authorized",
           },
         ],
       },
       // if the header `x-authorized` is present and
       // contains a matching value, the `x-another-header` will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'header',
-            key: 'x-authorized',
-            value: '(?<authorized>yes|true)',
+            type: "header",
+            key: "x-authorized",
+            value: "(?<authorized>yes|true)",
           },
         ],
         headers: [
           {
-            key: 'x-another-header',
-            value: ':authorized',
+            key: "x-another-header",
+            value: ":authorized",
           },
         ],
       },
       // if the host is `example.com`,
       // this header will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'host',
-            value: 'example.com',
+            type: "host",
+            value: "example.com",
           },
         ],
         headers: [
           {
-            key: 'x-another-header',
-            value: ':authorized',
+            key: "x-another-header",
+            value: ":authorized",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-## Headers with basePath support
+## 支持 basePath 的标头
 
-When leveraging [`basePath` support](/docs/app/api-reference/next-config-js/basePath) with headers each `source` is automatically prefixed with the `basePath` unless you add `basePath: false` to the header:
+当使用带有标头的[`basePath` 支持](/docs/app/api-reference/next-config-js/basePath)时，除非在标头中添加`basePath:false`，否则每个`source`都会自动以`basePath`为前缀：
 
 ```js filename="next.config.js"
 module.exports = {
-  basePath: '/docs',
+  basePath: "/docs",
 
   async headers() {
     return [
       {
-        source: '/with-basePath', // becomes /docs/with-basePath
+        source: "/with-basePath", // becomes /docs/with-basePath
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
       {
-        source: '/without-basePath', // is not modified since basePath: false is set
+        source: "/without-basePath", // is not modified since basePath: false is set
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
         basePath: false,
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-## Headers with i18n support
+## 支持 i18n 的标头
 
 <AppOnly>
 
-When leveraging [`i18n` support](/docs/app/building-your-application/routing/internationalization) with headers each `source` is automatically prefixed to handle the configured `locales` unless you add `locale: false` to the header. If `locale: false` is used you must prefix the `source` with a locale for it to be matched correctly.
+当使用带有标头的[`i18n` 支持](/docs/app/building-your-application/routing/internationalization)时，除非在标头中添加`locale:false`，否则每个`source`都会自动加前缀以处理配置的`locale`。如果使用了`locale:false`，则必须在`source`前面加上区域设置，才能正确匹配。
 
 </AppOnly>
 
@@ -333,66 +333,66 @@ When leveraging [`i18n` support](/docs/pages/building-your-application/routing/i
 ```js filename="next.config.js"
 module.exports = {
   i18n: {
-    locales: ['en', 'fr', 'de'],
-    defaultLocale: 'en',
+    locales: ["en", "fr", "de"],
+    defaultLocale: "en",
   },
 
   async headers() {
     return [
       {
-        source: '/with-locale', // automatically handles all locales
+        source: "/with-locale", // automatically handles all locales
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
       {
         // does not handle locales automatically since locale: false is set
-        source: '/nl/with-locale-manual',
+        source: "/nl/with-locale-manual",
         locale: false,
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
       {
         // this matches '/' since `en` is the defaultLocale
-        source: '/en',
+        source: "/en",
         locale: false,
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
       {
         // this gets converted to /(en|fr|de)/(.*) so will not match the top-level
         // `/` or `/fr` routes like /:path* would
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Cache-Control
 
-You cannot set `Cache-Control` headers in `next.config.js` for pages or assets, as these headers will be overwritten in production to ensure that responses and static assets are cached effectively.
+您不能在`next.config.js`中为页面或资产设置`Cache-Control`标头，因为这些标头将在生产中被覆盖，以确保有效缓存响应和静态资产。
 
 <AppOnly>
 
-Learn more about [caching](/docs/app/building-your-application/caching) with the App Router.
+了解有关使用 App Router 进行[缓存](/docs/app/building-your-application/caching)的更多信息。
 
 </AppOnly>
 
@@ -400,38 +400,35 @@ Learn more about [caching](/docs/app/building-your-application/caching) with the
 
 If you need to revalidate the cache of a page that has been [statically generated](/docs/pages/building-your-application/rendering/static-site-generation), you can do so by setting the `revalidate` prop in the page's [`getStaticProps`](/docs/pages/building-your-application/data-fetching/get-static-props) function.
 
-You can set the `Cache-Control` header in your [API Routes](/docs/pages/building-your-application/routing/api-routes) by using the `res.setHeader` method:
+您可以使用`res.setHeader`方法在[API 路由](/docs/pages/building-your-application/routing/api-routes)中设置`Cache-Control`头：
 
 ```ts filename="pages/api/hello.ts" switcher
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
 
 type ResponseData = {
-  message: string
-}
+  message: string;
+};
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
-) {
-  res.setHeader('Cache-Control', 's-maxage=86400')
-  res.status(200).json({ message: 'Hello from Next.js!' })
+export default function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
+  res.setHeader("Cache-Control", "s-maxage=86400");
+  res.status(200).json({ message: "Hello from Next.js!" });
 }
 ```
 
 ```js filename="pages/api/hello.js" switcher
 export default function handler(req, res) {
-  res.setHeader('Cache-Control', 's-maxage=86400')
-  res.status(200).json({ message: 'Hello from Next.js!' })
+  res.setHeader("Cache-Control", "s-maxage=86400");
+  res.status(200).json({ message: "Hello from Next.js!" });
 }
 ```
 
 </PagesOnly>
 
-## Options
+## 选项
 
 ### X-DNS-Prefetch-Control
 
-[This header](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control) controls DNS prefetching, allowing browsers to proactively perform domain name resolution on external links, images, CSS, JavaScript, and more. This prefetching is performed in the background, so the [DNS](https://developer.mozilla.org/docs/Glossary/DNS) is more likely to be resolved by the time the referenced items are needed. This reduces latency when the user clicks a link.
+[此标头](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control)控制 DNS 预取，允许浏览器主动对外部链接、图像、CSS、JavaScript 等执行域名解析。此预取是在后台执行的，因此[DNS](https://developer.mozilla.org/docs/Glossary/DNS)更有可能在需要引用项目时得到解析。这减少了用户单击链接时的延迟。
 
 ```js
 {
@@ -442,9 +439,9 @@ export default function handler(req, res) {
 
 ### Strict-Transport-Security
 
-[This header](https://developer.mozilla.org/docs/Web/HTTP/Headers/Strict-Transport-Security) informs browsers it should only be accessed using HTTPS, instead of using HTTP. Using the configuration below, all present and future subdomains will use HTTPS for a `max-age` of 2 years. This blocks access to pages or subdomains that can only be served over HTTP.
+[此标头](https://developer.mozilla.org/docs/Web/HTTP/Headers/Strict-Transport-Security)通知浏览器只能使用 HTTPS 访问，而不能使用 HTTP。使用下面的配置，所有现在和未来的子域都将使用 HTTPS，`max-age`为 2 年。这会阻止对只能通过 HTTP 提供服务的页面或子域的访问。
 
-If you're deploying to [Vercel](https://vercel.com/docs/concepts/edge-network/headers#strict-transport-security?utm_source=next-site&utm_medium=docs&utm_campaign=next-website), this header is not necessary as it's automatically added to all deployments unless you declare `headers` in your `next.config.js`.
+如果您正在部署到[Vercel](https://vercel.com/docs/concepts/edge-network/headers#strict-transport-security?utm_source=next-site&utm_medium=docs&utm_campaign=next-website)，则不需要此标头，因为它会自动添加到所有部署中，除非您在`next.config.js`中声明`headers`。
 
 ```js
 {
@@ -455,9 +452,9 @@ If you're deploying to [Vercel](https://vercel.com/docs/concepts/edge-network/he
 
 ### X-Frame-Options
 
-[This header](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Frame-Options) indicates whether the site should be allowed to be displayed within an `iframe`. This can prevent against clickjacking attacks.
+[此标题](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Frame-Options)指示是否应允许网站在`iframe`中显示。这可以防止点击劫持攻击。
 
-**This header has been superseded by CSP's `frame-ancestors` option**, which has better support in modern browsers.
+**此标头已被 CSP 的`frame-ancestors`选项取代**, 它在现代浏览器中具有更好的支持。
 
 ```js
 {
@@ -468,7 +465,7 @@ If you're deploying to [Vercel](https://vercel.com/docs/concepts/edge-network/he
 
 ### Permissions-Policy
 
-[This header](https://developer.mozilla.org/docs/Web/HTTP/Headers/Permissions-Policy) allows you to control which features and APIs can be used in the browser. It was previously named `Feature-Policy`.
+[此标题](https://developer.mozilla.org/docs/Web/HTTP/Headers/Permissions-Policy)允许您控制哪些功能和 API 可以在浏览器中使用。它以前被命名为`Feature-Policy`。
 
 ```js
 {
@@ -479,9 +476,9 @@ If you're deploying to [Vercel](https://vercel.com/docs/concepts/edge-network/he
 
 ### X-Content-Type-Options
 
-[This header](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Content-Type-Options) prevents the browser from attempting to guess the type of content if the `Content-Type` header is not explicitly set. This can prevent XSS exploits for websites that allow users to upload and share files.
+如果未明确设置`Content-Type`标头，则[此标头](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Content-Type-Options)可防止浏览器尝试猜测内容的类型。这可以防止允许用户上传和共享文件的网站利用 XSS 漏洞。
 
-For example, a user trying to download an image, but having it treated as a different `Content-Type` like an executable, which could be malicious. This header also applies to downloading browser extensions. The only valid value for this header is `nosniff`.
+例如，用户试图下载图像，但将其视为不同的`Content-Type` （如可执行文件），这可能是恶意的。此标题也适用于下载浏览器扩展。此标头的唯一有效值是`nosniff`。
 
 ```js
 {
@@ -490,9 +487,9 @@ For example, a user trying to download an image, but having it treated as a diff
 }
 ```
 
-### Referrer-Policy
+### 推荐人政策
 
-[This header](https://developer.mozilla.org/docs/Web/HTTP/Headers/Referrer-Policy) controls how much information the browser includes when navigating from the current website (origin) to another.
+[此标题](https://developer.mozilla.org/docs/Web/HTTP/Headers/Referrer-Policy)控制从当前网站（来源）导航到另一个网站时浏览器包含的信息量。
 
 ```js
 {
@@ -501,14 +498,14 @@ For example, a user trying to download an image, but having it treated as a diff
 }
 ```
 
-### Content-Security-Policy
+### 内容安全策略
 
-Learn more about adding a [Content Security Policy](/docs/app/building-your-application/configuring/content-security-policy) to your application.
+了解有关将[内容安全策略](/docs/app/building-your-application/configuring/content-security-policy)添加到应用程序的详细信息。
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes          |
-| --------- | ---------------- |
-| `v13.3.0` | `missing` added. |
-| `v10.2.0` | `has` added.     |
-| `v9.5.0`  | Headers added.   |
+| 版本      | 变化            |
+| --------- | --------------- |
+| `v13.3.0` | `missing` 添加. |
+| `v10.2.0` | `has` 添加.     |
+| `v9.5.0`  | 已添加标头。    |

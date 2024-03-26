@@ -1,5 +1,5 @@
 ---
-title: 拦截路线
+title: 拦截路由
 description: 使用截取路由在当前布局中加载新路由，同时屏蔽浏览器URL，这对于高级路由模式(如模式)非常有用。
 related:
   title: Next Steps
@@ -8,7 +8,7 @@ related:
     - app/building-your-application/routing/parallel-routes
 ---
 
-截取路由允许您在当前布局中从应用程序的另一部分加载路由。当您希望在不让用户切换到不同上下文的情况下显示路线的内容时，这种路由范例可能很有用。
+截取路由允许您在当前布局中从应用程序的另一部分加载路由。当您希望在不让用户切换到不同上下文的情况下显示路由的内容时，这种路由范例可能很有用。
 
 例如，当点击提要中的照片时，可以以模式显示照片，覆盖提要。
 在这种情况下，Next.js 截取`/photo/123`路由，屏蔽 URL，并将其覆盖在`/feed`上。
@@ -42,7 +42,7 @@ related:
 - `(..)(..)` to match segments **two levels above**
 - `(...)` to match segments from the **root** `app` directory
 
-For example, you can intercept the `photo` segment from within the `feed` segment by creating a `(..)photo` directory.
+例如，您可以通过创建`(..)photo`目录，从`feed`段中截取`photo`段。
 
 <Image
   alt="Intercepting routes folder structure"
@@ -52,20 +52,20 @@ For example, you can intercept the `photo` segment from within the `feed` segmen
   height="604"
 />
 
-> Note that the `(..)` convention is based on _route segments_, not the file-system.
+> 请注意，`(..)`约定基于*route segments*，而不是文件系统。
 
 ## 示例
 
 ### 模式
 
-Intercepting Routes can be used together with [Parallel Routes](/docs/app/building-your-application/routing/parallel-routes) to create modals.
+拦截路由可以与[并行路由](/docs/app/building-your-application/routing/parallel-routes)一起使用以创建模式。
 
-Using this pattern to create modals overcomes some common challenges when working with modals, by allowing you to:
+使用此模式创建模态克服了使用模态时的一些常见挑战，允许您：
 
-- Make the modal content **shareable through a URL**
-- **Preserve context** when the page is refreshed, instead of closing the modal
-- **Close the modal on backwards navigation** rather than going to the previous route
-- **Reopen the modal on forwards navigation**
+- 使模式内容**可通过 URL 共享**
+- **刷新页面时保留上下文**，而不是关闭模态
+- **关闭向后导航**上的模态，而不是转到上一条路由
+- **在向前导航时重新打开模态**
 
 <Image
   alt="Intercepting routes modal example"
@@ -75,8 +75,8 @@ Using this pattern to create modals overcomes some common challenges when workin
   height="976"
 />
 
-> In the above example, the path to the `photo` segment can use the `(..)` matcher since `@modal` is a _slot_ and not a _segment_. This means that the `photo` route is only one _segment_ level higher, despite being two _file-system_ levels higher.
+> 在上面的例子中，`photo`段的路径可以使用`(..)`匹配器，因为`@modal`是*槽*而不是*段*。这意味着`photo`路由只高出一个段级别，尽管它高出两个文件系统级别。
 
-Other examples could include opening a login modal in a top navbar while also having a dedicated `/login` page, or opening a shopping cart in a side modal.
+其他示例可以包括在顶部导航栏中打开登录模式，同时还具有专用的`/login`页面，或者在侧模式中打开购物车。
 
-[View an example](https://github.com/vercel-labs/nextgram) of modals with Intercepted and Parallel Routes.
+[查看示例](https://github.com/vercel-labs/nextgram)具有拦截和并行路由的模式。

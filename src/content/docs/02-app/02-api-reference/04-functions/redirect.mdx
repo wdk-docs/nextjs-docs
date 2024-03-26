@@ -1,25 +1,25 @@
 ---
 title: redirect
-description: API Reference for the redirect function.
+description: 重定向函数的API引用。
 related:
   links:
     - app/api-reference/functions/permanentRedirect
 ---
 
-The `redirect` function allows you to redirect the user to another URL. `redirect` can be used in Server Components, Client Components, [Route Handlers](/docs/app/building-your-application/routing/route-handlers), and [Server Actions](/docs/app/building-your-application/data-fetching/server-actions-and-mutations).
+`redirect`功能允许您将用户重定向到另一个 URL。 `redirect`可用于服务器组件、客户端组件、[路由处理程序](/docs/app/building-your-application/routing/route-handlers), 和[服务器操作](/docs/app/building-your-application/data-fetching/server-actions-and-mutations).
 
-When used in a [streaming context](/docs/app/building-your-application/routing/loading-ui-and-streaming#what-is-streaming), this will insert a meta tag to emit the redirect on the client side. When used in a server action, it will serve a 303 HTTP redirect response to the caller. Otherwise, it will serve a 307 HTTP redirect response to the caller.
+在[流上下文](/docs/app/building-your-application/routing/loading-ui-and-streaming#what-is-streaming)中使用时, 这将插入一个元标记以在客户端发出重定向。当在服务器操作中使用时，它将向调用方提供 303 HTTP 重定向响应。否则，它将向调用方提供 307 HTTP 重定向响应。
 
-If a resource doesn't exist, you can use the [`notFound` function](/docs/app/api-reference/functions/not-found) instead.
+如果资源不存在，则可以使用[`notFound` 函数](/docs/app/api-reference/functions/not-found)。
 
-> **Good to know**: If you prefer to return a 308 (Permanent) HTTP redirect instead of 307 (Temporary), you can use the [`permanentRedirect` function](/docs/app/api-reference/functions/permanentRedirect) instead.
+> **很高兴知道**: 如果您希望返回 308（永久）HTTP 重定向而不是 307（临时）, 您可以使用[`permanentRedirect` 函数](/docs/app/api-reference/functions/permanentRedirect)。
 
-## Parameters
+## 参数
 
-The `redirect` function accepts two arguments:
+`redirect`函数接受两个参数:
 
 ```js
-redirect(path, type)
+redirect(path, type);
 ```
 
 | Parameter | Type                                                          | Description                                                 |
@@ -29,58 +29,58 @@ redirect(path, type)
 
 By default, `redirect` will use `push` (adding a new entry to the browser history stack) in [Server Actions](/docs/app/building-your-application/data-fetching/server-actions-and-mutations) and `replace` (replacing the current URL in the browser history stack) everywhere else. You can override this behavior by specifying the `type` parameter.
 
-The `type` parameter has no effect when used in Server Components.
+在服务器组件中使用`type`参数时没有任何效果。
 
-## Returns
+## 返回
 
-`redirect` does not return any value.
+`redirect` 不返回任何值。
 
-## Example
+## 实例
 
-Invoking the `redirect()` function throws a `NEXT_REDIRECT` error and terminates rendering of the route segment in which it was thrown.
+调用`redirect()`函数会引发`NEXT_REDIRECT`错误，并终止对引发该错误的路由段的渲染。
 
-> **Good to know**: If you need to programmatically redirect the user after a certain event in a Client Component, you can use the [`useRouter`](/docs/app/api-reference/functions/use-router) hook.
+> **很高兴知道**: 如果在客户端组件中的某个事件后需要以编程方式重定向用户，可以使用[`useRouter`](/docs/app/api-reference/functions/use-router)钩.
 
 ```jsx filename="app/team/[id]/page.js"
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 
 async function fetchTeam(id) {
-  const res = await fetch('https://...')
-  if (!res.ok) return undefined
-  return res.json()
+  const res = await fetch("https://...");
+  if (!res.ok) return undefined;
+  return res.json();
 }
 
 export default async function Profile({ params }) {
-  const team = await fetchTeam(params.id)
+  const team = await fetchTeam(params.id);
   if (!team) {
-    redirect('/login')
+    redirect("/login");
   }
 
   // ...
 }
 ```
 
-> **Good to know**: `redirect` does not require you to use `return redirect()` as it uses the TypeScript [`never`](https://www.typescriptlang.org/docs/handbook/2/functions.html#never) type.
+> **很高兴知道**: `redirect`不需要使用`return redirect()`，因为它使用的是 TypeScript[`never`](https://www.typescriptlang.org/docs/handbook/2/functions.html#never)类型。
 
-## FAQ
+## 常见问题
 
-### Why does `redirect` use 307 and 308?
+### 为什么`redirect`使用 307 和 308？
 
-When using `redirect()` you may notice that the status codes used are `307` for a temporary redirect, and `308` for a permanent redirect. While traditionally a `302` was used for a temporary redirect, and a `301` for a permanent redirect, many browsers changed the request method of the redirect, from a `POST` to `GET` request when using a `302`, regardless of the origins request method.
+当使用`redirect()`时，您可能会注意到使用的状态代码是`307`表示临时重定向，`308`表示永久重定向。虽然传统上`302`用于临时重定向，`301`用于永久重定向，但许多浏览器在使用`302`时将重定向的请求方法从`POST`更改为`GET`请求，而与源请求方法无关。
 
-Taking the following example of a redirect from `/users` to `/people`, if you make a `POST` request to `/users` to create a new user, and are conforming to a `302` temporary redirect, the request method will be changed from a `POST` to a `GET` request. This doesn't make sense, as to create a new user, you should be making a `POST` request to `/people`, and not a `GET` request.
+以以下从`/users`重定向到`/peoples`的示例为例，如果您向`/users`发出`POST`请求以创建新用户，并且符合`302`临时重定向，则请求方法将从`POST`更改为`GET`请求。这是没有意义的，因为要创建一个新用户，您应该向`/people`发出`POST`请求，而不是`GET`请求。
 
-The introduction of the `307` status code means that the request method is preserved as `POST`.
+`307`状态码的引入意味着请求方法被保留为`POST`。
 
-- `302` - Temporary redirect, will change the request method from `POST` to `GET`
-- `307` - Temporary redirect, will preserve the request method as `POST`
+- `302` - 临时重定向，将请求方法从`POST`更改为`GET`
+- `307` - 临时重定向，将请求方法保留为`POST`
 
-The `redirect()` method uses a `307` by default, instead of a `302` temporary redirect, meaning your requests will _always_ be preserved as `POST` requests.
+`redirect()`方法默认使用`307`，而不是`302`临时重定向，这意味着您的请求将始终保留为`POST`请求。
 
-[Learn more](https://developer.mozilla.org/docs/Web/HTTP/Redirections) about HTTP Redirects.
+[了解更多信息](https://developer.mozilla.org/docs/Web/HTTP/Redirections)关于 HTTP 重定向。
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes                |
-| --------- | ---------------------- |
-| `v13.0.0` | `redirect` introduced. |
+| 版本      | 变化             |
+| --------- | ---------------- |
+| `v13.0.0` | `redirect` 介绍. |

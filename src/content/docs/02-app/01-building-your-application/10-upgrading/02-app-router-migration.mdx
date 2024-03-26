@@ -1,38 +1,38 @@
 ---
-title: App Router Incremental Adoption Guide
-nav_title: App Router Migration
-description: Learn how to upgrade your existing Next.js application from the Pages Router to the App Router.
+title: 应用路由器增量采用指南
+nav_title: 应用程序路由器迁移
+description: 了解如何将现有的Next.js应用程序从页面路由器升级到应用程序路由器。
 ---
 
-This guide will help you:
+本指南将帮助您:
 
-- [Update your Next.js application from version 12 to version 13](#nextjs-version)
-- [Upgrade features that work in both the `pages` and the `app` directories](#upgrading-new-features)
-- [Incrementally migrate your existing application from `pages` to `app`](#migrating-from-pages-to-app)
+- [将 Next.js 应用程序从版本 12 更新到版本 13](#nextjs-version)
+- [升级同时在`pages`和`app`目录中工作的功能](#upgrading-new-features)
+- [将现有应用程序从`页面`增量迁移到`应用程序`](#migrating-from-pages-to-app)
 
 ## 正在升级
 
-### Node.js Version
+### Node.js 版本
 
-The minimum Node.js version is now **v18.17**. See the [Node.js documentation](https://nodejs.org/docs/latest-v18.x/api/) for more information.
+Node.js 的最低版本现在是**v18.17**。请参阅[Node.js 文档](https://nodejs.org/docs/latest-v18.x/api/)了解更多信息。
 
-### Next.js Version
+### Next.js 版本
 
-To update to Next.js version 13, run the following command using your preferred package manager:
+要更新到 Next.js 版本 13，请使用首选包管理器运行以下命令：
 
 ```bash filename="Terminal"
 npm install next@latest react@latest react-dom@latest
 ```
 
-### ESLint Version
+### ESLint 版本
 
-If you're using ESLint, you need to upgrade your ESLint version:
+如果您正在使用 ESLint，则需要升级您的 ESLint 版本：
 
 ```bash filename="Terminal"
 npm install -D eslint-config-next@latest
 ```
 
-> **Good to know**: You may need to restart the ESLint server in VS Code for the ESLint changes to take effect. Open the Command Palette (`cmd+shift+p` on Mac; `ctrl+shift+p` on Windows) and search for `ESLint: Restart ESLint Server`.
+> **很高兴知道**: You may need to restart the ESLint server in VS Code for the ESLint changes to take effect. Open the Command Palette (`cmd+shift+p` on Mac; `ctrl+shift+p` on Windows) and search for `ESLint: Restart ESLint Server`.
 
 ## Next Steps
 
@@ -339,7 +339,7 @@ We recommend breaking down the migration of a page into two main steps:
 - Step 1: Move the default exported Page Component into a new Client Component.
 - Step 2: Import the new Client Component into a new `page.js` file inside the `app` directory.
 
-> **Good to know**: This is the easiest migration path because it has the most comparable behavior to the `pages` directory.
+> **很高兴知道**: This is the easiest migration path because it has the most comparable behavior to the `pages` directory.
 
 **Step 1: Create a new Client Component**
 
@@ -869,7 +869,7 @@ export async function GET(request: Request) {}
 export async function GET(request) {}
 ```
 
-> **Good to know**: If you previously used API routes to call an external API from the client, you can now use [Server Components](/docs/app/building-your-application/rendering/server-components) instead to securely fetch data. Learn more about [data fetching](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating).
+> **很高兴知道**: If you previously used API routes to call an external API from the client, you can now use [Server Components](/docs/app/building-your-application/rendering/server-components) instead to securely fetch data. Learn more about [data fetching](/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating).
 
 ### Step 7: Styling
 

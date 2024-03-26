@@ -5,7 +5,7 @@ description: 了解如何在Next.js应用程序中使用插入在服务器启动
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-如果您从项目**根目录**中的`instrumentation.ts`（或`.js`）文件导出名为`register`的函数（如果使用的话，则在`src`文件夹中），则每当启动新的 Next.js 服务器实例时，我们都会调用该函数。
+如果您从项目**根目录**中的`instrumentation.ts`(或`.js`)文件导出名为`register`的函数(如果使用的话，则在`src`文件夹中)，则每当启动新的 Next.js 服务器实例时，我们都会调用该函数。
 
 <AppOnly>
 
@@ -29,7 +29,7 @@ description: 了解如何在Next.js应用程序中使用插入在服务器启动
 
 </PagesOnly>
 
-当部署`register`函数时，它将在每次冷启动时被调用（但在每个环境中只调用一次）。
+当部署`register`函数时，它将在每次冷启动时被调用(但在每个环境中只调用一次)。
 
 有时，在代码中导入文件可能会很有用，因为它会产生副作用。例如，您可以导入定义一组全局变量的文件，但永远不要在代码中显式使用导入的文件。您仍然可以访问包声明的全局变量。
 

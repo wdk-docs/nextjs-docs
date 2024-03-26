@@ -1,21 +1,21 @@
 ---
-title: Defining Routes
-description: Learn how to create your first route in Next.js.
+title: 定义路由
+description: 了解如何在Next.js中创建您的第一条路由。
 related:
-  description: Learn more about creating pages and layouts.
+  description: 了解有关创建页面和布局的详细信息。
   links:
     - app/building-your-application/routing/pages-and-layouts
 ---
 
 > 我们建议在继续之前阅读[路由基础知识](/docs/app/building-your-application/routing)页面。
 
-本页将指导您如何在 Next.js 应用程序中定义和组织路线。
+本页将指导您如何在 Next.js 应用程序中定义和组织路由。
 
 ## 创建路由
 
 Next.js 使用基于文件系统的路由器，其中**folders**用于定义路由。
 
-每个文件夹代表一个[**route** 段](/docs/app/building-your-application/routing#route-segments)，映射到**URL**段。要创建[嵌套路由](/docs/app/building-your-application/routing#nested-routes)，可以将文件夹嵌套在彼此内部。
+每个文件夹代表一个[**路由**段](/docs/app/building-your-application/routing#route-segments)，映射到**URL**段。要创建[嵌套路由](/docs/app/building-your-application/routing#nested-routes)，可以将文件夹嵌套在彼此内部。
 
 <Image
   alt="Route segments to path segments"
@@ -25,7 +25,7 @@ Next.js 使用基于文件系统的路由器，其中**folders**用于定义路�
   height="594"
 />
 
-A special [`page.js` file](/docs/app/building-your-application/routing/pages-and-layouts#pages) is used to make route segments publicly accessible.
+一个特殊的[`page.js`](/docs/app/building-your-application/routing/pages-and-layouts#pages)文件用于公开访问路由段。
 
 <Image
   alt="Defining Routes"
@@ -35,13 +35,13 @@ A special [`page.js` file](/docs/app/building-your-application/routing/pages-and
   height="687"
 />
 
-In this example, the `/dashboard/analytics` URL path is _not_ publicly accessible because it does not have a corresponding `page.js` file. This folder could be used to store components, stylesheets, images, or other colocated files.
+在本例中，`/dashboard/analytics`URL 路径*不*可公开访问，因为它没有相应的`page.js`文件。此文件夹可用于存储组件、样式表、图像或其他共有文件。
 
-> **Good to know**: `.js`, `.jsx`, or `.tsx` file extensions can be used for special files.
+> **很高兴知道**: `.js`, `.jsx`, 或 `.tsx` 文件扩展名可以用于特殊文件。
 
-## 正在创建 UI
+## 创建 UI
 
-[特殊文件约定](/docs/app/building-your-application/routing#file-conventions)用于为每个管段创建 UI。 The most common are [pages](/docs/app/building-your-application/routing/pages-and-layouts#pages) to show UI unique to a route, and [layouts](/docs/app/building-your-application/routing/pages-and-layouts#layouts) to show UI that is shared across multiple routes.
+[特殊文件约定](/docs/app/building-your-application/routing#file-conventions)用于为每个管段创建 UI。最常见的是[页面](/docs/app/building-your-application/routing/pages-and-layouts#pages)显示路由唯一的 UI，[布局](/docs/app/building-your-application/routing/pages-and-layouts#layouts)显示跨多个路由共享的 UI。
 
 例如，要创建第一个页面，请在`app`目录中添加一个`page.js`文件，然后导出一个 React 组件：
 

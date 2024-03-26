@@ -1,95 +1,95 @@
 ---
 title: generateViewport
-description: API Reference for the generateViewport function.
+description: generateViewport函数的API参考。
 related:
-  title: Next Steps
-  description: View all the Metadata API options.
+  title: 接下来的步骤
+  description: 查看所有元数据API选项。
   links:
     - app/api-reference/file-conventions/metadata
     - app/building-your-application/optimizing/metadata
 ---
 
-You can customize the initial viewport of the page with the static `viewport` object or the dynamic `generateViewport` function.
+您可以使用静态`viewport`对象或动态`generateViewport`函数自定义页面的初始视口。
 
-> **Good to know**:
+> **很高兴知道**:
 >
-> - The `viewport` object and `generateViewport` function exports are **only supported in Server Components**.
-> - You cannot export both the `viewport` object and `generateViewport` function from the same route segment.
-> - If you're coming from migrating `metadata` exports, you can use [metadata-to-viewport-export codemod](/docs/app/building-your-application/upgrading/codemods#metadata-to-viewport-export) to update your changes.
+> - `viewport`对象和`generateViewport`函数导出**仅在服务器组件**中受支持。
+> - 不能从同一管段同时导出`viewport`对象和`generateViewport`函数。
+> - 如果您来自迁移`metadata`导出，您可以使用[元数据到视口导出 codemod](/docs/app/building-your-application/upgrading/codemods#metadata-to-viewport-export)来更新您的更改。
 
-## The `viewport` object
+## `viewport` 对象
 
-To define the viewport options, export a `viewport` object from a `layout.js` or `page.js` file.
+要定义视口选项，请从`layout.js`或`page.js`文件导出`viewport`对象。
 
 ```tsx filename="layout.tsx | page.tsx" switcher
-import { Viewport } from 'next'
+import { Viewport } from "next";
 
 export const viewport: Viewport = {
-  themeColor: 'black',
-}
+  themeColor: "black",
+};
 
 export default function Page() {}
 ```
 
 ```jsx filename="layout.js | page.js" switcher
 export const viewport = {
-  themeColor: 'black',
-}
+  themeColor: "black",
+};
 
 export default function Page() {}
 ```
 
-## `generateViewport` function
+## `generateViewport` 函数
 
-`generateViewport` should return a [`Viewport` object](#viewport-fields) containing one or more viewport fields.
+`generateViewport`应返回包含一个或多个视口字段的[`Viewport` 对象](#viewport-fields)。
 
 ```tsx filename="layout.tsx | page.tsx" switcher
 export function generateViewport({ params }) {
   return {
-    themeColor: '...',
-  }
+    themeColor: "...",
+  };
 }
 ```
 
 ```jsx filename="layout.js | page.js" switcher
 export function generateViewport({ params }) {
   return {
-    themeColor: '...',
-  }
+    themeColor: "...",
+  };
 }
 ```
 
-> **Good to know**:
+> **很高兴知道**:
 >
-> - If the viewport doesn't depend on runtime information, it should be defined using the static [`viewport` object](#the-viewport-object) rather than `generateMetadata`.
+> - 如果视口不依赖于运行时信息，则应使用静态[`viewport` 对象](#the-viewport-object)而不是`generateMetadata`来定义它。
 
-## Viewport Fields
+## Viewport 字段
 
 ### `themeColor`
 
-Learn more about [theme-color](https://developer.mozilla.org/docs/Web/HTML/Element/meta/name/theme-color).
+了解有关[主题颜色](https://developer.mozilla.org/docs/Web/HTML/Element/meta/name/theme-color)的更多信息.
 
-**Simple theme color**
+**简单的主题颜色**
 
 ```jsx filename="layout.js | page.js"
 export const viewport = {
-  themeColor: 'black',
-}
+  themeColor: "black",
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
 <meta name="theme-color" content="black" />
 ```
 
-**With media attribute**
+**具有媒体属性**
 
 ```jsx filename="layout.js | page.js"
 export const viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'cyan' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
+    { media: "(prefers-color-scheme: light)", color: "cyan" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -97,35 +97,32 @@ export const viewport = {
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
 ```
 
-### `width`, `initialScale`, and `maximumScale`
+### `width`, `initialScale`, 和 `maximumScale`
 
-> **Good to know**: The `viewport` meta tag is automatically set with the following default values. Usually, manual configuration is unnecessary as the default is sufficient. However, the information is provided for completeness.
+> **很高兴知道**: `viewport`元标记是使用以下默认值自动设置的。通常，手动配置是不必要的，因为默认配置就足够了。但是，提供这些信息是为了完整。
 
 ```jsx filename="layout.js | page.js"
 export const viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 1,
   // Also supported by less commonly used
   // interactiveWidget: 'resizes-visual',
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1, maximum-scale=1"
-/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 ```
 
 ### `colorScheme`
 
-Learn more about [`color-scheme`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name#:~:text=color%2Dscheme%3A%20specifies,of%20the%20following%3A).
+了解有关[`配色方案`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name#:~:text=color%2Dscheme%3A%20specifies,of%20the%20following%3A)的详细信息.
 
 ```jsx filename="layout.js | page.js"
 export const viewport = {
-  colorScheme: 'dark',
-}
+  colorScheme: "dark",
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -134,64 +131,64 @@ export const viewport = {
 
 ## Types
 
-You can add type safety to your viewport object by using the `Viewport` type. If you are using the [built-in TypeScript plugin](/docs/app/building-your-application/configuring/typescript) in your IDE, you do not need to manually add the type, but you can still explicitly add it if you want.
+可以使用`Viewport`类型为视口对象添加类型安全性。如果您在 IDE 中使用[内置 TypeScript 插件](/docs/app/building-your-application/configuring/typescript)，则不需要手动添加类型，但如果需要，仍然可以显式添加。
 
-### `viewport` object
+### `viewport` 对象
 
 ```tsx
-import type { Viewport } from 'next'
+import type { Viewport } from "next";
 
 export const viewport: Viewport = {
-  themeColor: 'black',
-}
+  themeColor: "black",
+};
 ```
 
-### `generateViewport` function
+### `generateViewport` 函数
 
-#### Regular function
+#### 正则函数
 
 ```tsx
-import type { Viewport } from 'next'
+import type { Viewport } from "next";
 
 export function generateViewport(): Viewport {
   return {
-    themeColor: 'black',
-  }
+    themeColor: "black",
+  };
 }
 ```
 
-#### With segment props
+#### 带分段道具
 
 ```tsx
-import type { Viewport } from 'next'
+import type { Viewport } from "next";
 
 type Props = {
-  params: { id: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
 export function generateViewport({ params, searchParams }: Props): Viewport {
   return {
-    themeColor: 'black',
-  }
+    themeColor: "black",
+  };
 }
 
 export default function Page({ params, searchParams }: Props) {}
 ```
 
-#### JavaScript Projects
+#### JavaScript 项目
 
-For JavaScript projects, you can use JSDoc to add type safety.
+对于 JavaScript 项目，您可以使用 JSDoc 来添加类型安全性。
 
 ```js
 /** @type {import("next").Viewport} */
 export const viewport = {
-  themeColor: 'black',
-}
+  themeColor: "black",
+};
 ```
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes                                       |
-| --------- | --------------------------------------------- |
-| `v14.0.0` | `viewport` and `generateViewport` introduced. |
+| 版本      | 变化                                   |
+| --------- | -------------------------------------- |
+| `v14.0.0` | `viewport` 和 `generateViewport` 介绍. |

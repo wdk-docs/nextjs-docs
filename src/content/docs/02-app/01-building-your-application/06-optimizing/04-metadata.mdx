@@ -149,7 +149,7 @@ export default function Page({ params, searchParams }) {}
 
 按照[评估顺序](#ordering)，从同一路由中的多个分段导出的元数据对象**浅**合并在一起，形成路由的最终元数据输出。重复的钥匙将根据其顺序进行**替换**。
 
-这意味着在前一个段中定义的带有嵌套字段（如[`openGraph`](/docs/app/api-reference/functions/generate-metadata#opengraph)和[`robots`](/docs/app/api-reference/functions/generate-metadata#robots)）的元数据会被最后一个段**覆盖**以定义它们。
+这意味着在前一个段中定义的带有嵌套字段(如[`openGraph`](/docs/app/api-reference/functions/generate-metadata#opengraph)和[`robots`](/docs/app/api-reference/functions/generate-metadata#robots))的元数据会被最后一个段**覆盖**以定义它们。
 
 #### 覆盖字段
 
@@ -287,7 +287,7 @@ export async function GET() {
 > - 示例可在[Vercel OG 游乐场](https://og-playground.vercel.app/)中找到.
 > - `ImageResponse` 使用 [@vercel/og](https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation), [Satori](https://github.com/vercel/satori), 以及 Resvg ，用于将 HTML 和 CSS 转换为 PNG。
 > - 仅支持 Edge Runtime。默认的 Node.js 运行时将不起作用。
-> - 仅支持 flexbox 和 CSS 属性的子集。高级布局（例如`display: grid`）将不起作用。
+> - 仅支持 flexbox 和 CSS 属性的子集。高级布局(例如`display: grid`)将不起作用。
 > - 最大捆绑包大小为`500KB`。捆绑包大小包括您的 JSX、CSS、字体、图像和任何其他资产。如果超出限制，请考虑减少任何资产的大小或在运行时提取。
 > - 仅支持`ttf`、`otf`和`woff`字体格式。为了最大限度地提高字体解析速度，`ttf`或`otf`优先于`woff`。
 
@@ -343,7 +343,7 @@ export default async function Page({ params }) {
 
 您可以使用 Google 的[丰富结果测试](https://search.google.com/test/rich-results)或通用[架构标记验证器](https://validator.schema.org/)验证和测试结构化数据.
 
-您可以使用社区包（如[`schema-dts`](https://www.npmjs.com/package/schema-dts)）使用 TypeScript 键入 JSON-LD:
+您可以使用社区包(如[`schema-dts`](https://www.npmjs.com/package/schema-dts))使用 TypeScript 键入 JSON-LD:
 
 ```tsx
 import { Product, WithContext } from "schema-dts";

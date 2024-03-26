@@ -1,78 +1,78 @@
 ---
 title: revalidateTag
-description: API Reference for the revalidateTag function.
+description: 重新验证Tag函数的API参考。
 ---
 
-`revalidateTag` allows you to purge [cached data](/docs/app/building-your-application/caching) on-demand for a specific cache tag.
+`revalidateTag`允许按需清除特定缓存标记的[缓存数据](/docs/app/building-your-application/caching)。
 
-> **Good to know**:
+> **很高兴知道**:
 >
-> - `revalidateTag` is available in both [Node.js and Edge runtimes](/docs/app/building-your-application/rendering/edge-and-nodejs-runtimes).
-> - `revalidateTag` only invalidates the cache when the path is next visited. This means calling `revalidateTag` with a dynamic route segment will not immediately trigger many revalidations at once. The invalidation only happens when the path is next visited.
+> - `revalidateTag`在[Node.js 和 Edge 运行时](/docs/app/building-your-application/rendering/edge-and-nodejs-runtimes)中都可用.
+> - `revalidateTag`仅在下次访问路径时使缓存无效。这意味着用动态路由段调用`revalidateTag`不会立即触发多次重新验证。只有在下次访问路径时才会发生失效。
 
-## Parameters
+## 参数
 
 ```tsx
 revalidateTag(tag: string): void;
 ```
 
-- `tag`: A string representing the cache tag associated with the data you want to revalidate. Must be less than or equal to 256 characters.
+- `tag`: 一个字符串，表示与要重新验证的数据关联的缓存标记。必须小于或等于 256 个字符。
 
-You can add tags to `fetch` as follows:
+您可以按如下方式向`fetch`添加标记：
 
 ```tsx
 fetch(url, { next: { tags: [...] } });
 ```
 
-## Returns
+## 返回
 
-`revalidateTag` does not return any value.
+`revalidateTag` 不返回任何值。
 
-## Examples
+## 举例
 
-### Server Action
+### 服务器操作
 
 ```ts filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import { revalidateTag } from 'next/cache'
+import { revalidateTag } from "next/cache";
 
 export default async function submit() {
-  await addPost()
-  revalidateTag('posts')
+  await addPost();
+  revalidateTag("posts");
 }
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
-import { revalidateTag } from 'next/cache'
+import { revalidateTag } from "next/cache";
 
 export default async function submit() {
-  await addPost()
-  revalidateTag('posts')
+  await addPost();
+  revalidateTag("posts");
 }
 ```
 
-### Route Handler
+### 路由处理程序
 
 ```ts filename="app/api/revalidate/route.ts" switcher
-import { NextRequest } from 'next/server'
-import { revalidateTag } from 'next/cache'
+import { NextRequest } from "next/server";
+import { revalidateTag } from "next/cache";
 
 export async function GET(request: NextRequest) {
-  const tag = request.nextUrl.searchParams.get('tag')
-  revalidateTag(tag)
-  return Response.json({ revalidated: true, now: Date.now() })
+  const tag = request.nextUrl.searchParams.get("tag");
+  revalidateTag(tag);
+  return Response.json({ revalidated: true, now: Date.now() });
 }
 ```
 
 ```js filename="app/api/revalidate/route.js" switcher
-import { revalidateTag } from 'next/cache'
+import { revalidateTag } from "next/cache";
 
 export async function GET(request) {
-  const tag = request.nextUrl.searchParams.get('tag')
-  revalidateTag(tag)
-  return Response.json({ revalidated: true, now: Date.now() })
+  const tag = request.nextUrl.searchParams.get("tag");
+  revalidateTag(tag);
+  return Response.json({ revalidated: true, now: Date.now() });
 }
 ```

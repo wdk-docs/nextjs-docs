@@ -43,9 +43,9 @@ export async function PATCH(request) {}
 export async function OPTIONS(request) {}
 ```
 
-> **Good to know**: Route Handlers are only available inside the `app` directory. You **do not** need to use API Routes (`pages`) and Route Handlers (`app`) together, as Route Handlers should be able to handle all use cases.
+> **很高兴知道**: Route Handlers are only available inside the `app` directory. You **do not** need to use API Routes (`pages`) and Route Handlers (`app`) together, as Route Handlers should be able to handle all use cases.
 
-## Parameters
+## 参数
 
 ### `request` (optional)
 
@@ -71,8 +71,8 @@ Currently, the only value of `context` is `params`, which is an object containin
 
 Route Handlers can extend the Web Response API by returning a `NextResponse` object. This allows you to easily set cookies, headers, redirect, and rewrite. [View the API reference](/docs/app/api-reference/functions/next-response).
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes                        |
+| 版本      | 变化                           |
 | --------- | ------------------------------ |
 | `v13.2.0` | Route handlers are introduced. |

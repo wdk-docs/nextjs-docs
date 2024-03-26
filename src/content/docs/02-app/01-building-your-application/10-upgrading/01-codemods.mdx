@@ -1,32 +1,32 @@
 ---
 title: Codemods
-description: Use codemods to upgrade your Next.js codebase when new features are released.
+description: 当新功能发布时，使用codemods升级Next.js代码库。
 ---
 
-Codemods are transformations that run on your codebase programmatically. This allows a large number of changes to be programmatically applied without having to manually go through every file.
+Codemods 是以编程方式在代码库上运行的转换。这允许以编程方式应用大量更改，而不必手动遍历每个文件。
 
-Next.js provides Codemod transformations to help upgrade your Next.js codebase when an API is updated or deprecated.
+当 API 被更新或弃用时，Next.js 提供了 Codemod 转换，以帮助升级 Next.js 代码库。
 
 ## 用法
 
-In your terminal, navigate (`cd`) into your project's folder, then run:
+在终端中，导航(`cd`)到项目的文件夹中，然后运行：
 
 ```bash filename="Terminal"
 npx @next/codemod <transform> <path>
 ```
 
-Replacing `<transform>` and `<path>` with appropriate values.
+用适当的值替换`<transform>`和`<path>`。
 
-- `transform` - name of transform
-- `path` - files or directory to transform
-- `--dry` Do a dry-run, no code will be edited
-- `--print` Prints the changed output for comparison
+- `transform` - 变换的名称
+- `path` - 要转换的文件或目录
+- `--dry` 进行试运行，不会编辑任何代码
+- `--print` 打印更改后的输出以进行比较
 
 ## Next.js Codemods
 
 ### 14.0
 
-#### Migrate `ImageResponse` imports
+#### 迁移`ImageResponse`导入
 
 ##### `next-og-import`
 
@@ -34,21 +34,21 @@ Replacing `<transform>` and `<path>` with appropriate values.
 npx @next/codemod@latest next-og-import .
 ```
 
-This codemod moves transforms imports from `next/server` to `next/og` for usage of [Dynamic OG Image Generation](/docs/app/building-your-application/optimizing/metadata#dynamic-image-generation).
+此代码模块将导入的转换从`next/server`移动到`next/og`，以用于[动态 og 图像生成](/docs/app/building-your-application/optimizing/metadata#dynamic-image-generation).
 
-For example:
+例如:
 
 ```js
 import { ImageResponse } from "next/server";
 ```
 
-Transforms into:
+转换为:
 
 ```js
 import { ImageResponse } from "next/og";
 ```
 
-#### Use `viewport` export
+#### 使用`viewport`导出
 
 ##### `metadata-to-viewport-export`
 
@@ -56,9 +56,9 @@ import { ImageResponse } from "next/og";
 npx @next/codemod@latest metadata-to-viewport-export .
 ```
 
-This codemod migrates certain viewport metadata to `viewport` export.
+此代码模块将某些视口元数据迁移到`viewport`导出。
 
-For example:
+例如:
 
 ```js
 export const metadata = {
@@ -70,7 +70,7 @@ export const metadata = {
 };
 ```
 
-Transforms into:
+转换为:
 
 ```js
 export const metadata = {
@@ -85,7 +85,7 @@ export const viewport = {
 
 ### 13.2
 
-#### Use Built-in Font
+#### 使用内置字体
 
 ##### `built-in-next-font`
 
@@ -93,15 +93,15 @@ export const viewport = {
 npx @next/codemod@latest built-in-next-font .
 ```
 
-This codemod uninstalls the `@next/font` package and transforms `@next/font` imports into the built-in `next/font`.
+此 codemod 卸载`@next/font'`包，并将`@next/font`导入转换为内置的`next/font`。
 
-For example:
+例如:
 
 ```js
 import { Inter } from "@next/font/google";
 ```
 
-Transforms into:
+转换为:
 
 ```js
 import { Inter } from "next/font/google";
@@ -109,7 +109,7 @@ import { Inter } from "next/font/google";
 
 ### 13.0
 
-#### Rename Next Image Imports
+#### 重命名下一个图像导入
 
 ##### `next-image-to-legacy-image`
 
@@ -117,9 +117,9 @@ import { Inter } from "next/font/google";
 npx @next/codemod@latest next-image-to-legacy-image .
 ```
 
-Safely renames `next/image` imports in existing Next.js 10, 11, or 12 applications to `next/legacy/image` in Next.js 13. Also renames `next/future/image` to `next/image`.
+将现有 next.js 10、11 或 12 应用程序中的`next/image`导入安全地重命名为 Next.js 13 中的`next/legacy/image`。还将`next/future/image`重命名为`next/image`。
 
-For example:
+例如
 
 ```jsx filename="pages/index.js"
 import Image1 from "next/image";
@@ -135,7 +135,7 @@ export default function Home() {
 }
 ```
 
-Transforms into:
+转换为：
 
 ```jsx filename="pages/index.js"
 // 'next/image' becomes 'next/legacy/image'
@@ -153,7 +153,7 @@ export default function Home() {
 }
 ```
 
-#### Migrate to the New Image Component
+#### 移植到新的图像组件
 
 ##### `next-image-experimental`
 
@@ -169,7 +169,7 @@ Dangerously migrates from `next/legacy/image` to the new `next/image` by adding 
 - Removes `lazyBoundary` prop.
 - Removes `lazyRoot` prop.
 
-#### Remove `<a>` Tags From Link Components
+#### 从链接组件中删除`<a>`标记
 
 ##### `new-link`
 
@@ -179,17 +179,17 @@ npx @next/codemod@latest new-link .
 
 <AppOnly>
 
-Remove `<a>` tags inside [Link Components](/docs/app/api-reference/components/link), or add a `legacyBehavior` prop to Links that cannot be auto-fixed.
+删除[链接组件](/docs/app/api-reference/components/link)内的`<a>`标记，或向无法自动修复的链接添加`legacyBehavior`道具。
 
 </AppOnly>
 
 <PagesOnly>
 
-Remove `<a>` tags inside [Link Components](/docs/pages/api-reference/components/link), or add a `legacyBehavior` prop to Links that cannot be auto-fixed.
+删除[链接组件](/docs/pages/api-reference/components/link)内的`<a>`标记, 或者向无法自动修复的链接添加`legacyBehavior`道具。
 
 </PagesOnly>
 
-For example:
+例如
 
 ```jsx
 <Link href="/about">
@@ -209,7 +209,7 @@ For example:
 </Link>
 ```
 
-In cases where auto-fixing can't be applied, the `legacyBehavior` prop is added. This allows your app to keep functioning using the old behavior for that particular link.
+在无法应用自动修复的情况下，会添加`legacyBehavior`道具。这允许您的应用程序使用该特定链接的旧行为继续运行。
 
 ```jsx
 const Component = () => <a>About</a>
@@ -233,13 +233,13 @@ const Component = () => <a>About</a>
 npx @next/codemod cra-to-next
 ```
 
-Migrates a Create React App project to Next.js; creating a Pages Router and necessary config to match behavior. Client-side only rendering is leveraged initially to prevent breaking compatibility due to `window` usage during SSR and can be enabled seamlessly to allow the gradual adoption of Next.js specific features.
+将 Create React App 项目迁移到 Next.js；创建一个页面路由器和必要的配置来匹配行为。仅客户端渲染最初被用来防止由于 SSR 期间的`window`使用而破坏兼容性，并且可以无缝启用，以允许逐步采用 Next.js 特定的功能。
 
-Please share any feedback related to this transform [in this discussion](https://github.com/vercel/next.js/discussions/25858).
+请[在此讨论中](https://github.com/vercel/next.js/discussions/25858)分享与此转换相关的任何反馈.
 
 ### 10
 
-#### Add React imports
+#### 添加 React 导入
 
 ##### `add-missing-react-import`
 
@@ -249,7 +249,7 @@ npx @next/codemod add-missing-react-import
 
 Transforms files that do not import `React` to include the import in order for the new [React JSX transform](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html) to work.
 
-For example:
+例如:
 
 ```jsx filename="my-component.js"
 export default class Home extends React.Component {
@@ -259,7 +259,7 @@ export default class Home extends React.Component {
 }
 ```
 
-Transforms into:
+转换为:
 
 ```jsx filename="my-component.js"
 import React from "react";
@@ -284,7 +284,7 @@ npx @next/codemod name-default-component
 
 Transforms anonymous components into named components to make sure they work with [Fast Refresh](https://nextjs.org/blog/next-9-4#fast-refresh).
 
-For example:
+例如:
 
 ```jsx filename="my-component.js"
 export default function () {
@@ -292,7 +292,7 @@ export default function () {
 }
 ```
 
-Transforms into:
+转换为:
 
 ```jsx filename="my-component.js"
 export default function MyComponent() {
@@ -314,7 +314,7 @@ npx @next/codemod withamp-to-config
 
 Transforms the `withAmp` HOC into Next.js 9 page configuration.
 
-For example:
+例如:
 
 ```js
 // Before
@@ -350,7 +350,7 @@ npx @next/codemod url-to-withrouter
 
 Transforms the deprecated automatically injected `url` property on top level pages to using `withRouter` and the `router` property it injects. Read more here: [https://nextjs.org/docs/messages/url-deprecated](/docs/messages/url-deprecated)
 
-For example:
+例如:
 
 ```js filename="From"
 import React from "react";

@@ -1,92 +1,91 @@
 ---
 title: urlImports
-description: Configure Next.js to allow importing modules from external URLs (experimental).
+description: 配置Next.js以允许从外部URL导入模块（实验）。
 ---
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-URL imports are an experimental feature that allows you to import modules directly from external servers (instead of from the local disk).
+URL 导入是一个实验性功能，允许您直接从外部服务器（而不是从本地磁盘）导入模块。
 
-> **Warning**: This feature is experimental. Only use domains that you trust to download and execute on your machine. Please exercise
-> discretion, and caution until the feature is flagged as stable.
+> **警告**: 此功能是实验性的。仅使用您信任的域来下载并在您的计算机上执行。请谨慎行事，直到该功能被标记为稳定。
 
-To opt-in, add the allowed URL prefixes inside `next.config.js`:
+要选择加入，请在`next.config.js`中添加允许的 URL 前缀：
 
 ```js filename="next.config.js"
 module.exports = {
   experimental: {
-    urlImports: ['https://example.com/assets/', 'https://cdn.skypack.dev'],
+    urlImports: ["https://example.com/assets/", "https://cdn.skypack.dev"],
   },
-}
+};
 ```
 
-Then, you can import modules directly from URLs:
+然后，您可以直接从 URL 导入模块：
 
 ```js
-import { a, b, c } from 'https://example.com/assets/some/module.js'
+import { a, b, c } from "https://example.com/assets/some/module.js";
 ```
 
-URL Imports can be used everywhere normal package imports can be used.
+URL 导入可以在任何可以使用普通包导入的地方使用。
 
-## Security Model
+## 安全模型
 
 This feature is being designed with **security as the top priority**. To start, we added an experimental flag forcing you to explicitly allow the domains you accept URL imports from. We're working to take this further by limiting URL imports to execute in the browser sandbox using the [Edge Runtime](/docs/app/api-reference/edge).
 
 ## Lockfile
 
-When using URL imports, Next.js will create a `next.lock` directory containing a lockfile and fetched assets.
-This directory **must be committed to Git**, not ignored by `.gitignore`.
+当使用 URL 导入时，Next.js 将创建一个`next.lock`目录，其中包含一个锁定文件和提取的资产。
+此目录**必须提交到 Git**，而不能被`.gitignore`忽略。
 
-- When running `next dev`, Next.js will download and add all newly discovered URL Imports to your lockfile
-- When running `next build`, Next.js will use only the lockfile to build the application for production
+- 当运行`next dev`时，Next.js 将下载并将所有新发现的 URL 导入添加到您的锁定文件中
+- 当运行`next build`时，next.js 将仅使用锁定文件来构建用于生产的应用程序
 
 Typically, no network requests are needed and any outdated lockfile will cause the build to fail.
 One exception is resources that respond with `Cache-Control: no-cache`.
 These resources will have a `no-cache` entry in the lockfile and will always be fetched from the network on each build.
 
-## Examples
+## 示例
 
 ### Skypack
 
 ```js
-import confetti from 'https://cdn.skypack.dev/canvas-confetti'
-import { useEffect } from 'react'
+import confetti from "https://cdn.skypack.dev/canvas-confetti";
+import { useEffect } from "react";
 
 export default () => {
   useEffect(() => {
-    confetti()
-  })
-  return <p>Hello</p>
-}
+    confetti();
+  });
+  return <p>Hello</p>;
+};
 ```
 
-### Static Image Imports
+### 静态图像导入
 
 ```js
-import Image from 'next/image'
-import logo from 'https://example.com/assets/logo.png'
+import Image from "next/image";
+import logo from "https://example.com/assets/logo.png";
 
 export default () => (
   <div>
     <Image src={logo} placeholder="blur" />
   </div>
-)
+);
 ```
 
-### URLs in CSS
+### CSS 中的 URLs
 
 ```css
 .className {
-  background: url('https://example.com/assets/hero.jpg');
+  background: url("https://example.com/assets/hero.jpg");
 }
 ```
 
-### Asset Imports
+### 资产导入
 
 ```js
-const logo = new URL('https://example.com/assets/file.txt', import.meta.url)
+const logo = new URL("https://example.com/assets/file.txt", import.meta.url);
 
-console.log(logo.pathname)
+console.log(logo.pathname);
 
 // prints "/_next/static/media/file.a9727b5d.txt"
 ```

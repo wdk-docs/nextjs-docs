@@ -1,54 +1,54 @@
 ---
 title: useSelectedLayoutSegment
-description: API Reference for the useSelectedLayoutSegment hook.
+description: useSelectedLayoutSegment挂钩的API参考。
 ---
 
-`useSelectedLayoutSegment` is a **Client Component** hook that lets you read the active route segment **one level below** the Layout it is called from.
+`useSelectedLayoutSegment `是一个**客户端组件**挂钩，可用于读取**活动路由段**，该路由段**位于调用它的 Layout 的**下一级。
 
-It is useful for navigation UI, such as tabs inside a parent layout that change style depending on the active child segment.
+它对导航 UI 很有用，例如父布局中根据活动子段更改样式的选项卡。
 
 ```tsx filename="app/example-client-component.tsx" switcher
-'use client'
+"use client";
 
-import { useSelectedLayoutSegment } from 'next/navigation'
+import { useSelectedLayoutSegment } from "next/navigation";
 
 export default function ExampleClientComponent() {
-  const segment = useSelectedLayoutSegment()
+  const segment = useSelectedLayoutSegment();
 
-  return <p>Active segment: {segment}</p>
+  return <p>Active segment: {segment}</p>;
 }
 ```
 
 ```jsx filename="app/example-client-component.js" switcher
-'use client'
+"use client";
 
-import { useSelectedLayoutSegment } from 'next/navigation'
+import { useSelectedLayoutSegment } from "next/navigation";
 
 export default function ExampleClientComponent() {
-  const segment = useSelectedLayoutSegment()
+  const segment = useSelectedLayoutSegment();
 
-  return <p>Active segment: {segment}</p>
+  return <p>Active segment: {segment}</p>;
 }
 ```
 
-> **Good to know**:
+> **很高兴知道**:
 >
-> - Since `useSelectedLayoutSegment` is a [Client Component](/docs/app/building-your-application/rendering/client-components) hook, and Layouts are [Server Components](/docs/app/building-your-application/rendering/server-components) by default, `useSelectedLayoutSegment` is usually called via a Client Component that is imported into a Layout.
-> - `useSelectedLayoutSegment` only returns the segment one level down. To return all active segments, see [`useSelectedLayoutSegments`](/docs/app/api-reference/functions/use-selected-layout-segments)
+> - 由于`useSelectedLayoutSegment`是[客户端组件](/docs/app/building-your-application/rendering/client-components)挂钩，而 Layouts 默认情况下是[服务器组件](/docs/app/building-your-application/rendering/server-components)，因此通常通过导入到 Layout 中的客户端组件来调用`useSelectedLayoutSegment`。
+> - `useSelectedLayoutSegment`只返回下一级的段。要返回所有活动分段，请参阅[`useSelectedLayoutSegments`](/docs/app/api-reference/functions/use-selected-layout-segments)
 
-## Parameters
+## 参数
 
 ```tsx
 const segment = useSelectedLayoutSegment(parallelRoutesKey?: string)
 ```
 
-`useSelectedLayoutSegment` _optionally_ accepts a [`parallelRoutesKey`](/docs/app/building-your-application/routing/parallel-routes#useselectedlayoutsegments), which allows you to read the active route segment within that slot.
+`useSelectedLayoutSegment`*可选*地接受[`parallelRoutesKey`](/docs/app/building-your-application/routing/parallel-routes#useselectedlayoutsegments), 这允许您读取该插槽中的活动路由段。
 
-## Returns
+## 返回
 
-`useSelectedLayoutSegment` returns a string of the active segment or `null` if one doesn't exist.
+`useSelectedLayoutSegment`返回活动段的字符串，如果不存在，则返回`null`。
 
-For example, given the Layouts and URLs below, the returned segment would be:
+例如，给定下面的布局和 URL，返回的片段将是：
 
 | Layout                    | Visited URL                    | Returned Segment |
 | ------------------------- | ------------------------------ | ---------------- |
@@ -59,79 +59,69 @@ For example, given the Layouts and URLs below, the returned segment would be:
 | `app/dashboard/layout.js` | `/dashboard/analytics`         | `'analytics'`    |
 | `app/dashboard/layout.js` | `/dashboard/analytics/monthly` | `'analytics'`    |
 
-## Examples
+## 举例
 
-### Creating an active link component
+### 创建活动链接组件
 
-You can use `useSelectedLayoutSegment` to create an active link component that changes style depending on the active segment. For example, a featured posts list in the sidebar of a blog:
+您可以使用`useSelectedLayoutSegment`创建活动链接组件，该组件根据活动段更改样式。例如，博客侧边栏中的特色帖子列表：
 
 ```tsx filename="app/blog/blog-nav-link.tsx" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useSelectedLayoutSegment } from 'next/navigation'
+import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
 
 // This *client* component will be imported into a blog layout
-export default function BlogNavLink({
-  slug,
-  children,
-}: {
-  slug: string
-  children: React.ReactNode
-}) {
+export default function BlogNavLink({ slug, children }: { slug: string; children: React.ReactNode }) {
   // Navigating to `/blog/hello-world` will return 'hello-world'
   // for the selected layout segment
-  const segment = useSelectedLayoutSegment()
-  const isActive = slug === segment
+  const segment = useSelectedLayoutSegment();
+  const isActive = slug === segment;
 
   return (
     <Link
       href={`/blog/${slug}`}
       // Change style depending on whether the link is active
-      style={{ fontWeight: isActive ? 'bold' : 'normal' }}
+      style={{ fontWeight: isActive ? "bold" : "normal" }}
     >
       {children}
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/blog/blog-nav-link.js" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useSelectedLayoutSegment } from 'next/navigation'
+import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
 
 // This *client* component will be imported into a blog layout
 export default function BlogNavLink({ slug, children }) {
   // Navigating to `/blog/hello-world` will return 'hello-world'
   // for the selected layout segment
-  const segment = useSelectedLayoutSegment()
-  const isActive = slug === segment
+  const segment = useSelectedLayoutSegment();
+  const isActive = slug === segment;
 
   return (
     <Link
       href={`/blog/${slug}`}
       // Change style depending on whether the link is active
-      style={{ fontWeight: isActive ? 'bold' : 'normal' }}
+      style={{ fontWeight: isActive ? "bold" : "normal" }}
     >
       {children}
     </Link>
-  )
+  );
 }
 ```
 
 ```tsx filename="app/blog/layout.tsx" switcher
 // Import the Client Component into a parent Layout (Server Component)
-import { BlogNavLink } from './blog-nav-link'
-import getFeaturedPosts from './get-featured-posts'
+import { BlogNavLink } from "./blog-nav-link";
+import getFeaturedPosts from "./get-featured-posts";
 
-export default async function Layout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  const featuredPosts = await getFeaturedPosts()
+export default async function Layout({ children }: { children: React.ReactNode }) {
+  const featuredPosts = await getFeaturedPosts();
   return (
     <div>
       {featuredPosts.map((post) => (
@@ -141,17 +131,17 @@ export default async function Layout({
       ))}
       <div>{children}</div>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/blog/layout.js" switcher
 // Import the Client Component into a parent Layout (Server Component)
-import { BlogNavLink } from './blog-nav-link'
-import getFeaturedPosts from './get-featured-posts'
+import { BlogNavLink } from "./blog-nav-link";
+import getFeaturedPosts from "./get-featured-posts";
 
 export default async function Layout({ children }) {
-  const featuredPosts = await getFeaturedPosts()
+  const featuredPosts = await getFeaturedPosts();
   return (
     <div>
       {featuredPosts.map((post) => (
@@ -161,12 +151,12 @@ export default async function Layout({ children }) {
       ))}
       <div>{children}</div>
     </div>
-  )
+  );
 }
 ```
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes                                |
-| --------- | -------------------------------------- |
-| `v13.0.0` | `useSelectedLayoutSegment` introduced. |
+| 版本      | 变化                             |
+| --------- | -------------------------------- |
+| `v13.0.0` | `useSelectedLayoutSegment` 介绍. |

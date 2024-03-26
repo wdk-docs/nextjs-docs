@@ -33,7 +33,7 @@ export async function GET(request) {
 }
 ```
 
-这将设置一个**cookie**以启用草稿模式。包含此 cookie 的后续请求将触发**草稿模式**更改静态生成页面的行为（稍后将对此进行详细介绍）。
+这将设置一个**cookie**以启用草稿模式。包含此 cookie 的后续请求将触发**草稿模式**更改静态生成页面的行为(稍后将对此进行详细介绍)。
 
 您可以通过访问`/api/draft`并查看浏览器的开发工具来手动测试。请注意`Set-Cookie`响应标头中有一个名为`__prerender_bypass`的 Cookie。
 
@@ -59,7 +59,7 @@ https://<your-site>/api/draft?secret=<token>&slug=<path>
 
 **最后**，在路由处理程序中：
 
-- 检查机密是否匹配以及`slug`参数是否存在（如果不匹配，则请求应失败）。
+- 检查机密是否匹配以及`slug`参数是否存在(如果不匹配，则请求应失败)。
 - 调用`draftMode.enable()`来设置 cookie。
 - 然后将浏览器重定向到`slug`指定的路径。
 
@@ -139,7 +139,7 @@ export async function GET(request) {
 
 下一步是更新页面以检查`draftMode().isEnabled`的值。
 
-如果您请求一个设置了 cookie 的页面，那么数据将在**请求时**（而不是在构建时）提取。
+如果您请求一个设置了 cookie 的页面，那么数据将在**请求时**(而不是在构建时)提取。
 
 此外，`isEnabled`的值将为`true`。
 
@@ -195,7 +195,7 @@ export default async function Page() {
 }
 ```
 
-就是这样！如果您从无头 CMS 或手动访问草稿路由处理程序（带有`secret`和`slug`），您现在应该能够看到草稿内容。如果您在不发布的情况下更新草稿，您应该可以查看草稿。
+就是这样！如果您从无头 CMS 或手动访问草稿路由处理程序(带有`secret`和`slug`)，您现在应该能够看到草稿内容。如果您在不发布的情况下更新草稿，您应该可以查看草稿。
 
 将其设置为无头 CMS 上的草稿 URL 或手动访问，您应该能够看到草稿。
 

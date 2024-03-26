@@ -169,7 +169,7 @@ export default function Page() {
 }
 ```
 
-> **Good to know:**
+> **很高兴知道:**
 >
 > - 示例：[带有加载和错误状态的表单](https://github.com/vercel/next.js/tree/canary/examples/next-forms)
 > - 在处理具有多个字段的表单时，您可能需要考虑将[`entries()`](https://developer.mozilla.org/en-US/docs/Web/API/FormData/entries)方法与 JavaScript 的[`Object.fromEntries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries)一起使用. 例如: `const rawFormData = Object.fromEntries(formData.entries())`
@@ -223,7 +223,7 @@ export async function updateUser(userId, formData) {
 }
 ```
 
-> **Good to know**:
+> **很高兴知道**:
 >
 > - 另一种选择是将参数作为隐藏的输入字段传递到表单中 (例如 `<input type="hidden" name="userId" value={userId} />`). 但是，该值将是呈现的 HTML 的一部分，不会进行编码。
 > - `.bind` 适用于服务器组件和客户端组件。它还支持渐进增强。
@@ -651,7 +651,7 @@ export async function createTodo(prevState, formData) {
 }
 ```
 
-> **Good to know:**
+> **很高兴知道:**
 >
 > - 除了抛出错误之外，您还可以返回一个由`useFormStatus`处理的对象。请参阅[服务器端验证和错误处理](#server-side-validation-and-error-handling).
 
@@ -866,7 +866,7 @@ export default function Page() {
 
 然而，为了实现这一点，在调用操作时，捕获的变量会被发送到客户端并返回到服务器。为了防止敏感数据暴露给客户端，Next.js 自动对封闭变量进行加密。每次构建 Next.js 应用程序时，都会为每个操作生成一个新的私钥。这意味着只能对特定的生成调用操作。
 
-> **Good to know:** 我们不建议仅依靠加密来防止敏感值在客户端上暴露。相反，您应该使用[React taint APIs](/docs/app/building-your-application/data-fetching/patterns#preventing-sensitive-data-from-being-exposed-to-the-client)来主动防止特定数据发送到客户端。
+> **很高兴知道:** 我们不建议仅依靠加密来防止敏感值在客户端上暴露。相反，您应该使用[React taint APIs](/docs/app/building-your-application/data-fetching/patterns#preventing-sensitive-data-from-being-exposed-to-the-client)来主动防止特定数据发送到客户端。
 
 ### 重写加密密钥(高级)
 
@@ -876,7 +876,7 @@ export default function Page() {
 
 这是一个高级用例，其中跨多个部署的一致加密行为对您的应用程序至关重要。您应该考虑标准的安全实践，如密钥轮换和签名。
 
-> **Good to know:** 部署到 Vercel 的 Next.js 应用程序会自动处理此问题。
+> **很高兴知道:** 部署到 Vercel 的 Next.js 应用程序会自动处理此问题。
 
 ### 允许的来源(高级)
 

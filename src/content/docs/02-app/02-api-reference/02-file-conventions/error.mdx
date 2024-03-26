@@ -88,7 +88,7 @@ A function to reset the error boundary. When executed, the function will try to 
 
 Can be used to prompt the user to attempt to recover from the error.
 
-> **Good to know**:
+> **很高兴知道**:
 >
 > - `error.js` boundaries must be **[Client Components](/docs/app/building-your-application/rendering/client-components)**.
 > - In Production builds, errors forwarded from Server Components will be stripped of specific error details to avoid leaking sensitive information.
@@ -130,7 +130,7 @@ export default function GlobalError({ error, reset }) {
 }
 ```
 
-> **Good to know**:
+> **很高兴知道**:
 >
 > - `global-error.js` replaces the root `layout.js` when active and so **must** define its own `<html>` and `<body>` tags.
 > - While designing error UI, you may find it helpful to use the [React Developer Tools](https://react.dev/learn/react-developer-tools) to manually toggle Error boundaries.
@@ -139,9 +139,9 @@ export default function GlobalError({ error, reset }) {
 
 The [`not-found`](https://nextjs.org/docs/app/api-reference/file-conventions/not-found) file is used to render UI when the `notFound()` function is thrown within a route segment.
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes                    |
+| 版本      | 变化                       |
 | --------- | -------------------------- |
 | `v13.1.0` | `global-error` introduced. |
 | `v13.0.0` | `error` introduced.        |

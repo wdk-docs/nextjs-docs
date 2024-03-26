@@ -1,15 +1,15 @@
 ---
 title: rewrites
-description: Add rewrites to your Next.js app.
+description: 将重写内容添加到您的Next.js应用程序中。
 ---
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-Rewrites allow you to map an incoming request path to a different destination path.
+重写允许您将传入的请求路径映射到不同的目标路径。
 
 <AppOnly>
 
-Rewrites act as a URL proxy and mask the destination path, making it appear the user hasn't changed their location on the site. In contrast, [redirects](/docs/app/api-reference/next-config-js/redirects) will reroute to a new page and show the URL changes.
+重写充当 URL 代理并屏蔽目标路径，使其看起来用户没有更改其在网站上的位置。相反，[重定向](/docs/app/api-reference/next-config-js/redirects)将重新路由到一个新页面，并显示 URL 的更改。
 
 </AppOnly>
 
@@ -19,33 +19,33 @@ Rewrites act as a URL proxy and mask the destination path, making it appear the 
 
 </PagesOnly>
 
-To use rewrites you can use the `rewrites` key in `next.config.js`:
+要使用重写，可以使用`next.config.js`中的`rewrites`键：
 
 ```js filename="next.config.js"
 module.exports = {
   async rewrites() {
     return [
       {
-        source: '/about',
-        destination: '/',
+        source: "/about",
+        destination: "/",
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-Rewrites are applied to client-side routing, a `<Link href="/about">` will have the rewrite applied in the above example.
+重写应用于客户端路由，`<Link href="/about">`将在上面的示例中应用重写。
 
-`rewrites` is an async function that expects to return either an array or an object of arrays (see below) holding objects with `source` and `destination` properties:
+`rewrites`是一个异步函数，它期望返回一个数组或数组中的一个对象（见下文），其中包含具有`source`和`destination`属性的对象：
 
-- `source`: `String` - is the incoming request path pattern.
-- `destination`: `String` is the path you want to route to.
-- `basePath`: `false` or `undefined` - if false the basePath won't be included when matching, can be used for external rewrites only.
-- `locale`: `false` or `undefined` - whether the locale should not be included when matching.
-- `has` is an array of [has objects](#header-cookie-and-query-matching) with the `type`, `key` and `value` properties.
-- `missing` is an array of [missing objects](#header-cookie-and-query-matching) with the `type`, `key` and `value` properties.
+- `source`: `String` - 是传入请求路径模式。
+- `destination`: `String` 是您要路由到的路径。
+- `basePath`: `false` 或 `undefined` - 如果为 false，匹配时将不包括 basePath，只能用于外部重写。
+- `locale`: `false` 或 `undefined` - 匹配时是否不应包括区域设置。
+- `has`是具有`type`、`key`和`value`属性的[has objects](#header-cookie-and-query-matching)数组。
+- `missing`是一个具有`type`、`key`和`value`属性的[缺少对象](#header-cookie-and-query-matching)数组。
 
-When the `rewrites` function returns an array, rewrites are applied after checking the filesystem (pages and `/public` files) and before dynamic routes. When the `rewrites` function returns an object of arrays with a specific shape, this behavior can be changed and more finely controlled, as of `v10.1` of Next.js:
+当`rewrites`函数返回一个数组时，在检查文件系统（页面和`/public`文件）之后和动态路由之前应用重写。当`rewrites`函数返回具有特定形状的数组对象时，可以更改和更精细地控制此行为，如 Next.js 的`v10.1`：
 
 ```js filename="next.config.js"
 module.exports = {
@@ -56,35 +56,35 @@ module.exports = {
         // and before all files including _next/public files which
         // allows overriding page files
         {
-          source: '/some-page',
-          destination: '/somewhere-else',
-          has: [{ type: 'query', key: 'overrideMe' }],
+          source: "/some-page",
+          destination: "/somewhere-else",
+          has: [{ type: "query", key: "overrideMe" }],
         },
       ],
       afterFiles: [
         // These rewrites are checked after pages/public files
         // are checked but before dynamic routes
         {
-          source: '/non-existent',
-          destination: '/somewhere-else',
+          source: "/non-existent",
+          destination: "/somewhere-else",
         },
       ],
       fallback: [
         // These rewrites are checked after both pages/public files
         // and dynamic routes are checked
         {
-          source: '/:path*',
+          source: "/:path*",
           destination: `https://my-old-site.com/:path*`,
         },
       ],
-    }
+    };
   },
-}
+};
 ```
 
-> **Good to know**: rewrites in `beforeFiles` do not check the filesystem/dynamic routes immediately after matching a source, they continue until all `beforeFiles` have been checked.
+> **很高兴知道**: rewrites in `beforeFiles` do not check the filesystem/dynamic routes immediately after matching a source, they continue until all `beforeFiles` have been checked.
 
-The order Next.js routes are checked is:
+检查 Next.js 路由的顺序是：
 
 <AppOnly>
 
@@ -108,110 +108,110 @@ The order Next.js routes are checked is:
 
 </PagesOnly>
 
-## Rewrite parameters
+## 重写参数
 
-When using parameters in a rewrite the parameters will be passed in the query by default when none of the parameters are used in the `destination`.
+当在重写中使用参数时，当`destination`中没有使用任何参数时，默认情况下参数将在查询中传递。
 
 ```js filename="next.config.js"
 module.exports = {
   async rewrites() {
     return [
       {
-        source: '/old-about/:path*',
-        destination: '/about', // The :path parameter isn't used here so will be automatically passed in the query
+        source: "/old-about/:path*",
+        destination: "/about", // The :path parameter isn't used here so will be automatically passed in the query
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-If a parameter is used in the destination none of the parameters will be automatically passed in the query.
+如果在目标中使用了某个参数，则不会在查询中自动传递任何参数。
 
 ```js filename="next.config.js"
 module.exports = {
   async rewrites() {
     return [
       {
-        source: '/docs/:path*',
-        destination: '/:path*', // The :path parameter is used here so will not be automatically passed in the query
+        source: "/docs/:path*",
+        destination: "/:path*", // The :path parameter is used here so will not be automatically passed in the query
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-You can still pass the parameters manually in the query if one is already used in the destination by specifying the query in the `destination`.
+如果在`destination`中指定了某个查询，则仍然可以在查询中手动传递参数。
 
 ```js filename="next.config.js"
 module.exports = {
   async rewrites() {
     return [
       {
-        source: '/:first/:second',
-        destination: '/:first?second=:second',
+        source: "/:first/:second",
+        destination: "/:first?second=:second",
         // Since the :first parameter is used in the destination the :second parameter
         // will not automatically be added in the query although we can manually add it
         // as shown above
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-> **Good to know**: Static pages from [Automatic Static Optimization](/docs/pages/building-your-application/rendering/automatic-static-optimization) or [prerendering](/docs/pages/building-your-application/data-fetching/get-static-props) params from rewrites will be parsed on the client after hydration and provided in the query.
+> **很高兴知道**: 来自[自动静态优化](/docs/pages/building-your-application/rendering/automatic-static-optimization)或[预提交](/docs/pages/building-your-application/data-fetching/get-static-props)参数的静态页面将在水合后在客户端上解析，并在查询中提供。
 
-## Path Matching
+## 路径匹配
 
-Path matches are allowed, for example `/blog/:slug` will match `/blog/hello-world` (no nested paths):
+允许路径匹配，例如`/blog/:slug`将匹配`/blog/hello-world`(没有嵌套路径):
 
 ```js filename="next.config.js"
 module.exports = {
   async rewrites() {
     return [
       {
-        source: '/blog/:slug',
-        destination: '/news/:slug', // Matched parameters can be used in the destination
+        source: "/blog/:slug",
+        destination: "/news/:slug", // Matched parameters can be used in the destination
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-### Wildcard Path Matching
+### 通配符路径匹配
 
-To match a wildcard path you can use `*` after a parameter, for example `/blog/:slug*` will match `/blog/a/b/c/d/hello-world`:
+要匹配通配符路径，可以在参数后使用`*`, 例如 `/blog/:slug*`将匹配`/blog/a/b/c/d/hello-world`:
 
 ```js filename="next.config.js"
 module.exports = {
   async rewrites() {
     return [
       {
-        source: '/blog/:slug*',
-        destination: '/news/:slug*', // Matched parameters can be used in the destination
+        source: "/blog/:slug*",
+        destination: "/news/:slug*", // Matched parameters can be used in the destination
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-### Regex Path Matching
+### Regex 路径匹配
 
-To match a regex path you can wrap the regex in parenthesis after a parameter, for example `/blog/:slug(\\d{1,})` will match `/blog/123` but not `/blog/abc`:
+要匹配正则表达式路径，可以将正则表达式包装在参数后面的括号中, 例如 `/blog/:slug(\\d{1,})` 将匹配 `/blog/123` 但不是 `/blog/abc`:
 
 ```js filename="next.config.js"
 module.exports = {
   async rewrites() {
     return [
       {
-        source: '/old-blog/:post(\\d{1,})',
-        destination: '/blog/:post', // Matched parameters can be used in the destination
+        source: "/old-blog/:post(\\d{1,})",
+        destination: "/blog/:post", // Matched parameters can be used in the destination
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-The following characters `(`, `)`, `{`, `}`, `:`, `*`, `+`, `?` are used for regex path matching, so when used in the `source` as non-special values they must be escaped by adding `\\` before them:
+以下字符 `(`, `)`, `{`, `}`, `:`, `*`, `+`, `?`用于正则表达式路径匹配, 因此，当在`source`中用作非特殊值时，必须通过在它们之前添加`\\`来转义它们：
 
 ```js filename="next.config.js"
 module.exports = {
@@ -219,23 +219,23 @@ module.exports = {
     return [
       {
         // this will match `/english(default)/something` being requested
-        source: '/english\\(default\\)/:slug',
-        destination: '/en-us/:slug',
+        source: "/english\\(default\\)/:slug",
+        destination: "/en-us/:slug",
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-## Header, Cookie, and Query Matching
+## 标头、Cookie 和查询匹配
 
-To only match a rewrite when header, cookie, or query values also match the `has` field or don't match the `missing` field can be used. Both the `source` and all `has` items must match and all `missing` items must not match for the rewrite to be applied.
+只有当标头、cookie 或查询值也与`has`字段匹配或与`missing`字段不匹配时，才能匹配重写。`source`和所有`has`项都必须匹配，所有`missing`项必须不匹配才能应用重写。
 
-`has` and `missing` items can have the following fields:
+`has` 和 `missing`项可以具有以下字段：
 
-- `type`: `String` - must be either `header`, `cookie`, `host`, or `query`.
-- `key`: `String` - the key from the selected type to match against.
-- `value`: `String` or `undefined` - the value to check for, if undefined any value will match. A regex like string can be used to capture a specific part of the value, e.g. if the value `first-(?<paramName>.*)` is used for `first-second` then `second` will be usable in the destination with `:paramName`.
+- `type`: `String` - 必须是其中之一 `header`, `cookie`, `host`, 或 `query`.
+- `key`: `String` - 所选类型中要匹配的键。
+- `value`: `String` or `undefined` - 要检查的值，如果未定义，则任何值都将匹配。类似 regex 的字符串可用于捕获值的特定部分, 例如，如果值`first-(?<paramName>.*)`用于`first-second`，则`second`将可用于带有`:paramName`的目的地。
 
 ```js filename="next.config.js"
 module.exports = {
@@ -244,79 +244,79 @@ module.exports = {
       // if the header `x-rewrite-me` is present,
       // this rewrite will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'header',
-            key: 'x-rewrite-me',
+            type: "header",
+            key: "x-rewrite-me",
           },
         ],
-        destination: '/another-page',
+        destination: "/another-page",
       },
       // if the header `x-rewrite-me` is not present,
       // this rewrite will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         missing: [
           {
-            type: 'header',
-            key: 'x-rewrite-me',
+            type: "header",
+            key: "x-rewrite-me",
           },
         ],
-        destination: '/another-page',
+        destination: "/another-page",
       },
       // if the source, query, and cookie are matched,
       // this rewrite will be applied
       {
-        source: '/specific/:path*',
+        source: "/specific/:path*",
         has: [
           {
-            type: 'query',
-            key: 'page',
+            type: "query",
+            key: "page",
             // the page value will not be available in the
             // destination since value is provided and doesn't
             // use a named capture group e.g. (?<page>home)
-            value: 'home',
+            value: "home",
           },
           {
-            type: 'cookie',
-            key: 'authorized',
-            value: 'true',
+            type: "cookie",
+            key: "authorized",
+            value: "true",
           },
         ],
-        destination: '/:path*/home',
+        destination: "/:path*/home",
       },
       // if the header `x-authorized` is present and
       // contains a matching value, this rewrite will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'header',
-            key: 'x-authorized',
-            value: '(?<authorized>yes|true)',
+            type: "header",
+            key: "x-authorized",
+            value: "(?<authorized>yes|true)",
           },
         ],
-        destination: '/home?authorized=:authorized',
+        destination: "/home?authorized=:authorized",
       },
       // if the host is `example.com`,
       // this rewrite will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'host',
-            value: 'example.com',
+            type: "host",
+            value: "example.com",
           },
         ],
-        destination: '/another-page',
+        destination: "/another-page",
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-## Rewriting to an external URL
+## 重写到外部 URL
 
 <details>
   <summary>Examples</summary>
@@ -326,26 +326,26 @@ module.exports = {
 
 </details>
 
-Rewrites allow you to rewrite to an external url. This is especially useful for incrementally adopting Next.js. The following is an example rewrite for redirecting the `/blog` route of your main app to an external site.
+重写允许您重写到外部 url。这对于逐步采用 Next.js 特别有用。以下是将主应用程序的`/blog`路由重定向到外部网站的重写示例。
 
 ```js filename="next.config.js"
 module.exports = {
   async rewrites() {
     return [
       {
-        source: '/blog',
-        destination: 'https://example.com/blog',
+        source: "/blog",
+        destination: "https://example.com/blog",
       },
       {
-        source: '/blog/:slug',
-        destination: 'https://example.com/blog/:slug', // Matched parameters can be used in the destination
+        source: "/blog/:slug",
+        destination: "https://example.com/blog/:slug", // Matched parameters can be used in the destination
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-If you're using `trailingSlash: true`, you also need to insert a trailing slash in the `source` parameter. If the destination server is also expecting a trailing slash it should be included in the `destination` parameter as well.
+如果使用`trailingSlash: true`，还需要在`source`参数中插入一个尾随斜杠。如果目标服务器也期望有一个尾部斜杠，那么它也应该包含在`destination`参数中。
 
 ```js filename="next.config.js"
 module.exports = {
@@ -353,23 +353,23 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/blog/',
-        destination: 'https://example.com/blog/',
+        source: "/blog/",
+        destination: "https://example.com/blog/",
       },
       {
-        source: '/blog/:path*/',
-        destination: 'https://example.com/blog/:path*/',
+        source: "/blog/:path*/",
+        destination: "https://example.com/blog/:path*/",
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-### Incremental adoption of Next.js
+### Next.js 的增量采用
 
-You can also have Next.js fall back to proxying to an existing website after checking all Next.js routes.
+您还可以在检查完所有 Next.js 路由后，让 Next.jss 返回到现有网站代理。
 
-This way you don't have to change the rewrites configuration when migrating more pages to Next.js
+这样，当将更多页面迁移到 Next.js 时，就不必更改重写配置
 
 ```js filename="next.config.js"
 module.exports = {
@@ -377,42 +377,42 @@ module.exports = {
     return {
       fallback: [
         {
-          source: '/:path*',
+          source: "/:path*",
           destination: `https://custom-routes-proxying-endpoint.vercel.app/:path*`,
         },
       ],
-    }
+    };
   },
-}
+};
 ```
 
-### Rewrites with basePath support
+### 使用 basePath 支持重写
 
 When leveraging [`basePath` support](/docs/app/api-reference/next-config-js/basePath) with rewrites each `source` and `destination` is automatically prefixed with the `basePath` unless you add `basePath: false` to the rewrite:
 
 ```js filename="next.config.js"
 module.exports = {
-  basePath: '/docs',
+  basePath: "/docs",
 
   async rewrites() {
     return [
       {
-        source: '/with-basePath', // automatically becomes /docs/with-basePath
-        destination: '/another', // automatically becomes /docs/another
+        source: "/with-basePath", // automatically becomes /docs/with-basePath
+        destination: "/another", // automatically becomes /docs/another
       },
       {
         // does not add /docs to /without-basePath since basePath: false is set
         // Note: this can not be used for internal rewrites e.g. `destination: '/another'`
-        source: '/without-basePath',
-        destination: 'https://example.com',
+        source: "/without-basePath",
+        destination: "https://example.com",
         basePath: false,
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-### Rewrites with i18n support
+### 支持 i18n 的重写
 
 <AppOnly>
 
@@ -429,49 +429,49 @@ When leveraging [`i18n` support](/docs/pages/building-your-application/routing/i
 ```js filename="next.config.js"
 module.exports = {
   i18n: {
-    locales: ['en', 'fr', 'de'],
-    defaultLocale: 'en',
+    locales: ["en", "fr", "de"],
+    defaultLocale: "en",
   },
 
   async rewrites() {
     return [
       {
-        source: '/with-locale', // automatically handles all locales
-        destination: '/another', // automatically passes the locale on
+        source: "/with-locale", // automatically handles all locales
+        destination: "/another", // automatically passes the locale on
       },
       {
         // does not handle locales automatically since locale: false is set
-        source: '/nl/with-locale-manual',
-        destination: '/nl/another',
+        source: "/nl/with-locale-manual",
+        destination: "/nl/another",
         locale: false,
       },
       {
         // this matches '/' since `en` is the defaultLocale
-        source: '/en',
-        destination: '/en/another',
+        source: "/en",
+        destination: "/en/another",
         locale: false,
       },
       {
         // it's possible to match all locales even when locale: false is set
-        source: '/:locale/api-alias/:path*',
-        destination: '/api/:path*',
+        source: "/:locale/api-alias/:path*",
+        destination: "/api/:path*",
         locale: false,
       },
       {
         // this gets converted to /(en|fr|de)/(.*) so will not match the top-level
         // `/` or `/fr` routes like /:path* would
-        source: '/(.*)',
-        destination: '/another',
+        source: "/(.*)",
+        destination: "/another",
       },
-    ]
+    ];
   },
-}
+};
 ```
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes          |
-| --------- | ---------------- |
-| `v13.3.0` | `missing` added. |
-| `v10.2.0` | `has` added.     |
-| `v9.5.0`  | Headers added.   |
+| 版本      | 变化            |
+| --------- | --------------- |
+| `v13.3.0` | `missing` 补充. |
+| `v10.2.0` | `has` 补充.     |
+| `v9.5.0`  | 已添加标头.     |

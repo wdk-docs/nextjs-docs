@@ -5,12 +5,12 @@ description: Next.js provides gzip compression to compress rendered content and 
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-Next.js provides [**gzip**](https://tools.ietf.org/html/rfc6713#section-3) compression to compress rendered content and static files. In general you will want to enable compression on a HTTP proxy like [nginx](https://www.nginx.com/), to offload load from the `Node.js` process.
+Next.js 提供[**gzip**](https://tools.ietf.org/html/rfc6713#section-3)压缩来压缩渲染的内容和静态文件。通常，您会希望在像[nginx](https://www.nginx.com/)这样的 HTTP 代理上启用压缩, 以卸载`Node.js`进程的负载。
 
-To disable **compression**, open `next.config.js` and disable the `compress` config:
+要禁用**compression**，请打开`next.config.js`并禁用`compress`配置:
 
 ```js filename="next.config.js"
 module.exports = {
   compress: false,
-}
+};
 ```

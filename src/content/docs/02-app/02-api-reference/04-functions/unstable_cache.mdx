@@ -1,9 +1,9 @@
 ---
 title: unstable_cache
-description: API Reference for the unstable_cache function.
+description: unstable_cache函数的API引用。
 ---
 
-`unstable_cache` allows you to cache the results of expensive operations, like database queries, and reuse them across multiple requests.
+`unstable_cache`允许缓存昂贵操作（如数据库查询）的结果，并在多个请求中重用它们。
 
 ```jsx
 import { getUser } from './data';
@@ -22,10 +22,10 @@ export default async function Component({ userID }) {
 
 > **Warning**: This API is unstable and may change in the future. We will provide migration documentation and codemods, if needed, as this API stabilizes.
 
-## Parameters
+## 参数
 
 ```jsx
-const data = unstable_cache(fetchData, keyParts, options)()
+const data = unstable_cache(fetchData, keyParts, options)();
 ```
 
 - `fetchData`: This is an asynchronous function that fetches the data you want to cache. It must be a function that returns a `Promise`.
@@ -34,12 +34,12 @@ const data = unstable_cache(fetchData, keyParts, options)()
   - `tags`: An array of tags that can be used to control cache invalidation.
   - `revalidate`: The number of seconds after which the cache should be revalidated.
 
-## Returns
+## 返回
 
 `unstable_cache` returns a function that when invoked, returns a Promise that resolves to the cached data. If the data is not in the cache, the provided function will be invoked, and its result will be cached and returned.
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes                      |
+| 版本      | 变化                         |
 | --------- | ---------------------------- |
 | `v14.0.0` | `unstable_cache` introduced. |

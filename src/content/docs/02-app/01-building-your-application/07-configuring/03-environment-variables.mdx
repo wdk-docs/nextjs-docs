@@ -65,7 +65,7 @@ export async function getStaticProps() {
 > ```
 
 > **Note**: 如果您使用的是`/src`文件夹，请注意 Next.js 将**仅**从父文件夹加载.env 文件，而**不**是从`/src`文件夹加载。
-> 这将加载`process.env.DB_HOST`, `process.env.DB_USER`, 和 `process.env.DB_PASS`自动进入 Node.js 环境，允许您在[路线处理程序](/docs/app/building-your-application/routing/route-handlers)中使用它们.
+> 这将加载`process.env.DB_HOST`, `process.env.DB_USER`, 和 `process.env.DB_PASS`自动进入 Node.js 环境，允许您在[路由处理程序](/docs/app/building-your-application/routing/route-handlers)中使用它们.
 
 例如:
 
@@ -156,7 +156,7 @@ export default function Component() {
 }
 ```
 
-**Good to know:**
+**很高兴知道:**
 
 - 您可以使用[`register` 函数](/docs/app/building-your-application/optimizing/instrumentation)在服务器启动时运行代码.
 - 我们不建议使用[runtimeConfig](/docs/pages/api-reference/next-config-js/runtime-configuration)选项，因为这不适用于独立输出模式。 相反，我们建议[逐步采用](/docs/app/building-your-application/upgrading/app-router-migration)应用路由器。
@@ -183,7 +183,7 @@ Next.js 允许您在`.env`(所有环境)中设置默认值， `.env.development`
 vercel env pull .env.local
 ```
 
-> **Good to know**: 将 Next.js 应用程序部署到[Vercel](https://vercel.com)时, `.env*`文件中的环境变量将不可用于 Edge Runtime，除非它们的名称以`NEXT_PUBLIC_`为前缀。我们强烈建议您改为在[项目设置](https://vercel.com/docs/projects/environment-variables?utm_medium=docs&utm_source=next-site&utm_campaign=next-website)中管理环境变量，在那里所有环境变量都可用。
+> **很高兴知道**: 将 Next.js 应用程序部署到[Vercel](https://vercel.com)时, `.env*`文件中的环境变量将不可用于 Edge Runtime，除非它们的名称以`NEXT_PUBLIC_`为前缀。我们强烈建议您改为在[项目设置](https://vercel.com/docs/projects/environment-variables?utm_medium=docs&utm_source=next-site&utm_campaign=next-website)中管理环境变量，在那里所有环境变量都可用。
 
 ## 测试环境变量
 
@@ -193,7 +193,7 @@ vercel env pull .env.local
 
 `测试`环境与`开发`和`生产`之间有一个小区别，您需要记住：`.env.local`不会被加载，因为您希望测试能为每个人产生相同的结果。这样，通过忽略`.env.local`(旨在覆盖默认集)，每个测试执行都将在不同的执行中使用相同的 env 默认值。
 
-> **Good to know**: 与默认环境变量类似，`.env.test`文件应包含在存储库中，但`.env.test.local`不应包含在内，因为`.env*.local`将通过`.gitignore`忽略。
+> **很高兴知道**: 与默认环境变量类似，`.env.test`文件应包含在存储库中，但`.env.test.local`不应包含在内，因为`.env*.local`将通过`.gitignore`忽略。
 
 在运行单元测试时，您可以确保以与 Next.js 相同的方式加载环境变量，方法是利用`@next/env`包中的`loadEnvConfig`函数。
 

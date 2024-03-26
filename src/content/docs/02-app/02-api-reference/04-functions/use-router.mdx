@@ -1,99 +1,99 @@
 ---
 title: useRouter
-description: API reference for the useRouter hook.
+description: useRouter钩子的API引用。
 ---
 
-The `useRouter` hook allows you to programmatically change routes inside [Client Components](/docs/app/building-your-application/rendering/client-components).
+`useRouter`挂钩允许您以编程方式更改[客户端组件](/docs/app/building-your-application/rendering/client-components)内部的路由.
 
-> **Recommendation:** Use the [`<Link>` component](/docs/app/building-your-application/routing/linking-and-navigating#link-component) for navigation unless you have a specific requirement for using `useRouter`.
+> **正式建议:** 使用[`<Link>` 组件](/docs/app/building-your-application/routing/linking-and-navigating#link-component)进行导航，除非您对使用`useRouter`有特定要求。
 
 ```tsx filename="app/example-client-component.tsx" switcher
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 export default function Page() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <button type="button" onClick={() => router.push('/dashboard')}>
+    <button type="button" onClick={() => router.push("/dashboard")}>
       Dashboard
     </button>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/example-client-component.js" switcher
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 export default function Page() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <button type="button" onClick={() => router.push('/dashboard')}>
+    <button type="button" onClick={() => router.push("/dashboard")}>
       Dashboard
     </button>
-  )
+  );
 }
 ```
 
 ## `useRouter()`
 
-- `router.push(href: string, { scroll: boolean })`: Perform a client-side navigation to the provided route. Adds a new entry into the [browser’s history](https://developer.mozilla.org/docs/Web/API/History_API) stack.
-- `router.replace(href: string, { scroll: boolean })`: Perform a client-side navigation to the provided route without adding a new entry into the [browser’s history stack](https://developer.mozilla.org/docs/Web/API/History_API).
-- `router.refresh()`: Refresh the current route. Making a new request to the server, re-fetching data requests, and re-rendering Server Components. The client will merge the updated React Server Component payload without losing unaffected client-side React (e.g. `useState`) or browser state (e.g. scroll position).
-- `router.prefetch(href: string)`: [Prefetch](/docs/app/building-your-application/routing/linking-and-navigating#1-prefetching) the provided route for faster client-side transitions.
-- `router.back()`: Navigate back to the previous route in the browser’s history stack.
-- `router.forward()`: Navigate forwards to the next page in the browser’s history stack.
+- `router.push(href: string, { scroll: boolean })`: 对提供的路线执行客户端导航。将新条目添加到[浏览器的历史记录](https://developer.mozilla.org/docs/Web/API/History_API)堆栈中。
+- `router.replace(href: string, { scroll: boolean })`: 在不向[浏览器的历史堆栈](https://developer.mozilla.org/docs/Web/API/History_API)中添加新条目的情况下，执行客户端导航到所提供的路线.
+- `router.refresh()`: 刷新当前路由。向服务器发出新请求，重新获取数据请求，并重新呈现服务器组件。客户端将合并更新的 React 服务器组件有效载荷，而不会丢失未受影响的客户端 React（例如`useState`）或浏览器状态（例如滚动位置）。
+- `router.prefetch(href: string)`: [Prefetch](/docs/app/building-your-application/routing/linking-and-navigating#1-prefetching)为更快的客户端转换提供的路由。
+- `router.back()`: 导航回浏览器历史堆栈中的上一条管线。
+- `router.forward()`: 向前导航到浏览器历史堆栈中的下一页。
 
-> **Good to know**:
+> **很高兴知道**:
 >
-> - The `<Link>` component automatically prefetch routes as they become visible in the viewport.
-> - `refresh()` could re-produce the same result if fetch requests are cached. Other dynamic functions like `cookies` and `headers` could also change the response.
+> - 当管线在视口中可见时，`<Link>`组件会自动预取管线。
+> - 如果缓存了 fetch 请求，`refresh()`可能会重新生成相同的结果。其他动态函数，如`cookie`和`headers`也可以更改响应。
 
 ### Migrating from `next/router`
 
-- The `useRouter` hook should be imported from `next/navigation` and not `next/router` when using the App Router
-- The `pathname` string has been removed and is replaced by [`usePathname()`](/docs/app/api-reference/functions/use-pathname)
-- The `query` object has been removed and is replaced by [`useSearchParams()`](/docs/app/api-reference/functions/use-search-params)
-- `router.events` has been replaced. [See below.](#router-events)
+- 使用应用程序路由器时，`useRouter`挂钩应从`next/navigation`导入，而不是从`next/router`导入
+- `pathname`字符串已被删除，并替换为[`usePathname()`](/docs/app/api-reference/functions/use-pathname)
+- `query`对象已被删除，并替换为[`useSearchParams()`](/docs/app/api-reference/functions/use-search-params)
+- `router.events`已被替换。[见下文。](#router-events)
 
-[View the full migration guide](/docs/app/building-your-application/upgrading/app-router-migration).
+[查看完整的迁移指南](/docs/app/building-your-application/upgrading/app-router-migration).
 
-## Examples
+## 举例
 
-### Router events
+### 路由事件
 
-You can listen for page changes by composing other Client Component hooks like `usePathname` and `useSearchParams`.
+您可以通过组合其他客户端组件挂钩（如`usePathname`和`useSearchParams`）来侦听页面更改。
 
 ```jsx filename="app/components/navigation-events.js"
-'use client'
+"use client";
 
-import { useEffect } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { useEffect } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export function NavigationEvents() {
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    const url = `${pathname}?${searchParams}`
-    console.log(url)
+    const url = `${pathname}?${searchParams}`;
+    console.log(url);
     // You can now use the current URL
     // ...
-  }, [pathname, searchParams])
+  }, [pathname, searchParams]);
 
-  return null
+  return null;
 }
 ```
 
-Which can be imported into a layout.
+可以导入到布局中。
 
 ```jsx filename="app/layout.js" highlight={2,10-12}
-import { Suspense } from 'react'
-import { NavigationEvents } from './components/navigation-events'
+import { Suspense } from "react";
+import { NavigationEvents } from "./components/navigation-events";
 
 export default function Layout({ children }) {
   return (
@@ -106,56 +106,50 @@ export default function Layout({ children }) {
         </Suspense>
       </body>
     </html>
-  )
+  );
 }
 ```
 
-> **Good to know**: `<NavigationEvents>` is wrapped in a [`Suspense` boundary](/docs/app/building-your-application/routing/loading-ui-and-streaming#example) because[`useSearchParams()`](/docs/app/api-reference/functions/use-search-params) causes client-side rendering up to the closest `Suspense` boundary during [static rendering](/docs/app/building-your-application/rendering/server-components#static-rendering-default). [Learn more](/docs/app/api-reference/functions/use-search-params#behavior).
+> **很高兴知道**: `<NavigationEvents>`被包装在[`Suspense` 边界](/docs/app/building-your-application/routing/loading-ui-and-streaming#example)中，因为[`useSearchParams()`](/docs/app/api-reference/functions/use-search-params)导致客户端在[静态渲染](/docs/app/building-your-application/rendering/server-components#static-rendering-default)期间渲染到最接近的`Suspense`边界. [Learn more](/docs/app/api-reference/functions/use-search-params#behavior).
 
-### Disabling scroll restoration
+### 禁用滚动恢复
 
-By default, Next.js will scroll to the top of the page when navigating to a new route. You can disable this behavior by passing `scroll: false` to `router.push()` or `router.replace()`.
+默认情况下，当导航到新路线时，Next.js 将滚动到页面顶部。您可以通过将`scroll: false`传递给`router.push()`或`router.replace()`来禁用此行为。
 
 ```tsx filename="app/example-client-component.tsx" switcher
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 export default function Page() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <button
-      type="button"
-      onClick={() => router.push('/dashboard', { scroll: false })}
-    >
+    <button type="button" onClick={() => router.push("/dashboard", { scroll: false })}>
       Dashboard
     </button>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/example-client-component.jsx" switcher
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 export default function Page() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <button
-      type="button"
-      onClick={() => router.push('/dashboard', { scroll: false })}
-    >
+    <button type="button" onClick={() => router.push("/dashboard", { scroll: false })}>
       Dashboard
     </button>
-  )
+  );
 }
 ```
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes                                        |
-| --------- | ---------------------------------------------- |
-| `v13.0.0` | `useRouter` from `next/navigation` introduced. |
+| 版本      | 变化                                      |
+| --------- | ----------------------------------------- |
+| `v13.0.0` | 引入了`useRouter`from `next/navigation`。 |

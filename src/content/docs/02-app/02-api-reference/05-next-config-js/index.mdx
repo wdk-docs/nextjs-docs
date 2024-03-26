@@ -1,24 +1,24 @@
 ---
-title: next.config.js Options
-description: Learn how to configure your application with next.config.js.
+title: next.config.js 选项
+description: 了解如何使用next.config.js配置您的应用程序。
 ---
 
-{/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
+{/* 此文档的内容在应用程序和页面路由器之间共享。 您可以使用`<PagesOnly>Content</PagesOnly>`组件添加特定于页面路由器的内容。任何共享内容都不应封装在组件中。 */}
 
-Next.js can be configured through a `next.config.js` file in the root of your project directory (for example, by `package.json`).
+Next.js 可以通过项目目录根目录中的`next.config.js`文件进行配置 (例如，通过 `package.json`).
 
 ```js filename="next.config.js"
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   /* config options here */
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
-`next.config.js` is a regular Node.js module, not a JSON file. It gets used by the Next.js server and build phases, and it's not included in the browser build.
+`next.config.js`是一个常规的 Node.js 模块，而不是 JSON 文件。它被 Next.js 服务器和构建阶段使用，并且不包含在浏览器构建中。
 
-If you need [ECMAScript modules](https://nodejs.org/api/esm.html), you can use `next.config.mjs`:
+如果您需要[ECMAScript 模块](https://nodejs.org/api/esm.html)，您可以使用`next.config.mjs`：
 
 ```js filename="next.config.mjs"
 /**
@@ -26,12 +26,12 @@ If you need [ECMAScript modules](https://nodejs.org/api/esm.html), you can use `
  */
 const nextConfig = {
   /* config options here */
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
-You can also use a function:
+您也可以使用函数:
 
 ```js filename="next.config.mjs"
 export default (phase, { defaultConfig }) => {
@@ -40,12 +40,12 @@ export default (phase, { defaultConfig }) => {
    */
   const nextConfig = {
     /* config options here */
-  }
-  return nextConfig
-}
+  };
+  return nextConfig;
+};
 ```
 
-Since Next.js 12.1.0, you can use an async function:
+由于 Next.js 12.1.0，您可以使用异步函数:
 
 ```js filename="next.config.js"
 module.exports = async (phase, { defaultConfig }) => {
@@ -54,33 +54,33 @@ module.exports = async (phase, { defaultConfig }) => {
    */
   const nextConfig = {
     /* config options here */
-  }
-  return nextConfig
-}
+  };
+  return nextConfig;
+};
 ```
 
-`phase` is the current context in which the configuration is loaded. You can see the [available phases](https://github.com/vercel/next.js/blob/5e6b008b561caf2710ab7be63320a3d549474a5b/packages/next/shared/lib/constants.ts#L19-L23). Phases can be imported from `next/constants`:
+`phase`是加载配置的当前上下文。您可以看到[可用阶段](https://github.com/vercel/next.js/blob/5e6b008b561caf2710ab7be63320a3d549474a5b/packages/next/shared/lib/constants.ts#L19-L23). 阶段可以从`next/constants`导入：
 
 ```js
-const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
+const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 
 module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
       /* development only config options here */
-    }
+    };
   }
 
   return {
     /* config options for all phases except development here */
-  }
-}
+  };
+};
 ```
 
-The commented lines are the place where you can put the configs allowed by `next.config.js`, which are [defined in this file](https://github.com/vercel/next.js/blob/canary/packages/next/src/server/config-shared.ts).
+注释行是您可以放置`next.config.js`允许的配置的地方，这些配置是[在该文件中定义的](https://github.com/vercel/next.js/blob/canary/packages/next/src/server/config-shared.ts).
 
-However, none of the configs are required, and it's not necessary to understand what each config does. Instead, search for the features you need to enable or modify in this section and they will show you what to do.
+但是，不需要任何配置，也不需要了解每个配置的作用。相反，在本节中搜索需要启用或修改的功能，它们将向您显示要做的操作。
 
-> Avoid using new JavaScript features not available in your target Node.js version. `next.config.js` will not be parsed by Webpack, Babel or TypeScript.
+> 避免使用目标 Node.js 版本中没有的新 JavaScript 功能`next.config.js`将不会被 Webpack、Babel 或 TypeScript 解析。
 
-This page documents all the available configuration options:
+此页面记录了所有可用的配置选项:

@@ -82,7 +82,7 @@ Generate a route segment's shared image by creating an `opengraph-image` or `twi
 | `opengraph-image` | `.js`, `.ts`, `.tsx` |
 | `twitter-image`   | `.js`, `.ts`, `.tsx` |
 
-> **Good to know**
+> **很高兴知道**
 >
 > - By default, generated images are [**statically optimized**](/docs/app/building-your-application/rendering/server-components#static-rendering-default) (generated at build time and cached) unless they use [dynamic functions](/docs/app/building-your-application/rendering/server-components#server-rendering-strategies#dynamic-functions) or uncached data.
 > - You can generate multiple Images in the same file using [`generateImageMetadata`](/docs/app/api-reference/functions/generate-image-metadata).
@@ -234,11 +234,11 @@ export default function Image({ params }) {
 | `app/shop/[tag]/[item]/opengraph-image.js` | `/shop/1/2` | `{ tag: '1', item: '2' }` |
 | `app/shop/[...slug]/opengraph-image.js`    | `/shop/1/2` | `{ slug: ['1', '2'] }`    |
 
-### Returns
+### 返回
 
 The default export function should return a `Blob` | `ArrayBuffer` | `TypedArray` | `DataView` | `ReadableStream` | `Response`.
 
-> **Good to know**: `ImageResponse` satisfies this return type.
+> **很高兴知道**: `ImageResponse` satisfies this return type.
 
 ### Config exports
 
@@ -327,13 +327,13 @@ export const runtime = "edge";
 export default function Image() {}
 ```
 
-### Examples
+### 举例
 
 #### Using external data
 
 This example uses the `params` object and external data to generate the image.
 
-> **Good to know**:
+> **很高兴知道**:
 > By default, this generated image will be [statically optimized](/docs/app/building-your-application/rendering/server-components#static-rendering-default). You can configure the individual `fetch` [`options`](/docs/app/api-reference/functions/fetch) or route segments [options](/docs/app/api-reference/file-conventions/route-segment-config#revalidate) to change this behavior.
 
 ```tsx filename="app/posts/[slug]/opengraph-image.tsx" switcher
@@ -412,8 +412,8 @@ export default async function Image({ params }) {
 }
 ```
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes                                           |
+| 版本      | 变化                                              |
 | --------- | ------------------------------------------------- |
 | `v13.3.0` | `opengraph-image` and `twitter-image` introduced. |

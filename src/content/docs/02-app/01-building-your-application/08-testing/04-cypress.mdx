@@ -169,7 +169,7 @@ Cypress will simulate a user navigating your application, this requires your Nex
 
 Run `npm run build && npm run start` to build your Next.js application, then run `npm run cypress:open` in another terminal window to start Cypress and run your E2E testing suite.
 
-> **Good to know:**
+> **很高兴知道:**
 >
 > - You can use `cy.visit("/")` instead of `cy.visit("http://localhost:3000/")` by adding `baseUrl: 'http://localhost:3000'` to the `cypress.config.js` configuration file.
 > - Alternatively, you can install the `start-server-and-test` package to run the Next.js production server in conjuction with Cypress. After installation, add `"test": "start-server-and-test start http://localhost:3000 cypress"` to your `package.json` scripts field. Remember to rebuild your application after new changes.
@@ -254,7 +254,7 @@ describe("<AboutPage />", () => {
 
 </PagesOnly>
 
-> **Good to know**:
+> **很高兴知道**:
 >
 > - Cypress currently doesn't support component testing for `async` Server Components. We recommend using E2E testing.
 > - Since component tests do not require a Next.js server, features like `<Image />` that rely on a server being available may not function out-of-the-box.

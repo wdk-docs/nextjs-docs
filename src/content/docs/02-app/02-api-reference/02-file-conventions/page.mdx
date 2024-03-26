@@ -45,13 +45,13 @@ An object containing the [search parameters](https://developer.mozilla.org/docs/
 | `/shop?a=1&b=2` | `{ a: '1', b: '2' }` |
 | `/shop?a=1&a=2` | `{ a: ['1', '2'] }`  |
 
-> **Good to know**:
+> **很高兴知道**:
 >
 > - `searchParams` is a **[Dynamic API](/docs/app/building-your-application/rendering/server-components#server-rendering-strategies#dynamic-functions)** whose values cannot be known ahead of time. Using it will opt the page into **[dynamic rendering](/docs/app/building-your-application/rendering/server-components#dynamic-rendering)** at request time.
 > - `searchParams` returns a plain JavaScript object and not a `URLSearchParams` instance.
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes            |
+| 版本      | 变化               |
 | --------- | ------------------ |
 | `v13.0.0` | `page` introduced. |

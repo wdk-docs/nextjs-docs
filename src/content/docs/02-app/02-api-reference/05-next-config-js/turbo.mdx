@@ -1,16 +1,16 @@
 ---
 title: turbo (Experimental)
 nav_title: turbo
-description: Configure Next.js with Turbopack-specific options
+description: 使用Turbopack-specific选项配置Next.js
 ---
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-> **Warning**: These features are experimental and will only work with `next --turbo`.
+> **警告**: 这些功能是实验性的，只适用于`next --turbo`。
 
-## webpack loaders
+## webpack 装载机
 
-Currently, Turbopack supports a subset of webpack's loader API, allowing you to use some webpack loaders to transform code in Turbopack.
+目前，Turbopack 支持 webpack 的加载程序 API 的一个子集，允许您使用一些 webpack 加载程序来转换 Turbopack 中的代码。
 
 To configure loaders, add the names of the loaders you've installed and any options in `next.config.js`, mapping file extensions to a list of loaders:
 
@@ -20,29 +20,29 @@ module.exports = {
     turbo: {
       rules: {
         // Option format
-        '*.md': [
+        "*.md": [
           {
-            loader: '@mdx-js/loader',
+            loader: "@mdx-js/loader",
             options: {
-              format: 'md',
+              format: "md",
             },
           },
         ],
         // Option-less format
-        '*.mdx': ['@mdx-js/loader'],
+        "*.mdx": ["@mdx-js/loader"],
       },
     },
   },
-}
+};
 ```
 
 Then, given the above configuration, you can use transformed code from your app:
 
 ```js
-import MyDoc from './my-doc.mdx'
+import MyDoc from "./my-doc.mdx";
 
 export default function Home() {
-  return <MyDoc />
+  return <MyDoc />;
 }
 ```
 
@@ -57,12 +57,12 @@ module.exports = {
   experimental: {
     turbo: {
       resolveAlias: {
-        underscore: 'lodash',
-        mocha: { browser: 'mocha/browser-entry.js' },
+        underscore: "lodash",
+        mocha: { browser: "mocha/browser-entry.js" },
       },
     },
   },
-}
+};
 ```
 
 This aliases imports of the `underscore` package to the `lodash` package. In other words, `import underscore from 'underscore'` will load the `lodash` module instead of `underscore`.

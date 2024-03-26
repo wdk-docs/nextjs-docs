@@ -1,17 +1,17 @@
 ---
 title: create-next-app
-description: Create Next.js apps in one command with create-next-app.
+description: 使用create-next-app在一个命令中创建Next.js应用程序。
 ---
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-The easiest way to get started with Next.js is by using `create-next-app`. This CLI tool enables you to quickly start building a new Next.js application, with everything set up for you.
+开始使用 Next.js 最简单的方法是使用`create-next-app`。此 CLI 工具使您能够快速开始构建新的 Next.js 应用程序，并为您设置一切。
 
-You can create a new app using the default Next.js template, or by using one of the [official Next.js examples](https://github.com/vercel/next.js/tree/canary/examples).
+您可以使用默认的 Next.js 模板创建一个新的应用程序，也可以使用其中一个[官方的 Next..js 示例](https://github.com/vercel/next.js/tree/canary/examples).
 
-### Interactive
+### 交互
 
-You can create a new project interactively by running:
+您可以通过运行以下命令以交互方式创建新项目：
 
 ```bash filename="Terminal"
 npx create-next-app@latest
@@ -29,7 +29,7 @@ pnpm create next-app
 bunx create-next-app
 ```
 
-You will then be asked the following prompts:
+然后，系统将提示您以下内容:
 
 ```txt filename="Terminal"
 What is your project named?  my-app
@@ -41,15 +41,15 @@ Would you like to use App Router? (recommended)  No / Yes
 Would you like to customize the default import alias (@/*)?  No / Yes
 ```
 
-Once you've answered the prompts, a new project will be created with the correct configuration depending on your answers.
+一旦您回答了提示，将根据您的回答创建一个具有正确配置的新项目。
 
-### Non-interactive
+### 非交互式
 
-You can also pass command line arguments to set up a new project non-interactively.
+也可以传递命令行参数以非交互方式设置新项目。
 
-Further, you can negate default options by prefixing them with `--no-` (e.g. `--no-eslint`).
+此外，您可以通过在默认选项前面加上`--no-`来否定它们 (例如 `--no-eslint`).
 
-See `create-next-app --help`:
+查看 `create-next-app --help`:
 
 ```bash filename="Terminal"
 Usage: create-next-app <project-directory> [options]
@@ -120,12 +120,12 @@ Options:
   -h, --help                           output usage information
 ```
 
-### Why use Create Next App?
+### 为什么要使用创建 Next 应用程序？
 
-`create-next-app` allows you to create a new Next.js app within seconds. It is officially maintained by the creators of Next.js, and includes a number of benefits:
+`create-next-app` 允许您在几秒钟内创建一个新的 Next.js 应用程序。它由 Next.js 的创建者正式维护，并包括许多好处:
 
-- **Interactive Experience**: Running `npx create-next-app@latest` (with no arguments) launches an interactive experience that guides you through setting up a project.
-- **Zero Dependencies**: Initializing a project is as quick as one second. Create Next App has zero dependencies.
-- **Offline Support**: Create Next App will automatically detect if you're offline and bootstrap your project using your local package cache.
-- **Support for Examples**: Create Next App can bootstrap your application using an example from the Next.js examples collection (e.g. `npx create-next-app --example api-routes`) or any public GitHub repository.
-- **Tested**: The package is part of the Next.js monorepo and tested using the same integration test suite as Next.js itself, ensuring it works as expected with every release.
+- **互动体验**: 正在运行`npx create-next-app@latest`(没有任何争论)启动一种互动体验，引导您完成项目设置。
+- **零依赖项**: 初始化项目只需一秒钟。创建下一个应用程序没有依赖项。
+- **离线支持**: 创建下一个应用程序将自动检测您是否离线，并使用本地包缓存引导您的项目。
+- **支持示例**: Create Next App 可以使用 Next.js 示例集合(例如 `npx create-next-app --example api-routes`)或任何公共 GitHub 存储库中的示例引导您的应用程序。
+- **已测试**: 该包是 Next.js monorepo 的一部分，并使用与 Next.js 本身相同的集成测试套件进行测试，确保它在每个版本中都能正常工作。

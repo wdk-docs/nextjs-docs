@@ -1,110 +1,107 @@
 ---
-title: Metadata Object and generateMetadata Options
+title: 元数据对象和生成元数据选项
 nav_title: generateMetadata
-description: Learn how to add Metadata to your Next.js application for improved search engine optimization (SEO) and web shareability.
+description: 了解如何将元数据添加到Next.js应用程序中，以提高搜索引擎优化（SEO）和网络共享性。
 related:
-  title: Next Steps
-  description: View all the Metadata API options.
+  title: 接下来的步骤
+  description: 查看所有元数据API选项。
   links:
     - app/api-reference/file-conventions/metadata
     - app/api-reference/functions/generate-viewport
     - app/building-your-application/optimizing/metadata
 ---
 
-This page covers all **Config-based Metadata** options with `generateMetadata` and the static metadata object.
+本页介绍了带有`generateMetadata`和静态元数据对象的所有**基于配置的元数据**选项。
 
 ```tsx filename="layout.tsx | page.tsx" switcher
-import { Metadata } from 'next'
+import { Metadata } from "next";
 
 // either Static metadata
 export const metadata: Metadata = {
-  title: '...',
-}
+  title: "...",
+};
 
 // or Dynamic metadata
 export async function generateMetadata({ params }) {
   return {
-    title: '...',
-  }
+    title: "...",
+  };
 }
 ```
 
 ```jsx filename="layout.js | page.js" switcher
 // either Static metadata
 export const metadata = {
-  title: '...',
-}
+  title: "...",
+};
 
 // or Dynamic metadata
 export async function generateMetadata({ params }) {
   return {
-    title: '...',
-  }
+    title: "...",
+  };
 }
 ```
 
-> **Good to know**:
+> **很高兴知道**:
 >
-> - The `metadata` object and `generateMetadata` function exports are **only supported in Server Components**.
-> - You cannot export both the `metadata` object and `generateMetadata` function from the same route segment.
+> - `metadata`对象和`generateMetadata`函数导出**仅在服务器组件**中受支持。
+> - 不能从同一管线段同时导出`metadata`对象和`generateMetadata`函数。
 
-## The `metadata` object
+## `metadata`对象
 
-To define static metadata, export a [`Metadata` object](#metadata-fields) from a `layout.js` or `page.js` file.
+要定义静态元数据，请从`layout.js`或`page.js`文件导出[`metadata` 对象](#metadata-fields)。
 
 ```tsx filename="layout.tsx | page.tsx" switcher
-import { Metadata } from 'next'
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: '...',
-  description: '...',
-}
+  title: "...",
+  description: "...",
+};
 
 export default function Page() {}
 ```
 
 ```jsx filename="layout.js | page.js" switcher
 export const metadata = {
-  title: '...',
-  description: '...',
-}
+  title: "...",
+  description: "...",
+};
 
 export default function Page() {}
 ```
 
-See the [Metadata Fields](#metadata-fields) for a complete list of supported options.
+有关支持选项的完整列表，请参阅[元数据字段](#metadata-fields)。
 
-## `generateMetadata` function
+## `generateMetadata` 函数
 
-Dynamic metadata depends on **dynamic information**, such as the current route parameters, external data, or `metadata` in parent segments, can be set by exporting a `generateMetadata` function that returns a [`Metadata` object](#metadata-fields).
+动态元数据取决于**动态信息**，如当前路线参数、外部数据或父段中的`metadata`，可以通过导出返回[`metadata`对象](#metadata-fields)的`generateMetadata`函数来设置.
 
 ```tsx filename="app/products/[id]/page.tsx" switcher
-import { Metadata, ResolvingMetadata } from 'next'
+import { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
-  params: { id: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
   // read route params
-  const id = params.id
+  const id = params.id;
 
   // fetch data
-  const product = await fetch(`https://.../${id}`).then((res) => res.json())
+  const product = await fetch(`https://.../${id}`).then((res) => res.json());
 
   // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || []
+  const previousImages = (await parent).openGraph?.images || [];
 
   return {
     title: product.title,
     openGraph: {
-      images: ['/some-specific-page-image.jpg', ...previousImages],
+      images: ["/some-specific-page-image.jpg", ...previousImages],
     },
-  }
+  };
 }
 
 export default function Page({ params, searchParams }: Props) {}
@@ -113,32 +110,32 @@ export default function Page({ params, searchParams }: Props) {}
 ```jsx filename="app/products/[id]/page.js" switcher
 export async function generateMetadata({ params, searchParams }, parent) {
   // read route params
-  const id = params.id
+  const id = params.id;
 
   // fetch data
-  const product = await fetch(`https://.../${id}`).then((res) => res.json())
+  const product = await fetch(`https://.../${id}`).then((res) => res.json());
 
   // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || []
+  const previousImages = (await parent).openGraph?.images || [];
 
   return {
     title: product.title,
     openGraph: {
-      images: ['/some-specific-page-image.jpg', ...previousImages],
+      images: ["/some-specific-page-image.jpg", ...previousImages],
     },
-  }
+  };
 }
 
 export default function Page({ params, searchParams }) {}
 ```
 
-### Parameters
+### 参数
 
-`generateMetadata` function accepts the following parameters:
+`generateMetadata`函数接受以下参数：
 
-- `props` - An object containing the parameters of the current route:
+- `props` - 包含当前管线参数的对象:
 
-  - `params` - An object containing the [dynamic route parameters](/docs/app/building-your-application/routing/dynamic-routes) object from the root segment down to the segment `generateMetadata` is called from. Examples:
+  - `params` - 从调用一个对象，该对象包含从根段到段`generateMetadata`的[动态路由参数](/docs/app/building-your-application/routing/dynamic-routes)对象。示例：
 
     | Route                           | URL         | `params`                  |
     | ------------------------------- | ----------- | ------------------------- |
@@ -146,7 +143,7 @@ export default function Page({ params, searchParams }) {}
     | `app/shop/[tag]/[item]/page.js` | `/shop/1/2` | `{ tag: '1', item: '2' }` |
     | `app/shop/[...slug]/page.js`    | `/shop/1/2` | `{ slug: ['1', '2'] }`    |
 
-  - `searchParams` - An object containing the current URL's [search params](https://developer.mozilla.org/docs/Learn/Common_questions/What_is_a_URL#parameters). Examples:
+  - `searchParams` - 包含当前 URL 的[搜索参数](https://developer.mozilla.org/docs/Learn/Common_questions/What_is_a_URL#parameters)的对象. 示例:
 
     | URL             | `searchParams`       |
     | --------------- | -------------------- |
@@ -154,165 +151,165 @@ export default function Page({ params, searchParams }) {}
     | `/shop?a=1&b=2` | `{ a: '1', b: '2' }` |
     | `/shop?a=1&a=2` | `{ a: ['1', '2'] }`  |
 
-- `parent` - A promise of the resolved metadata from parent route segments.
+- `parent` - promise 从父路由段解析元数据。
 
-### Returns
+### 返回
 
-`generateMetadata` should return a [`Metadata` object](#metadata-fields) containing one or more metadata fields.
+`generateMetadata`应返回包含一个或多个元数据字段的[`Metadata` 对象](#metadata-fields)。
 
-> **Good to know**:
+> **很高兴知道**:
 >
-> - If metadata doesn't depend on runtime information, it should be defined using the static [`metadata` object](#the-metadata-object) rather than `generateMetadata`.
-> - `fetch` requests are automatically [memoized](/docs/app/building-your-application/caching#request-memoization) for the same data across `generateMetadata`, `generateStaticParams`, Layouts, Pages, and Server Components. React [`cache` can be used](/docs/app/building-your-application/caching#request-memoization) if `fetch` is unavailable.
-> - `searchParams` are only available in `page.js` segments.
-> - The [`redirect()`](/docs/app/api-reference/functions/redirect) and [`notFound()`](/docs/app/api-reference/functions/not-found) Next.js methods can also be used inside `generateMetadata`.
+> - 如果元数据不依赖于运行时信息，则应该使用静态[`metadata` 对象](#the-metadata-object)而不是`generateMetadata`来定义它。
+> - 在`generateMetadata`、`generateStaticParams`、Layouts、Pages 和服务器组件中，对相同数据的`fetch`请求会自动[存储](/docs/app/building-your-application/caching#request-memoization)。 如果`fetch`不可用，则 React[可以使用 `cache`](/docs/app/building-your-application/caching#request-memoization)。
+> - `searchParams`仅在`page.js`段中可用。
+> - [`redirect()`](/docs/app/api-reference/functions/redirect) 和 [`notFound()`](/docs/app/api-reference/functions/not-found) Next.js 方法也可以在`generateMetadata`中使用.
 
-## Metadata Fields
+## Metadata 字段
 
 ### `title`
 
-The `title` attribute is used to set the title of the document. It can be defined as a simple [string](#string) or an optional [template object](#template-object).
+`title`属性用于设置文档的标题。它可以定义为简单的[string](#string)或可选的[模板对象](#template-object).
 
 #### String
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  title: 'Next.js',
-}
+  title: "Next.js",
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
 <title>Next.js</title>
 ```
 
-#### Template object
+#### template 对象
 
 ```tsx filename="app/layout.tsx" switcher
-import { Metadata } from 'next'
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    template: '...',
-    default: '...',
-    absolute: '...',
+    template: "...",
+    default: "...",
+    absolute: "...",
   },
-}
+};
 ```
 
 ```jsx filename="app/layout.js" switcher
 export const metadata = {
   title: {
-    default: '...',
-    template: '...',
-    absolute: '...',
+    default: "...",
+    template: "...",
+    absolute: "...",
   },
-}
+};
 ```
 
-##### Default
+##### 默认
 
-`title.default` can be used to provide a **fallback title** to child route segments that don't define a `title`.
+`title.default`可用于向未定义`title`的子路由段提供 **fallback title**。
 
 ```tsx filename="app/layout.tsx"
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    default: 'Acme',
+    default: "Acme",
   },
-}
+};
 ```
 
 ```tsx filename="app/about/page.tsx"
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
-export const metadata: Metadata = {}
+export const metadata: Metadata = {};
 
 // Output: <title>Acme</title>
 ```
 
 ##### Template
 
-`title.template` can be used to add a prefix or a suffix to `titles` defined in **child** route segments.
+`title.template`可用于为**子**路由段中定义的`title`添加前缀或后缀。
 
 ```tsx filename="app/layout.tsx" switcher
-import { Metadata } from 'next'
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Acme',
-    default: 'Acme', // a default is required when creating a template
+    template: "%s | Acme",
+    default: "Acme", // a default is required when creating a template
   },
-}
+};
 ```
 
 ```jsx filename="app/layout.js" switcher
 export const metadata = {
   title: {
-    template: '%s | Acme',
-    default: 'Acme', // a default is required when creating a template
+    template: "%s | Acme",
+    default: "Acme", // a default is required when creating a template
   },
-}
+};
 ```
 
 ```tsx filename="app/about/page.tsx" switcher
-import { Metadata } from 'next'
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'About',
-}
+  title: "About",
+};
 
 // Output: <title>About | Acme</title>
 ```
 
 ```jsx filename="app/about/page.js" switcher
 export const metadata = {
-  title: 'About',
-}
+  title: "About",
+};
 
 // Output: <title>About | Acme</title>
 ```
 
-> **Good to know**:
+> **很高兴知道**:
 >
-> - `title.template` applies to **child** route segments and **not** the segment it's defined in. This means:
+> - `title.template`适用于**子**路由段，而**不适用于**在其中定义的路由段。这意味着：
 >
->   - `title.default` is **required** when you add a `title.template`.
->   - `title.template` defined in `layout.js` will not apply to a `title` defined in a `page.js` of the same route segment.
->   - `title.template` defined in `page.js` has no effect because a page is always the terminating segment (it doesn't have any children route segments).
+>   - 添加`title.template`时，`title.default`是**必需的**。
+>   - 在`layout.js`中定义的`title.template`将不适用于同一路由段的`page.js`中所定义的`title`。
+>   - 在`page.js`中定义的`title.template`无效，因为页面始终是终止段（它没有任何子路由段）。
 >
-> - `title.template` has **no effect** if a route has not defined a `title` or `title.default`.
+> - 如果路由未定义`title`或`title.default`，则`title.template`**无效**。
 
 ##### Absolute
 
-`title.absolute` can be used to provide a title that **ignores** `title.template` set in parent segments.
+`title.absolute `可用于提供**忽略父段中设置的**`title.template`的标题。
 
 ```tsx filename="app/layout.tsx" switcher
-import { Metadata } from 'next'
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Acme',
+    template: "%s | Acme",
   },
-}
+};
 ```
 
 ```jsx filename="app/layout.js" switcher
 export const metadata = {
   title: {
-    template: '%s | Acme',
+    template: "%s | Acme",
   },
-}
+};
 ```
 
 ```tsx filename="app/about/page.tsx" switcher
-import { Metadata } from 'next'
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'About',
+    absolute: "About",
   },
-}
+};
 
 // Output: <title>About</title>
 ```
@@ -320,56 +317,56 @@ export const metadata: Metadata = {
 ```jsx filename="app/about/page.js" switcher
 export const metadata = {
   title: {
-    absolute: 'About',
+    absolute: "About",
   },
-}
+};
 
 // Output: <title>About</title>
 ```
 
-> **Good to know**:
+> **很高兴知道**:
 >
 > - `layout.js`
 >
->   - `title` (string) and `title.default` define the default title for child segments (that do not define their own `title`). It will augment `title.template` from the closest parent segment if it exists.
->   - `title.absolute` defines the default title for child segments. It ignores `title.template` from parent segments.
->   - `title.template` defines a new title template for child segments.
+>   - `title`（字符串）和`title.default`定义子段（不定义自己的`title`）的默认标题。如果存在，它将从最近的父段中扩充`title.template`。
+>   - `title.absolute`定义子段的默认标题。它忽略父分段中的`title.template`。
+>   - `title.template`定义子段的新标题模板。
 >
 > - `page.js`
->   - If a page does not define its own title the closest parents resolved title will be used.
->   - `title` (string) defines the routes title. It will augment `title.template` from the closest parent segment if it exists.
->   - `title.absolute` defines the route title. It ignores `title.template` from parent segments.
->   - `title.template` has no effect in `page.js` because a page is always the terminating segment of a route.
+>   - 如果页面没有定义自己的标题，则将使用最接近父级解析的标题。
+>   - `title`（字符串）定义路由标题。如果存在，它将从最近的父段中扩充`title.template`。
+>   - `title.absolute`定义路线标题。它忽略父分段中的`title.template`。
+>   - `title.template`在`page.js`中无效，因为页面始终是路由的终止段。
 
 ### `description`
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  description: 'The React Framework for the Web',
-}
+  description: "The React Framework for the Web",
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
 <meta name="description" content="The React Framework for the Web" />
 ```
 
-### Basic Fields
+### 基本字段
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  generator: 'Next.js',
-  applicationName: 'Next.js',
-  referrer: 'origin-when-cross-origin',
-  keywords: ['Next.js', 'React', 'JavaScript'],
-  authors: [{ name: 'Seb' }, { name: 'Josh', url: 'https://nextjs.org' }],
-  creator: 'Jiachi Liu',
-  publisher: 'Sebastian Markbåge',
+  generator: "Next.js",
+  applicationName: "Next.js",
+  referrer: "origin-when-cross-origin",
+  keywords: ["Next.js", "React", "JavaScript"],
+  authors: [{ name: "Seb" }, { name: "Josh", url: "https://nextjs.org" }],
+  creator: "Jiachi Liu",
+  publisher: "Sebastian Markbåge",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -388,26 +385,26 @@ export const metadata = {
 
 ### `metadataBase`
 
-`metadataBase` is a convenience option to set a base URL prefix for `metadata` fields that require a fully qualified URL.
+`metadataBase`是一个方便的选项，用于为需要完全限定 URL 的`metadata`字段设置基本 URL 前缀。
 
-- `metadataBase` allows URL-based `metadata` fields defined in the **current route segment and below** to use a **relative path** instead of an otherwise required absolute URL.
-- The field's relative path will be composed with `metadataBase` to form a fully qualified URL.
-- If not configured, `metadataBase` is **automatically populated** with a [default value](#default-value).
+- `metadataBase`允许在**当前路由段及其下**中定义的基于 URL 的`metadata`字段使用**相对路径**，而不是其他所需的绝对 URL。
+- 字段的相对路径将由`metadataBase`组成，以形成一个完全限定的 URL。
+- 如果未配置，`metadataBase`将**自动填充**一个[默认值](#default-value).
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  metadataBase: new URL('https://acme.com'),
+  metadataBase: new URL("https://acme.com"),
   alternates: {
-    canonical: '/',
+    canonical: "/",
     languages: {
-      'en-US': '/en-US',
-      'de-DE': '/de-DE',
+      "en-US": "/en-US",
+      "de-DE": "/de-DE",
     },
   },
   openGraph: {
-    images: '/og-image.png',
+    images: "/og-image.png",
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -417,48 +414,48 @@ export const metadata = {
 <meta property="og:image" content="https://acme.com/og-image.png" />
 ```
 
-> **Good to know**:
+> **很高兴知道**:
 >
-> - `metadataBase` is typically set in root `app/layout.js` to apply to URL-based `metadata` fields across all routes.
-> - All URL-based `metadata` fields that require absolute URLs can be configured with a `metadataBase` option.
-> - `metadataBase` can contain a subdomain e.g. `https://app.acme.com` or base path e.g. `https://acme.com/start/from/here`
-> - If a `metadata` field provides an absolute URL, `metadataBase` will be ignored.
-> - Using a relative path in a URL-based `metadata` field without configuring a `metadataBase` will cause a build error.
-> - Next.js will normalize duplicate slashes between `metadataBase` (e.g. `https://acme.com/`) and a relative field (e.g. `/path`) to a single slash (e.g. `https://acme.com/path`)
+> - `metadataBase`通常在根`app/layout.js`中设置，以应用于所有路由中基于 URL 的`metadata`字段。
+> - 所有需要绝对 URL 的基于 URL 的`metadata`字段都可以使用`metadataBase`选项进行配置。
+> - `metadataBase`可以包含子域，例如`https://app.acme.com`或基本路径，例如。 `https://acme.com/start/from/here`
+> - 如果`metadata`字段提供了绝对 URL，则将忽略`metadataBase`。
+> - 在基于 URL 的`metadata`字段中使用相对路径而不配置`metadataBase`将导致生成错误。
+> - Next.js 将规范化`metadataBase`之间的重复斜杠（例如`https://acme.com/`)以及与单个斜线（例如`https://acme.com/path`)
 
-#### Default value
+#### 默认值
 
-If not configured, `metadataBase` has a **default value**
+如果未配置，`metadataBase`将具有**默认值**
 
-- When [`VERCEL_URL`](https://vercel.com/docs/concepts/projects/environment-variables/system-environment-variables#:~:text=.-,VERCEL_URL,-The%20domain%20name) is detected: `https://${process.env.VERCEL_URL}` otherwise it falls back to `http://localhost:${process.env.PORT || 3000}`.
-- When overriding the default, we recommend using environment variables to compute the URL. This allows configuring a URL for local development, staging, and production environments.
+- 检测到[`VERCEL_URL`](https://vercel.com/docs/concepts/projects/environment-variables/system-environment-variables#:~:text=.-,VERCEL_URL,-The%20domain%20name)时: `https://${process.env.VERCEL_URL}` 否则它会回落到 `http://localhost:${process.env.PORT || 3000}`.
+- 当覆盖默认值时，我们建议使用环境变量来计算 URL。这允许为本地开发、暂存和生产环境配置 URL。
 
-#### URL Composition
+#### URL 组合
 
-URL composition favors developer intent over default directory traversal semantics.
+URL 组合有利于开发人员的意图，而不是默认的目录遍历语义。
 
-- Trailing slashes between `metadataBase` and `metadata` fields are normalized.
-- An "absolute" path in a `metadata` field (that typically would replace the whole URL path) is treated as a "relative" path (starting from the end of `metadataBase`).
+- `metadataBase`和`metadata`字段之间的尾部斜杠是标准化的。
+- `metadata`字段中的`absolute`路径（通常会取代整个 URL 路径）被视为`relative`路径（从`metadataBase`的末尾开始）。
 
-For example, given the following `metadataBase`:
+例如，给定以下`metadataBase`：
 
 ```tsx filename="app/layout.tsx" switcher
-import { Metadata } from 'next'
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://acme.com'),
-}
+  metadataBase: new URL("https://acme.com"),
+};
 ```
 
 ```jsx filename="app/layout.js" switcher
 export const metadata = {
-  metadataBase: new URL('https://acme.com'),
-}
+  metadataBase: new URL("https://acme.com"),
+};
 ```
 
-Any `metadata` fields that inherit the above `metadataBase` and set their own value will be resolved as follows:
+继承上述`metadataBase`并设置其自身值的任何`metadata`字段将按如下方式解析：
 
-| `metadata` field                 | Resolved URL                     |
+| `metadata` 字段                  | 解析的 URL                       |
 | -------------------------------- | -------------------------------- |
 | `/`                              | `https://acme.com`               |
 | `./`                             | `https://acme.com`               |
@@ -473,27 +470,27 @@ Any `metadata` fields that inherit the above `metadataBase` and set their own va
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   openGraph: {
-    title: 'Next.js',
-    description: 'The React Framework for the Web',
-    url: 'https://nextjs.org',
-    siteName: 'Next.js',
+    title: "Next.js",
+    description: "The React Framework for the Web",
+    url: "https://nextjs.org",
+    siteName: "Next.js",
     images: [
       {
-        url: 'https://nextjs.org/og.png',
+        url: "https://nextjs.org/og.png",
         width: 800,
         height: 600,
       },
       {
-        url: 'https://nextjs.org/og-alt.png',
+        url: "https://nextjs.org/og-alt.png",
         width: 1800,
         height: 1600,
-        alt: 'My custom alt',
+        alt: "My custom alt",
       },
     ],
-    locale: 'en_US',
-    type: 'website',
+    locale: "en_US",
+    type: "website",
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -515,13 +512,13 @@ export const metadata = {
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   openGraph: {
-    title: 'Next.js',
-    description: 'The React Framework for the Web',
-    type: 'article',
-    publishedTime: '2023-01-01T00:00:00.000Z',
-    authors: ['Seb', 'Josh'],
+    title: "Next.js",
+    description: "The React Framework for the Web",
+    type: "article",
+    publishedTime: "2023-01-01T00:00:00.000Z",
+    authors: ["Seb", "Josh"],
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -533,14 +530,14 @@ export const metadata = {
 <meta property="article:author" content="Josh" />
 ```
 
-> **Good to know**:
+> **很高兴知道**:
 >
-> - It may be more convenient to use the [file-based Metadata API](/docs/app/api-reference/file-conventions/metadata/opengraph-image#image-files-jpg-png-gif) for Open Graph images. Rather than having to sync the config export with actual files, the file-based API will automatically generate the correct metadata for you.
+> - 对于 Open Graph 图像，使用[基于文件的元数据 API](/docs/app/api-reference/file-conventions/metadata/opengraph-image#image-files-jpg-png-gif)可能更方便。基于文件的 API 将自动为您生成正确的元数据，而不必将配置导出与实际文件同步。
 
 ### `robots`
 
 ```tsx
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   robots: {
@@ -551,12 +548,12 @@ export const metadata: Metadata = {
       index: true,
       follow: false,
       noimageindex: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -569,82 +566,68 @@ export const metadata: Metadata = {
 
 ### `icons`
 
-> **Good to know**: We recommend using the [file-based Metadata API](/docs/app/api-reference/file-conventions/metadata/app-icons#image-files-ico-jpg-png) for icons where possible. Rather than having to sync the config export with actual files, the file-based API will automatically generate the correct metadata for you.
+> **很高兴知道**: 我们建议在可能的情况下使用[基于文件的元数据 API](/docs/app/api-reference/file-conventions/metadata/app-icons#image-files-ico-jpg-png)作为图标。基于文件的 API 将自动为您生成正确的元数据，而不必将配置导出与实际文件同步。
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   icons: {
-    icon: '/icon.png',
-    shortcut: '/shortcut-icon.png',
-    apple: '/apple-icon.png',
+    icon: "/icon.png",
+    shortcut: "/shortcut-icon.png",
+    apple: "/apple-icon.png",
     other: {
-      rel: 'apple-touch-icon-precomposed',
-      url: '/apple-touch-icon-precomposed.png',
+      rel: "apple-touch-icon-precomposed",
+      url: "/apple-touch-icon-precomposed.png",
     },
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
 <link rel="shortcut icon" href="/shortcut-icon.png" />
 <link rel="icon" href="/icon.png" />
 <link rel="apple-touch-icon" href="/apple-icon.png" />
-<link
-  rel="apple-touch-icon-precomposed"
-  href="/apple-touch-icon-precomposed.png"
-/>
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" />
 ```
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   icons: {
-    icon: [{ url: '/icon.png' }, new URL('/icon.png', 'https://example.com')],
-    shortcut: ['/shortcut-icon.png'],
-    apple: [
-      { url: '/apple-icon.png' },
-      { url: '/apple-icon-x3.png', sizes: '180x180', type: 'image/png' },
-    ],
+    icon: [{ url: "/icon.png" }, new URL("/icon.png", "https://example.com")],
+    shortcut: ["/shortcut-icon.png"],
+    apple: [{ url: "/apple-icon.png" }, { url: "/apple-icon-x3.png", sizes: "180x180", type: "image/png" }],
     other: [
       {
-        rel: 'apple-touch-icon-precomposed',
-        url: '/apple-touch-icon-precomposed.png',
+        rel: "apple-touch-icon-precomposed",
+        url: "/apple-touch-icon-precomposed.png",
       },
     ],
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
 <link rel="shortcut icon" href="/shortcut-icon.png" />
 <link rel="icon" href="/icon.png" />
 <link rel="apple-touch-icon" href="/apple-icon.png" />
-<link
-  rel="apple-touch-icon-precomposed"
-  href="/apple-touch-icon-precomposed.png"
-/>
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" />
 <link rel="icon" href="https://example.com/icon.png" />
-<link
-  rel="apple-touch-icon"
-  href="/apple-icon-x3.png"
-  sizes="180x180"
-  type="image/png"
-/>
+<link rel="apple-touch-icon" href="/apple-icon-x3.png" sizes="180x180" type="image/png" />
 ```
 
-> **Good to know**: The `msapplication-*` meta tags are no longer supported in Chromium builds of Microsoft Edge, and thus no longer needed.
+> **很高兴知道**: `msapplication-*`元标记在 Microsoft Edge 的 Chromium 版本中不再受支持，因此不再需要。
 
 ### `themeColor`
 
-> **Deprecated**: The `themeColor` option in `metadata` is deprecated as of Next.js 14. Please use the [`viewport` configuration](/docs/app/api-reference/functions/generate-viewport) instead.
+> **已弃用**: 从 Next.js 14 起，`metadata`中的`themeColor`选项已被弃用。请改用[`viewport`配置](/docs/app/api-reference/functions/generate-viewport)。
 
 ### `manifest`
 
-A web application manifest, as defined in the [Web Application Manifest specification](https://developer.mozilla.org/docs/Web/Manifest).
+web 应用程序清单，如[web 应用程序指令清单规范](https://developer.mozilla.org/docs/Web/Manifest)中所定义.
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  manifest: 'https://nextjs.org/manifest.json',
-}
+  manifest: "https://nextjs.org/manifest.json",
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -653,20 +636,20 @@ export const metadata = {
 
 ### `twitter`
 
-Learn more about the [Twitter Card markup reference](https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup).
+了解有关[Twitter Card 标记参考](https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup)的更多信息.
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   twitter: {
-    card: 'summary_large_image',
-    title: 'Next.js',
-    description: 'The React Framework for the Web',
-    siteId: '1467726470533754880',
-    creator: '@nextjs',
-    creatorId: '1467726470533754880',
-    images: ['https://nextjs.org/og.png'],
+    card: "summary_large_image",
+    title: "Next.js",
+    description: "The React Framework for the Web",
+    siteId: "1467726470533754880",
+    creator: "@nextjs",
+    creatorId: "1467726470533754880",
+    images: ["https://nextjs.org/og.png"],
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -682,30 +665,30 @@ export const metadata = {
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   twitter: {
-    card: 'app',
-    title: 'Next.js',
-    description: 'The React Framework for the Web',
-    siteId: '1467726470533754880',
-    creator: '@nextjs',
-    creatorId: '1467726470533754880',
+    card: "app",
+    title: "Next.js",
+    description: "The React Framework for the Web",
+    siteId: "1467726470533754880",
+    creator: "@nextjs",
+    creatorId: "1467726470533754880",
     images: {
-      url: 'https://nextjs.org/og.png',
-      alt: 'Next.js Logo',
+      url: "https://nextjs.org/og.png",
+      alt: "Next.js Logo",
     },
     app: {
-      name: 'twitter_app',
+      name: "twitter_app",
       id: {
-        iphone: 'twitter_app://iphone',
-        ipad: 'twitter_app://ipad',
-        googleplay: 'twitter_app://googleplay',
+        iphone: "twitter_app://iphone",
+        ipad: "twitter_app://ipad",
+        googleplay: "twitter_app://googleplay",
       },
       url: {
-        iphone: 'https://iphone_url',
-        ipad: 'https://ipad_url',
+        iphone: "https://iphone_url",
+        ipad: "https://ipad_url",
       },
     },
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -729,21 +712,21 @@ export const metadata = {
 
 ### `viewport`
 
-> **Deprecated**: The `viewport` option in `metadata` is deprecated as of Next.js 14. Please use the [`viewport` configuration](/docs/app/api-reference/functions/generate-viewport) instead.
+> **已弃用**: `metadata`中的`viewport`选项自 Next.js 14 起已弃用。请改用[`viewport` 配置](/docs/app/api-reference/functions/generate-viewport)。
 
 ### `verification`
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   verification: {
-    google: 'google',
-    yandex: 'yandex',
-    yahoo: 'yahoo',
+    google: "google",
+    yandex: "yandex",
+    yahoo: "yahoo",
     other: {
-      me: ['my-email', 'my-link'],
+      me: ["my-email", "my-link"],
     },
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -759,43 +742,34 @@ export const metadata = {
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   itunes: {
-    appId: 'myAppStoreID',
-    appArgument: 'myAppArgument',
+    appId: "myAppStoreID",
+    appArgument: "myAppArgument",
   },
   appleWebApp: {
-    title: 'Apple Web App',
-    statusBarStyle: 'black-translucent',
+    title: "Apple Web App",
+    statusBarStyle: "black-translucent",
     startupImage: [
-      '/assets/startup/apple-touch-startup-image-768x1004.png',
+      "/assets/startup/apple-touch-startup-image-768x1004.png",
       {
-        url: '/assets/startup/apple-touch-startup-image-1536x2008.png',
-        media: '(device-width: 768px) and (device-height: 1024px)',
+        url: "/assets/startup/apple-touch-startup-image-1536x2008.png",
+        media: "(device-width: 768px) and (device-height: 1024px)",
       },
     ],
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
-<meta
-  name="apple-itunes-app"
-  content="app-id=myAppStoreID, app-argument=myAppArgument"
-/>
+<meta name="apple-itunes-app" content="app-id=myAppStoreID, app-argument=myAppArgument" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-title" content="Apple Web App" />
-<link
-  href="/assets/startup/apple-touch-startup-image-768x1004.png"
-  rel="apple-touch-startup-image"
-/>
+<link href="/assets/startup/apple-touch-startup-image-768x1004.png" rel="apple-touch-startup-image" />
 <link
   href="/assets/startup/apple-touch-startup-image-1536x2008.png"
   media="(device-width: 768px) and (device-height: 1024px)"
   rel="apple-touch-startup-image"
 />
-<meta
-  name="apple-mobile-web-app-status-bar-style"
-  content="black-translucent"
-/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 ```
 
 ### `alternates`
@@ -803,35 +777,27 @@ export const metadata = {
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   alternates: {
-    canonical: 'https://nextjs.org',
+    canonical: "https://nextjs.org",
     languages: {
-      'en-US': 'https://nextjs.org/en-US',
-      'de-DE': 'https://nextjs.org/de-DE',
+      "en-US": "https://nextjs.org/en-US",
+      "de-DE": "https://nextjs.org/de-DE",
     },
     media: {
-      'only screen and (max-width: 600px)': 'https://nextjs.org/mobile',
+      "only screen and (max-width: 600px)": "https://nextjs.org/mobile",
     },
     types: {
-      'application/rss+xml': 'https://nextjs.org/rss',
+      "application/rss+xml": "https://nextjs.org/rss",
     },
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
 <link rel="canonical" href="https://nextjs.org" />
 <link rel="alternate" hreflang="en-US" href="https://nextjs.org/en-US" />
 <link rel="alternate" hreflang="de-DE" href="https://nextjs.org/de-DE" />
-<link
-  rel="alternate"
-  media="only screen and (max-width: 600px)"
-  href="https://nextjs.org/mobile"
-/>
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://nextjs.org/rss"
-/>
+<link rel="alternate" media="only screen and (max-width: 600px)" href="https://nextjs.org/mobile" />
+<link rel="alternate" type="application/rss+xml" href="https://nextjs.org/rss" />
 ```
 
 ### `appLinks`
@@ -840,19 +806,19 @@ export const metadata = {
 export const metadata = {
   appLinks: {
     ios: {
-      url: 'https://nextjs.org/ios',
-      app_store_id: 'app_store_id',
+      url: "https://nextjs.org/ios",
+      app_store_id: "app_store_id",
     },
     android: {
-      package: 'com.example.android/package',
-      app_name: 'app_name_android',
+      package: "com.example.android/package",
+      app_name: "app_name_android",
     },
     web: {
-      url: 'https://nextjs.org/web',
+      url: "https://nextjs.org/web",
       should_fallback: true,
     },
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -866,12 +832,12 @@ export const metadata = {
 
 ### `archives`
 
-Describes a collection of records, documents, or other materials of historical interest ([source](https://www.w3.org/TR/2011/WD-html5-20110113/links.html#rel-archives)).
+描述具有历史意义的记录、文件或其他材料的集合 ([来源](https://www.w3.org/TR/2011/WD-html5-20110113/links.html#rel-archives)).
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  archives: ['https://nextjs.org/13'],
-}
+  archives: ["https://nextjs.org/13"],
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -882,8 +848,8 @@ export const metadata = {
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  assets: ['https://nextjs.org/assets'],
-}
+  assets: ["https://nextjs.org/assets"],
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -894,8 +860,8 @@ export const metadata = {
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  bookmarks: ['https://nextjs.org/13'],
-}
+  bookmarks: ["https://nextjs.org/13"],
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -906,8 +872,8 @@ export const metadata = {
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  category: 'technology',
-}
+  category: "technology",
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -916,87 +882,87 @@ export const metadata = {
 
 ### `other`
 
-All metadata options should be covered using the built-in support. However, there may be custom metadata tags specific to your site, or brand new metadata tags just released. You can use the `other` option to render any custom metadata tag.
+所有元数据选项都应使用内置支持进行覆盖。然而，可能有特定于您的网站的自定义元数据标记，或者刚刚发布的全新元数据标记。您可以使用`other`选项来呈现任何自定义元数据标记。
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   other: {
-    custom: 'meta',
+    custom: "meta",
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
 <meta name="custom" content="meta" />
 ```
 
-If you want to generate multiple same key meta tags you can use array value.
+如果您想生成多个相同的关键字元标记，您可以使用数组值。
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   other: {
-    custom: ['meta1', 'meta2'],
+    custom: ["meta1", "meta2"],
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
 <meta name="custom" content="meta1" /> <meta name="custom" content="meta2" />
 ```
 
-## Unsupported Metadata
+## 不支持 Metadata
 
-The following metadata types do not currently have built-in support. However, they can still be rendered in the layout or page itself.
+以下元数据类型当前没有内置支持。但是，它们仍然可以在布局或页面本身中呈现。
 
-| Metadata                      | Recommendation                                                                                                                                                                                                                                     |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<meta http-equiv="...">`     | Use appropriate HTTP Headers via [`redirect()`](/docs/app/api-reference/functions/redirect), [Middleware](/docs/app/building-your-application/routing/middleware#nextresponse), [Security Headers](/docs/app/api-reference/next-config-js/headers) |
-| `<base>`                      | Render the tag in the layout or page itself.                                                                                                                                                                                                       |
-| `<noscript>`                  | Render the tag in the layout or page itself.                                                                                                                                                                                                       |
-| `<style>`                     | Learn more about [styling in Next.js](/docs/app/building-your-application/styling/css-modules).                                                                                                                                                    |
-| `<script>`                    | Learn more about [using scripts](/docs/app/building-your-application/optimizing/scripts).                                                                                                                                                          |
-| `<link rel="stylesheet" />`   | `import` stylesheets directly in the layout or page itself.                                                                                                                                                                                        |
-| `<link rel="preload />`       | Use [ReactDOM preload method](#link-relpreload)                                                                                                                                                                                                    |
-| `<link rel="preconnect" />`   | Use [ReactDOM preconnect method](#link-relpreconnect)                                                                                                                                                                                              |
-| `<link rel="dns-prefetch" />` | Use [ReactDOM prefetchDNS method](#link-reldns-prefetch)                                                                                                                                                                                           |
+| Metadata                      | Recommendation                                                                                                                                                                                                                |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<meta http-equiv="...">`     | 通过[`redirect()`](/docs/app/api-reference/functions/redirect), [中间件](/docs/app/building-your-application/routing/middleware#nextresponse), [安全标头](/docs/app/api-reference/next-config-js/headers)使用适当的 HTTP 标头 |
+| `<base>`                      | 在布局或页面本身中渲染标记。                                                                                                                                                                                                  |
+| `<noscript>`                  | 在布局或页面本身中渲染标记。                                                                                                                                                                                                  |
+| `<style>`                     | 了解有关[在 Next.js 中设置样式](/docs/app/building-your-application/styling/css-modules)的更多信息.                                                                                                                           |
+| `<script>`                    | 了解有关[使用脚本](/docs/app/building-your-application/optimizing/scripts)的更多信息.                                                                                                                                         |
+| `<link rel="stylesheet" />`   | 直接在布局或页面本身中`import`样式表。                                                                                                                                                                                        |
+| `<link rel="preload />`       | 使用[ReactDOM 预加载方法](#link-relpreload)                                                                                                                                                                                   |
+| `<link rel="preconnect" />`   | 使用[ReactDOM 预连接方法](#link-relpreconnect)                                                                                                                                                                                |
+| `<link rel="dns-prefetch" />` | 使用[ReactDOM prefetchDNS 方法](#link-reldns-prefetch)                                                                                                                                                                        |
 
-### Resource hints
+### 资源提示
 
-The `<link>` element has a number of `rel` keywords that can be used to hint to the browser that an external resource is likely to be needed. The browser uses this information to apply preloading optimizations depending on the keyword.
+`<link>`元素有许多`rel`关键字，这些关键字可用于向浏览器提示可能需要外部资源。浏览器使用这些信息根据关键字应用预加载优化。
 
-While the Metadata API doesn't directly support these hints, you can use new [`ReactDOM` methods](https://github.com/facebook/react/pull/26237) to safely insert them into the `<head>` of the document.
+虽然元数据 API 不直接支持这些提示，但您可以使用新的[`ReactDOM`方法](https://github.com/facebook/react/pull/26237)以便将它们安全地插入文档的`<head>`中。
 
 ```tsx filename="app/preload-resources.tsx" switcher
-'use client'
+"use client";
 
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom";
 
 export function PreloadResources() {
-  ReactDOM.preload('...', { as: '...' })
-  ReactDOM.preconnect('...', { crossOrigin: '...' })
-  ReactDOM.prefetchDNS('...')
+  ReactDOM.preload("...", { as: "..." });
+  ReactDOM.preconnect("...", { crossOrigin: "..." });
+  ReactDOM.prefetchDNS("...");
 
-  return null
+  return null;
 }
 ```
 
 ```jsx filename="app/preload-resources.js" switcher
-'use client'
+"use client";
 
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom";
 
 export function PreloadResources() {
-  ReactDOM.preload('...', { as: '...' })
-  ReactDOM.preconnect('...', { crossOrigin: '...' })
-  ReactDOM.prefetchDNS('...')
+  ReactDOM.preload("...", { as: "..." });
+  ReactDOM.preconnect("...", { crossOrigin: "..." });
+  ReactDOM.prefetchDNS("...");
 
-  return null
+  return null;
 }
 ```
 
 ##### `<link rel="preload">`
 
-Start loading a resource early in the page rendering (browser) lifecycle. [MDN Docs](https://developer.mozilla.org/docs/Web/HTML/Attributes/rel/preload).
+在页面呈现（浏览器）生命周期的早期开始加载资源。[MDN 文档](https://developer.mozilla.org/docs/Web/HTML/Attributes/rel/preload).
 
 ```tsx
 ReactDOM.preload(href: string, options: { as: string })
@@ -1008,7 +974,7 @@ ReactDOM.preload(href: string, options: { as: string })
 
 ##### `<link rel="preconnect">`
 
-Preemptively initiate a connection to an origin. [MDN Docs](https://developer.mozilla.org/docs/Web/HTML/Attributes/rel/preconnect).
+先发制人地启动到源的连接。[MDN 文档](https://developer.mozilla.org/docs/Web/HTML/Attributes/rel/preconnect).
 
 ```tsx
 ReactDOM.preconnect(href: string, options?: { crossOrigin?: string })
@@ -1020,7 +986,7 @@ ReactDOM.preconnect(href: string, options?: { crossOrigin?: string })
 
 ##### `<link rel="dns-prefetch">`
 
-Attempt to resolve a domain name before resources get requested. [MDN Docs](https://developer.mozilla.org/docs/Web/HTML/Attributes/rel/dns-prefetch).
+在请求资源之前尝试解析域名。[MDN 文档](https://developer.mozilla.org/docs/Web/HTML/Attributes/rel/dns-prefetch).
 
 ```tsx
 ReactDOM.prefetchDNS(href: string)
@@ -1030,100 +996,97 @@ ReactDOM.prefetchDNS(href: string)
 <link rel="dns-prefetch" href="..." />
 ```
 
-> **Good to know**:
+> **很高兴知道**:
 >
-> - These methods are currently only supported in Client Components, which are still Server Side Rendered on initial page load.
-> - Next.js in-built features such as `next/font`, `next/image` and `next/script` automatically handle relevant resource hints.
-> - React 18.3 does not yet include type definitions for `ReactDOM.preload`, `ReactDOM.preconnect`, and `ReactDOM.preconnectDNS`. You can use `// @ts-ignore` as a temporary solution to avoid type errors.
+> - 这些方法目前仅在客户端组件中受支持，客户端组件在初始页面加载时仍然是服务器端呈现的。
+> - Next.js 内置的功能，如`next/font`, `next/image` 和 `next/script` ，可以自动处理相关的资源提示。
+> - React 18.3 还不包括`ReactDOM.preload`, `ReactDOM.preconnect`, 和 `ReactDOM.preconnectDNS`的类型定义。您可以使用`// @ts-ignore`作为临时解决方案来避免类型错误。
 
-## Types
+## 类型
 
-You can add type safety to your metadata by using the `Metadata` type. If you are using the [built-in TypeScript plugin](/docs/app/building-your-application/configuring/typescript) in your IDE, you do not need to manually add the type, but you can still explicitly add it if you want.
+您可以使用`Metadata`类型将类型安全性添加到元数据中。如果您在 IDE 中使用[内置 TypeScript 插件](/docs/app/building-your-application/configuring/typescript) ，则不需要手动添加类型，但如果需要，仍然可以显式添加。
 
-### `metadata` object
+### `metadata` 对象
 
 ```tsx
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Next.js',
-}
+  title: "Next.js",
+};
 ```
 
-### `generateMetadata` function
+### `generateMetadata` 函数
 
-#### Regular function
+#### 正则函数
 
 ```tsx
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export function generateMetadata(): Metadata {
   return {
-    title: 'Next.js',
-  }
+    title: "Next.js",
+  };
 }
 ```
 
-#### Async function
+#### 异步函数
 
 ```tsx
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Next.js',
-  }
+    title: "Next.js",
+  };
 }
 ```
 
-#### With segment props
+#### 带分段道具
 
 ```tsx
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 type Props = {
-  params: { id: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
 export function generateMetadata({ params, searchParams }: Props): Metadata {
   return {
-    title: 'Next.js',
-  }
+    title: "Next.js",
+  };
 }
 
 export default function Page({ params, searchParams }: Props) {}
 ```
 
-#### With parent metadata
+#### 具有父元数据
 
 ```tsx
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata, ResolvingMetadata } from "next";
 
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
   return {
-    title: 'Next.js',
-  }
+    title: "Next.js",
+  };
 }
 ```
 
-#### JavaScript Projects
+#### JavaScript 项目
 
-For JavaScript projects, you can use JSDoc to add type safety.
+对于 JavaScript 项目，您可以使用 JSDoc 来添加类型安全性。
 
 ```js
 /** @type {import("next").Metadata} */
 export const metadata = {
-  title: 'Next.js',
-}
+  title: "Next.js",
+};
 ```
 
-## Version History
+## 版本历史记录
 
-| Version   | Changes                                                                                                                                                 |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `v13.2.0` | `viewport`, `themeColor`, and `colorScheme` deprecated in favor of the [`viewport` configuration](/docs/app/api-reference/functions/generate-viewport). |
-| `v13.2.0` | `metadata` and `generateMetadata` introduced.                                                                                                           |
+| 版本      | 变化                                                                                                                       |
+| --------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `v13.2.0` | `viewport`, `themeColor`, 和 `colorScheme` 反对使用[`viewport` 配置](/docs/app/api-reference/functions/generate-viewport). |
+| `v13.2.0` | `metadata` 和 `generateMetadata` 介绍.                                                                                     |

@@ -113,7 +113,7 @@ export default function Component() {
 }
 ```
 
-> **Good to know:**
+> **很高兴知道:**
 >
 > - 您可以使用[`register` 函数](/docs/app/building-your-application/optimizing/instrumentation)在服务器启动时运行代码.
 > - 我们不建议使用[runtimeConfig](/docs/pages/api-reference/next-config-js/runtime-configuration)选项，因为这不适用于独立输出模式。相反, 我们建议[逐步采用](/docs/app/building-your-application/upgrading/app-router-migration)应用路由器。
@@ -191,7 +191,7 @@ module.exports = class CacheHandler {
 
 使用自定义缓存处理程序可以确保所有托管 Next.js 应用程序的 pod 之间的一致性。例如，您可以将缓存的值保存在任何位置，如[Redis](https://github.com/vercel/next.js/tree/canary/examples/cache-handler-redis)或 AWS S3。
 
-> **Good to know:**
+> **很高兴知道:**
 >
 > - `revalidatePath` 是缓存标记之上的便利层. 调用`revalidatePath`将使用所提供页面的特殊默认标记调用`revalidateTag`函数。
 
@@ -226,7 +226,7 @@ When self-hosting, you might want to run code when the server shuts down on `SIG
 
 You can set the env variable `NEXT_MANUAL_SIG_HANDLE` to `true` and then register a handler for that signal inside your `_document.js` file. You will need to register the environment variable directly in the `package.json` script, and not in the `.env` file.
 
-> **Good to know**: Manual signal handling is not available in `next dev`.
+> **很高兴知道**: Manual signal handling is not available in `next dev`.
 
 ```json filename="package.json"
 {

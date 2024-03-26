@@ -1,21 +1,21 @@
 ---
 title: Next.js CLI
-description: The Next.js CLI allows you to start, build, and export your application. Learn more about it here.
+description: Next.js CLI允许您启动、构建和导出应用程序。点击此处了解更多信息。
 ---
 
 {/* The content of this doc is shared between the app and pages router. You can use the `<PagesOnly>Content</PagesOnly>` component to add content that is specific to the Pages Router. Any shared content should not be wrapped in a component. */}
 
-The Next.js CLI allows you to start, build, and export your application.
+Next.js CLI 允许您启动、构建和导出应用程序。
 
-To get a list of the available CLI commands, run the following command inside your project directory:
+要获得可用 CLI 命令的列表，请在项目目录中运行以下命令:
 
 ```bash filename="Terminal"
 npx next -h
 ```
 
-_([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) comes with npm 5.2+ and higher)_
+_([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) 配备 npm 5.2+及更高版本)_
 
-The output should look like this:
+输出应该是这样的:
 
 ```bash filename="Terminal"
 Usage
@@ -32,7 +32,7 @@ For more information run a command with the --help flag
   $ next build --help
 ```
 
-You can pass any [node arguments](https://nodejs.org/api/cli.html#cli_node_options_options) to `next` commands:
+您可以传递任何[节点参数](https://nodejs.org/api/cli.html#cli_node_options_options)到`next`命令：
 
 ```bash filename="Terminal"
 NODE_OPTIONS='--throw-deprecation' next
@@ -40,16 +40,16 @@ NODE_OPTIONS='-r esm' next
 NODE_OPTIONS='--inspect' next
 ```
 
-> **Good to know**: Running `next` without a command is the same as running `next dev`
+> **很高兴知道**: 在没有命令的情况下运行`next`与运行`next dev`相同`
 
 ## Build
 
-`next build` creates an optimized production build of your application. The output displays information about each route.
+`next build`创建应用程序的优化生产构建。输出显示有关每条路线的信息。
 
-- **Size** – The number of assets downloaded when navigating to the page client-side. The size for each route only includes its dependencies.
-- **First Load JS** – The number of assets downloaded when visiting the page from the server. The amount of JS shared by all is shown as a separate metric.
+- **Size** – 导航到页面客户端时下载的资产数。每条路由的大小仅包括其依赖项。
+- **First Load JS** – 从服务器访问页面时下载的资产数量。所有人共享的 JS 数量显示为一个单独的度量。
 
-Both of these values are **compressed with gzip**. The first load is indicated by green, yellow, or red. Aim for green for performant applications.
+这两个值都是用**gzip 压缩的**。 第一个负载用绿色、黄色或红色表示。针对高性能应用，请选择绿色。
 
 You can enable production profiling for React with the `--profile` flag in `next build`. This requires [Next.js 9.5](https://nextjs.org/blog/next-9-5):
 
@@ -69,7 +69,7 @@ With this flag enabled additional build output like rewrites, redirects, and hea
 
 ## Development
 
-`next dev` starts the application in development mode with hot-code reloading, error reporting, and more:
+`next dev`以开发模式启动应用程序，包括热代码重新加载、错误报告等：
 
 The application will start at `http://localhost:3000` by default. The default port can be changed with `-p`, like so:
 
@@ -83,7 +83,7 @@ Or using the `PORT` environment variable:
 PORT=4000 npx next dev
 ```
 
-> **Good to know**: `PORT` cannot be set in `.env` as booting up the HTTP server happens before any other code is initialized.
+> **很高兴知道**: `PORT` cannot be set in `.env` as booting up the HTTP server happens before any other code is initialized.
 
 You can also set the hostname to be different from the default of `0.0.0.0`, this can be useful for making the application available for other devices on the network. The default hostname can be changed with `-H`, like so:
 
@@ -93,9 +93,9 @@ npx next dev -H 192.168.1.2
 
 ## Production
 
-`next start` starts the application in production mode. The application should be compiled with [`next build`](#build) first.
+`next start`在生产模式下启动应用程序。应用程序应首先使用[`next build`](#build)进行编译。
 
-The application will start at `http://localhost:3000` by default. The default port can be changed with `-p`, like so:
+应用程序将在启动`http://localhost:3000`默认情况下。默认端口可以用`-p`更改，如下所示：
 
 ```bash filename="Terminal"
 npx next start -p 4000
@@ -107,13 +107,13 @@ Or using the `PORT` environment variable:
 PORT=4000 npx next start
 ```
 
-> **Good to know**:
+> **很高兴知道**:
 >
 > -`PORT` cannot be set in `.env` as booting up the HTTP server happens before any other code is initialized.
 >
 > - `next start` cannot be used with `output: 'standalone'` or `output: 'export'`.
 
-### Keep Alive Timeout
+### 保持活动超时
 
 When deploying Next.js behind a downstream proxy (e.g. a load-balancer like AWS ELB/ALB) it's important to configure Next's underlying HTTP server with [keep-alive timeouts](https://nodejs.org/api/http.html#http_server_keepalivetimeout) that are _larger_ than the downstream proxy's timeouts. Otherwise, once a keep-alive timeout is reached for a given TCP connection, Node.js will immediately terminate that connection without notifying the downstream proxy. This results in a proxy error whenever it attempts to reuse a connection that Node.js has already terminated.
 
@@ -138,23 +138,23 @@ next lint --dir utils
 
 ## Telemetry
 
-Next.js collects **completely anonymous** telemetry data about general usage.
-Participation in this anonymous program is optional, and you may opt-out if you'd not like to share any information.
+Next.js 收集**完全匿名的**有关一般用途的遥测数据。
+参与此匿名计划是可选的，如果您不想分享任何信息，您可以选择退出。
 
-To learn more about Telemetry, [please read this document](https://nextjs.org/telemetry/).
+要了解有关遥测的更多信息，[请阅读此文档](https://nextjs.org/telemetry/).
 
 ## Next Info
 
-`next info` prints relevant details about the current system which can be used to report Next.js bugs.
+`next info`打印当前系统的相关详细信息，可用于报告 next.js 错误。
 This information includes Operating System platform/arch/version, Binaries (Node.js, npm, Yarn, pnpm) and npm package versions (`next`, `react`, `react-dom`).
 
-Running the following in your project's root directory:
+在项目的根目录中运行以下操作：
 
 ```bash filename="Terminal"
 next info
 ```
 
-will give you information like this example:
+将为您提供类似以下示例的信息：
 
 ```bash filename="Terminal"
 
@@ -174,6 +174,6 @@ Relevant packages:
 
 ```
 
-This information should then be pasted into GitHub Issues.
+然后应该将这些信息粘贴到 GitHub Issues 中。
 
-In order to diagnose installation issues, you can run `next info --verbose` to print additional information about system and the installation of next-related packages.
+为了诊断安装问题，您可以运行`next info --verbose`来打印有关系统和下一个相关软件包安装的其他信息。

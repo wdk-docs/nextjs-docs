@@ -1,54 +1,54 @@
 ---
 title: usePathname
-description: API Reference for the usePathname hook.
+description: usePathname挂钩的API参考。
 ---
 
-`usePathname` is a **Client Component** hook that lets you read the current URL's **pathname**.
+`usePathname`是一个**客户端组件**挂钩，用于读取当前 URL 的**路径名**。
 
 ```tsx filename="app/example-client-component.tsx" switcher
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 
 export default function ExampleClientComponent() {
-  const pathname = usePathname()
-  return <p>Current pathname: {pathname}</p>
+  const pathname = usePathname();
+  return <p>Current pathname: {pathname}</p>;
 }
 ```
 
 ```jsx filename="app/example-client-component.js" switcher
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 
 export default function ExampleClientComponent() {
-  const pathname = usePathname()
-  return <p>Current pathname: {pathname}</p>
+  const pathname = usePathname();
+  return <p>Current pathname: {pathname}</p>;
 }
 ```
 
-`usePathname` intentionally requires using a [Client Component](/docs/app/building-your-application/rendering/client-components). It's important to note Client Components are not a de-optimization. They are an integral part of the [Server Components](/docs/app/building-your-application/rendering/server-components) architecture.
+`usePathname`有意要求使用[客户端组件](/docs/app/building-your-application/rendering/client-components). 需要注意的是，客户端组件并不是去优化的。 它们是[服务器组件](/docs/app/building-your-application/rendering/server-components)体系结构不可分割的一部分。
 
-For example, a Client Component with `usePathname` will be rendered into HTML on the initial page load. When navigating to a new route, this component does not need to be re-fetched. Instead, the component is downloaded once (in the client JavaScript bundle), and re-renders based on the current state.
+例如，具有`usePathname`的客户端组件将在初始页面加载时呈现为 HTML。导航到新路线时，不需要重新获取此组件。相反，该组件被下载一次（在客户端 JavaScript 捆绑包中），并根据当前状态重新渲染。
 
-> **Good to know**:
+> **很高兴知道**:
 >
-> - Reading the current URL from a [Server Component](/docs/app/building-your-application/rendering/server-components) is not supported. This design is intentional to support layout state being preserved across page navigations.
-> - Compatibility mode:
->   - `usePathname` can return `null` when a [fallback route](/docs/pages/api-reference/functions/get-static-paths#fallback-true) is being rendered or when a `pages` directory page has been [automatically statically optimized](/docs/pages/building-your-application/rendering/automatic-static-optimization) by Next.js and the router is not ready.
->   - Next.js will automatically update your types if it detects both an `app` and `pages` directory in your project.
+> - 不支持从[服务器组件](/docs/app/building-your-application/rendering/server-components)读取当前 URL。此设计旨在支持在页面导航中保留布局状态。
+> - 兼容性模式:
+>   - 当呈现[回退路由](/docs/pages/api-reference/functions/get-static-paths#fallback-true)时，或者当 Next.js 已经[自动静态优化](/docs/pages/building-your-application/rendering/automatic-static-optimization)了`pages`目录页并且路由器还没有准备好时， usePathname 可以返回`null`。
+>   - 如果 Next.js 在您的项目中同时检测到`app`和`pages`目录，它将自动更新您的类型。
 
-## Parameters
+## 参数
 
 ```tsx
-const pathname = usePathname()
+const pathname = usePathname();
 ```
 
-`usePathname` does not take any parameters.
+`usePathname` 不采用任何参数。
 
-## Returns
+## 返回
 
-`usePathname` returns a string of the current URL's pathname. For example:
+`usePathname` 返回当前 URL 的路径名字符串。例如
 
 | URL                 | Returned value        |
 | ------------------- | --------------------- |
@@ -57,38 +57,38 @@ const pathname = usePathname()
 | `/dashboard?v=2`    | `'/dashboard'`        |
 | `/blog/hello-world` | `'/blog/hello-world'` |
 
-## Examples
+## 举例
 
-### Do something in response to a route change
+### 针对路线变更采取措施
 
 ```tsx filename="app/example-client-component.tsx" switcher
-'use client'
+"use client";
 
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from "next/navigation";
 
 function ExampleClientComponent() {
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   useEffect(() => {
     // Do something here...
-  }, [pathname, searchParams])
+  }, [pathname, searchParams]);
 }
 ```
 
 ```jsx filename="app/example-client-component.js" switcher
-'use client'
+"use client";
 
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from "next/navigation";
 
 function ExampleClientComponent() {
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   useEffect(() => {
     // Do something here...
-  }, [pathname, searchParams])
+  }, [pathname, searchParams]);
 }
 ```
 
-| Version   | Changes                   |
+| 版本      | 变化                      |
 | --------- | ------------------------- |
 | `v13.0.0` | `usePathname` introduced. |

@@ -14,7 +14,7 @@ description: 使用内置的`Next/image`组件优化Next.js应用程序中的图
 
 <PagesOnly>
 
-> **Good to know**: 如果您使用的是 13 之前的 Next.js 版本, 您将希望使用[next/legate/image](/docs/pages/api-reference/components/image-legacy)文档，因为组件已重命名。
+> **很高兴知道**: 如果您使用的是 13 之前的 Next.js 版本, 您将希望使用[next/legate/image](/docs/pages/api-reference/components/image-legacy)文档，因为组件已重命名。
 
 </PagesOnly>
 
@@ -133,7 +133,7 @@ export default function Page() {
 
 <AppOnly>
 
-> **Good to know**: 使用像`loader`这样接受函数的道具，需要使用[Client Components](/docs/app/building-your-application/rendering/client-components)来序列化所提供的函数。
+> **很高兴知道**: 使用像`loader`这样接受函数的道具，需要使用[Client Components](/docs/app/building-your-application/rendering/client-components)来序列化所提供的函数。
 
 </AppOnly>
 
@@ -281,7 +281,7 @@ The callback function will be called with one argument, a reference to the under
 
 <AppOnly>
 
-> **Good to know**: Using props like `onLoadingComplete`, which accept a function, require using [Client Components](/docs/app/building-your-application/rendering/client-components) to serialize the provided function.
+> **很高兴知道**: Using props like `onLoadingComplete`, which accept a function, require using [Client Components](/docs/app/building-your-application/rendering/client-components) to serialize the provided function.
 
 </AppOnly>
 
@@ -297,7 +297,7 @@ The callback function will be called with one argument, the Event which has a `t
 
 <AppOnly>
 
-> **Good to know**: Using props like `onLoad`, which accept a function, require using [Client Components](/docs/app/building-your-application/rendering/client-components) to serialize the provided function.
+> **很高兴知道**: Using props like `onLoad`, which accept a function, require using [Client Components](/docs/app/building-your-application/rendering/client-components) to serialize the provided function.
 
 </AppOnly>
 
@@ -311,7 +311,7 @@ A callback function that is invoked if the image fails to load.
 
 <AppOnly>
 
-> **Good to know**: Using props like `onError`, which accept a function, require using [Client Components](/docs/app/building-your-application/rendering/client-components) to serialize the provided function.
+> **很高兴知道**: Using props like `onError`, which accept a function, require using [Client Components](/docs/app/building-your-application/rendering/client-components) to serialize the provided function.
 
 </AppOnly>
 
@@ -406,7 +406,7 @@ module.exports = {
 };
 ```
 
-> **Good to know**: The example above will ensure the `src` property of `next/image` must start with `https://example.com/account123/`. Any other protocol, hostname, port, or unmatched path will respond with 400 Bad Request.
+> **很高兴知道**: The example above will ensure the `src` property of `next/image` must start with `https://example.com/account123/`. Any other protocol, hostname, port, or unmatched path will respond with 400 Bad Request.
 
 Below is another example of the `remotePatterns` property in the `next.config.js` file:
 
@@ -423,7 +423,7 @@ module.exports = {
 };
 ```
 
-> **Good to know**: The example above will ensure the `src` property of `next/image` must start with `https://img1.example.com` or `https://me.avatar.example.com` or any number of subdomains. Any other protocol or unmatched hostname will respond with 400 Bad Request.
+> **很高兴知道**: The example above will ensure the `src` property of `next/image` must start with `https://img1.example.com` or `https://me.avatar.example.com` or any number of subdomains. Any other protocol or unmatched hostname will respond with 400 Bad Request.
 
 Wildcard patterns can be used for both `pathname` and `hostname` and have the following syntax:
 
@@ -545,7 +545,7 @@ module.exports = {
 };
 ```
 
-> **Good to know**:
+> **很高兴知道**:
 >
 > - AVIF generally takes 20% longer to encode but it compresses 20% smaller compared to WebP. This means that the first time an image is requested, it will typically be slower and then subsequent requests that are cached will be faster.
 > - If you self-host with a Proxy/CDN in front of Next.js, you must configure the Proxy to forward the `Accept` header.
@@ -771,7 +771,7 @@ const ThemeImage = (props) => {
 };
 ```
 
-> **Good to know**: The default behavior of `loading="lazy"` ensures that only the correct image is loaded. You cannot use `priority` or `loading="eager"` because that would cause both images to load. Instead, you can use [`fetchPriority="high"`](https://developer.mozilla.org/docs/Web/API/HTMLImageElement/fetchPriority).
+> **很高兴知道**: The default behavior of `loading="lazy"` ensures that only the correct image is loaded. You cannot use `priority` or `loading="eager"` because that would cause both images to load. Instead, you can use [`fetchPriority="high"`](https://developer.mozilla.org/docs/Web/API/HTMLImageElement/fetchPriority).
 
 Try it out:
 
@@ -790,7 +790,7 @@ This `next/image` component uses browser native [lazy loading](https://caniuse.c
 
 ## 版本历史记录
 
-| Version    | Changes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Version    | 变化                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `v14.0.0`  | `onLoadingComplete` prop and `domains` config deprecated.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `v13.4.14` | `placeholder` prop support for `data:/image...`                                                                                                                                                                                                                                                                                                                                                                                                                                                               |

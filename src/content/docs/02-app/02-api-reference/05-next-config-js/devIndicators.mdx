@@ -7,48 +7,48 @@ description: Optimized pages include an indicator to let you know if it's being 
 
 <AppOnly>
 
-When you edit your code, and Next.js is compiling the application, a compilation indicator appears in the bottom right corner of the page.
+当您编辑代码，Next.js 正在编译应用程序时，页面右下角会出现一个编译指示符。
 
-> **Good to know**: This indicator is only present in development mode and will not appear when building and running the app in production mode.
+> **很高兴知道**: 此指标仅在开发模式下存在，在生产模式下构建和运行应用程序时不会出现。
 
-In some cases this indicator can be misplaced on your page, for example, when conflicting with a chat launcher. To change its position, open `next.config.js` and set the `buildActivityPosition` in the `devIndicators` object to `bottom-right` (default), `bottom-left`, `top-right` or `top-left`:
+在某些情况下，该指示器可能会放错位置，例如，当与聊天启动程序发生冲突时。要更改其位置，请打开`next.config.js`，并将`devIndicators`对象中的`buildActivityPosition`设置为`bottom-right`(默认值)、`bottom-left`、`top-right`或`top-left`)：
 
 ```js filename="next.config.js"
 module.exports = {
   devIndicators: {
-    buildActivityPosition: 'bottom-right',
+    buildActivityPosition: "bottom-right",
   },
-}
+};
 ```
 
-In some cases this indicator might not be useful for you. To remove it, open `next.config.js` and disable the `buildActivity` config in `devIndicators` object:
+在某些情况下，此指标可能对您没有用处。要删除它，请打开`next.config.js`并禁用`devIndicators`对象中的`buildActivity`配置：
 
 ```js filename="next.config.js"
 module.exports = {
   devIndicators: {
     buildActivity: false,
   },
-}
+};
 ```
 
 </AppOnly>
 
 <PagesOnly>
 
-> **Good to know**: This indicator was removed in Next.js version 10.0.1. We recommend upgrading to the latest version of Next.js.
+> **很高兴知道**: 此指示器已在 Next.js 10.0.1 版本中删除。我们建议升级到最新版本的 Next.js。
 
-When a page qualifies for [Automatic Static Optimization](/docs/pages/building-your-application/rendering/automatic-static-optimization) we show an indicator to let you know.
+当页面符合[自动静态优化](/docs/pages/building-your-application/rendering/automatic-static-optimization)条件时，我们会显示一个指示器，让您知道。
 
-This is helpful since automatic static optimization can be very beneficial and knowing immediately in development if the page qualifies can be useful.
+这是有帮助的，因为自动静态优化可能非常有益，并且在开发过程中立即了解页面是否合格是有用的。
 
-In some cases this indicator might not be useful, like when working on electron applications. To remove it open `next.config.js` and disable the `autoPrerender` config in `devIndicators`:
+在某些情况下，这种指示剂可能没有用处，比如在电子应用方面。要删除它，请打开`next.config.js`并禁用`devIndicators`中的`autoPrerender`配置：
 
 ```js filename="next.config.js"
 module.exports = {
   devIndicators: {
     autoPrerender: false,
   },
-}
+};
 ```
 
 </PagesOnly>

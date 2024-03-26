@@ -49,7 +49,7 @@ Next.js 将评估该文件，并自动将适当的标记添加到应用程序的
 <link rel="apple-touch-icon" href="/apple-icon?<generated>" type="image/<generated>" sizes="<generated>" />
 ```
 
-> **Good to know**
+> **很高兴知道**
 >
 > - 可以通过在文件名中添加数字后缀来设置多个图标。 例如 `icon1.png`, `icon2.png`, 等编号的文件将按词汇排序。
 > - 传真只能在根`/app`段中设置。 如果需要更大的粒度，可以使用[`icon`](#icon).
@@ -162,7 +162,7 @@ export default function Icon() {
 
 > **很高兴知道**
 >
-> - 默认情况下，生成的图标是[**静态优化的**](/docs/app/building-your-application/rendering/server-components#static-rendering-default)（在构建时生成并缓存），除非它们使用[动态函数](/docs/app/building-your-application/rendering/server-components#server-rendering-strategies#dynamic-functions)或未缓存的数据。
+> - 默认情况下，生成的图标是[**静态优化的**](/docs/app/building-your-application/rendering/server-components#static-rendering-default)(在构建时生成并缓存)，除非它们使用[动态函数](/docs/app/building-your-application/rendering/server-components#server-rendering-strategies#dynamic-functions)或未缓存的数据。
 > - 可以使用[`generateImageMetadata`](/docs/app/api-reference/functions/generate-image-metadata)在同一文件中生成多个图标.
 > - 您无法生成`favicon`图标。请使用[`icon`](#icon)或者[favicon.ico](#favicon)文件。
 
@@ -186,7 +186,7 @@ export default function Icon({ params }) {
 }
 ```
 
-| 路线                            | URL         | `params`                  |
+| 路由                            | URL         | `params`                  |
 | ------------------------------- | ----------- | ------------------------- |
 | `app/shop/icon.js`              | `/shop`     | `undefined`               |
 | `app/shop/[slug]/icon.js`       | `/shop/1`   | `{ slug: '1' }`           |
@@ -246,7 +246,7 @@ export default function Icon() {}
 
 #### 路由段配置
 
-`icon` 和 `apple-icon` 是专门的[路线管理员](/docs/app/building-your-application/routing/route-handlers) 可以使用相同的[路由段配置](/docs/app/api-reference/file-conventions/route-segment-config) 选项作为页面和布局.
+`icon` 和 `apple-icon` 是专门的[路由管理员](/docs/app/building-your-application/routing/route-handlers) 可以使用相同的[路由段配置](/docs/app/api-reference/file-conventions/route-segment-config) 选项作为页面和布局.
 
 | 选项                                                                                               | 类型                                                     | 默认       |
 | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ---------- |
